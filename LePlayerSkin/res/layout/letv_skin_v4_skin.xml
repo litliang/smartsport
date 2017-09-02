@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+        <include
+            android:id="@+id/v4_letv_skin_v4_top_layout"
+            layout="@layout/letv_skin_v4_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <include
+            android:id="@+id/v4_large_media_controller"
+            layout="@layout/letv_skin_v4_controller_large_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+        <include
+            android:id="@+id/v4_small_media_controller"
+            layout="@layout/letv_skin_v4_controller_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+    <ImageView
+        android:id="@+id/iv_video_lock"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:padding="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:src="@drawable/screen_unlock_drawable"
+        android:clickable="true"/>
+
+    <!--     <include -->
+    <!--         android:layout_width="wrap_content" -->
+    <!--         android:layout_height="wrap_content" -->
+    <!--         android:layout_alignParentBottom="true" -->
+    <!--         layout="@layout/letv_skin_v4_controller_layout" /> -->
+
+</RelativeLayout>

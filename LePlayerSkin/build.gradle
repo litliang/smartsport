@@ -1,0 +1,210 @@
+apply plugin: 'com.android.library'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile project(':LePlayerSdk')
+}
+
+subprojects {
+    tasks.withType(JavaCompile) {
+        apply(plugin: 'java')
+        options.encoding = 'UTF-8'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+repositories {
+    flatDir{
+        dirs project(':LePlayerSdk').file('libs')
+    }
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        minSdkVersion 9
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+def parentPath = projectDir.getParentFile().absolutePath + '/LePlayerSdk/build/intermediates'
+def sourceClassPath = parentPath + '/exploded-aar'
+def leNetWorkJarPath = sourceClassPath + '/LePlayer/LeNetWork/unspecified/jars'
+def lePlayerAdJarPath = sourceClassPath + '/LePlayer/LePlayerAd/unspecified/jars'
+def lePlayerAdMobileJarPath = sourceClassPath + '/LePlayer/LePlayerAdMobile/unspecified'
+//拷贝jar和so到(build/nativeLibs)目录下
+task copyLeNetWorkLibs(type: Copy) {
+    from(leNetWorkJarPath) {
+        include '*.jar'
+        rename('classes.jar', 'LeNetWork.jar')
+    }
+    from(leNetWorkJarPath + '/libs') {
+        include '*.jar'
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn copyLeNetWorkLibs
+}
+
+task copyLePlayerAdLibs(type: Copy) {
+    from(lePlayerAdJarPath) {
+        include '*.jar'
+        rename('classes.jar', 'LePlayerAd.jar')
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn copyLePlayerAdLibs
+}
+
+task copyLePlayerAdMobileLibs(type: Copy) {
+    from(lePlayerAdMobileJarPath + '/jars') {
+        include '*.jar'
+        rename('classes.jar', 'LePlayerAdMobile.jar')
+    }
+    from(lePlayerAdMobileJarPath + '/jars/libs') {
+        include '*.jar'
+    }
+    from(lePlayerAdMobileJarPath + '/jni') {
+        include 'arm*/*.so'
+        exclude 'x86*'
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn copyLePlayerAdMobileLibs
+}
+
+task copyLePlayerSdkLibs(type: Copy) {
+
+    from(parentPath + '/jniLibs/release') {
+        include 'arm*/*.so'
+        exclude 'x86*'
+        include '*.jar'
+        include '*.aar'
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn copyLePlayerSdkLibs
+}
+
+//打包LePlayerSdk(LePlayerAd,LePlayerAdMobile,LePlayerSdk)
+task lePlayerSdkJar(type: Jar) {
+    archiveName = 'LePlayerSdk.jar'
+    from(parentPath + '/classes/release') {
+        include('**/*.class')
+        exclude('**/BuildConfig.class')
+        exclude('**/R\$*.class')
+        exclude('**/R.class')
+        exclude "com/lecloud/sdk/videoview/vod/*.class"
+        exclude "com/lecloud/sdk/videoview/live/*.class"
+        exclude "com/lecloud/sdk/videoview/mobile/*.class"
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+artifacts {
+    archives lePlayerSdkJar
+}
+
+//打包点播业务线jar包
+task vodJar(type: Jar) {
+    baseName 'vod'
+    classifier 'v4.6'
+    from(parentPath + '/classes/release') {
+        exclude('**/BuildConfig.class')
+        exclude('**/R\$*.class')
+        exclude('**/R.class')
+        include "com/lecloud/sdk/videoview/vod/*.class"
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+artifacts {
+    archives vodJar
+}
+//打包直播业务线jar包
+task liveJar(type: Jar) {
+    baseName 'live'
+    classifier 'v4.6'
+    from(parentPath + '/classes/release') {
+        exclude('**/BuildConfig.class')
+        exclude('**/R\$*.class')
+        exclude('**/R.class')
+        include "com/lecloud/sdk/videoview/live/*.class"
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+artifacts {
+    archives liveJar
+}
+//打包移动直播业务线jar包
+task mobileJar(type: Jar) {
+    baseName 'mobile'
+    classifier 'v1.5'
+    from(parentPath + '/classes/release') {
+        exclude('**/BuildConfig.class')
+        exclude('**/R\$*.class')
+        exclude('**/R.class')
+        include "com/lecloud/sdk/videoview/mobile/*.class"
+    }
+    destinationDir new File(buildDir, 'nativeLibs')
+}
+artifacts {
+    archives mobileJar
+}
+//混淆sdk-jar
+def androidJarDir = '/Users/gaolinhua/Library/Android/sdk' + '/platforms/' + 'android-21' + '/android.jar'
+
+task proguardSdk(type: proguard.gradle.ProGuardTask) {
+    libraryjars(androidJarDir)
+    libraryjars new File(buildDir, 'nativeLibs/cmf-sdk-1.1.07-master-arm32&64.jar')
+    libraryjars new File(buildDir, 'nativeLibs/lecloudutils.jar')
+    libraryjars new File(buildDir, 'nativeLibs/LeNetWork.jar')
+    libraryjars new File(buildDir, 'nativeLibs/LePanoLib.jar')
+    libraryjars new File(buildDir, 'nativeLibs/letvadlib.jar')
+    libraryjars new File(buildDir, 'nativeLibs/mAppTracker_Android_2.3.4.jar')
+    libraryjars new File(buildDir, 'nativeLibs/mVVTracker_Android_20160628.jar')
+    libraryjars new File(buildDir, 'nativeLibs/org.apache.http.legacy.jar')
+    libraryjars new File(buildDir, 'nativeLibs/LeStatsSdk.jar')
+    injars(new File(buildDir, 'nativeLibs/LePlayerSdk.jar'))
+    injars(new File(buildDir, 'nativeLibs/LePlayerAd.jar'))
+    injars(new File(buildDir, 'nativeLibs/LePlayerAdMobile.jar'))
+    outjars(new File(buildDir, 'nativeLibs/LePlayerSdk-v4.6.jar'))
+    def mapPath = buildDir.absolutePath + '/nativeLibs/outmap.txt'
+    printmapping mapPath
+    configuration new File(buildDir.getParentFile(), 'proguard.cfg')
+}
+//lePlayerSdkJar.finalizedBy proguardSdk
+build.mustRunAfter ':LePlayerSdk:build'
