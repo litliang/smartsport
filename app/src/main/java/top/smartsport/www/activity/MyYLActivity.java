@@ -1,0 +1,21 @@
+package top.smartsport.www.activity;
+
+import android.view.View;
+
+import org.xutils.view.annotation.ContentView;
+
+import top.smartsport.www.R;
+import top.smartsport.www.base.BaseActivity;
+
+/**
+ * Created by Aaron on 2017/7/18.
+ * 娱乐
+ */
+@ContentView(R.layout.activity_myyl)
+public class MyYLActivity extends BaseActivity{
+
+    @Override
+    protected void initView() {
+
+    }
+}

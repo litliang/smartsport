@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <top.smartsport.www.widget.TeamMemberView
+        android:id="@+id/view_member"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        app:laber_color="@color/font_main"
+        app:content_color="@color/font_gray"
+        app:content_hint_name="球员姓名"
+        app:content_hint_location="位置"
+        app:content_hint_number="球衣号码"
+        />
+</LinearLayout>

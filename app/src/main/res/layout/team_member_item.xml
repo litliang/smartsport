@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:id="@+id/tv_add_member"
+    android:layout_width="885px"
+    android:layout_height="132px"
+    android:text="+ 添加新球员"
+    android:textColor="@color/font_gray"
+    android:textSize="@dimen/text_size"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:background="@mipmap/add_member"
+    android:layout_marginTop="@dimen/margin_leftx1.5"
+    android:layout_marginBottom="@dimen/margin_leftx1.5"
+    />
+</LinearLayout>

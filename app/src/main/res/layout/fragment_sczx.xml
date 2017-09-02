@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--<top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView android:id="@+id/pullrefreshlistview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:text="入门级"
+                android:textColor="@color/black"
+                android:textSize="58px" />
+
+            <top.smartsport.www.widget.MyGridView
+                android:id="@+id/rumenjigrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:text="初级"
+                android:textColor="@color/black"
+                android:textSize="58px" />
+
+            <top.smartsport.www.widget.MyGridView
+                android:id="@+id/chujigrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:text="中级"
+                android:textColor="@color/black"
+                android:textSize="58px" />
+
+            <top.smartsport.www.widget.MyGridView
+                android:id="@+id/zhongjigrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </FrameLayout>
+    <!--</top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView>-->
+    <RelativeLayout
+        android:id="@+id/mykcempty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:visibility="invisible"
+            android:id="@+id/gojoinlesson"
+            android:layout_width="700px"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dip"
+            android:background="@mipmap/btn_long"
+            android:gravity="center"
+            android:text="加入会员观看所有在线教案"
+            android:textColor="@android:color/white"
+            android:textSize="18dip" />
+
+        <RelativeLayout android:layout_above="@+id/gojoinlesson"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30px"
+                    android:src="@mipmap/myfavempty" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还没有收藏任何资讯"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17dip" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

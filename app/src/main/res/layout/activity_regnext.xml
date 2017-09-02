@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_bar"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/layout_actionbar" /></FrameLayout>
+    <EditText
+        android:id="@+id/reg_next_edit_user"
+        android:layout_marginTop="140px"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:textColor="@color/black"
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:hint="用户名2-15位，且不能是纯数字"
+        android:textSize="45px"
+        android:inputType="text"
+        android:background="@null"
+        android:textColorHint="@color/text_hint"/>
+
+    <View
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"/>
+
+    <EditText
+        android:id="@+id/reg_next_edit_psw"
+        android:layout_marginTop="100px"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:textColor="@color/black"
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:hint="密码6-16位"
+        android:maxLength="16"
+        android:inputType="textPassword"
+        android:background="@null"
+        android:textSize="45px"
+        android:textColorHint="@color/text_hint"/>
+
+    <View
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"/>
+
+    <EditText
+        android:id="@+id/reg_next_edit_psw_again"
+        android:layout_marginTop="100px"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:textColor="@color/black"
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:hint="重复密码"
+        android:textSize="45px"
+        android:maxLength="16"
+        android:inputType="textPassword"
+        android:background="@null"
+        android:textColorHint="@color/text_hint"/>
+
+    <View
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"/>
+
+
+    <Button
+        android:id="@+id/reg_next_btn_reg"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="100px"
+        android:layout_marginRight="60px"
+        android:layout_marginLeft="60px"
+        android:background="@drawable/shape_bg_button"
+        android:text="注 册"
+        android:textColor="@color/white"
+        android:textSize="48px" />
+
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
+        android:id="@+id/pullrefreshlistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </top.smartsport.www.listview_pulltorefresh.PullToRefreshListView>
+
+    <RelativeLayout
+        android:id="@+id/mykcempty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/gojoinlesson"
+            android:layout_width="600px"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dip"
+            android:background="@mipmap/btn_long"
+            android:gravity="center"
+            android:text="去查找青训课程"
+            android:textColor="@android:color/white"
+            android:textSize="19dip" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/gojoinlesson">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30px"
+                    android:src="@mipmap/wdkcempty" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="还未加入任何青训课程"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17dip" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="viewpager_inner" type="id"/>
+    <item name="mcv_pager" type="id" />
+    <item type="id" name="details_layout"/>
+    <item type="id" name="detail_layout"/>
+    <item type="id" name="navigation_back_button"/>
+    <item type="id" name="separator_line"/>
+    <item type="id" name="detail_header_label"/>
+    <item type="id" name="add_to_cart"/>
+    <item type="id" name="tv_cart_count"/>
+    <item type="id" name="goods_gallery"/>
+    <item type="id" name="main_layout"/>
+    <item type="id" name="titlebar_layout"/>
+    <item type="id" name="titlebar_title"/>
+    <item type="id" name="switcher_frame"/>
+    <item type="id" name="common_error"/>
+    <item type="id" name="switcher"/>
+    <item type="id" name="message"/>
+    <item type="id" name="loading_layout"/>
+    <item type="id" name="navigation_separator"/>
+</resources>

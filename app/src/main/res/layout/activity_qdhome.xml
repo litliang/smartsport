@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_account_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/wd_bg"
+                    android:gravity="center_vertical">
+
+
+                    <ImageView
+                        android:id="@+id/wd_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:src="@mipmap/head_default" />
+
+                    <LinearLayout
+                        android:id="@+id/wd_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50px"
+                        android:layout_marginTop="50px"
+                        android:layout_toRightOf="@+id/wd_header"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="球队名字"
+                            android:textColor="@color/white"
+                            android:textSize="45px" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="球队简介"
+                            android:textColor="@color/white"
+                            android:textSize="38px" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="132px"
+                    android:layout_below="@+id/rl_account_set"
+                    android:background="@color/theme_color"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="排名：3"
+                        android:textColor="@color/white"
+                        android:textSize="42px" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="积分：10"
+                        android:textColor="@color/white"
+                        android:textSize="42px" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="胜：2"
+                        android:textColor="@color/white"
+                        android:textSize="42px" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="平：1"
+                        android:textColor="@color/white"
+                        android:textSize="42px" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="负：5"
+                        android:textColor="@color/white"
+                        android:textSize="42px" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="40px"
+                android:text="教练"
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
+
+            <top.smartsport.www.widget.MyListView
+                android:id="@+id/qd_home_listView_jiaolian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="40px"
+                android:text="助教"
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
+
+            <top.smartsport.www.widget.MyListView
+                android:id="@+id/qd_home_listView_zhujiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="40px"
+                android:text="球员"
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
+
+            <top.smartsport.www.widget.MyListView
+                android:id="@+id/qd_home_listView_qiuyuan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

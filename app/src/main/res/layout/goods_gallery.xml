@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#cd000000">
+	<RelativeLayout 
+	    	android:id="@id/titlebar_layout"
+	    	android:layout_width="match_parent"
+    		android:layout_height="wrap_content">
+    	<ImageView android:id="@id/navigation_back_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="invisible" android:layout_centerVertical="true" />
+        <ImageView android:id="@id/navigation_separator" android:layout_width="2.0dip" android:layout_height="wrap_content" android:layout_toRightOf="@id/navigation_back_button" android:visibility="invisible"/>
+	    <TextView 
+	        android:id="@id/titlebar_title"
+	    	android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:layout_centerInParent="true"
+    		android:textSize="12.0dip"
+    		android:layout_marginTop="9.0dip"
+    		android:layout_marginLeft="10.0dip"
+    		android:textColor="@color/white"
+    		android:text="@string/app_name"/>
+	</RelativeLayout>
+	<FrameLayout android:visibility="gone"
+	    android:id="@id/switcher_frame"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	    <ImageSwitcher
+				android:id="@id/switcher"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_gravity="center" />
+		<LinearLayout
+		    android:id="@id/common_error"
+			android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_gravity="center"
+		    android:visibility="gone">
+		    <ImageView 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center"
+		         />
+		    <TextView 
+		        android:id="@id/message"
+		        android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+
+		        android:layout_gravity="center"
+		        android:textColor="@color/white"/>
+		</LinearLayout>
+	</FrameLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@id/goods_gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center_vertical"
+        android:spacing="16dp" />
+</RelativeLayout>

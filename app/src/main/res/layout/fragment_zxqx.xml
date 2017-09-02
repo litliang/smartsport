@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/layout_banner"
+                android:layout_width="match_parent"
+                android:layout_height="450px"
+                android:background="@color/white" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="推荐课程"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40px"
+                    android:textColor="@color/black"
+                    android:textSize="58px"/>
+
+                <TextView
+                    android:id="@+id/fm_text_qbkc"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="全部课程"
+                    android:layout_marginRight="40px"
+                    android:layout_weight="1"
+                    android:textColor="@color/theme_color"
+                    android:textSize="42px"/>
+
+            </LinearLayout>
+
+            <top.smartsport.www.widget.HorizontalListView
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:id="@+id/fm_grid_tjkc"
+                android:layout_width="match_parent"
+                android:layout_height="600px"
+                android:listSelector="#00000000"
+                android:layout_marginRight="40px"
+                android:layout_marginLeft="40px"
+                android:verticalSpacing="30px"
+                android:horizontalSpacing="30px"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="58px"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="40px"
+                android:textColor="@color/black"
+                android:text="青训资讯"/>
+            <top.smartsport.www.widget.MyListView
+                android:id="@+id/fm_list_qxzx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="推荐教练"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40px"
+                    android:textColor="@color/black"
+                    android:textSize="58px"/>
+
+                <TextView
+                    android:id="@+id/fm_text_"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="全部教练"
+                    android:layout_marginRight="40px"
+                    android:layout_weight="1"
+                    android:textColor="@color/theme_color"
+                    android:textSize="42px"/>
+
+            </LinearLayout>
+
+            <top.smartsport.www.widget.HorizontalListView
+                android:id="@+id/fm_grid_tjjl"
+                android:layout_width="match_parent"
+                android:layout_height="600px"
+                android:listSelector="#00000000"
+                android:layout_marginRight="40px"
+                android:layout_marginLeft="40px"
+                android:verticalSpacing="30px"
+                android:horizontalSpacing="30px"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--<ImageView-->
+                    <!--android:id="@+id/fm_img_qxzx"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:src="@mipmap/login_logo"/>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_toRightOf="@+id/fm_img_qxzx"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20px"-->
+                    <!--android:layout_marginRight="40px"-->
+                    <!--android:orientation="vertical">-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/fm_text_one_title"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="45px"-->
+                        <!--android:text="青训资讯资讯资讯资讯资讯青训资讯资讯资讯资讯资讯青训资讯资讯资讯资讯资讯"/>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/fm_text_one_dis"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/text_gray"-->
+                        <!--android:textSize="42px"-->
+                        <!--android:text="描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述"/>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:gravity="center_vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="2019-10-10"-->
+                            <!--android:textSize="42px"-->
+                            <!--android:textColor="@color/text_gray"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="阅读100"-->
+                            <!--android:textSize="42px"-->
+                            <!--android:gravity="right"-->
+                            <!--android:textColor="@color/text_gray"/>-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+                <top.smartsport.www.widget.MyListView
+                    android:id="@+id/fm_list_top_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="今日球星"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40px"
+                    android:textColor="@color/black"
+                    android:textSize="58px"/>
+
+                <TextView
+
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="往期球星"
+                    android:layout_marginRight="40px"
+                    android:layout_weight="1"
+                    android:textColor="@color/theme_color"
+                    android:textSize="42px"/>
+
+            </LinearLayout>
+            <include
+                android:layout_marginBottom="30px"
+                layout="@layout/layout_horizontal_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="520px" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

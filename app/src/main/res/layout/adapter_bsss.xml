@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginTop="20px"
+            android:id="@+id/adapter_bsss_img"
+            android:layout_width="match_parent"
+            android:layout_height="450px"
+            android:src="@mipmap/aa_tim"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/adapter_bsss_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="报名中"
+            android:paddingTop="10px"
+            android:paddingBottom="10px"
+            android:textSize="36px"
+            android:paddingRight="30px"
+            android:paddingLeft="30px"
+            android:layout_gravity="right"
+            android:layout_marginTop="40px"
+            android:layout_marginRight="40px"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_bg_button"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adapter_bsss_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="20px"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="比赛标题比赛标题比赛标题比赛标题比赛标题"
+            android:textColor="@color/black"
+            android:textSize="45px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/adapter_bsss_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="10px"
+                android:text="2017-05-20至2017-06-21"
+                android:textColor="@color/text_gray"
+                android:textSize="38px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:text="|"
+                android:textColor="@color/text_gray" />
+
+            <TextView
+                android:id="@+id/adapter_bsss_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="10px"
+                android:text="上海体育馆"
+                android:textColor="@color/text_gray"
+                android:textSize="38px" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/adapter_bsss_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="10px"
+                android:background="@drawable/guide_background"
+                android:paddingLeft="5px"
+                android:paddingRight="5px"
+                android:text="U16"
+                android:textColor="@color/theme_color"
+                android:textSize="35px" />
+
+            <TextView
+                android:id="@+id/adapter_bsss_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="10px"
+                android:background="@drawable/guide_background"
+                android:paddingLeft="5px"
+                android:paddingRight="5px"
+                android:text="11人"
+                android:textColor="@color/theme_color"
+                android:textSize="35px" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginTop="20px"
+            android:background="@color/line_color" />
+
+        <RelativeLayout
+            android:id="@+id/adapter_bsss_rl_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:layout_marginTop="30px">
+
+            <TextView
+                android:id="@+id/adapter_bsss_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="10px"
+                android:text="￥199"
+                android:textColor="@color/red"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/adapter_bsss_wybm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:background="@drawable/guide_background"
+                android:paddingBottom="10px"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:paddingTop="10px"
+                android:text="我要报名"
+                android:textColor="@color/theme_color"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/adapter_bsss_syu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10px"
+                android:layout_marginTop="10px"
+                android:layout_toLeftOf="@+id/adapter_bsss_wybm"
+                android:text="还剩8个名额"
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/adapter_bsss_rl_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:layout_marginTop="30px"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/adapter_bsss_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:background="@drawable/guide_background_gray"
+                android:paddingBottom="10px"
+                android:paddingLeft="20px"
+                android:paddingRight="20px"
+                android:paddingTop="10px"
+                android:text="查看详情"
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

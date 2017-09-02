@@ -1,0 +1,33 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="text_48">48px</dimen>
+    <dimen name="text_45">45px</dimen>
+    <dimen name="text_40">40px</dimen>
+    <dimen name="text_38">38px</dimen>
+
+    <dimen name="layout_height_100">100px</dimen>
+    <dimen name="layout_height_120">120px</dimen>
+
+    <dimen name="margin_size_60">60px</dimen>
+    <dimen name="margin_size_80">100px</dimen>
+    <dimen name="margin_size_100">100px</dimen>
+    <dimen name="margin_size_120">120px</dimen>
+    <dimen name="margin_size_140">140px</dimen>
+    <dimen name="margin_size_160">160px</dimen>
+    <dimen name="margin_size_180">180px</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="margin_left">45px</dimen>
+    <dimen name="margin_leftx1.5">67.5px</dimen>
+    <dimen name="margin_top">22.5px</dimen>
+    <dimen name="padding">60px</dimen>
+    <dimen name="margin_leftx2">90px</dimen>
+    <dimen name="margin_leftx3">135px</dimen>
+    <dimen name="tab_layout_height">134px</dimen>
+    <dimen name="layout_height">120px</dimen>
+    <dimen name="layout_with_pic_height">210px</dimen>
+    <dimen name="text_size">48px</dimen>
+    <dimen name="text_size_notice">39px</dimen>
+    <dimen name="list_item_top">60px</dimen>
+</resources>

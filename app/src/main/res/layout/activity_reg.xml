@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_bar"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/layout_actionbar" /></FrameLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:layout_marginTop="141px"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中国+86 |"
+            android:textSize="45px"/>
+        <EditText
+            android:id="@+id/reg_edit_phone"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20px"
+            android:hint="手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:background="@null"
+            android:textSize="45px"
+            android:textColorHint="@color/text_hint"/>
+
+        <TextView
+            android:id="@+id/reg_text_send_code"
+            android:layout_width="150px"
+            android:layout_height="match_parent"
+            android:text="验证"
+            android:textSize="45px"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_bg_button_small"/>
+
+
+    </LinearLayout>
+    <View
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"/>
+
+    <EditText
+        android:id="@+id/reg_edit_code"
+        android:layout_marginTop="50px"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:textColor="@color/black"
+        android:layout_marginLeft="120px"
+        android:hint="验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:background="@null"
+        android:textSize="45px"
+        android:textColorHint="@color/text_hint"/>
+    <View
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="100px"/>
+
+    <Button
+        android:id="@+id/reg_btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="66px"
+        android:layout_marginRight="60px"
+        android:layout_marginLeft="60px"
+        android:background="@drawable/shape_bg_button"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="48px" />
+
+
+    <TextView
+        android:layout_marginTop="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40px"
+        android:layout_gravity="center"
+        android:textColor="@color/text_gray"
+        android:text="轻按上面的“下一步”，即表示你同意"/>
+    <TextView
+        android:layout_marginTop="5px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="《数苗足球软件许可及服务协议》"
+        android:textColor="@color/text_black"
+        android:layout_gravity="center"
+        android:textSize="40px"/>
+
+</LinearLayout>

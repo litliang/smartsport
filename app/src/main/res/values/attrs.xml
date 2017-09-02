@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RollViewPager">
+        <attr name="rollviewpager_hint_mode">
+            <enum name="point" value="0" />
+            <enum name="number" value="1" />
+        </attr>
+        <attr name="rollviewpager_hint_gravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="rollviewpager_hint_paddingRight" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingLeft" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingTop" format="dimension"/>
+        <attr name="rollviewpager_hint_paddingBottom" format="dimension"/>
+
+        <attr name="rollviewpager_play_delay" format="integer" />
+        <attr name="rollviewpager_hint_color" format="color" />
+        <attr name="rollviewpager_hint_alpha" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="CustomShapeImageView">
+        <attr name="shape" format="integer">
+            <enum name="circle" value="1" />
+            <enum name="rectangle" value="2" />
+            <enum name="svg" value="3" />
+        </attr>
+        <attr name="svg_raw_resource" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color"/>
+        <attr name="pstsUnderlineColor" format="color"/>
+        <attr name="pstsDividerColor" format="color"/>
+        <attr name="contentSelectedTextColor" format="color"/>
+        <attr name="contentUnselectedTextColor" format="color"/>
+        <attr name="contentTextSize" format="dimension"/>
+        <attr name="contentTextColor" format="color"/>
+        <attr name="pstsIndicatorHeight" format="dimension"/>
+        <attr name="pstsUnderlineHeight" format="dimension"/>
+        <attr name="pstsDividerPadding" format="dimension"/>
+        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
+        <attr name="pstsScrollOffset" format="dimension"/>
+        <attr name="pstsTabBackground" format="reference"/>
+        <attr name="pstsShouldExpand" format="boolean"/>
+        <attr name="pstsTextAllCaps" format="boolean"/>
+        <attr name="selectedTabTextColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="QuickIndex">
+        <attr name="drawSize" format="dimension"/>
+    </declare-styleable>
+
+</resources>

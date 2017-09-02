@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <RelativeLayout android:layout_height="260dip" android:layout_width="match_parent">
+        <ImageView  android:layout_width="match_parent" android:layout_height="match_parent"
+                   android:id="@+id/shipin"/>
+        <TextView  android:id="@+id/duration" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:background="@mipmap/time10hours" android:text="10小时" android:textColor="@color/white" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_marginLeft="10dip" android:layout_marginBottom="10dip" />
+
+    </RelativeLayout>
+    <TextView android:id="@+id/kechengmingzi" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="8dip" android:lines="1" android:ellipsize="end" android:text="课程名字 课程名字"/>
+</LinearLayout>

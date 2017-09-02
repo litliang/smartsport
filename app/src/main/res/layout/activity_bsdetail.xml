@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/bs_detail_baoming"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red_baoming"
+        android:gravity="center"
+        android:text="我要报名(￥999)"
+        android:textColor="@color/white"
+        android:textSize="45px"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bs_detail_baoming"
+        android:layout_below="@id/action_bar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/comm_bsss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/bs_detail_ll__listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <top.smartsport.www.widget.MyListView
+                    android:id="@+id/bs_detail_listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_kc"
+                    android:layout_width="match_parent"
+                    android:layout_height="120px">
+
+                    <ImageView
+                        android:id="@+id/wd_kc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50px"
+                        android:src="@mipmap/detail_people" />
+
+                    <TextView
+                        android:id="@+id/wd_text_kc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30px"
+                        android:layout_toRightOf="@+id/wd_kc"
+                        android:text="参赛球队"
+                        android:textColor="@color/text_black"
+                        android:textSize="45px" />
+
+                    <ImageView
+                        android:id="@+id/arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="50px"
+                        android:src="@mipmap/left_arrow" />
+
+                    <TextView
+                        android:id="@+id/text_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30px"
+                        android:layout_marginRight="30px"
+                        android:layout_toLeftOf="@+id/arrow"
+                        android:text="0/0"
+                        android:textColor="@color/text_gray"
+                        android:textSize="45px" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_below="@id/rl_kc"
+                    android:layout_marginLeft="152px"
+                    android:layout_toRightOf="@+id/wd_kc"
+                    android:background="@color/line_color" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_sc"
+                    android:layout_width="match_parent"
+                    android:layout_height="120px">
+
+                    <ImageView
+                        android:id="@+id/wd_sc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50px"
+                        android:src="@mipmap/detail_fx" />
+
+                    <TextView
+                        android:id="@+id/wd_text_sc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30px"
+                        android:layout_toRightOf="@+id/wd_sc"
+                        android:text="数据分析"
+                        android:textColor="@color/text_black"
+                        android:textSize="45px" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="50px"
+                        android:src="@mipmap/left_arrow" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_below="@id/rl_sc"
+                    android:layout_marginLeft="152px"
+                    android:layout_toRightOf="@+id/wd_sc"
+                    android:background="@color/line_color" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120px">
+
+                    <ImageView
+                        android:id="@+id/wd_sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50px"
+                        android:src="@mipmap/detail_kcb" />
+
+                    <TextView
+                        android:id="@+id/wd_text_sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30px"
+                        android:layout_toRightOf="@+id/wd_sp"
+                        android:text="赛程表"
+                        android:textColor="@color/text_black"
+                        android:textSize="45px" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="50px"
+                        android:src="@mipmap/left_arrow" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pictitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_below="@id/rl_sc"
+                    android:layout_marginLeft="152px"
+                    android:layout_toRightOf="@+id/wd_sc"
+                    android:background="@color/line_color" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginLeft="50px"
+                    android:layout_marginTop="40px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="赛事图片"
+                        android:textColor="@color/black"
+                        android:textSize="48px" />
+
+                    <TextView
+                        android:id="@+id/lookuppics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50px"
+                        android:text="查看全部"
+                        android:textColor="@color/theme_color"
+                        android:textSize="45px" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <top.smartsport.www.widget.MyGridView
+                android:id="@+id/pic_gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:columnWidth="180px"
+                android:horizontalSpacing="30px"
+                android:listSelector="#00000000"
+                android:numColumns="3"
+                android:verticalSpacing="30px" />
+
+            <LinearLayout
+                android:id="@+id/saishijianjie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_below="@id/rl_sc"
+                    android:layout_marginLeft="152px"
+                    android:layout_toRightOf="@+id/wd_sc"
+                    android:background="@color/line_color" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50px"
+                    android:layout_marginTop="40px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="赛事简介"
+                        android:textColor="@color/black"
+                        android:textSize="48px" />
+
+                    <WebView
+                        android:id="@+id/bs_detail_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30px"
+                         />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bs_detail_ll_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="40px"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_below="@id/rl_sc"
+                    android:layout_marginLeft="152px"
+                    android:layout_toRightOf="@+id/wd_sc"
+                    android:background="@color/line_color" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="赛事视频"
+                    android:textColor="@color/black"
+                    android:textSize="48px" />
+
+                <top.smartsport.www.widget.MyListView
+                    android:id="@+id/bs_detail_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

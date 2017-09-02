@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TeamMemberView">
+        <attr name="laber" format="string" />
+        <attr name="laber_color" format="color" />
+        <attr name="content_color" format="color" />
+        <attr name="content_name" format="string" />
+        <attr name="content_location" format="string" />
+        <attr name="content_number" format="string" />
+        <attr name="content_hint_name" format="string" />
+        <attr name="content_hint_location" format="string" />
+        <attr name="content_hint_number" format="string" />
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="144px"
+    android:background="@color/theme_color">
+
+    <TextView
+        android:id="@+id/ivLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:focusable="true"
+        android:paddingLeft="50px"
+        android:text="返回"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/arrow_left" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:textColor="@android:color/white"
+        android:textSize="54px" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:id="@+id/ll_right"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10px"
+        >
+        <TextView
+            android:id="@+id/ivRight_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:gravity="right|center"
+            android:focusable="true"
+            android:visibility="visible"
+            android:textSize="48px"
+            android:layout_marginRight="50px"
+            />
+        <ImageView
+            android:id="@+id/ivRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
+            android:layout_marginRight="50px"
+            android:visibility="visible"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_bspicture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="top.smartsport.www.activity.BSPictureActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/action_bar">
+        <include layout="@layout/layout_actionbar"   />
+    </FrameLayout>
+    <top.smartsport.www.widget.MyGridView
+            android:layout_below="@+id/action_bar"
+            android:id="@+id/pic_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20px"
+            android:columnWidth="180px"
+            android:horizontalSpacing="30px"
+            android:listSelector="#00000000"
+            android:numColumns="3"
+            android:verticalSpacing="30px" />
+</RelativeLayout>

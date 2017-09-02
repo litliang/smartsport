@@ -1,0 +1,1264 @@
+{
+
+  "hotCity" : [ {
+    "areaName" : "上海市",
+    "areaId" : "86042ad2-444c-4c64-8fe8-cb4c342d8d09"
+  }, {
+    "areaName" : "重庆市",
+    "areaId" : "c9b70bdb-af49-44b6-a188-2613fd3969e5"
+  }, {
+    "areaName" : "北京市",
+    "areaId" : "d5aa5f72-58e2-4dc1-be5f-29a82a6f7325"
+  } ],
+  "data" : [ {
+    "areaName" : "阿坝藏族羌族自治州",
+    "areaId" : "2bf11bba-f2c9-4f74-8d9c-e2f0e506c888"
+  }, {
+    "areaName" : "阿克苏地区",
+    "areaId" : "fe7b52b5-6d9b-44f6-b432-2d64b7513abe"
+  }, {
+    "areaName" : "阿拉尔市",
+    "areaId" : "af2c936f-1781-4206-8ee9-af4e0b883e94"
+  }, {
+    "areaName" : "阿拉善盟",
+    "areaId" : "8eb2f539-295d-4e12-a90e-1297fef45274"
+  }, {
+    "areaName" : "阿勒泰地区",
+    "areaId" : "e4e7f3de-ecf0-49c7-b05f-1ae72a8f4254"
+  }, {
+    "areaName" : "阿里地区",
+    "areaId" : "2277565b-d988-4f7f-80f2-85cbdd99ef37"
+  }, {
+    "areaName" : "安康地区",
+    "areaId" : "0d280ab8-2892-49fe-8fe2-366d93672933"
+  }, {
+    "areaName" : "安庆市",
+    "areaId" : "9d111651-47c1-411f-a0a4-46c54b292af5"
+  }, {
+    "areaName" : "安阳市",
+    "areaId" : "8113cda2-18f4-41c5-9ea5-98a46e5011c0"
+  }, {
+    "areaName" : "巴南区",
+    "areaId" : "c14db8be-de42-43d6-bf03-7a9243c25d0b"
+  }, {
+    "areaName" : "巴彦淖尔盟",
+    "areaId" : "e5501f7e-6f5e-434c-8ddb-c70ccb7fb4a5"
+  }, {
+    "areaName" : "巴音郭楞蒙古自治州",
+    "areaId" : "b28fef94-2c89-4f59-b079-13485c04c35d"
+  }, {
+    "areaName" : "白城市",
+    "areaId" : "ca63c033-bd2d-4e3d-92c4-c203e6bbfda5"
+  }, {
+    "areaName" : "白沙黎族自治县",
+    "areaId" : "4e63821e-0968-4d1f-a1d1-23d4f5de05d0"
+  }, {
+    "areaName" : "白山市",
+    "areaId" : "80a7722a-5335-4649-8c0b-0a184917afaf"
+  }, {
+    "areaName" : "白银市",
+    "areaId" : "876f5dfa-4c4a-40e0-824e-dabb693fa354"
+  }, {
+    "areaName" : "百色市",
+    "areaId" : "65883b30-9644-41c7-8827-a4bd3947e95e"
+  }, {
+    "areaName" : "蚌埠市",
+    "areaId" : "7f590f83-9cb2-11e5-ab67-00163e0e0718"
+  }, {
+    "areaName" : "包头市",
+    "areaId" : "d396060f-73a5-4441-93d9-59c4f8ee5eed"
+  }, {
+    "areaName" : "宝坻区",
+    "areaId" : "e6773408-a648-4990-8054-d8ba0c54c92d"
+  }, {
+    "areaName" : "宝鸡市",
+    "areaId" : "6bc33ed5-388a-4d54-81c8-18d145b04cd6"
+  }, {
+    "areaName" : "保定市",
+    "areaId" : "da437356-df47-4c92-99b8-1c72022eeb95"
+  }, {
+    "areaName" : "保山地区",
+    "areaId" : "8519d6a8-ef53-4934-8235-a400081d50c7"
+  }, {
+    "areaName" : "保亭黎族苗族自治县",
+    "areaId" : "a4e5cade-ffaa-4776-875b-de85b3aee389"
+  }, {
+    "areaName" : "北碚区",
+    "areaId" : "92db7ae1-29b6-490c-8d96-964e5fca8154"
+  }, {
+    "areaName" : "北辰区",
+    "areaId" : "44b517d4-4f80-48cf-a1de-255ea43ca2b7"
+  }, {
+    "areaName" : "北海市",
+    "areaId" : "2ce77b74-4e9e-4b55-a499-31906cd4b330"
+  }, {
+    "areaName" : "北京市",
+    "areaId" : "d5aa5f72-58e2-4dc1-be5f-29a82a6f7325"
+  }, {
+    "areaName" : "本溪市",
+    "areaId" : "5b7cb6b0-f95b-4ef2-8c4a-2a663f77907a"
+  }, {
+    "areaName" : "毕节地区",
+    "areaId" : "8988fe5d-a2f0-4418-a1c7-8b3e38c01fad"
+  }, {
+    "areaName" : "璧山县",
+    "areaId" : "12dba70b-9382-4a91-9d99-fb068e73162f"
+  }, {
+    "areaName" : "滨海新区",
+    "areaId" : "6fd8ef4b-6c2b-4213-bd22-1beb4a21856c"
+  }, {
+    "areaName" : "滨州市",
+    "areaId" : "8ae73e0d-1495-41ce-80f2-f55681a06116"
+  }, {
+    "areaName" : "博尔塔拉蒙古自治州",
+    "areaId" : "01aa1a68-1846-47d5-a142-101dfb0fe0ff"
+  }, {
+    "areaName" : "沧州市",
+    "areaId" : "16d6f8f4-f015-449f-b5fc-e9923226981c"
+  }, {
+    "areaName" : "昌都地区",
+    "areaId" : "0f2b2656-8e4b-44cf-b527-af9841891c1c"
+  }, {
+    "areaName" : "昌吉回族自治州",
+    "areaId" : "11c2904a-6005-4ae8-a17b-2bb1ab0bcaba"
+  }, {
+    "areaName" : "昌江黎族自治县",
+    "areaId" : "9b7546e2-418f-4937-be37-61371ce41a02"
+  }, {
+    "areaName" : "长春市",
+    "areaId" : "ce49b681-b38e-4fba-8cae-e048654141e0"
+  }, {
+    "areaName" : "长沙市",
+    "areaId" : "a2fcae80-86da-4b79-9944-a30cc0dcdee7"
+  }, {
+    "areaName" : "长寿区",
+    "areaId" : "dd7da030-0119-4304-9c58-01f608659264"
+  }, {
+    "areaName" : "长治市",
+    "areaId" : "2d63a72a-0751-4715-9b28-a97756291226"
+  }, {
+    "areaName" : "常德市",
+    "areaId" : "8b7bd797-7b15-4e30-a833-f57062a8466c"
+  }, {
+    "areaName" : "常州市",
+    "areaId" : "11531886-cb53-4e93-b327-354f3ba0bf10"
+  }, {
+    "areaName" : "巢湖市",
+    "areaId" : "bea3a94e-94cd-482c-a67a-8717089b8a59"
+  }, {
+    "areaName" : "朝阳市",
+    "areaId" : "d011f174-54c1-45d2-b372-483aa6b2ad3d"
+  }, {
+    "areaName" : "潮州市",
+    "areaId" : "b11c8c91-65ab-4747-ab39-6213db576e38"
+  }, {
+    "areaName" : "郴州市",
+    "areaId" : "d448abc0-05e9-4e43-9cd8-f1c5619bd647"
+  }, {
+    "areaName" : "成都市",
+    "areaId" : "0b8bc74e-b841-46a4-9744-0c9293640596"
+  }, {
+    "areaName" : "承德市",
+    "areaId" : "65b8c859-5fef-443d-83d2-b90e67158223"
+  }, {
+    "areaName" : "城口县",
+    "areaId" : "5ceb2558-6be5-45cd-a17d-30f94068d281"
+  }, {
+    "areaName" : "澄迈县",
+    "areaId" : "a0caa056-f0ec-4b66-b71f-95c6e7c1fd0c"
+  }, {
+    "areaName" : "池州市",
+    "areaId" : "ed9393e1-e6a8-412c-8fad-ff323505466a"
+  }, {
+    "areaName" : "赤峰市",
+    "areaId" : "d29ccd3a-d0c5-406f-a560-592266aef708"
+  }, {
+    "areaName" : "崇左市",
+    "areaId" : "95a0d951-f319-481e-a82b-bcc98342fe4c"
+  }, {
+    "areaName" : "滁州市",
+    "areaId" : "4e79680c-f9ac-4bd2-a062-e0cf12aa7472"
+  }, {
+    "areaName" : "楚雄彝族自治州",
+    "areaId" : "14fb74ad-fded-4fcb-a803-9ff10bb0f7fe"
+  }, {
+    "areaName" : "达川地区",
+    "areaId" : "a44c9256-6ff3-4e2e-a307-624e4092fd77"
+  }, {
+    "areaName" : "大渡口区",
+    "areaId" : "44ad16b0-a26b-4e58-aab7-7c645408b7d6"
+  }, {
+    "areaName" : "大港区",
+    "areaId" : "34a56303-2c24-4b2e-bfc5-03c78f8a946e"
+  }, {
+    "areaName" : "大理白族自治州",
+    "areaId" : "ab5e1915-9210-483f-8ef1-f69fc26b3584"
+  }, {
+    "areaName" : "大连市",
+    "areaId" : "2e613421-ebd7-4dcc-8c54-08f2fb950b72"
+  }, {
+    "areaName" : "大庆市",
+    "areaId" : "51df10a8-6f8b-4e9d-a681-948f90295e3b"
+  }, {
+    "areaName" : "大同市",
+    "areaId" : "69675f23-7ab2-495b-b888-1b4d5f692197"
+  }, {
+    "areaName" : "大兴安岭地区",
+    "areaId" : "6fb861bb-1920-45b6-945b-ef3ba62a4d79"
+  }, {
+    "areaName" : "大足县",
+    "areaId" : "b3213cfe-601a-4dbd-bea1-81ddbe8d95ca"
+  }, {
+    "areaName" : "丹东市",
+    "areaId" : "b5f1b127-899c-419b-8c4a-89f95880e721"
+  }, {
+    "areaName" : "儋州市",
+    "areaId" : "3aed4519-a327-43bc-a1e7-009bfa5b99bc"
+  }, {
+    "areaName" : "德宏傣族景颇族自治州",
+    "areaId" : "1f3a3842-4217-4358-9a5b-7baad64c48f6"
+  }, {
+    "areaName" : "德阳市",
+    "areaId" : "bf43b517-0d48-4bfc-95bd-0facf3e998c2"
+  }, {
+    "areaName" : "德州市",
+    "areaId" : "8acde810-8887-496c-b416-e3b7edf1351d"
+  }, {
+    "areaName" : "迪庆藏族自治州",
+    "areaId" : "d4555f2c-16f4-4ea0-87c2-0b5b3e19d136"
+  }, {
+    "areaName" : "垫江县",
+    "areaId" : "8fd3ee36-2244-4a7b-a419-0f143cd8fac7"
+  }, {
+    "areaName" : "定安县",
+    "areaId" : "371439a2-9b59-4870-98f8-d28faf535dfe"
+  }, {
+    "areaName" : "定西地区",
+    "areaId" : "6a8d8f8a-70a8-4626-98f6-e37fc0853fd1"
+  }, {
+    "areaName" : "东方市",
+    "areaId" : "e4111a4e-5d50-42c5-826c-268957d1bc76"
+  }, {
+    "areaName" : "东丽区",
+    "areaId" : "7eb9d8b7-5dc0-4800-ab61-509cdc084629"
+  }, {
+    "areaName" : "东莞市",
+    "areaId" : "d58081b0-3210-40fb-84a6-68b407a17555"
+  }, {
+    "areaName" : "东营市",
+    "areaId" : "2e83acef-664e-43d2-999f-2463c8508390"
+  }, {
+    "areaName" : "恩施土家族苗族自治州",
+    "areaId" : "4961055c-841b-4ddb-9060-b72180bd075b"
+  }, {
+    "areaName" : "防城港市",
+    "areaId" : "c9388326-325e-40ec-bc27-9099e1c83fd7"
+  }, {
+    "areaName" : "丰都县",
+    "areaId" : "d6bad17e-5f82-4607-91bb-1e41ff70985e"
+  }, {
+    "areaName" : "奉节县",
+    "areaId" : "639d75a3-7b1e-4add-b4c1-86be2c551769"
+  }, {
+    "areaName" : "佛山市",
+    "areaId" : "f53788eb-eecc-4047-9b70-2681c968647f"
+  }, {
+    "areaName" : "涪陵区",
+    "areaId" : "a33c86a1-fc04-4128-aaae-6de73811d392"
+  }, {
+    "areaName" : "福州市",
+    "areaId" : "41b58e29-133d-4f42-9674-935db3c6aa6f"
+  }, {
+    "areaName" : "抚顺市",
+    "areaId" : "a6f65432-3553-4503-96c5-ef962ab7048d"
+  }, {
+    "areaName" : "抚州市",
+    "areaId" : "71b75203-5cfb-435e-a27c-4bdc5d13514a"
+  }, {
+    "areaName" : "阜新市",
+    "areaId" : "f9ba72e6-5f55-4a4c-bf57-097b620f9ca4"
+  }, {
+    "areaName" : "阜阳市",
+    "areaId" : "81fb4762-78ab-4c14-bbc6-e63d6c7c62f4"
+  }, {
+    "areaName" : "甘南藏族自治州",
+    "areaId" : "467a87e0-7490-4257-a002-e9a12ea058b9"
+  }, {
+    "areaName" : "甘孜藏族自治州",
+    "areaId" : "f8f41544-e4a5-4d85-9673-2e6230030dae"
+  }, {
+    "areaName" : "赣州市",
+    "areaId" : "865df4c4-3fef-491d-bff2-016613719826"
+  }, {
+    "areaName" : "固原地区",
+    "areaId" : "f4b09afe-e4b8-4760-add8-5d667cb53cba"
+  }, {
+    "areaName" : "广安市",
+    "areaId" : "358a3261-018d-490f-85c3-aa0d02f70138"
+  }, {
+    "areaName" : "广元市",
+    "areaId" : "5844c654-4fa4-48e7-a2e3-cf4c4c27e663"
+  }, {
+    "areaName" : "广州市",
+    "areaId" : "d112ab4d-cc4c-4927-9064-5529dd0ff495"
+  }, {
+    "areaName" : "贵港市",
+    "areaId" : "8570da7e-e377-4361-bdca-bed7aa39fcd1"
+  }, {
+    "areaName" : "贵阳市",
+    "areaId" : "4d3e8d43-1ff9-483a-90ac-cfe4ada327a3"
+  }, {
+    "areaName" : "桂林市",
+    "areaId" : "4bc30530-e1ed-464f-a2c0-38f5a6868cb2"
+  }, {
+    "areaName" : "果洛藏族自治州",
+    "areaId" : "23c91acf-e718-477b-a88f-0e21ce150fe8"
+  }, {
+    "areaName" : "哈尔滨市",
+    "areaId" : "96b2788b-858e-4813-9a26-fe3114385082"
+  }, {
+    "areaName" : "哈密地区",
+    "areaId" : "d975f27c-92da-438e-bda1-c842604f559e"
+  }, {
+    "areaName" : "海北藏族自治州",
+    "areaId" : "7f4773fa-47b4-4714-9e12-9bb79a29216f"
+  }, {
+    "areaName" : "海东地区",
+    "areaId" : "b1e50091-eef7-44d9-b963-7d5a03922db7"
+  }, {
+    "areaName" : "海口市",
+    "areaId" : "150a340e-23e8-40d8-87da-891cb7a9ee63"
+  }, {
+    "areaName" : "海南藏族自治州",
+    "areaId" : "461b453c-7a41-4af8-b57a-6b622381e7c9"
+  }, {
+    "areaName" : "海西蒙古族藏族自治州",
+    "areaId" : "c9d9ebac-c4a5-40f1-bec2-d4e1db128e3c"
+  }, {
+    "areaName" : "邯郸市",
+    "areaId" : "b3f23f76-3ab9-4941-9113-5a1a21d72c66"
+  }, {
+    "areaName" : "汉沽区",
+    "areaId" : "4988b8a9-9db4-46a8-9071-3236fc171a8d"
+  }, {
+    "areaName" : "汉中市",
+    "areaId" : "d5796d56-b79d-4ba3-a0df-40e8c4e7b762"
+  }, {
+    "areaName" : "杭州市",
+    "areaId" : "2d4e635d-246a-4957-9e38-67f9e43b1094"
+  }, {
+    "areaName" : "合川区",
+    "areaId" : "f0c38383-ce24-4a9a-8aaa-96b69d85fabd"
+  }, {
+    "areaName" : "合肥市",
+    "areaId" : "57b540fa-df4f-49fd-8e47-f8b1d53553ef"
+  }, {
+    "areaName" : "和平区",
+    "areaId" : "f97ff56f-7a35-4585-b0c1-ae7348d14fce"
+  }, {
+    "areaName" : "和田地区",
+    "areaId" : "4c4ae5b4-c3da-40f8-bb0d-1e6914d3192f"
+  }, {
+    "areaName" : "河北区",
+    "areaId" : "2373fdb2-7fff-40f5-97aa-58eff6a727ca"
+  }, {
+    "areaName" : "河池市",
+    "areaId" : "c5838cc1-d185-4354-b8d7-2d090883b7bd"
+  }, {
+    "areaName" : "河东区",
+    "areaId" : "995030a2-b381-45de-a337-ec3589c0972d"
+  }, {
+    "areaName" : "河西区",
+    "areaId" : "3a4f196f-cb8e-4976-951a-c736b348b8fb"
+  }, {
+    "areaName" : "河源市",
+    "areaId" : "d5daebe0-b405-4503-a3de-db4943e0b1c7"
+  }, {
+    "areaName" : "菏泽市",
+    "areaId" : "709fb83f-c121-411b-a5dd-f40352fde154"
+  }, {
+    "areaName" : "贺州市",
+    "areaId" : "dd47a847-c7e1-44a7-891e-321723e4f5be"
+  }, {
+    "areaName" : "鹤壁市",
+    "areaId" : "9175b53c-36ca-4c97-a0df-858c29248e3c"
+  }, {
+    "areaName" : "鹤岗市",
+    "areaId" : "76495d48-9f88-4fbe-8d85-9e32f32237d0"
+  }, {
+    "areaName" : "黑河市",
+    "areaId" : "7f832f05-693e-4398-b283-ff6241a6e8a6"
+  }, {
+    "areaName" : "衡水市",
+    "areaId" : "9fe83e32-9388-4c80-8c1a-5cfe16a960b1"
+  }, {
+    "areaName" : "衡阳市",
+    "areaId" : "83247f44-1f77-4fb1-959a-b1e6f1c8fac3"
+  }, {
+    "areaName" : "红河哈尼族彝族自治州",
+    "areaId" : "93dc067b-7b12-40c9-be61-44b63180ed13"
+  }, {
+    "areaName" : "红桥区",
+    "areaId" : "19eaeb09-e20e-41c0-9f69-7aa6aeeb00d6"
+  }, {
+    "areaName" : "呼和浩特市",
+    "areaId" : "50ce0058-4cb7-48f7-944a-d06d7ef311ec"
+  }, {
+    "areaName" : "呼伦贝尔市",
+    "areaId" : "23461e09-a488-4628-b1c2-37b2517b5f33"
+  }, {
+    "areaName" : "湖州市",
+    "areaId" : "e6aa6ba0-c001-4b0a-997b-cb103bde8680"
+  }, {
+    "areaName" : "葫芦岛市",
+    "areaId" : "a7c94224-dd8c-4e6c-856c-054b4eedf156"
+  }, {
+    "areaName" : "怀化市",
+    "areaId" : "f446d7c2-8ce3-4146-bf86-312d7fd19926"
+  }, {
+    "areaName" : "淮安市",
+    "areaId" : "3dfe60ca-e2ae-4bb2-b244-c5289c9a27a3"
+  }, {
+    "areaName" : "淮北市",
+    "areaId" : "18eb226e-856c-4f6c-bd50-09dae5469d46"
+  }, {
+    "areaName" : "淮南市",
+    "areaId" : "06c51401-62f1-42ec-b506-3d71bc9b13cf"
+  }, {
+    "areaName" : "淮南市",
+    "areaId" : "dc16c1d9-9cbb-11e5-ab67-00163e0e0718"
+  }, {
+    "areaName" : "黄冈市",
+    "areaId" : "2e9983f4-9714-449d-98b9-dff26686c97b"
+  }, {
+    "areaName" : "黄南藏族自治州",
+    "areaId" : "7849147c-548d-4466-8296-7f7c30cb3aa0"
+  }, {
+    "areaName" : "黄山市",
+    "areaId" : "3738ca50-b317-4545-8219-b620caed9958"
+  }, {
+    "areaName" : "黄石市",
+    "areaId" : "e61162a1-fb9c-40d9-9fb9-9ce895a46c81"
+  }, {
+    "areaName" : "惠州市",
+    "areaId" : "90152efb-e545-416c-bf67-071fd0b5e5c5"
+  }, {
+    "areaName" : "鸡西市",
+    "areaId" : "ad63c223-2f5c-4969-b67f-3c3837ffac59"
+  }, {
+    "areaName" : "吉安市",
+    "areaId" : "a851c947-88a6-46e6-9d06-25ca8ae1389d"
+  }, {
+    "areaName" : "吉林市",
+    "areaId" : "e8fb24bb-6bbc-4507-868f-d679393c19a6"
+  }, {
+    "areaName" : "济南市",
+    "areaId" : "102d8380-f6b6-445a-80cd-08e7e73c0ba1"
+  }, {
+    "areaName" : "济宁市",
+    "areaId" : "6c9c39ca-f652-447c-9a5b-1052d6d838b1"
+  }, {
+    "areaName" : "济源市",
+    "areaId" : "4835632b-ad8a-4dde-ab49-a4129e600678"
+  }, {
+    "areaName" : "蓟县",
+    "areaId" : "e4214f33-b7b3-4cb3-b239-936636d9b799"
+  }, {
+    "areaName" : "嘉兴市",
+    "areaId" : "a28994c6-30f9-49f7-8cff-a807ede5a111"
+  }, {
+    "areaName" : "嘉峪关市",
+    "areaId" : "b25fd15a-0b21-4a1d-9d62-8eb572bac560"
+  }, {
+    "areaName" : "江北区",
+    "areaId" : "1f5bd8fb-65a1-4032-a1fb-953cc855d702"
+  }, {
+    "areaName" : "江津区",
+    "areaId" : "e0355f80-be10-4d50-a90c-faa33d4bd620"
+  }, {
+    "areaName" : "江门市",
+    "areaId" : "0fb7f65a-292a-4788-823a-9bdc16c4fc72"
+  }, {
+    "areaName" : "焦作市",
+    "areaId" : "6c42833d-1db8-4e3c-9509-1ccc8a9c3db3"
+  }, {
+    "areaName" : "金昌市",
+    "areaId" : "33ea1e95-7ae0-4073-95bd-c3fe0e69ff99"
+  }, {
+    "areaName" : "金昌市",
+    "areaId" : "776243a9-fe68-4518-92a0-1089ff79b56d"
+  }, {
+    "areaName" : "金华市",
+    "areaId" : "8dc0999a-6a54-49b0-b1f7-98e342f19b45"
+  }, {
+    "areaName" : "津南区",
+    "areaId" : "bcb60aea-68fe-4641-9b33-c15f2947f555"
+  }, {
+    "areaName" : "锦州市",
+    "areaId" : "a921e6d3-3901-4d98-9bcf-27cdfd5ca190"
+  }, {
+    "areaName" : "晋城市",
+    "areaId" : "15c35721-a9a4-4c73-b291-94ba72a91e79"
+  }, {
+    "areaName" : "晋中市",
+    "areaId" : "7fad27e6-73e2-4548-9454-fa059e5e1e17"
+  }, {
+    "areaName" : "荆门市",
+    "areaId" : "930114a2-1d89-4ca5-b59c-26389c544979"
+  }, {
+    "areaName" : "荆州市",
+    "areaId" : "850b9d99-c1a0-48ba-940a-af754d815106"
+  }, {
+    "areaName" : "景德镇市",
+    "areaId" : "607b1c59-c5f9-4f02-8d49-7e915b5cccde"
+  }, {
+    "areaName" : "静海县",
+    "areaId" : "0370594d-ed5c-45e2-b831-47f3e87e98c0"
+  }, {
+    "areaName" : "九江市",
+    "areaId" : "d9b37a90-483d-457b-8b5b-f501f71907a5"
+  }, {
+    "areaName" : "九龙坡区",
+    "areaId" : "fa200780-2e27-4d3d-8f9d-d637b7432d5a"
+  }, {
+    "areaName" : "酒泉地区",
+    "areaId" : "b4224e5b-0bf0-49c2-947c-002b97b93e73"
+  }, {
+    "areaName" : "喀什地区",
+    "areaId" : "79ab7517-c137-4e8c-9bd4-602acfb56931"
+  }, {
+    "areaName" : "开封市",
+    "areaId" : "91efa45d-05e9-4152-b687-21a6c5338f37"
+  }, {
+    "areaName" : "开县",
+    "areaId" : "a0670e74-f2a6-4469-b254-009a525ddf09"
+  }, {
+    "areaName" : "克拉玛依市",
+    "areaId" : "7a4ed3cf-3e6c-4c46-9058-de99106e8ea6"
+  }, {
+    "areaName" : "克孜勒苏柯尔克孜自治州",
+    "areaId" : "5f64194c-ac65-4450-9c5e-bb69f812bfb6"
+  }, {
+    "areaName" : "昆明市",
+    "areaId" : "0606f36f-4c59-449d-9ee0-42a2d16dbd45"
+  }, {
+    "areaName" : "拉萨市",
+    "areaId" : "ef1c935c-2b83-4a2c-8570-eb55a4c5920a"
+  }, {
+    "areaName" : "来宾市",
+    "areaId" : "77f36afb-7d2e-4ceb-9773-f29eb349c167"
+  }, {
+    "areaName" : "莱芜市",
+    "areaId" : "71a0d218-bfd1-4590-a819-49f4fa427cfb"
+  }, {
+    "areaName" : "兰州市",
+    "areaId" : "b45268e9-6d54-4cfc-a028-f1c4454a6050"
+  }, {
+    "areaName" : "廊坊市",
+    "areaId" : "1f7fa1b6-e03f-4bb7-b853-3f3d1689e9f7"
+  }, {
+    "areaName" : "乐东黎族自治县",
+    "areaId" : "6c82fb54-a1e8-4302-9e6c-cbd6e517aa63"
+  }, {
+    "areaName" : "乐山市",
+    "areaId" : "7f566d99-dfe0-488d-b906-e75b40d08247"
+  }, {
+    "areaName" : "丽江地区",
+    "areaId" : "09279ae6-923f-4d44-85af-0a1edc994d3e"
+  }, {
+    "areaName" : "丽水市",
+    "areaId" : "efd42b51-d62a-4995-a343-57fa30ae5b99"
+  }, {
+    "areaName" : "连云港市",
+    "areaId" : "33329bfb-bb72-46cf-81db-605d64869222"
+  }, {
+    "areaName" : "凉山彝族自治州",
+    "areaId" : "02e6b9d1-b909-4905-b27b-3e7a99a8d801"
+  }, {
+    "areaName" : "梁平县",
+    "areaId" : "e6e7baa2-0154-4b3b-87ce-ea8920ad3790"
+  }, {
+    "areaName" : "辽阳市",
+    "areaId" : "0f3f8888-5385-4eff-b7a8-7abb5d70b146"
+  }, {
+    "areaName" : "辽源市",
+    "areaId" : "8e1a3d5a-4f2b-42d5-9a8b-369687852d65"
+  }, {
+    "areaName" : "聊城市",
+    "areaId" : "93b05cef-12f9-4f57-b9c0-63fbb117e9b1"
+  }, {
+    "areaName" : "林芝地区",
+    "areaId" : "56a5fe01-ec09-4368-9d09-d2c82595eb74"
+  }, {
+    "areaName" : "临沧地区",
+    "areaId" : "a6f372c3-a2f7-4eaf-8508-99c2c287d6e1"
+  }, {
+    "areaName" : "临汾市",
+    "areaId" : "fbe16cef-6d89-4483-bdf8-338388923e2b"
+  }, {
+    "areaName" : "临高县",
+    "areaId" : "2743b294-7d54-4f54-9211-20b3f81efa18"
+  }, {
+    "areaName" : "临夏回族自治州",
+    "areaId" : "da4d3c15-585c-4a36-a60d-fca8f4f02ab4"
+  }, {
+    "areaName" : "临沂市",
+    "areaId" : "fa5c758c-b868-4fb5-bf6f-86af5a3d177a"
+  }, {
+    "areaName" : "陵水黎族自治县",
+    "areaId" : "e56956cc-9796-4576-a232-0562691f3d75"
+  }, {
+    "areaName" : "柳州市",
+    "areaId" : "f27dc6e5-f4bf-4f03-b903-9b8eb5f131f2"
+  }, {
+    "areaName" : "六安市",
+    "areaId" : "bad7429c-900d-4715-9aba-58972da462d3"
+  }, {
+    "areaName" : "六盘水市",
+    "areaId" : "74ba48e9-ab2d-419d-9167-9ed987956604"
+  }, {
+    "areaName" : "龙岩",
+    "areaId" : "006e5f91-e012-495a-87ca-1219a0ffc881"
+  }, {
+    "areaName" : "陇南地区",
+    "areaId" : "4c04ebcc-9378-4f95-88d4-f2661a388c50"
+  }, {
+    "areaName" : "娄底地区",
+    "areaId" : "dfd34fbd-20da-4c2e-a6fc-1277f58a84a0"
+  }, {
+    "areaName" : "泸州市",
+    "areaId" : "6e695267-e3ce-420b-b021-74f91aedb0e6"
+  }, {
+    "areaName" : "吕梁市",
+    "areaId" : "a8c57e33-6ef1-4cc1-84a3-dd13b72efe9c"
+  }, {
+    "areaName" : "洛阳市",
+    "areaId" : "f0b38d83-ef65-42f1-95e6-bedd9fc3404e"
+  }, {
+    "areaName" : "漯河市",
+    "areaId" : "e5950fca-d8eb-492d-a6a6-f5c70d19578e"
+  }, {
+    "areaName" : "马鞍山市",
+    "areaId" : "5b15701e-55e1-4878-9db5-f97588240415"
+  }, {
+    "areaName" : "马鞍山市",
+    "areaId" : "a7a9386a-9cbc-11e5-ab67-00163e0e0718"
+  }, {
+    "areaName" : "茂名市",
+    "areaId" : "d3d1b17f-b07b-40d0-aa2b-afd0c9a33465"
+  }, {
+    "areaName" : "眉山地区",
+    "areaId" : "1ec309d4-d82e-4983-b354-45ea6b9a7c76"
+  }, {
+    "areaName" : "梅州市",
+    "areaId" : "8fb7e142-968f-4e05-9059-44688fca0ba1"
+  }, {
+    "areaName" : "绵阳市",
+    "areaId" : "1b2074f7-28a1-4da7-9b79-6fcd274b6799"
+  }, {
+    "areaName" : "牡丹江市",
+    "areaId" : "59606fc0-c4e4-4a36-b90e-0641eba384c6"
+  }, {
+    "areaName" : "内江市",
+    "areaId" : "83674627-fc4c-424c-abaa-02afb645fcb7"
+  }, {
+    "areaName" : "那曲地区",
+    "areaId" : "e25a5bbc-d783-4e63-8408-6bf398e0d8b2"
+  }, {
+    "areaName" : "南岸区",
+    "areaId" : "6c7b7392-617c-433e-ab40-f1c81ba96ce9"
+  }, {
+    "areaName" : "南昌市",
+    "areaId" : "97a6fa9f-45a1-48fd-bda5-5ac3a82d064c"
+  }, {
+    "areaName" : "南充市",
+    "areaId" : "16ecf001-042f-447a-a8ac-87ca24060660"
+  }, {
+    "areaName" : "南川区",
+    "areaId" : "f955757b-44b2-481d-81ab-0736a606e95f"
+  }, {
+    "areaName" : "南京市",
+    "areaId" : "eea85aa2-32f4-403e-913e-7e17c740d353"
+  }, {
+    "areaName" : "南开区",
+    "areaId" : "37a05f8f-610e-428d-9f86-81111be7e888"
+  }, {
+    "areaName" : "南宁市",
+    "areaId" : "3979a766-27e3-4bde-8c27-c18e11a77c37"
+  }, {
+    "areaName" : "南平市",
+    "areaId" : "2bc1bd84-1381-47dd-9789-df5582a33eca"
+  }, {
+    "areaName" : "南通市",
+    "areaId" : "72c2fa15-ff1c-44d4-a704-6a372583dd34"
+  }, {
+    "areaName" : "南阳市",
+    "areaId" : "5fa512ca-eb26-4ba3-bbda-05dfdd803242"
+  }, {
+    "areaName" : "宁波市",
+    "areaId" : "2f03bbcd-fb93-4f6b-825f-f087834ec18d"
+  }, {
+    "areaName" : "宁德市",
+    "areaId" : "3952097d-e077-4386-8a72-ddbc5be6658d"
+  }, {
+    "areaName" : "宁河县",
+    "areaId" : "dff2666e-fa59-4680-a7ab-33ec59c44e98"
+  }, {
+    "areaName" : "怒江傈僳族自治州",
+    "areaId" : "a6f740ca-347c-4394-86b4-72ee4bbb8550"
+  }, {
+    "areaName" : "攀枝花市",
+    "areaId" : "3bd685c7-9cb6-4855-bd3d-cfa59c42d29c"
+  }, {
+    "areaName" : "盘锦市",
+    "areaId" : "100f2b1a-fa8c-4adf-8b99-bb33d4fc8ee0"
+  }, {
+    "areaName" : "彭水苗族土家族自治县",
+    "areaId" : "64a3e3b3-e2ea-40cb-8b70-2ccdf7316ed2"
+  }, {
+    "areaName" : "平顶山市",
+    "areaId" : "75f4253e-c42d-4bdf-8f80-c7f90e3c6706"
+  }, {
+    "areaName" : "平凉地区",
+    "areaId" : "ac5b9c9f-039a-423d-8385-20b03bbd8b80"
+  }, {
+    "areaName" : "萍乡市",
+    "areaId" : "68c65f28-3684-49ea-bb0b-a7ea979a6e92"
+  }, {
+    "areaName" : "莆田市",
+    "areaId" : "d9be5b85-0dd6-45e9-ae88-b3877f23f166"
+  }, {
+    "areaName" : "濮阳市",
+    "areaId" : "19f2bd5c-7541-4273-8fc9-0d5dc54087ff"
+  }, {
+    "areaName" : "七台河市",
+    "areaId" : "43e41572-3ef3-4df1-8e0b-e00151adca54"
+  }, {
+    "areaName" : "齐齐哈尔市",
+    "areaId" : "8494a43c-f7cb-40cf-b684-a69ba2b27a60"
+  }, {
+    "areaName" : "綦江区",
+    "areaId" : "b8674496-32ef-47ae-91bb-1ccd8dacc809"
+  }, {
+    "areaName" : "潜江市",
+    "areaId" : "fb07d45f-c358-41f2-8fbf-5420eb9e48ac"
+  }, {
+    "areaName" : "黔江区",
+    "areaId" : "05e145a4-ac37-4ddf-8389-6e992c6ad832"
+  }, {
+    "areaName" : "黔南布依族苗族自治州",
+    "areaId" : "a2bd805e-e145-417a-813b-3f5d1f4f4d30"
+  }, {
+    "areaName" : "黔西南布依族苗族自治州",
+    "areaId" : "557aaf32-f69e-4294-a28f-5879e433c16c"
+  }, {
+    "areaName" : "钦州市",
+    "areaId" : "c7551321-65f4-42b8-b1c6-220fd3763c6d"
+  }, {
+    "areaName" : "秦皇岛市",
+    "areaId" : "a21ffc9b-f476-4e71-8981-2a661d754a3d"
+  }, {
+    "areaName" : "青岛市",
+    "areaId" : "bf82aa7e-3fb2-4179-8eed-dfb731e80ca4"
+  }, {
+    "areaName" : "清远市",
+    "areaId" : "4e5b04d6-8482-4d40-99c4-b459ef2bc957"
+  }, {
+    "areaName" : "庆阳地区",
+    "areaId" : "e679b1b1-cf6e-4643-b3c7-ecaaf6d9e5ab"
+  }, {
+    "areaName" : "琼海市",
+    "areaId" : "a29668ef-99ff-4870-9341-b539e842c1d8"
+  }, {
+    "areaName" : "琼中黎族苗族自治县",
+    "areaId" : "01e98a28-6598-407e-9a44-cf972e9da1d0"
+  }, {
+    "areaName" : "曲靖市",
+    "areaId" : "eac528f2-e9c1-4bcf-8250-1107a3888988"
+  }, {
+    "areaName" : "衢州市",
+    "areaId" : "e206ac0c-fb03-4225-ae11-7431bdcdf5c4"
+  }, {
+    "areaName" : "泉州市",
+    "areaId" : "681ae053-f578-48b6-8f45-e1ae3a0e3aa1"
+  }, {
+    "areaName" : "日喀则地区",
+    "areaId" : "39644834-3c7c-47f5-80ec-8a6f6c53f77b"
+  }, {
+    "areaName" : "日照市",
+    "areaId" : "54a6cf70-1405-43bc-bab4-a8c5ba34c20c"
+  }, {
+    "areaName" : "荣昌县",
+    "areaId" : "ad08d652-8274-494b-828f-eacc2ede7e34"
+  }, {
+    "areaName" : "三门峡市",
+    "areaId" : "e576daa8-c5c7-41ba-aaa2-8746159820f6"
+  }, {
+    "areaName" : "三明市",
+    "areaId" : "bc411748-d4df-48aa-acb6-d4f02f38c47e"
+  }, {
+    "areaName" : "三亚市",
+    "areaId" : "cfddadf8-2226-46e8-aead-87fec7886759"
+  }, {
+    "areaName" : "沙坪坝区",
+    "areaId" : "8c4be1d4-20ab-416a-8f7a-4830989c0494"
+  }, {
+    "areaName" : "山南地区",
+    "areaId" : "be6d216d-58f7-4226-bbdd-262227ceed47"
+  }, {
+    "areaName" : "汕头市",
+    "areaId" : "1a60a047-aa95-4e08-8186-c1d26d3cda25"
+  }, {
+    "areaName" : "汕尾市",
+    "areaId" : "6217ab4a-4ed9-4b2f-bd9e-e3b9c8d5f4fe"
+  }, {
+    "areaName" : "商洛地区",
+    "areaId" : "d16ac902-325e-4fbd-9da3-42df45c61941"
+  }, {
+    "areaName" : "商丘市",
+    "areaId" : "71a70f8e-2189-4d21-8a13-3570fc587a3f"
+  }, {
+    "areaName" : "上海市",
+    "areaId" : "86042ad2-444c-4c64-8fe8-cb4c342d8d09"
+  }, {
+    "areaName" : "上饶市",
+    "areaId" : "3073c21c-0c66-4c9a-a338-5d40acc969d3"
+  }, {
+    "areaName" : "韶关市",
+    "areaId" : "6433a1a9-39e8-45b2-9703-2a62367deba5"
+  }, {
+    "areaName" : "邵阳市",
+    "areaId" : "76d5b512-6d8a-4119-9335-b402eef97354"
+  }, {
+    "areaName" : "绍兴市",
+    "areaId" : "02fbee33-0546-4f33-a084-272e3d33ec7d"
+  }, {
+    "areaName" : "深圳市",
+    "areaId" : "806b398f-5d91-4613-9f2f-792f3b870456"
+  }, {
+    "areaName" : "神农架林区",
+    "areaId" : "513d11f7-864a-43b5-ae70-0313246366e3"
+  }, {
+    "areaName" : "沈阳市",
+    "areaId" : "27bbee0b-dfbe-4f0e-8e95-f608beee1634"
+  }, {
+    "areaName" : "十堰市",
+    "areaId" : "818358c5-8251-47b1-8677-e13974da5519"
+  }, {
+    "areaName" : "石河子市",
+    "areaId" : "f7abebef-b1a8-40fd-9100-94feed270ccd"
+  }, {
+    "areaName" : "石家庄市",
+    "areaId" : "f30844b9-d996-47cf-90d5-00334916a7c1"
+  }, {
+    "areaName" : "石柱土家族自治县",
+    "areaId" : "6598ff55-ba14-423b-b249-c35c0c2e6a72"
+  }, {
+    "areaName" : "石嘴山市",
+    "areaId" : "e0a0026c-f7f2-4c61-be3f-cbb62826dda4"
+  }, {
+    "areaName" : "双桥区",
+    "areaId" : "d0c44d48-3789-40f0-91e5-23a2814ceaff"
+  }, {
+    "areaName" : "双鸭山市",
+    "areaId" : "99945700-e60a-4ca5-b73f-728311a0b77a"
+  }, {
+    "areaName" : "朔州市",
+    "areaId" : "5a16856d-5acb-47cd-afb8-d7f180f0c22e"
+  }, {
+    "areaName" : "思茅市",
+    "areaId" : "2c12e6e8-b1b5-432e-8cf8-e914e2bdfbca"
+  }, {
+    "areaName" : "四平市",
+    "areaId" : "69003fdf-3329-4ee7-899a-a612b59e077d"
+  }, {
+    "areaName" : "松原市",
+    "areaId" : "df0c6a34-e09f-44c5-bd9d-abca34833c4a"
+  }, {
+    "areaName" : "苏州市",
+    "areaId" : "c6379f14-d5dd-4f3f-a78f-a38524ee2579"
+  }, {
+    "areaName" : "宿迁市",
+    "areaId" : "f459228c-0037-4397-ae24-87465f4984e9"
+  }, {
+    "areaName" : "宿州市",
+    "areaId" : "e5b51b12-c0df-4276-97c3-099225c5a50a"
+  }, {
+    "areaName" : "绥化市",
+    "areaId" : "42613a91-1ae2-4a89-9803-4aa393123584"
+  }, {
+    "areaName" : "随州市",
+    "areaId" : "94ecfd63-feb7-471e-8f56-bbacf466607a"
+  }, {
+    "areaName" : "遂宁市",
+    "areaId" : "d970670f-c04d-44e3-87f0-9273e7d792c4"
+  }, {
+    "areaName" : "塔城地区",
+    "areaId" : "cbd7237c-4916-4c98-8453-49edda5cf4f0"
+  }, {
+    "areaName" : "台州市",
+    "areaId" : "ec5a852e-56db-4f69-ae32-11b60abaf57b"
+  }, {
+    "areaName" : "太原市",
+    "areaId" : "eec0a57b-b125-4ddb-849f-8d0aa7b963ea"
+  }, {
+    "areaName" : "泰安市",
+    "areaId" : "7e20bace-957b-4fd0-90dd-2f5cc2acc357"
+  }, {
+    "areaName" : "泰州市",
+    "areaId" : "bfb23000-c5a4-426d-802a-3bd5e1fb9fa4"
+  }, {
+    "areaName" : "唐山市",
+    "areaId" : "f9636005-6b06-4dbe-9b4f-c278c4e1ed53"
+  }, {
+    "areaName" : "塘沽区",
+    "areaId" : "c9f546d8-a9c8-4c3f-9327-20605d12b9ee"
+  }, {
+    "areaName" : "天津市",
+    "areaId" : "9bd0b58c-0e80-4a37-9431-52b2a16514b2"
+  }, {
+    "areaName" : "天门市",
+    "areaId" : "a5e19771-6fda-47dc-94bc-19043f6769f7"
+  }, {
+    "areaName" : "天水市",
+    "areaId" : "6160f750-7792-4dba-b16e-09cc87a54d1d"
+  }, {
+    "areaName" : "铁岭市",
+    "areaId" : "c9a02fb2-343d-4f68-ae6e-3e5c34f293f5"
+  }, {
+    "areaName" : "通化市",
+    "areaId" : "346649a6-f214-45e0-9f27-7678dd6463de"
+  }, {
+    "areaName" : "通辽市",
+    "areaId" : "e40cccac-dab9-4618-ade2-af2d63abb096"
+  }, {
+    "areaName" : "铜川市",
+    "areaId" : "f16f0d03-b666-4f39-b1f3-deeb887cccdc"
+  }, {
+    "areaName" : "铜梁县",
+    "areaId" : "0e8217c2-d49a-4df0-9881-41667106440f"
+  }, {
+    "areaName" : "铜陵市",
+    "areaId" : "ac4bbf8b-9cb6-11e5-ab67-00163e0e0718"
+  }, {
+    "areaName" : "铜陵市",
+    "areaId" : "43484348-b4c4-4df1-9485-f9beaa2a998f"
+  }, {
+    "areaName" : "铜仁地区",
+    "areaId" : "1a4de196-a053-45ae-b88e-0f0f70eb19d5"
+  }, {
+    "areaName" : "潼南县",
+    "areaId" : "b48f0fc5-ed67-47d3-8652-08efc3055ca8"
+  }, {
+    "areaName" : "图木舒克市",
+    "areaId" : "7ec2270d-6691-4471-aca4-56046244714b"
+  }, {
+    "areaName" : "吐鲁番地区",
+    "areaId" : "1abc3f8d-1cf5-4ffc-8ee6-b580b21b134e"
+  }, {
+    "areaName" : "屯昌县",
+    "areaId" : "bd63bbaf-cbdc-4e18-b2a3-36c5fbc334a6"
+  }, {
+    "areaName" : "万宁市",
+    "areaId" : "ae2db412-a5b0-4e2c-bb62-8491ca61c8f9"
+  }, {
+    "areaName" : "万盛区",
+    "areaId" : "300bf944-f6dc-4a65-92c3-10f7074b479f"
+  }, {
+    "areaName" : "万州区",
+    "areaId" : "87dbe3dc-0b47-493c-b455-282a686ab19f"
+  }, {
+    "areaName" : "威海市",
+    "areaId" : "6b9d30cb-9cba-11e5-ab67-00163e0e0718"
+  }, {
+    "areaName" : "潍坊市",
+    "areaId" : "b900d584-5c0e-46aa-95c9-fc9b78b93088"
+  }, {
+    "areaName" : "渭南市",
+    "areaId" : "cfdf174d-c352-4458-9329-c5263771dff1"
+  }, {
+    "areaName" : "温州市",
+    "areaId" : "44be4cba-b6d2-4ab6-a8ed-38947b7f7b3b"
+  }, {
+    "areaName" : "文昌市",
+    "areaId" : "7e0b1b65-8edd-4225-a4d7-c4aeca175990"
+  }, {
+    "areaName" : "文山壮族苗族自治州",
+    "areaId" : "46a67309-02d8-48d7-9220-9bf362b5f04d"
+  }, {
+    "areaName" : "乌兰察布盟",
+    "areaId" : "fd5fc667-91d2-4ac1-8f6c-2b59f3f572a2"
+  }, {
+    "areaName" : "乌鲁木齐市",
+    "areaId" : "10d42e6a-b674-45f2-94e9-0941e4da5b80"
+  }, {
+    "areaName" : "巫山县",
+    "areaId" : "4490cc3d-f297-4e09-8a3d-bfbeddec6192"
+  }, {
+    "areaName" : "巫溪县",
+    "areaId" : "5b97f3da-21c8-4a2c-a915-b42466706ea1"
+  }, {
+    "areaName" : "无锡市",
+    "areaId" : "2919f114-b067-4ff4-bd6b-e3dca4a333f9"
+  }, {
+    "areaName" : "吴忠市",
+    "areaId" : "89598d00-aa27-4a4e-8a21-f6c1b7dda927"
+  }, {
+    "areaName" : "芜湖市",
+    "areaId" : "da63b3b2-42cf-4eb6-8c66-7e77ac87a1aa"
+  }, {
+    "areaName" : "梧州市",
+    "areaId" : "eb943a73-bfa2-4894-94e0-7999b5c3e884"
+  }, {
+    "areaName" : "五家渠市",
+    "areaId" : "d05becb9-50e8-4161-a68e-0bf0770857d1"
+  }, {
+    "areaName" : "五指山市",
+    "areaId" : "767f8e0d-3889-487a-925c-73e76cc54af2"
+  }, {
+    "areaName" : "武汉市",
+    "areaId" : "9c20cd7e-0be9-4411-aba0-91f04a0ec55e"
+  }, {
+    "areaName" : "武隆县",
+    "areaId" : "62557db3-6e5a-4cac-b7b9-f925686dac9a"
+  }, {
+    "areaName" : "武清区",
+    "areaId" : "8c780c1b-2ef1-4894-aa07-d8878dc6d84f"
+  }, {
+    "areaName" : "武威地区",
+    "areaId" : "e2229899-df0a-4817-bb77-39d4592a5014"
+  }, {
+    "areaName" : "西安市",
+    "areaId" : "7c0b34ad-e4e2-41f8-9953-b0c404af5fb5"
+  }, {
+    "areaName" : "西南中沙群岛办事处",
+    "areaId" : "28df19c1-abd3-4830-a003-da10bbc18030"
+  }, {
+    "areaName" : "西宁市",
+    "areaId" : "8e1971f0-8033-489d-bdbe-539dbd78d2b3"
+  }, {
+    "areaName" : "西青区",
+    "areaId" : "ae591c64-eee1-4a53-b083-69722324d620"
+  }, {
+    "areaName" : "西双版纳傣族自治州",
+    "areaId" : "1de474db-1612-42d3-94b8-d5ddabab6f77"
+  }, {
+    "areaName" : "锡林郭勒盟",
+    "areaId" : "d8b7c64b-9552-444b-8af7-b6837a070d49"
+  }, {
+    "areaName" : "厦门市",
+    "areaId" : "1d8d7302-1824-445e-8743-9c011e79fb02"
+  }, {
+    "areaName" : "仙桃市",
+    "areaId" : "275382af-14ed-42da-8a0c-105cdb7fdafe"
+  }, {
+    "areaName" : "咸宁市",
+    "areaId" : "c0e49574-22b0-46de-837d-6553518d70de"
+  }, {
+    "areaName" : "咸阳市",
+    "areaId" : "86f35d31-e4bc-4032-9d74-5bce8cff3c0d"
+  }, {
+    "areaName" : "湘潭市",
+    "areaId" : "32f93f2c-0195-4685-a730-4c31bad73eeb"
+  }, {
+    "areaName" : "湘西土家族苗族自治州",
+    "areaId" : "fdd1b1d6-bf26-4666-83ab-c1412248c665"
+  }, {
+    "areaName" : "襄阳市",
+    "areaId" : "59ac0229-0cce-4921-934e-1aaeb92e9fbf"
+  }, {
+    "areaName" : "孝感市",
+    "areaId" : "8632788c-7d9e-43d7-a228-8004fe7680d0"
+  }, {
+    "areaName" : "忻州市",
+    "areaId" : "96f8852d-6fce-43f4-b34a-73452238e4e7"
+  }, {
+    "areaName" : "新乡市",
+    "areaId" : "6e9fe201-792b-44d1-ae78-da4043522d63"
+  }, {
+    "areaName" : "新余市",
+    "areaId" : "f1b272d2-43b1-4a77-a8ad-c733d7c27b7b"
+  }, {
+    "areaName" : "信阳市",
+    "areaId" : "d0746e96-f3f7-4b71-be0d-0be12e94c382"
+  }, {
+    "areaName" : "兴安盟",
+    "areaId" : "8cc45e99-43f5-43fd-af25-5250d9ae41d1"
+  }, {
+    "areaName" : "邢台市",
+    "areaId" : "a021b8e1-df86-445e-8ca3-958560f1971e"
+  }, {
+    "areaName" : "秀山土家族苗族自治县",
+    "areaId" : "0deee019-dd4f-4e20-af79-a2a0ffe4847c"
+  }, {
+    "areaName" : "徐州市",
+    "areaId" : "a69bb3f2-1a53-4a13-9965-1978c61c8af1"
+  }, {
+    "areaName" : "许昌市",
+    "areaId" : "8cee1bf8-32ec-4b2f-9adf-b22d0b72dc1d"
+  }, {
+    "areaName" : "宣城市",
+    "areaId" : "b7f8ac82-5855-4f87-bf7f-7c892fad1a7d"
+  }, {
+    "areaName" : "雅安地区",
+    "areaId" : "2e8767d4-c047-49c8-adf1-0de3fcf790e4"
+  }, {
+    "areaName" : "烟台市",
+    "areaId" : "35f3ff22-9792-4123-a7eb-ed524f3957c3"
+  }, {
+    "areaName" : "延安市",
+    "areaId" : "11d647b3-87b0-43d1-8145-f6f868e9530e"
+  }, {
+    "areaName" : "延边朝鲜族自治州",
+    "areaId" : "5a58f679-7729-444e-a301-ea98c417cca1"
+  }, {
+    "areaName" : "盐城市",
+    "areaId" : "f3471c44-e177-4082-88b5-f624d1c7e4b0"
+  }, {
+    "areaName" : "扬州市",
+    "areaId" : "401fdea9-931b-45d9-8719-6d386160ebfb"
+  }, {
+    "areaName" : "阳江市",
+    "areaId" : "4219ee60-9f1e-45e9-8ef3-7483cc267f09"
+  }, {
+    "areaName" : "阳泉市",
+    "areaId" : "118f5f15-dce7-4b1f-aa2f-c641f0d37025"
+  }, {
+    "areaName" : "伊春市",
+    "areaId" : "e6a0c7c6-12a7-4fe4-9f5f-ddbb1785b843"
+  }, {
+    "areaName" : "伊克昭盟（鄂尔多斯旧称）",
+    "areaId" : "1cd8e72c-6295-42ed-96ab-4dabf40c35e8"
+  }, {
+    "areaName" : "伊犁哈萨克自治州",
+    "areaId" : "edb94533-989b-4aaf-9d03-2b118af113ca"
+  }, {
+    "areaName" : "宜宾市",
+    "areaId" : "fe48e832-d36b-4011-af07-02ebdb037707"
+  }, {
+    "areaName" : "宜昌市",
+    "areaId" : "52897650-2552-4bca-9a46-6811793541a9"
+  }, {
+    "areaName" : "宜春市",
+    "areaId" : "0c5e99ea-ccef-4d98-8347-3d300b4570ce"
+  }, {
+    "areaName" : "益阳市",
+    "areaId" : "9bd4ab92-25ee-4c0c-8a98-5ec8b9a6a31b"
+  }, {
+    "areaName" : "银川市",
+    "areaId" : "f4094f0b-804f-43a9-880a-1929b1b25d88"
+  }, {
+    "areaName" : "鹰潭市",
+    "areaId" : "74a8d531-87fa-43fa-8fd3-ced736924a35"
+  }, {
+    "areaName" : "永川区",
+    "areaId" : "ff6338e6-36bf-4f55-b30d-cf333ce1e780"
+  }, {
+    "areaName" : "永州市",
+    "areaId" : "c76a5682-af5e-4b35-9771-78bd6e65ebf2"
+  }, {
+    "areaName" : "酉阳土家族苗族自治县",
+    "areaId" : "74b6aa9c-8d80-486e-8ebe-e4ac7dfc15a8"
+  }, {
+    "areaName" : "渝北区",
+    "areaId" : "5c54cbe4-5fcf-450f-96bc-865fe0504fb3"
+  }, {
+    "areaName" : "渝中区",
+    "areaId" : "9e95fa8d-48a6-48e7-a0d4-5c83a5a8705d"
+  }, {
+    "areaName" : "榆林地区",
+    "areaId" : "0a5076df-1ae0-4d27-9ef6-34d2dc7c3aef"
+  }, {
+    "areaName" : "玉林市",
+    "areaId" : "e405b270-03c7-4c34-9a81-caebc7bfa5cb"
+  }, {
+    "areaName" : "玉树藏族自治州",
+    "areaId" : "8f69f4b8-00d3-4f6a-9ab2-7534b40b4f67"
+  }, {
+    "areaName" : "玉溪市",
+    "areaId" : "473f213b-7271-44d4-8b98-a9c6752f110e"
+  }, {
+    "areaName" : "岳阳市",
+    "areaId" : "16bca4aa-c74b-4572-a496-2f23c5f15bbc"
+  }, {
+    "areaName" : "云浮市",
+    "areaId" : "d7f933a3-c49e-4996-8f08-0e2f8db56df2"
+  }, {
+    "areaName" : "云阳县",
+    "areaId" : "8e706755-7f4f-4260-ac17-c899f33c1e34"
+  }, {
+    "areaName" : "运城市",
+    "areaId" : "06491a8a-b535-4698-8de0-9e0483a8afa1"
+  }, {
+    "areaName" : "枣庄市",
+    "areaId" : "75fa3c55-1f34-4b22-86f1-cfc737e62a0a"
+  }, {
+    "areaName" : "湛江市",
+    "areaId" : "34b0bf2b-4911-4c51-9dab-543de83823b5"
+  }, {
+    "areaName" : "张家界市",
+    "areaId" : "b74c786d-e1b4-4d7f-8b58-ebd654eed2f4"
+  }, {
+    "areaName" : "张家口市",
+    "areaId" : "e3e23d57-6006-46b3-9774-191f461cb6e4"
+  }, {
+    "areaName" : "张掖地区",
+    "areaId" : "d3979e4c-52f6-4cf2-aea4-53f7c260a65b"
+  }, {
+    "areaName" : "漳州市",
+    "areaId" : "b08da419-17a1-4764-9b3e-17034ece306c"
+  }, {
+    "areaName" : "昭通地区",
+    "areaId" : "9f60dfa3-60cb-4695-b1bf-a3c3c328fe10"
+  }, {
+    "areaName" : "肇庆市",
+    "areaId" : "09247722-64af-40dd-a9e2-7b23e0d32061"
+  }, {
+    "areaName" : "镇江市",
+    "areaId" : "f8a4c521-8e3d-46b9-9c35-a5effd894b1b"
+  }, {
+    "areaName" : "郑州市",
+    "areaId" : "81eec6e7-a58c-4f68-8d61-7f5d3fdba9be"
+  }, {
+    "areaName" : "中山市",
+    "areaId" : "2dcdc401-fb2c-4f7b-bf14-0ffc50d65a8d"
+  }, {
+    "areaName" : "中卫市",
+    "areaId" : "e600da29-97da-4461-99d3-4989f164f1d8"
+  }, {
+    "areaName" : "忠县",
+    "areaId" : "f378109a-b2d8-4488-af3c-14734778c3da"
+  }, {
+    "areaName" : "重庆市",
+    "areaId" : "c9b70bdb-af49-44b6-a188-2613fd3969e5"
+  }, {
+    "areaName" : "舟山市",
+    "areaId" : "d556e7d1-4563-4d4d-a5b2-f315d3e2ee2b"
+  }, {
+    "areaName" : "周口市",
+    "areaId" : "5ebc8746-0dfe-4f26-a20b-1ea2be2069be"
+  }, {
+    "areaName" : "株洲市",
+    "areaId" : "a9c5628a-2145-4b23-bba5-b2a1fa0c2af8"
+  }, {
+    "areaName" : "珠海市",
+    "areaId" : "4f325974-daf9-4f1a-a7ce-75cc64848484"
+  }, {
+    "areaName" : "驻马店地区",
+    "areaId" : "e6265a0d-ca38-4f5c-94cb-313f31a926d7"
+  }, {
+    "areaName" : "资阳地区",
+    "areaId" : "ddf049f7-7a43-47fa-91de-f1a344b7298c"
+  }, {
+    "areaName" : "淄博市",
+    "areaId" : "13613a4d-37ac-428a-b191-9aeae5e3adc5"
+  }, {
+    "areaName" : "自贡市",
+    "areaId" : "ddb5a70c-da1a-4ba3-98d4-20c8326a5760"
+  }, {
+    "areaName" : "遵义市",
+    "areaId" : "e2d94cd3-ea59-49e8-8657-12912b580fd8"
+  } ],
+  "status" : "0",
+  "info":"返回成功"
+}

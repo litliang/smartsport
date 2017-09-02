@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_bar"
+            android:layout_alignParentTop="true">
+            <include layout="@layout/layout_actionbar" /></FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_marginLeft="40px"
+            android:id="@+id/ssbm_img_pic"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_marginTop="20px"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="240px"
+            android:layout_marginLeft="40px"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ssbm_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="比赛标题"
+                android:textColor="@color/black"
+                android:textSize="45px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ssbm_text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017-12-12"
+                    android:textColor="@color/text_gray"
+                    android:textSize="42px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="20px"
+                    android:text="|"
+                    android:textColor="@color/text_gray"
+                    android:textSize="45px" />
+
+                <TextView
+                    android:id="@+id/ssbm_text_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上海体育馆"
+                    android:textColor="@color/text_gray"
+                    android:textSize="42px" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/line_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="40px"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/ssbm_text_sell_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥299"
+            android:textSize="56px"
+            android:textColor="@color/red_baoming" />
+        <TextView
+            android:id="@+id/ssbm_text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥1299"
+            android:layout_marginLeft="20px"
+            android:textSize="42px"
+            android:textColor="@color/text_gray" />
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40px"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_buy_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="购买定制视频"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+            <TextView
+                android:id="@+id/ssbm_text_sell_prices"
+                android:layout_toRightOf="@+id/ssbm_text_buy_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20px"
+                android:textColor="@color/red_baoming"
+                android:textSize="45px"
+                android:text="￥299"/>
+
+            <TextView
+                android:id="@+id/ssbm_text_dingzhi_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="定制视频A"
+                android:textSize="45px"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@+id/img1"
+                android:textColor="@color/text_gray"/>
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="50px"
+                android:src="@mipmap/left_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line_color"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_buy_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="商品总金额"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/ssbm_text_prices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥1299"
+                android:textSize="45px"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40px"
+                android:textColor="@color/red_baoming"/>
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40px"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/ssbm_rl_dui"
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_bao_diu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="报名球队"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/ssbm_text_baoming_qiudui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="青少年球队"
+                android:textSize="45px"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@+id/img2"
+                android:textColor="@color/text_gray"/>
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="50px"
+                android:src="@mipmap/left_arrow" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line_color"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_san_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="参赛队员"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+
+            <EditText
+                android:id="@+id/ssbm_text_people_num"
+                android:layout_toLeftOf="@+id/ssbm_text_num_people"
+                android:layout_width="160px"
+                android:layout_height="match_parent"
+                android:hint="11"
+                android:textSize="45px"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:textColor="@color/text_gray"/>
+            <TextView
+                android:id="@+id/ssbm_text_num_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="人"
+                android:textSize="45px"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40px"
+                android:textColor="@color/text_gray"/>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line_color"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="联系人"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+
+            <EditText
+                android:id="@+id/ssbm_text_people_name"
+                android:layout_width="300px"
+                android:layout_height="match_parent"
+                android:hint="联系人姓名"
+                android:textSize="45px"
+                android:gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@+id/img3"
+                android:background="@null"
+                android:textColor="@color/text_gray"/>
+
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="50px"
+                android:src="@mipmap/icon_bi" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line_color"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+
+            <TextView
+                android:id="@+id/ssbm_text_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40px"
+                android:layout_toRightOf="@+id/wd_kc"
+                android:text="联系电话"
+                android:textColor="@color/text_black"
+                android:textSize="45px" />
+
+            <EditText
+                android:id="@+id/ssbm_text_people_phone"
+                android:layout_width="300px"
+                android:layout_height="match_parent"
+                android:hint="18018608989"
+                android:textSize="45px"
+                android:gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20px"
+                android:layout_toLeftOf="@+id/img4"
+                android:background="@null"
+                android:textColor="@color/text_gray"/>
+
+            <ImageView
+                android:id="@+id/img4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="50px"
+                android:src="@mipmap/icon_bi" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/line_color"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="退款说明"
+                android:textSize="45px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/text_blue"/>
+            <View
+                android:layout_width="2px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="免责声明"
+                android:textSize="45px"
+                android:textColor="@color/text_blue"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ssbm_pay"
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:textSize="45px"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@color/red_baoming"
+        android:text="去支付"/>
+
+
+</RelativeLayout>

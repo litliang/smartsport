@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/videoContainer"
+        android:layout_height="wrap_content" >
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下一个"
+        android:visibility="gone"
+        />
+    <Button
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/next"
+        android:text="上一个"
+        android:visibility="gone"
+        />
+    <Button
+        android:id="@+id/jump_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/previous"
+        android:text="跳转界面"
+        android:visibility="gone"
+        />
+    <Button
+        android:id="@+id/print_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交日志"
+        android:layout_below="@id/videoContainer"
+        android:visibility="gone"
+        />
+    <EditText
+        android:id="@+id/log_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:layout_below="@id/print_btn"
+        android:numeric="integer"
+        android:hint="@string/phone"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:visibility="gone"
+        android:layout_below="@id/log_text"
+        />
+
+
+    <TextView
+        android:id="@+id/download_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:layout_below="@id/videoContainer"
+        />
+
+    <Button
+        android:id="@+id/start_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始录制"
+        android:layout_below="@+id/download_rate"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/end_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束录制"
+        android:layout_below="@+id/start_record"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

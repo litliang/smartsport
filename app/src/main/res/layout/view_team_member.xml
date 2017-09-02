@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!-- icon -->
+    <TextView
+        android:id="@+id/tv_laber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/font_main"
+        android:layout_marginLeft="@dimen/margin_left" />
+
+    <!-- text -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_laber"
+        android:layout_marginLeft="@dimen/margin_leftx1.5"
+        android:hint="球员姓名"
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_marginLeft="@dimen/layout_height"
+        android:hint="位置"
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imv_right"
+        android:layout_marginRight="30px"
+        android:hint="球衣号码"
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/text_size"
+        />
+
+    <!-- delete  -->
+    <ImageView
+        android:id="@+id/imv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_left"
+        android:src="@mipmap/icon_right_arrow" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/bg_gray">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_bar"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/layout_actionbar" /></FrameLayout>
+    <top.smartsport.www.widget.ListViewForScrollView
+            android:id="@+id/mScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/bg_gray">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:textSize="45px"
+                        android:text="赛事级别"
+                        android:layout_marginTop="20px"
+                        android:layout_marginBottom="20px"
+                        android:layout_marginLeft="40px"/>
+
+                <top.smartsport.www.widget.MyGridView
+                        android:id="@+id/bs_choice_gv_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:horizontalSpacing="40px"
+                        android:numColumns="3"
+                        android:paddingBottom="34px"
+                        android:paddingLeft="50px"
+                        android:paddingTop="34px"
+                        android:listSelector="@android:color/transparent"
+                        android:verticalSpacing="34px"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/bg_gray">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:textSize="45px"
+                        android:text="比赛状态"
+                        android:layout_marginTop="20px"
+                        android:layout_marginBottom="20px"
+                        android:layout_marginLeft="40px"/>
+
+                <top.smartsport.www.widget.MyGridView
+                        android:id="@+id/bs_choice_gv_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:horizontalSpacing="40px"
+                        android:numColumns="4"
+                        android:paddingBottom="34px"
+                        android:paddingLeft="50px"
+                        android:listSelector="@android:color/transparent"
+                        android:paddingTop="34px"
+                        android:verticalSpacing="34px"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/bg_gray"
+                    >
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_gray"
+                        android:textSize="45px"
+                        android:text="比赛赛制"
+                        android:layout_marginTop="20px"
+                        android:layout_marginBottom="20px"
+                        android:layout_marginLeft="40px"/>
+
+                <top.smartsport.www.widget.MyGridView
+                        android:id="@+id/bs_choice_gv_rule"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:horizontalSpacing="40px"
+                        android:numColumns="3"
+                        android:listSelector="@android:color/transparent"
+                        android:paddingBottom="34px"
+                        android:paddingLeft="50px"
+                        android:paddingTop="34px"
+                        android:verticalSpacing="34px"/>
+            </LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_gray"
+                    android:textSize="45px"
+                    android:text="地区"
+                    android:layout_marginTop="20px"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginLeft="40px"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="900px"
+                    android:baselineAligned="false"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                <ListView
+                        android:id="@+id/lv1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/bg_gray"
+                        android:scrollbars="none"/>
+
+                <ListView
+                        android:id="@+id/lv2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/bg_gray"
+                        android:scrollbars="none"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120px"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:background="@color/white">
+                <TextView android:id="@+id/chongzhi"
+                          android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:text="重置"
+                          android:gravity="center"
+                          android:textSize="45px"
+                          android:textColor="@color/text_gray"/>
+                <TextView android:id="@+id/queding"
+                          android:layout_width="0dp"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1"
+                          android:text="确定"
+                          android:textSize="45px"
+                          android:gravity="center"
+                          android:background="@color/theme_color"
+                          android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </top.smartsport.www.widget.ListViewForScrollView>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_bar"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/layout_actionbar" /></FrameLayout>
+
+    <top.smartsport.www.widget.PagerSlidingTabStrip
+        android:id="@+id/qx_tab"
+        android:layout_width="match_parent"
+        android:layout_height="136px"
+        app:contentTextColor="@color/theme_color"
+        app:pstsIndicatorColor="@color/theme_color"
+        app:pstsIndicatorHeight="2px"
+        android:background="@color/white"
+        app:contentUnselectedTextColor="@color/black"
+        app:contentTextSize="58px"
+        app:contentSelectedTextColor="@color/theme_color"
+        app:pstsUnderlineColor="@color/text_gray"
+        app:pstsShouldExpand="true"
+        app:pstsUnderlineHeight="0px"
+        app:pstsTabPaddingLeftRight="4px"
+        android:fillViewport="false"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/qx_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"/>
+</LinearLayout>

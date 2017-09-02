@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300px"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="160px"
+        android:layout_height="160px"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="30px"
+        android:src="@mipmap/default_head_image" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/ivAvatar"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adapter_csqd_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="球队名字"
+            android:textColor="@color/black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/adapter_csqd_dc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:text="球队简介"
+            android:textColor="@color/text_gray"
+            android:textSize="42px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="40px"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adapter_csqd_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第1名"
+            android:textColor="@color/theme_color"
+            android:textSize="45px" />
+
+        <TextView android:layout_gravity="right"
+            android:id="@+id/adapter_csqd_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:text="10积分"
+            android:textColor="@color/text_gray"
+            android:textSize="42px" />
+
+    </LinearLayout>
+
+</RelativeLayout>

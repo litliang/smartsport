@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:background="@color/theme_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="青训"
+            android:textColor="@color/white"
+            android:textSize="48px" />
+        <LinearLayout
+                android:id="@+id/bs_ll_choice"
+                android:layout_width="150px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:id="@+id/bs_choice"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/bs_choice"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <top.smartsport.www.widget.PagerSlidingTabStrip
+        android:id="@+id/qx_tab"
+        android:layout_width="match_parent"
+        android:layout_height="136px"
+        app:contentTextColor="@color/theme_color"
+        app:pstsIndicatorColor="@color/theme_color"
+        app:pstsIndicatorHeight="2px"
+        android:background="@color/white"
+        app:contentUnselectedTextColor="@color/black"
+        app:contentTextSize="58px"
+        app:contentSelectedTextColor="@color/theme_color"
+        app:pstsUnderlineColor="@color/text_gray"
+        app:pstsShouldExpand="true"
+        app:pstsUnderlineHeight="0px"
+        app:pstsTabPaddingLeftRight="4px"
+        android:fillViewport="false"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/qx_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"/>
+</LinearLayout>

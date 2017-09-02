@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">数苗足球</string>
+    <string name="title_zx">资讯</string>
+    <string name="title_qx">青训</string>
+    <string name="title_ss">比赛</string>
+    <string name="title_wd">我的</string>
+
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="setting">设置</string>
+    <string name="cancel">取消</string>
+
+
+    <string name="label_reg">请验证您的手机</string>
+    <string name="label_reg_next">注册</string>
+    <string name="label_forget_psw">找回密码</string>
+    <string name="label_wszl">完善个人信息</string>
+    <string name="label_choice_city">选择城市</string>
+    <string name="label_account_set">账户设置</string>
+    <string name="label_my_kc">我的课程</string>
+    <string name="label_my_sc">我的收藏</string>
+    <string name="label_my_sp">我的视频</string>
+    <string name="label_yl">娱乐</string>
+    <string name="label_my_hy">我的会员</string>
+    <string name="label_my_dd">我的订单</string>
+    <string name="label_set">设置</string>
+    <string name="label_message">消息</string>
+    <string name="label_about">关于</string>
+    <string name="label_tsxx_set">推送消息设置</string>
+    <string name="label_bs_detail">比赛详情</string>
+    <string name="label_bs_baoming">我要报名</string>
+    <string name="label_csqd">参赛球队</string>
+    <string name="label_sjfx">数据分析</string>
+    <string name="label_kcb">赛程表</string>
+    <string name="label_bs_choice">筛选</string>
+    <string name="label_ss_bm">赛事报名</string>
+    <string name="label_wd_qd">我的球队</string>
+    <string name="label_change_qd">修改球队</string>
+    <string name="label_order_cm">订单确认</string>
+    <string name="label_qd_home">球队主页</string>
+    <string name="label_zb_detail">直播详情</string>
+
+
+    <string name="pushmsg_center_no_more_msg">已经到底啦</string>
+    <string name="pushmsg_center_pull_up_text">松开加载更多</string>
+    <string name="pushmsg_center_pull_down_text">下拉可以刷新</string>
+    <string name="pushmsg_center_pull_release_text">松开获取更多</string>
+    <string name="pushmsg_center_pull_down_update_time">最后更新时间 :</string>
+    <string name="pushmsg_center_load_more_ongoing_text">正在加载中</string>
+    <string name="xsearch_loading">正在加载中…</string>
+
+    <!-- 加载图片失败时的提示文本 -->
+    <string name="picture_load_image_failed">点击屏幕，重新加载</string>
+    <!-- 加载中提示 -->
+    <string name="picture_image_loading">正在加载…</string>
+    <!-- 下拉刷新和上拉加载更多的文本 -->
+    <string name="pull_to_refresh_header_hint_normal">@string/pushmsg_center_pull_down_text</string>
+    <string name="pull_to_refresh_header_hint_normal2">上拉可以刷新</string>
+    <string name="pull_to_refresh_header_hint_ready">松开后刷新</string>
+    <string name="pull_to_refresh_header_hint_loading">@string/pushmsg_center_load_more_ongoing_text</string>
+    <string name="pull_to_refresh_header_last_time">@string/pushmsg_center_pull_down_update_time</string>
+    <string name="pull_to_refresh_footer_hint_ready">松开载入更多</string>
+    <string name="pull_to_refresh_refreshing_label">@string/pull_to_refresh_header_hint_loading</string>
+    <string name="pull_to_refresh_no_more_data">@string/pushmsg_center_no_more_msg</string>
+    <string name="pull_to_refresh_network_error">网络不给力，请检查网络</string>
+    <!-- 图片保存的文字 -->
+    <string name="picture_save_succeed">图片已保存到相册</string>
+    <string name="picture_save_fail">保存图片失败</string>
+    <string name="picture_next_album">下一组：</string>
+    <string name="picture_previous_album">上一组：</string>
+
+
+</resources>

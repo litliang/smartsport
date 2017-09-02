@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_bar"
+        android:layout_alignParentTop="true">
+        <include layout="@layout/layout_actionbar" /></FrameLayout>
+    <View
+        android:layout_marginTop="50px"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+            android:text="真实姓名"
+            android:textSize="45px"
+            android:layout_marginLeft="100px"
+            android:textColor="@color/text_black"/>
+        <EditText
+            android:id="@+id/wszl_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow1"
+            android:hint="请输入姓名"
+            android:background="@null"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <RelativeLayout
+        android:id="@+id/wszl_rel_age"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:text="出生日期"
+            android:textColor="@color/text_black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/wszl_text_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow2"
+            android:text="2000-12-12"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <RelativeLayout
+        android:id="@+id/wszl_rel_sex"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:text="性别"
+            android:textColor="@color/text_black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/wszl_text_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow3"
+            android:text="男"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <RelativeLayout
+        android:id="@+id/wszl_rel_height"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:text="身高"
+            android:textColor="@color/text_black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/wszl_text_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/wszl_text_cm"
+            android:text="175"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+        <TextView
+            android:id="@+id/wszl_text_cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow4"
+            android:text="cm"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <RelativeLayout
+        android:id="@+id/wszl_rel_weight"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:text="体重"
+            android:textColor="@color/text_black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/wszl_text_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/wszl_text_kg"
+            android:text="60"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+        <TextView
+            android:id="@+id/wszl_text_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow5"
+            android:text="kg"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <RelativeLayout
+        android:id="@+id/wszl_rel_habit"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:text="惯用脚"
+            android:textColor="@color/text_black"
+            android:textSize="45px" />
+
+        <TextView
+            android:id="@+id/wszl_text_habit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_toLeftOf="@+id/wszl_left_arrow6"
+            android:text="右脚"
+            android:textColor="@color/text_gray"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/wszl_left_arrow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60px"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/left_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text_gray"
+        android:layout_marginLeft="100px"/>
+
+    <TextView
+        android:layout_marginTop="50px"
+        android:layout_marginLeft="100px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完善个人信息有助于帮你找到最佳的青训训练与足球赛事"
+        android:textColor="@color/text_gray"
+        android:textSize="35px"/>
+
+    <Button
+        android:id="@+id/wszl_btn_sure"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="100px"
+        android:layout_marginRight="60px"
+        android:layout_marginLeft="60px"
+        android:background="@drawable/shape_bg_button"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="48px" />
+
+</LinearLayout>

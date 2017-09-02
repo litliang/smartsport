@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="top.smartsport.www">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 高德地图定位 -->
+    <!-- Normal Permissions 不需要运行时注册 -->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <!-- 请求网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 不是SDK需要的权限，是示例中的后台唤醒定位需要的权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 需要运行时注册的权限 -->
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于提高GPS定位速度 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 读取缓存数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 更改设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- 3.2.0版本增加 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 3.2.0版本增加 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <!-- 乐视直播权限 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:name=".base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="design_width"
+            android:value="1080" />
+        <meta-data
+            android:name="design_height"
+            android:value="1920" />
+
+        <!-- 高德地图定位 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="b6089982b3b67aecc51818147cd88e06" />
+        <!-- 在application标签中声明service组件 -->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!-- 乐视直播 -->
+        <service
+            android:name="com.letvcloud.cmf.MediaService"
+            android:process=":cmf" />
+
+        <activity
+            android:name="com.lecloud.skin.activity.FeedBackActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+
+        <!-- 欢迎页 -->
+        <activity android:name=".activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 主页 -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 图片浏览页 -->
+        <activity android:name="cn.android.gallery.GoodsGalleryActivity" />
+        <!-- 引导页 -->
+        <activity android:name=".activity.GuiderActivity" />
+
+        <!-- 登录 -->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 请验证您的手机 -->
+        <activity
+            android:name=".activity.RegActivity"
+            android:label="@string/label_reg" />
+
+        <!-- 注册 -->
+        <activity
+            android:name=".activity.RegNextActivity"
+            android:label="@string/label_reg_next" />
+
+        <!-- 忘记密码 -->
+        <activity
+            android:name=".activity.ForgetPSWActivity"
+            android:label="@string/label_forget_psw" />
+
+        <!-- 完善资料 -->
+        <activity
+            android:name=".activity.WSZLActivity"
+            android:label="@string/label_wszl" />
+
+        <!-- 选择城市 -->
+        <activity
+            android:name=".activity.ChoiceCityActivity"
+            android:label="@string/label_choice_city"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <!-- 账户设置 -->
+        <activity
+            android:name=".activity.AccountSetActivity"
+            android:label="@string/label_account_set" /> <!-- 账户设置 -->
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:label="我的订单"
+             /> <!-- 我的订单 -->
+        <activity
+            android:name=".activity.OrderDetailsActivity"
+            android:label="我的订单" /> <!-- 我的订单 -->
+
+        <activity
+            android:name=".activity.AddMemberActivity"
+            android:label="我的球队" />
+        <!-- 设置 -->
+        <activity
+            android:name=".activity.SetActivity"
+            android:label="@string/label_set" />
+        <!-- 消息 -->
+        <activity
+            android:name=".activity.MessageActivity"
+            android:label="@string/label_message" />
+
+        <!-- 我的课程 -->
+        <activity
+            android:name=".activity.MyKCActivity"
+            android:label="@string/label_my_kc" />
+        <!-- 我的收藏 -->
+        <activity
+            android:name=".activity.MySCActivity"
+            android:label="@string/label_my_sc" />
+        <!-- 我的视频 -->
+        <activity
+            android:name=".activity.MySPActivity"
+            android:label="@string/label_my_sp" />
+        <!-- 娱乐 -->
+        <activity
+            android:name=".activity.MyYLActivity"
+            android:label="@string/label_yl" />
+        <!-- 我的会员 -->
+        <activity
+            android:name=".activity.MyHYActivity"
+            android:label="@string/label_my_hy" />
+        <!-- 我的订单 -->
+        <activity
+            android:name=".activity.MyDDActivity"
+            android:label="@string/label_my_dd" />
+
+        <!-- 关于我们 -->
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/label_about" />
+
+        <!-- 比赛详情 -->
+        <activity
+            android:name=".activity.BSDetailActivity"
+            android:label="@string/label_bs_detail" />
+        <!-- 视频详情 -->
+        <activity
+            android:name=".activity.BSVideoActivity"
+            android:label="@string/label_bs_detail" />
+
+        <!-- 我要报名 -->
+        <activity
+            android:name=".activity.BSWYBMActivity"
+            android:label="@string/label_bs_baoming" />
+        <!-- 参数球队 -->
+        <activity
+            android:name=".activity.CSQDActivity"
+            android:label="@string/label_csqd" />
+        <!-- 数据分析 -->
+        <activity
+            android:name=".activity.SJFXActivity"
+            android:label="@string/label_sjfx" />
+        <!-- 课程表 -->
+        <activity
+            android:name=".activity.KCBActivity"
+            android:label="@string/label_kcb" />
+        <!-- 筛选 -->
+        <activity
+            android:name=".activity.BSChoiceActivity"
+            android:label="@string/label_bs_choice" />
+        <activity
+            android:name=".activity.QXChoiceActivity"
+            android:label="@string/label_bs_choice" />
+        <!-- 赛事报名 -->
+        <activity
+            android:name=".activity.SSBMActivity"
+            android:label="@string/label_ss_bm" />
+        <!-- 我的球队 -->
+        <activity
+            android:name=".activity.WDQDActivity"
+            android:label="@string/label_wd_qd" />
+        <!-- 修改球队 -->
+        <activity
+            android:name=".activity.ChangeQDActivity"
+            android:label="@string/label_change_qd" />
+        <!-- 订单确认 -->
+        <activity
+            android:name=".activity.OrderCMActivity"
+            android:label="@string/label_order_cm" />
+        <!-- 球队主页 -->
+        <activity
+            android:name=".activity.QDHomeActivity"
+            android:label="@string/label_qd_home" />
+        <!-- 直播详情 -->
+        <activity
+            android:name=".activity.ZBDetailActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:label="@string/label_zb_detail" />
+        <!-- 乐视直播 -->
+        <activity android:name=".activity.LeTvPlayActivity" />
+
+        <!-- 推送消息设置 -->
+        <activity
+            android:name=".activity.TSXXSetActivity"
+            android:label="@string/label_tsxx_set" />
+        <activity android:name=".activity.BSDetailBMActivity"></activity>
+        <activity android:name=".activity.BSPictureActivity"></activity>
+        <activity android:name="cn.android.gallery.ImageViewActivity"></activity>
+    </application>
+
+</manifest>
