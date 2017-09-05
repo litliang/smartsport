@@ -28,6 +28,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,11 @@ public class MapAdapter extends BaseAdapter {
 	protected List<String> fieldnames;
 	protected List<Integer> viewsid;
 	private int itemLayout;
+
+	public int getItemLayout() {
+		return itemLayout;
+	}
+
 	private MapContent itemDataSrc;
 	private Set<ActionListener> handlers;
 	private Map<Integer, ListenerBox> listenerMaps;
@@ -74,6 +80,7 @@ public class MapAdapter extends BaseAdapter {
 	private String imageField;
 
 	public List<Object> selectedItems = new ArrayList<Object>();
+	private MapConf mapconf;
 
 	public void clearStyles() {
 		styleMaps.clear();
@@ -196,6 +203,9 @@ public class MapAdapter extends BaseAdapter {
 	private List<Style> styles = new ArrayList<Style>();
 
 
+	public void setItemLayout(int itemLayout) {
+		this.itemLayout = itemLayout;
+	}
 
 	public void reinitSelectedAllBck(int count) {
 		selected = new ArrayList<Integer>(count);
@@ -269,6 +279,7 @@ public class MapAdapter extends BaseAdapter {
 	}
 
 	public void treatMap(Object item, View convertView, int position) {
+
 		String name;
 		Object value;
 		Map<String, Object> items = (Map<String, Object>) item;
@@ -516,7 +527,11 @@ public class MapAdapter extends BaseAdapter {
 		this.inpage = inpage;
 	}
 
-	public static class ContainerInfo {
+	public void setMapConf(MapConf mapconf) {
+		this.mapconf = mapconf;
+	}
+
+    public static class ContainerInfo {
 		public AdaptInfo adaptInfo = new AdaptInfo();
 		public List<Integer> itemsid = new ArrayList<Integer>();
 		public List<String> itemsname = new ArrayList<String>();
@@ -597,11 +612,24 @@ public class MapAdapter extends BaseAdapter {
 		if (item == null) {
 			return;
 		}
+
 		if (item instanceof Cursor || item instanceof SQLiteCursor) {
 			treatCursor(item, convertView, position);
 		} else if (item instanceof Map) {
+			if(mapconf!=null){
+				if(mapconf.viewlayoutid!=0){
+				mapconf.source(item,convertView).match();
+				return;
+
+				}
+
+			}
 			treatMap(item, convertView, position);
 		} else if (item instanceof Entity) {
+			if(mapconf!=null){
+				mapconf.source(((Entity) item).fieldContents,convertView).match();
+				return;
+			}
 			treatMap(((Entity) item).fieldContents, convertView, position);
 		} else if (item instanceof JSONObject) {
 			treatJSONArray(item, convertView, position);
@@ -610,6 +638,8 @@ public class MapAdapter extends BaseAdapter {
 		}
 
 	}
+
+
 
 	private void treatJSONArray(Object item, View convertView, int position) {
 		// TODO Auto-generated method stub
@@ -671,7 +701,8 @@ public class MapAdapter extends BaseAdapter {
 			if (value == null || value.toString().equals("-1")) {
 				return false;
 			}
-			if (value instanceof Integer) {
+
+			if (value instanceof Integer|| TextUtils.isDigitsOnly(value.toString())) {
 				((ImageView) theView).setImageResource(Integer.parseInt(value
 						.toString()));
 			} else if (value.getClass() == BitmapDrawable.class) {
@@ -814,14 +845,14 @@ public class MapAdapter extends BaseAdapter {
 			convertView = createItemView();
 		}
 
-		if (this.adaptInfo.scaledImageId != 0) {
-			View view = parent;
-			if (view instanceof GridView) {
-				convertView.findViewById(this.adaptInfo.scaledImageId)
-						.getLayoutParams().height = this.itemHeight = ((GridView) view)
-						.getWidth() / ((GridView) view).getNumColumns() - 20;
-			}
-		}
+//		if (this.adaptInfo.scaledImageId != 0) {
+//			View view = parent;
+//			if (view instanceof GridView) {
+//				convertView.findViewById(this.adaptInfo.scaledImageId)
+//						.getLayoutParams().height = this.itemHeight = ((GridView) view)
+//						.getWidth() / ((GridView) view).getNumColumns() - 20;
+//			}
+//		}
 		ListenerBox listener;
 		viewContentMap.put(convertView, position);
 		if (listenerMaps != null) {

@@ -86,7 +86,7 @@ public class AsyncClient {
 	}
 
 	/**
-	 * Cancels any pending (or potentially active) requests associated with the
+	 * Cancels any pending (or potentially active) requests associated withView the
 	 * passed Context.
 	 * <p>
 	 * <b>Note:</b>
@@ -96,7 +96,7 @@ public class AsyncClient {
 	 * @param context
 	 *            the android Context instance associated to the request.
 	 * @param mayInterruptIfRunning
-	 *            specifies if active requests should be cancelled along with
+	 *            specifies if active requests should be cancelled along withView
 	 *            pending requests.
 	 */
 	public void cancelRequests(Context context, boolean mayInterruptIfRunning) {

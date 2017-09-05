@@ -40,8 +40,8 @@ public class TextHighLightDecorator extends Decorator {
 	public SpannableStringBuilder getDecorated(Object key, String name,
 			String sortkey) {
 		String matchStr = key.toString();
-		// en head match
-		// zh fulltext match
+		// en head pairs
+		// zh fulltext pairs
 		SpannableStringBuilder style = new SpannableStringBuilder(matchStr);
 
 		// Logs.e("=== - name "+name);

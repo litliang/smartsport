@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import app.base.DipUtil;
 import app.base.SPrefUtil;
+import app.base.action.Epr;
 import app.base.task.AsyncClient;
 
 /***
@@ -28,6 +29,7 @@ public class Init extends Application {
 		SPrefUtil.iniContext(this);
 		
 		DipUtil.initCtx(this);
+		Epr.setCtx(this);
 	}
 
 	
