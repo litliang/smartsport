@@ -24,6 +24,9 @@
         android:inputType="text"
         android:paddingLeft="50px"
         android:textSize="48px" />
+    <LinearLayout android:id="@+id/shortcutarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical">
     <TextView
         android:paddingLeft="50px"
         android:layout_marginTop="20px"
@@ -66,7 +69,7 @@
         android:paddingLeft="50px"
         android:paddingTop="34px"
         android:verticalSpacing="34px"></GridView>
-
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

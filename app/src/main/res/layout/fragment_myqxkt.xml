@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <TextView android:tag="finish();clickActivityId(MainActivity,main_tabs_qx)"
             android:id="@+id/gojoinlesson"
             android:layout_width="600px"
             android:layout_height="wrap_content"

@@ -2,202 +2,234 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0"
-    >
+    android:background="#f0f0f0">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_above="@+id/btn_save"
-        >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/action_bar"
-            android:layout_alignParentTop="true">
-            <include layout="@layout/layout_actionbar" /></FrameLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height"
-        android:paddingLeft="@dimen/margin_left"
-        android:paddingRight="@dimen/margin_leftx2"
-        android:background="#ffffff"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="球队名称:"
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size"
-            android:layout_centerVertical="true"
-            />
-        <EditText
-            android:id="@+id/et_team_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上海青少年足球队"
-            android:hint="请输入队名"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/font_main"
-            android:background="@null"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="教练"
-        android:layout_marginTop="@dimen/margin_top"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:textColor="@color/font_gray"
-        android:textSize="@dimen/text_size_notice"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        android:layout_marginTop="@dimen/margin_top"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height"
-        android:paddingLeft="@dimen/margin_left"
-        android:paddingRight="@dimen/margin_leftx2"
-        android:background="#ffffff"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主教练:"
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size"
-            android:layout_centerVertical="true"
-            />
-        <EditText
-            android:id="@+id/et_main_coach_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:hint="主教练名称"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/font_main"
-            android:background="@null"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height"
-        android:paddingLeft="@dimen/margin_left"
-        android:paddingRight="@dimen/margin_leftx2"
-        android:background="#ffffff"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="助理教练1:"
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size" />
-
-        <EditText
-            android:id="@+id/et_coach1_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:hint="助理教练1名称"
-            android:text=""
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size" />
-    </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@mipmap/line_h"
-            />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height"
-        android:paddingLeft="@dimen/margin_left"
-        android:paddingRight="@dimen/margin_leftx2"
-        android:background="#ffffff"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="助理教练2:"
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size" />
-
-        <EditText
-            android:id="@+id/et_coach2_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:hint="助理教练2名称"
-            android:text=""
-            android:textColor="@color/font_main"
-            android:textSize="@dimen/text_size" />
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="队员"
-        android:layout_marginTop="@dimen/margin_top"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:textColor="@color/font_gray"
-        android:textSize="@dimen/text_size_notice"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@mipmap/line_h"
-        android:layout_marginTop="@dimen/margin_top"
-        />
-    <ListView
-        android:id="@+id/lv_team"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="0.5dp"
-        android:divider="@mipmap/line_h"
-        android:footerDividersEnabled="false"
-        />
-    </LinearLayout>
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="132px"
         android:layout_alignParentBottom="true"
-        android:background="@mipmap/icon_save"
-        />
+        android:background="@mipmap/icon_save" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_save"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <include layout="@layout/layout_actionbar" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@mipmap/line_h" />
+
+        <RelativeLayout android:tag="ShowInputbox(et_team_name,球队名称)" android:id="@+id/teamname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:background="#ffffff"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_leftx2">
+
+            <TextView android:id="@+id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="球队名称:"
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+
+            <TextView android:layout_toRightOf="@+id/left"
+                android:gravity="right"
+                android:id="@+id/et_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="请输入队名"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@mipmap/line_h" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="教练"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/text_size_notice" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/margin_top"
+            android:background="@mipmap/line_h" />
+
+        <RelativeLayout android:tag="ShowInputBox(et_main_coach_name,主教练名字)" android:id="@+id/majorcoach"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:background="#ffffff"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_leftx2">
+
+            <TextView android:id="@id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="主教练:"
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+
+            <TextView android:layout_toRightOf="@+id/left"
+                android:gravity="right"
+                android:id="@+id/et_main_coach_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:ellipsize="end"
+                android:hint="主教练名称"
+                android:lines="1"
+                android:text=""
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@mipmap/line_h" />
+
+        <RelativeLayout android:tag="Showinputbox(et_coach1_name,助理教练1名字)" android:id="@+id/assit1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_leftx2"
+            android:background="#ffffff"
+            >
+
+            <TextView android:id="@id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="助理教练1:"
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+
+            <TextView android:layout_toRightOf="@+id/left"
+                android:gravity="right"
+                android:id="@+id/et_coach1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="助理教练1名称"
+                android:lines="1"
+                android:ellipsize="end"
+                android:text=""
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@mipmap/line_h"
+            />
+        <RelativeLayout android:tag="ShowInputbox(et_coach2_name,助理教练2名字)" android:id="@+id/assit2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_leftx2"
+            android:background="#ffffff"
+            >
+
+            <TextView android:id="@id/left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="助理教练2:"
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+
+            <TextView android:layout_toRightOf="@+id/left"
+                android:gravity="right"
+                android:id="@+id/et_coach2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:ellipsize="end"
+                android:hint="助理教练2名称"
+                android:lines="1"
+                android:text=""
+                android:textColor="@color/font_main"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@mipmap/line_h" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="队员"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/text_size_notice" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/margin_top"
+            android:background="@mipmap/line_h" />
+
+        <ListView
+            android:id="@+id/lv_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@mipmap/line_h"
+            android:dividerHeight="0.5dp"
+            android:footerDividersEnabled="false" />
+
+        <RelativeLayout
+            android:id="@+id/team_member_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:layout_centerHorizontal="true"
+                android:id="@+id/tv_add_member"
+                android:layout_width="885px"
+                android:layout_height="132px"
+                android:text="+ 添加新球员"
+                android:textColor="@color/font_gray"
+                android:textSize="@dimen/text_size"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@mipmap/add_member"
+                android:layout_marginTop="@dimen/margin_leftx1.5"
+                android:layout_marginBottom="@dimen/margin_leftx1.5"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
 </RelativeLayout>

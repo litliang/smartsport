@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_back">返回</string>
+
+    <string name="left_bracket">(</string>
+    <string name="right_bracket">)</string>
+    <string name="money_unit">￥</string>
+    <string name="year">/年</string>
+    <!-- order confirm -->
+    <string name="confirm_title">订单确认</string>
+    <string name="confirm_pay_amount">应付金额</string>
+    <string name="confirm_pay_time_left">支付剩余时间</string>
+    <string name="confirm_pay_ali">支付宝支付</string>
+    <string name="confirm_pay_ali_hint">支付宝安全支付</string>
+    <string name="confirm_pay_wechat">微信支付</string>
+    <string name="confirm_pay_wechat_hint">微信安全支付</string>
+    <string name="confirm_pay_order">支付订单</string>
+
+    <!-- sign up -->
+    <string name="sign_up_title">青训报名</string>
+    <string name="sign_up_total_amount">商品总金额</string>
+    <string name="sign_up_member">报名球员</string>
+    <string name="sign_up_member_name">球员名字</string>
+    <string name="sign_up_contact">联系人</string>
+    <string name="sign_up_contact_name">联系人名字</string>
+    <string name="sign_up_phone">联系电话</string>
+    <string name="sign_up_refund">退款说明</string>
+    <string name="sign_up_disclaimer">免责声明</string>
+    <string name="sign_up_pay">去支付</string>
+
+    <!-- QingXun details -->
+    <string name="details_title">青训详情</string>
+    <string name="details_quota">还剩</string>
+    <string name="details_quota_unit">个名额</string>
+    <string name="details_school">青训学校:</string>
+    <string name="details_student">招生对象:</string>
+    <string name="details_time">青训时间:</string>
+    <string name="details_ground">青训场地:</string>
+    <string name="details_introduction">青训简介</string>
+    <string name="details_class">推荐课程</string>
+    <string name="details_sign_up">我要报名</string>
+
+    <!-- About strings -->
+    <string name="about_title">关于</string>
+    <string name="about_service">客服电话</string>
+    <string name="about_service_phone">电话号码</string>
+    <string name="about_email">邮件</string>
+    <string name="about_email_address">邮件地址</string>
+    <string name="about_service_agreement">服务协议</string>
+    <string name="about_copyright">数苗足球有限公司版权所有</string>
+</resources>

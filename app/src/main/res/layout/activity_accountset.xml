@@ -36,8 +36,8 @@
 
                     <ImageView
                         android:id="@+id/account_header"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="213px"
+                        android:layout_height="213px"
                         android:layout_marginBottom="40px"
                         android:layout_marginLeft="50px"
                         android:layout_marginTop="40px"
@@ -60,7 +60,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center">
 
-                        <ImageView
+                        <ImageView android:id="@+id/head"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/left_arrow" />
@@ -87,7 +87,7 @@
                         android:textColor="@color/black"
                         android:textSize="45px" />
 
-                    <TextView
+                    <TextView android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20px"
@@ -127,7 +127,7 @@
                         android:textColor="@color/black"
                         android:textSize="45px" />
 
-                    <TextView
+                    <TextView android:id="@+id/truename"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20px"

@@ -79,6 +79,11 @@
                         android:text="排名：3"
                         android:textColor="@color/white"
                         android:textSize="42px" />
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="42px"
+                        android:background="#ffffff"
+                        />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -89,7 +94,11 @@
                         android:text="积分：10"
                         android:textColor="@color/white"
                         android:textSize="42px" />
-
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="42px"
+                        android:background="#ffffff"
+                        />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -98,7 +107,11 @@
                         android:text="胜：2"
                         android:textColor="@color/white"
                         android:textSize="42px" />
-
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="42px"
+                        android:background="#ffffff"
+                        />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -107,7 +120,11 @@
                         android:text="平：1"
                         android:textColor="@color/white"
                         android:textSize="42px" />
-
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="42px"
+                        android:background="#ffffff"
+                        />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

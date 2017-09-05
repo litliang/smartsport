@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/margin_left"
+    android:paddingTop="@dimen/margin_left"
+    android:paddingBottom="@dimen/margin_left"
+    android:paddingRight="@dimen/margin_leftx1.5"
+    >
+
+    <ImageView
+        android:id="@+id/iv_head_icon"
+        android:layout_width="255px"
+        android:layout_height="255px"
+        app:layout_auto_baseheight="width"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/tuijian_touxiang6" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/iv_head_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_left"
+        >
+        <TextView
+            android:id="@+id/tv_coach_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="教练名称"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/font_main"
+            />
+        <TextView
+            android:id="@+id/tv_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上海国际青训学校主教练"
+            android:textSize="@dimen/text_size_notice"
+            android:textColor="@color/font_gray"
+            android:layout_marginTop="@dimen/margin_top"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_collect"
+        android:layout_width="72px"
+        android:layout_height="75px"
+        android:src="@mipmap/icon_collect"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

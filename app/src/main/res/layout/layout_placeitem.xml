@@ -8,7 +8,7 @@
         android:id="@+id/tv_pinyin"
         android:layout_width="match_parent"
         android:paddingLeft="30px"
-        android:layout_height="65px"
+        android:layout_height="39dip"
         android:background="@color/bg_gray"
         android:textColor="@color/black"
         android:gravity="center_vertical"
@@ -18,12 +18,12 @@
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
-        android:layout_height="88px"
+        android:layout_height="54dip"
         android:paddingLeft="30px"
         android:background="#ffffff"
         android:gravity="center_vertical"
         android:text="宋江"
-        android:textSize="32px"
+        android:textSize="17dip"
         android:textColor="#181818" />
 
 </LinearLayout>

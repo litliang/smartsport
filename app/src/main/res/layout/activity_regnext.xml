@@ -42,7 +42,7 @@
         android:layout_marginRight="120px"
         android:hint="密码6-16位"
         android:maxLength="16"
-        android:inputType="textPassword"
+        android:password="true"
         android:background="@null"
         android:textSize="45px"
         android:textColorHint="@color/text_hint"/>
@@ -64,9 +64,9 @@
         android:layout_marginLeft="120px"
         android:layout_marginRight="120px"
         android:hint="重复密码"
+        android:password="true"
         android:textSize="45px"
         android:maxLength="16"
-        android:inputType="textPassword"
         android:background="@null"
         android:textColorHint="@color/text_hint"/>
 

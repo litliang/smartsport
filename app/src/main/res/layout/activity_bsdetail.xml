@@ -293,7 +293,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50px"
                 android:layout_marginTop="40px"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
@@ -311,7 +312,9 @@
                 <top.smartsport.www.widget.MyListView
                     android:id="@+id/bs_detail_video"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    />
 
             </LinearLayout>
 

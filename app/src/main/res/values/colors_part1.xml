@@ -4,4 +4,6 @@
     <color name="font_main">#333333</color>
     <color name="font_gray">#969696</color>
     <color name="theme_green">#3bb862</color>
+    <color name="colorGray">#EDEDED</color>
+    <color name="diver_color">#d8d8d8</color>
 </resources>

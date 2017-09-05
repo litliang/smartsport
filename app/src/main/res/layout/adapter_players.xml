@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:minWidth="1080px"
+    android:layout_width="1080px"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginBottom="50dp">
@@ -11,8 +12,9 @@
         <ImageView
             android:id="@+id/players_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
+
+            android:layout_height="400px"
+            android:scaleType="fitCenter"
             android:src="@mipmap/login_logo"
             android:layout_marginTop="40px"/>
 
@@ -25,12 +27,14 @@
             android:textSize="45px"
             android:gravity="center"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="180px"
+            android:layout_marginTop="38px"
             android:text="99\n期"/>
     </RelativeLayout>
     <TextView
         android:id="@+id/players_name"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="40px"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="180px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="45px"
@@ -42,7 +46,7 @@
         android:layout_marginTop="10px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="38px"
+        android:textSize="45px"
         android:text="球星执行"
         android:layout_marginBottom="30dp"
         android:textColor="@color/text_gray"/>

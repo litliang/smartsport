@@ -2,14 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+            android:background="#f8f8f8"
     >
 
     <ListView
         android:id="@+id/id_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@mipmap/line_h"
-        android:dividerHeight="0.5dp"
+        android:divider="#f8f8f8"
+        android:dividerHeight="25px"
         >
     </ListView>
 

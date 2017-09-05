@@ -2,186 +2,207 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <FrameLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/action_bar"
         android:layout_alignParentTop="true">
-    <include layout="@layout/layout_actionbar" /></FrameLayout>
-    <RelativeLayout android:visibility="gone"
+
+        <include layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="140px"
         android:background="@color/theme_color"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/img"
-            android:layout_marginLeft="20px"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_left"/>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
+            android:src="@drawable/arrow_left" />
+
         <TextView
             android:id="@+id/back"
-            android:layout_toRightOf="@+id/img"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img"
+            android:text="返回"
             android:textColor="@color/white"
-            android:textSize="45px"
-            android:text="返回"/>
+            android:textSize="45px" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="视频"
-            android:textSize="48px"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"/>
+            android:text="视频"
+            android:textColor="@color/white"
+            android:textSize="48px" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/video"
-        android:layout_below="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar"
         android:orientation="vertical">
 
 
-    <FrameLayout
-        android:id="@+id/bszb_detail_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/bszb_detail_frame"
             android:layout_width="match_parent"
-            android:id="@+id/videoContainers"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/videoContainers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/bszb_detail_bszb_img"
-            android:layout_width="match_parent"
-            android:layout_height="600px"
-            android:src="@mipmap/aa_ting"
-            android:scaleType="fitXY" />
-
-        <TextView
-            android:id="@+id/zb_detail_bq_zhibo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
-            android:layout_marginLeft="20px"
-            android:background="@mipmap/bq_zhibo"
-            android:visibility="gone"
-            />
-        <TextView
-            android:id="@+id/bszb_detail_bszb_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="来源：花椒"
-            android:paddingTop="10px"
-            android:paddingBottom="10px"
-            android:textSize="36px"
-            android:paddingRight="30px"
-            android:visibility="gone"
-            android:paddingLeft="30px"
-            android:layout_gravity="right"
-            android:layout_marginTop="20px"
-            android:layout_marginRight="40px"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/zb_detail_bq_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/bq_start"/>
-
-    </FrameLayout>
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/bszb_detail_bszb_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="45px"
-            android:layout_marginLeft="40px"
-            android:layout_marginTop="20px"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="比赛标题比赛标题比赛标题比赛标题比赛标题"/>
-        <TextView
-            android:id="@+id/bszb_detail__bszb_dis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_gray"
-            android:textSize="38px"
-            android:layout_marginLeft="40px"
-            android:layout_marginTop="20px"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="比赛描述比赛描述比赛描述比赛描述比赛描述比赛描述"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/bszb_detail__bszb_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017-05-20"
-                android:textSize="38px"
-                android:textColor="@color/text_gray"
-                android:layout_marginLeft="40px"
-                android:layout_marginTop="10px"/>
-
-            <TextView
-                android:id="@+id/adapter_null"
-                android:layout_toRightOf="@+id/bszb_detail__bszb_date"
-                android:layout_marginLeft="20px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="|"
-                android:layout_marginTop="5px"
-                android:textColor="@color/text_gray"/>
-
-            <TextView
-                android:id="@+id/bszb_detail__bszb_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_gray"
-                android:textSize="38px"
-                android:layout_marginTop="10px"
-                android:text="上海体育馆上海馆"
-                android:ellipsize="end"
-                android:layout_toRightOf="@+id/adapter_null"
-                android:layout_marginRight="100px"
-                android:singleLine="true" />
+                <com.dl7.player.media.IjkPlayerView
+                    android:id="@+id/player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="600px"/>
+            </RelativeLayout>
 
             <ImageView
+                android:id="@+id/bszb_detail_bszb_img"
+                android:layout_width="match_parent"
+                android:layout_height="600px"
+                android:scaleType="fitXY"
+                android:src="@mipmap/aa_ting"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/zb_detail_bq_zhibo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/icon_share"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40px"/>
-        </RelativeLayout>
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:background="@mipmap/bq_zhibo"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/bszb_detail_bszb_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="40px"
+                android:layout_marginTop="20px"
+                android:paddingBottom="10px"
+                android:paddingLeft="30px"
+                android:paddingRight="30px"
+                android:paddingTop="10px"
+                android:text="来源：花椒"
+                android:textColor="@color/white"
+                android:textSize="36px"
+                android:visibility="gone" />
+
+            <TextView android:visibility="gone"
+                android:id="@+id/zb_detail_bq_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@mipmap/bq_start" />
+
+        </FrameLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/bszb_detail_bszb_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="比赛标题比赛标题比赛标题比赛标题比赛标题"
+                android:textColor="@color/black"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/bszb_detail__bszb_dis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="20px"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="比赛描述比赛描述比赛描述比赛描述比赛描述比赛描述"
+                android:textColor="@color/text_gray"
+                android:textSize="38px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bszb_detail__bszb_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40px"
+                    android:layout_marginTop="10px"
+                    android:text="2017-05-20"
+                    android:textColor="@color/text_gray"
+                    android:textSize="38px" />
+
+                <TextView
+                    android:id="@+id/adapter_null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginTop="5px"
+                    android:layout_toRightOf="@+id/bszb_detail__bszb_date"
+                    android:text="|"
+                    android:textColor="@color/text_gray" />
+
+                <TextView
+                    android:id="@+id/bszb_detail__bszb_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="10px"
+                    android:layout_toRightOf="@+id/adapter_null"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="上海体育馆上海馆"
+                    android:textColor="@color/text_gray"
+                    android:textSize="38px" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40px"
+                    android:src="@mipmap/icon_share"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-    </LinearLayout>
-    <LinearLayout android:layout_below="@id/video"
+
+    <LinearLayout
         android:id="@+id/sp_detail_ll_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/video"
         android:layout_marginLeft="50px"
         android:layout_marginTop="40px"
         android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
@@ -189,6 +210,7 @@
             android:layout_marginLeft="152px"
             android:layout_toRightOf="@+id/wd_sc"
             android:background="@color/line_color" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -202,91 +224,98 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-    <LinearLayout android:visibility="gone"
-        android:layout_marginTop="1450px"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1450px"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <LinearLayout
-            android:layout_marginBottom="20px"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/bszb_detail_a_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/bszb_detail_a_name"
-                android:layout_marginTop="20px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:text="球队A名字"
-                android:textSize="45px"
-                android:textColor="@color/text_gray"/>
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginBottom="20px"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20px"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/bszb_detail_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="小组赛第一轮"
-                android:textSize="38px"
-                android:textColor="@color/text_gray"/>
+                android:textColor="@color/text_gray"
+                android:textSize="38px" />
+
             <TextView
-                android:layout_marginTop="23px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="23px"
                 android:text="正在直播"
-                android:textSize="78px"
-                android:textColor="@color/theme_color"/>
+                android:textColor="@color/theme_color"
+                android:textSize="78px" />
 
             <TextView
                 android:id="@+id/bszb_detail_time"
-                android:layout_marginTop="12px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12px"
                 android:text="2017-12-12 18:00"
-                android:textSize="38px"
-                android:textColor="@color/text_gray"/>
+                android:textColor="@color/text_gray"
+                android:textSize="38px" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginBottom="20px"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/bszb_detail_b_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/bszb_detail_b_name"
-                android:layout_marginTop="20px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
                 android:text="球队B名字"
-                android:textSize="45px"
-                android:textColor="@color/text_gray"/>
+                android:textColor="@color/text_gray"
+                android:textSize="45px" />
         </LinearLayout>
-
 
 
     </LinearLayout>

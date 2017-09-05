@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_left"
+    >
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="300px"
+        android:layout_height="300px"
+        app:layout_auto_baseheight="width"
+        android:scaleType="fitXY"
+        android:src="@mipmap/timg" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_pic"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_alignTop="@+id/iv_pic"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/font_main"
+        android:text="比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题"
+        android:textSize="@dimen/text_size" />
+    <TextView
+        android:id="@+id/tv_describe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_marginTop="20px"
+        android:maxLines="2"
+        android:textColor="@color/font_gray"
+        android:text="这里是描述，这里是描述，这里是描述,这里是描述,这里是描述,这里是描述,"
+        android:textSize="@dimen/text_size_notice" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_alignBottom="@+id/iv_pic"
+        android:gravity="center_vertical"
+        >
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-05-28"
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/text_consult" />
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="@dimen/text_consult"
+        android:background="@color/font_gray"
+        android:layout_toRightOf="@+id/tv_date"
+        android:layout_marginLeft="15px"
+        />
+
+    <TextView
+        android:id="@+id/tv_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15px"
+        android:text="冬令营"
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/text_consult" />
+        <TextView
+            android:id="@+id/tv_read_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="阅读 395"
+            android:textColor="@color/font_gray"
+            android:textSize="@dimen/text_consult"
+            android:gravity="right"
+            />
+    </LinearLayout>
+</RelativeLayout>

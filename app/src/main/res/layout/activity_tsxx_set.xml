@@ -2,11 +2,115 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_gray"
     android:orientation="vertical">
+
     <FrameLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/action_bar"
         android:layout_alignParentTop="true">
-        <include layout="@layout/layout_actionbar" /></FrameLayout>
+
+        <include layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/horizontal_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50px"
+                android:gravity="center_vertical"
+                android:text="接受新消息通知"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="50px"
+                android:layout_toLeftOf="@+id/r_arrow"
+                android:gravity="center_vertical"
+                android:text="已关闭" />
+
+            <ImageView
+                android:id="@+id/r_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50px"
+                android:gravity="center_vertical"
+                android:src="@mipmap/icon_right_arrow" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_line" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70px"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:text="运营类消息"
+        android:textSize="45px"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="30px"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/horizontal_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50px"
+                android:gravity="center_vertical"
+                android:text="推送消息设置"
+                android:textSize="45px"
+                android:textColor="@color/black" />
+
+
+            <com.zf.view.UISwitchButton
+                android:layout_margin="-10px"
+                android:id="@id/r_arrow"
+                android:layout_width="70px"
+                android:layout_height="120px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50px"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_line" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginLeft="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:gravity="center_vertical"
+        android:text="开启后，将收到精选的内容推送和活动通知" />
 </LinearLayout>

@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#FEFEFE"
+    >
 
     <ImageView
         android:id="@+id/iv_pic"
@@ -23,6 +25,7 @@
         android:layout_marginLeft="@dimen/padding"
         android:layout_marginRight="@dimen/margin_leftx2"
         android:layout_alignTop="@+id/iv_pic"
+        android:layout_marginTop="20px"
         android:maxLines="2"
         android:ellipsize="end"
         android:text="比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题"

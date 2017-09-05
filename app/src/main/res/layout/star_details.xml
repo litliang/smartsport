@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <include layout="@layout/layout_actionbar" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_top_pic"
+                android:layout_width="match_parent"
+                android:layout_height="500px"
+                android:scaleType="fitXY"
+                android:src="@mipmap/timg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/iv_top_pic"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_left"
+                android:paddingLeft="@dimen/margin_left">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="球星名称"
+                    android:textColor="@color/font_main"
+                    android:textSize="@dimen/text_size" />
+
+                <TextView android:visibility="gone"
+                    android:id="@+id/tv_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:text="所属球队名称"
+                    android:textColor="@color/font_gray"
+                    android:textSize="@dimen/text_size_notice" />
+
+                <TextView android:visibility="gone"
+                    android:id="@+id/tv_introduce_star"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_item_top"
+                    android:text="球星介绍。图文介绍。球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍球星介绍。图文介绍"
+                    android:textColor="@color/font_gray"
+                    android:textSize="@dimen/text_size_notice" />
+
+                <ImageView
+                    android:id="@+id/iv_mid_pic" android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="500px"
+                    android:layout_marginTop="@dimen/margin_left"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/timg" />
+
+                <TextView
+                    android:id="@+id/tv_content"  android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_item_top"
+                    android:text="文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。文章正文内容。"
+                    android:textColor="@color/font_gray"
+                    android:textSize="@dimen/text_size_notice" />
+
+                <ImageView  android:visibility="gone"
+                    android:id="@+id/iv_bottom_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="500px"
+                    android:layout_marginTop="@dimen/list_item_top"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/timg" />
+
+                <TextView  android:visibility="gone"
+                    android:id="@+id/tv_ending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_item_top"
+                    android:text="文章结尾。"
+                    android:textColor="@color/font_gray"
+                    android:textSize="@dimen/text_size_notice" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="80px"
+                android:layout_height="160px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginTop="450px"
+                android:background="#ff0000"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20px"
+                    android:text="97"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_week"
+                    android:layout_centerHorizontal="true"
+                    android:text="期"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/text_size_notice" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

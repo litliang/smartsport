@@ -30,4 +30,8 @@
     <dimen name="text_size">48px</dimen>
     <dimen name="text_size_notice">39px</dimen>
     <dimen name="list_item_top">60px</dimen>
+
+
+    <dimen name="round_corner">20px</dimen>
+    <dimen name="text_consult">36px</dimen>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:background="@drawable/shape_comment"
+        android:layout_margin="@dimen/margin_left"
+        android:hint="说点什么吧"
+        android:gravity="top"
+        android:maxLength="50"
+        android:padding="@dimen/margin_left"
+        android:textColor="@color/font_main"
+        android:textSize="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/tv_font_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/font_gray"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:text="0/50"
+        android:textSize="@dimen/text_size_notice"
+        android:layout_below="@+id/et_comment"
+        android:layout_alignBaseline="@+id/btn_commit"
+        />
+    <TextView
+        android:id="@+id/tv_commit"
+        android:layout_width="250px"
+        android:layout_height="120px"
+        android:text="发送"
+        android:textSize="@dimen/text_size"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@drawable/shape_commit_round"
+        android:layout_alignRight="@+id/et_comment"
+        android:layout_below="@+id/et_comment"
+        />
+</RelativeLayout>

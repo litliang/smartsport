@@ -70,6 +70,7 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:tag="finish();clickActivityId(MainActivity,main_tabs_qx)"
             android:id="@+id/gojoinlesson"
             android:layout_width="700px"
             android:layout_height="wrap_content"

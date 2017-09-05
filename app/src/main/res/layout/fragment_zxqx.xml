@@ -17,7 +17,7 @@
             <include
                 layout="@layout/layout_banner"
                 android:layout_width="match_parent"
-                android:layout_height="450px"
+                android:layout_height="550px"
                 android:background="@color/white" />
 
 
@@ -49,6 +49,7 @@
             </LinearLayout>
 
             <top.smartsport.www.widget.HorizontalListView
+
                 android:focusableInTouchMode="true"
                 android:focusable="true"
                 android:id="@+id/fm_grid_tjkc"
@@ -58,7 +59,8 @@
                 android:layout_marginRight="40px"
                 android:layout_marginLeft="40px"
                 android:verticalSpacing="30px"
-                android:horizontalSpacing="30px"/>
+                android:horizontalSpacing="30px"
+                />
 
             <TextView
                 android:layout_width="wrap_content"

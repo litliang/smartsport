@@ -75,26 +75,14 @@
                 android:textColor="@color/black"
                 android:textSize="45px" />
 
-            <TextView
-                android:id="@+id/set_yjms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20px"
-                android:layout_toLeftOf="@+id/set_left_arrow2"
-                android:text="18"
-                android:visibility="invisible"
-                android:textColor="@color/text_gray"
-                android:textSize="45px" />
 
-            <ImageView
+            <com.zf.view.UISwitchButton
                 android:id="@+id/set_left_arrow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="60px"
-                android:src="@mipmap/left_arrow" />
+                android:layout_marginRight="60px" />
 
         </RelativeLayout>
 
@@ -149,7 +137,7 @@
             android:layout_marginLeft="60px"
             android:background="@color/line_color" />
 
-        <RelativeLayout
+        <RelativeLayout android:id="@+id/hc"
             android:layout_width="match_parent"
             android:layout_height="120px">
 
