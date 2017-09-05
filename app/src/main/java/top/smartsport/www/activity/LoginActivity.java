@@ -19,11 +19,13 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import app.base.JsonUtil;
 import top.smartsport.www.H;
 import top.smartsport.www.O;
 import top.smartsport.www.R;
@@ -37,6 +39,7 @@ import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.MD5Util;
 import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.utils.SerialUtil;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -85,10 +88,12 @@ public class LoginActivity extends BaseActivity {
                 case 1:
                     RegInfo.setRegInfo(regInfo);
                     Log.i("___regInfo","regInfo");
+
                     break;
                 case 2:
                     AuthInfo.setAuthInfo(authInfo);
                     Log.i("___authInfo","authInfo");
+
                     break;
                 case 3:
                     TokenInfo.setTokenInfo(tokenInfo);
@@ -119,12 +124,21 @@ public class LoginActivity extends BaseActivity {
                 Log.i("_______++", message + "");
                 showToast(message);
             }
-
+//{"app_key":"5284047f4ffb4e04824a2fd1d1f0cd62","app_secret":"11ca2105ff3555598cc4a2329140d016","authorize_url":"http://smapi.baibaobike.com/authed/authorize/0410428c.html","token_url":"http://smapi.baibaobike.com/authed/token/e251cb42.html","refresh_url":"http://smapi.baibaobike.com/authed/refresh/4138ecf7.html","source_url":"http://smapi.baibaobike.com/authed/resource/2690f862.html","seed_secret":"c5a2525cbc48a95c023534ae32949b1b","expire_time":30}
             @Override
             public void onSuccess(NetEntity entity) {
                 Log.i("________", entity.getStatus() + "__________" + entity.getErrno() + "");
-                regInfo = entity.toObj(RegInfo.class);
-//                RegInfo.setRegInfo(regInfo);//保存对象
+                RegInfo reginfo = new RegInfo();
+
+                reginfo.setApp_key((String) JsonUtil.findJsonLink("app_key",entity.getData().toString()));
+                reginfo.setApp_secret((String) JsonUtil.findJsonLink("app_secret",entity.getData().toString()));
+                reginfo.setAuthorize_url((String) JsonUtil.findJsonLink("authorize_url",entity.getData().toString()));
+                reginfo.setRefresh_url((String) JsonUtil.findJsonLink("refresh_url",entity.getData().toString()));
+                reginfo.setSeed_secret((String) JsonUtil.findJsonLink("seed_secret",entity.getData().toString()));
+                reginfo.setSource_url((String) JsonUtil.findJsonLink("source_url",entity.getData().toString()));
+                reginfo.setToken_url((String) JsonUtil.findJsonLink("token_url",entity.getData().toString()));
+                regInfo = reginfo;
+                RegInfo.setRegInfo(reginfo);//保存对象
                 Message msg = new Message();
                 msg.what = 1;
                 mHandler.sendMessage(msg);
@@ -315,6 +329,7 @@ public class LoginActivity extends BaseActivity {
     private void login(){
         phone = login_edit_phone.getText().toString().trim();
         psd = login_edit_psd.getText().toString().trim();
+
         String url = regInfo.getSource_url();
 
         if(phone.isEmpty()||psd.isEmpty()){

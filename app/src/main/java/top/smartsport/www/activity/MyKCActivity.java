@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -15,11 +14,9 @@ import java.util.List;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.fragment.MYQXKTFragment;
-import top.smartsport.www.fragment.MYZXJAFragment;
-import top.smartsport.www.fragment.QXFragment;
-import top.smartsport.www.fragment.QXKTFragment;
-import top.smartsport.www.fragment.ZXJAFragment;
+import top.smartsport.www.fragment.MYQXKTV4Fragment;
+import top.smartsport.www.fragment.MYZXJAV4Fragment;
+import top.smartsport.www.fragment.QXV4Fragment;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 
 /**
@@ -37,8 +34,8 @@ public class MyKCActivity extends BaseActivity {
     private FragmentManager fragmentManager;
 
     private List<Fragment> listFM;
-    public static QXFragment newInstance() {
-        QXFragment fragment = new QXFragment();
+    public static QXV4Fragment newInstance() {
+        QXV4Fragment fragment = new QXV4Fragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
@@ -53,8 +50,8 @@ public class MyKCActivity extends BaseActivity {
 
     private void addFragment(){
         listFM = new ArrayList<>();
-        listFM.add(MYQXKTFragment.newInstance());
-        listFM.add(MYZXJAFragment.newInstance());
+        listFM.add(MYQXKTV4Fragment.newInstance());
+        listFM.add(MYZXJAV4Fragment.newInstance());
         qxzxAdapter = new QXZXAdapter(this,fragmentManager,tabTitle,listFM);
         qx_viewpager.setAdapter(qxzxAdapter);
         qx_tab.setViewPager(qx_viewpager);

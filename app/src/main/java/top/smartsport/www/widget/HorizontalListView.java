@@ -32,6 +32,7 @@ import java.util.Queue;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -48,7 +49,35 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Scroller;
 
+import app.base.action.ItemClickAction;
+
 public class HorizontalListView extends AdapterView<ListAdapter> {
+
+	public static View.OnTouchListener hlv = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			PointF downP = new PointF();
+			PointF curP = new PointF();
+			int act = event.getAction();
+			if (act == MotionEvent.ACTION_DOWN) {
+				downP.y = event.getY();
+				downP.x = event.getX();
+			}
+			if (act == MotionEvent.ACTION_MOVE) {
+				curP.y = event.getY();
+				curP.x = event.getX();
+			}
+			if (curP.x != 0 || curP.y != 0) {
+				if ((Math.abs(curP.y - downP.y)) < (Math.abs(curP.x
+						- downP.x))) {
+					((HorizontalListView) v)
+							.requestDisallowInterceptTouchEvent(true);
+				}
+			}
+			return false;
+		}
+	};
 
 	public boolean mAlwaysOverrideTouch = true;
 	protected ListAdapter mAdapter;
@@ -71,6 +100,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 	public HorizontalListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initView();
+		setOnItemClickListener(new ItemClickAction());
 	}
 
 	public void setViewPager(ViewPager viewPager){
@@ -115,6 +145,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 		mMaxX = Integer.MAX_VALUE;
 		mScroller = new Scroller(getContext());
 		mGesture = new GestureDetector(getContext(), mOnGesture);
+		setOnTouchListener(HorizontalListView.hlv);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package top.smartsport.www.activity;
 
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -100,10 +101,11 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
         return actionbar;
     }
 
+
+
     @Override
     protected void initView() {
         back();
-        setTitle("筛选");
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
 

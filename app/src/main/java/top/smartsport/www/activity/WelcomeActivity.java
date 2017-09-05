@@ -1,8 +1,11 @@
 package top.smartsport.www.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 
@@ -21,16 +24,12 @@ import top.smartsport.www.utils.SPUtils;
  * 欢迎页
  */
 @ContentView(R.layout.activity_welcome)
-public class WelcomeActivity extends BaseActivity {
+public class WelcomeActivity extends Activity {
 
 
     @Override
-    public void featureNoTitle() {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-    }
-
-    @Override
-    protected void initView() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             finish();
             return;
@@ -43,23 +42,8 @@ public class WelcomeActivity extends BaseActivity {
 
                 if (SPUtils.getBoolean(getBaseContext(), "welcomeGuide", "isFirst")) {
                     if(!phone.equals("")){
-                        new Dev().reg(WelcomeActivity.this, new FunCallback() {
-                            @Override
-                            public void onSuccess(Object result, List object) {
-
-                            }
-
-                            @Override
-                            public void onFailure(Object result, List object) {
-
-                            }
-
-                            @Override
-                            public void onCallback(Object result, List object) {
-                                goActivity(MainActivity.class);
-                                finish();
-                            }
-                        });
+                        goActivity(MainActivity.class);
+                        finish();
                         return false;
                     }else {
                         goActivity(LoginActivity.class);
@@ -71,7 +55,12 @@ public class WelcomeActivity extends BaseActivity {
                 finish();
                 return false;
             }
+
+            private void goActivity(Class loginActivityClass) {
+                startActivity(new Intent(getBaseContext(),loginActivityClass));
+            }
         }).sendEmptyMessageDelayed(0, 2000);
+
 
     }
 

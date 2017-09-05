@@ -16,7 +16,7 @@ public interface ILoadingLayout {
 
         /**
          * When the UI is in a state which means that user is not interacting
-         * with the Pull-to-Refresh function.
+         * withView the Pull-to-Refresh function.
          */
         RESET,
 

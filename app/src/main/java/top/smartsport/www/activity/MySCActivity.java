@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -15,14 +14,12 @@ import java.util.List;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.fragment.MYQXKTFragment;
-import top.smartsport.www.fragment.MYZXJAFragment;
-import top.smartsport.www.fragment.QXFragment;
-import top.smartsport.www.fragment.SCBSFragment;
-import top.smartsport.www.fragment.SCJLFragment;
-import top.smartsport.www.fragment.SCQXKTFragment;
-import top.smartsport.www.fragment.SCZXFragment;
-import top.smartsport.www.fragment.SCZXJAFragment;
+import top.smartsport.www.fragment.QXV4Fragment;
+import top.smartsport.www.fragment.SCBSV4Fragment;
+import top.smartsport.www.fragment.SCJLV4Fragment;
+import top.smartsport.www.fragment.SCQXKTV4Fragment;
+import top.smartsport.www.fragment.SCZXV4Fragment;
+import top.smartsport.www.fragment.SCZXJAV4Fragment;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 
 /**
@@ -40,8 +37,8 @@ public class MySCActivity extends BaseActivity {
     private FragmentManager fragmentManager;
 
     private List<Fragment> listFM;
-    public static QXFragment newInstance() {
-        QXFragment fragment = new QXFragment();
+    public static QXV4Fragment newInstance() {
+        QXV4Fragment fragment = new QXV4Fragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
@@ -56,14 +53,15 @@ public class MySCActivity extends BaseActivity {
 
     private void addFragment(){
         listFM = new ArrayList<>();
-        listFM.add(SCQXKTFragment.newInstance());
-        listFM.add(SCZXJAFragment.newInstance());
-        listFM.add(SCBSFragment.newInstance());
-        listFM.add(SCZXFragment.newInstance());
-        listFM.add(SCJLFragment.newInstance());
+        listFM.add(SCQXKTV4Fragment.newInstance());
+        listFM.add(SCZXJAV4Fragment.newInstance());
+        listFM.add(SCBSV4Fragment.newInstance());
+        listFM.add(SCZXV4Fragment.newInstance());
+        listFM.add(SCJLV4Fragment.newInstance());
         qxzxAdapter = new QXZXAdapter(this,fragmentManager,tabTitle,listFM);
         qx_viewpager.setAdapter(qxzxAdapter);
         qx_tab.setViewPager(qx_viewpager);
+
 
     }
 }

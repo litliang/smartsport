@@ -95,7 +95,7 @@ public class CSQDActivity extends BaseActivity {
         ptrlv.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                CSQDInfo csqdInfo = csqdAdapter.getItem(position-1);
+                CSQDInfo csqdInfo = csqdAdapter.getItem(position);
                 Bundle bundle = new Bundle();
                 bundle.putString(QDHomeActivity.TAG,csqdInfo.getTeam_id());
                 goActivity(QDHomeActivity.class,bundle);

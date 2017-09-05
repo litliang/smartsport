@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import org.xutils.x;
 
+import app.base.action.ViewInflater;
 import top.smartsport.www.dialog.CustomProgressDialog;
 
 /**
@@ -22,11 +23,15 @@ public abstract class BaseFragment extends Fragment {
     public CustomProgressDialog pd;
     public View root;
 
+    public void refresh(){
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initProgressDialog();
-        root = x.view().inject(this, inflater, container);
+        root = x.view().inject(this, new ViewInflater(getActivity()), container);
         initView();
         return root;
     }

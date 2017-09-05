@@ -1,10 +1,12 @@
 package top.smartsport.www.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Aaron on 2017/8/9.
  */
 
-public class News {
+public class News implements Serializable{
     private String cate_name;
     private String cover_url;
     private String ctime;

@@ -12,6 +12,8 @@ import com.lecloud.sdk.api.stats.IAppStats;
 import com.lecloud.sdk.api.stats.ICdeSetting;
 import com.lecloud.sdk.config.LeCloudPlayerConfig;
 import com.lecloud.sdk.listener.OnInitCmfListener;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
 import org.xutils.x;
@@ -19,28 +21,43 @@ import org.xutils.x;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import app.base.RRes;
+import app.base.framework.Init;
+import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import top.smartsport.www.handler.CrashHandler;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.SerialUtil;
 
 /**
  * Created by Aaron on 2017/6/30.
  */
 
-public class BaseApplication extends Application {
+public class BaseApplication extends Init {
     private static BaseApplication application;
-
+    public static IWXAPI mWxApi;
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         application = this;
+        JAnalyticsInterface.init(getApplication());
+        JAnalyticsInterface.initCrashHandler(this);
+        JAnalyticsInterface.setDebugMode(true);
+        cn.jiguang.share.android.api.JShareInterface.init(this);
+        cn.jiguang.share.android.api.JShareInterface.setDebugMode(true);
+        SerialUtil.initCtx(application);
         //ImageLoader初始化
         ImageUtil.initImageLoader(this);
         //AutoLayout初始化
         AutoLayoutConifg.getInstance().useDeviceSize().init(this);
 
+        mWxApi = WXAPIFactory.createWXAPI(getBaseContext(), "wx5939ba19b940fea1", true);
+        mWxApi.registerApp("wx5939ba19b940fea1");
+
         x.Ext.init(this); //初始化xUtils
         x.Ext.setDebug(true);//设置是否输出debug
-
+        RRes.initR(getBaseContext());
         /**
          * 乐视直播
          * */
@@ -48,7 +65,6 @@ public class BaseApplication extends Application {
         String processName = getProcessName(this, android.os.Process.myPid());
         if (getApplicationInfo().packageName.equals(processName)) {
             //TODO CrashHandler是一个抓取崩溃log的工具类（可选）
-            CrashHandler.getInstance(this);
 //            LeakCanary.install(this);
 //            CrashReport.initCrashReport(getApplicationContext(), "900059604", true);
             try {

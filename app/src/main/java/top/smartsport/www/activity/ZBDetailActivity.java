@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import cn.jiguang.share.android.api.Platform;
+import cn.jiguang.share.android.api.ShareParams;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSzbInfo;
@@ -170,6 +172,12 @@ public class ZBDetailActivity extends BaseActivity {
         bszb_detail__bszb_address.setText(bSzbInfo.getDescription());
 
         initViews();
+        ShareParams shareParams = new ShareParams();
+        shareParams.setText(bSzbInfo.getActivityName());
+//        shareParams.setText(bSzbInfo.getActivityName());
+        shareParams.setShareType(Platform.SHARE_TEXT);
+//        shareParams.setImageUrl(bSzbInfo.getCoverImgUrl());
+        share(shareParams, Sharetype.TEXT);
 
         getData();
     }

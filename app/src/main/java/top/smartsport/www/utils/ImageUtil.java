@@ -129,7 +129,7 @@ public class ImageUtil {
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, 480, 640);
 
-        // Decode bitmap with inSampleSize set
+        // Decode bitmap withView inSampleSize set
         options.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeFile(filePath, options);

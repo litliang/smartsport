@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
@@ -23,6 +24,8 @@ import android.widget.Toolbar;
 
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import app.base.action.ViewInflater;
+import cn.jiguang.share.android.api.ShareParams;
 import intf.FunCallback;
 import intf.QueryBuilder;
 
@@ -34,6 +37,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 import top.smartsport.www.R;
 import top.smartsport.www.bean.NetEntity;
@@ -51,6 +55,7 @@ import top.smartsport.www.xutils3.X;
 public abstract class BaseActivity extends AutoLayoutActivity {
     public CustomProgressDialog pd;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         featureNoTitle();
@@ -65,8 +70,8 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         initHttpParams();
 
         actionbar = findViewById(R.id.action_bar);
-        if(actionbar!=null&&((TextView)actionbar.findViewById(R.id.tvTitle))!=null){
-            ((TextView)actionbar.findViewById(R.id.tvTitle)).setText(getTitle());
+        if (actionbar != null && ((TextView) actionbar.findViewById(R.id.tvTitle)) != null) {
+            ((TextView) actionbar.findViewById(R.id.tvTitle)).setText(getTitle());
             back();
         }
         initView();
@@ -75,16 +80,18 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     public View actionbar;
 
 
-    public View getTopBar(){
+    public View getTopBar() {
         return actionbar;
-    };
+    }
+
+    ;
 
     public void setTitle(String title) {
         ((TextView) getTopBar().findViewById(R.id.tvTitle)).setText(title);
     }
 
     public void back() {
-        if(getTopBar()==null){
+        if (getTopBar() == null) {
             return;
         }
         getTopBar().findViewById(R.id.ivLeft).setOnClickListener(new View.OnClickListener() {
@@ -95,21 +102,26 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         });
     }
 
-    public void share() {
-        if(getTopBar()==null){
+    public enum Sharetype {
+        TEXT, IMAGE, URl, VIDEO
+    }
+
+    public void share(ShareParams shareParams, final Sharetype type) {
+        if (getTopBar() == null) {
             return;
         }
+        ShareActivity.shareparams = shareParams;
         getTopBar().findViewById(R.id.ivRight).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getBaseContext(), ShareActivity.class));
             }
         });
         getTopBar().findViewById(R.id.ivRight).setBackground(getResources().getDrawable(R.mipmap.share, null));
     }
 
     public void fav() {
-        if(getTopBar()==null){
+        if (getTopBar() == null) {
             return;
         }
         getTopBar().findViewById(R.id.ivRight_text).setOnClickListener(new View.OnClickListener() {
@@ -142,6 +154,12 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     }
 
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+
+        super.setContentView(new ViewInflater(this).inflate(layoutResID,null));
+    }
+
     public static void callHttp(final Map map, final FunCallback funcall) {
         RegInfo regInfo = RegInfo.newInstance();
         TokenInfo tokenInfo = TokenInfo.newInstance();
@@ -169,6 +187,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
+                funcall.<NetEntity>onSuccessConnected(entity);
                 funcall.<NetEntity>onCallbackConnected(entity);
             }
         });

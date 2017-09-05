@@ -9,6 +9,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.xutils.view.annotation.ViewInject;
 
+import java.io.Serializable;
+
 import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.Players;
@@ -19,7 +21,7 @@ import top.smartsport.www.utils.ViewHolder;
  * Created by Aaron on 2017/8/10.
  */
 
-public class PlayersAdapter extends EntityListAdapter<Players,PlayersHolder> {
+public class PlayersAdapter extends EntityListAdapter<Players,PlayersHolder>  implements Serializable{
     public PlayersAdapter(Context context) {
         super(context);
     }

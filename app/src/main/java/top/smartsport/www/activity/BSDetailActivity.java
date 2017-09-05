@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -25,6 +26,8 @@ import java.util.Map;
 
 import app.base.MapAdapter;
 import app.base.MapContent;
+import cn.jiguang.share.android.api.Platform;
+import cn.jiguang.share.android.api.ShareParams;
 import intf.JsonUtil;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.PICAdapter;
@@ -108,8 +111,8 @@ public class BSDetailActivity extends BaseActivity {
     protected void initView() {
         back();
         fav();
-        share();
-        ((TextView) actionbar.findViewById(R.id.tvTitle)).setText("比赛");
+
+//        ((TextView) actionbar.findViewById(R.id.tvTitle)).setText("比赛");
         id = (String) getObj(BSDetailActivity.TAG);
         states = (String) getObj("states");
         if (null != state) {
@@ -162,6 +165,24 @@ public class BSDetailActivity extends BaseActivity {
             }
         });
         getDetail();
+        findViewById(R.id.rl_sp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), KCBActivity.class));
+            }
+        });findViewById(R.id.rl_sc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(),SJFXActivity.class));
+            }
+        });
+        findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(),BSSignUpActivity.class));
+            }
+        });
+
     }
 
 
@@ -215,6 +236,11 @@ public class BSDetailActivity extends BaseActivity {
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions());
                 adapter_bsss_state.setText(states);
+                ShareParams shareParams = new ShareParams();
+                shareParams.setShareType(Platform.SHARE_TEXT);
+                shareParams.setText(bsDetail.getName());//必须
+
+                share(shareParams,Sharetype.TEXT);
                 adapter_bsss_title.setText(bsDetail.getName());
                 adapter_bsss_date.setText(bsDetail.getStart_time() + "至" + bsDetail.getEnd_time());
                 adapter_bsss_address.setText(bsDetail.getAddress());
@@ -227,6 +253,7 @@ public class BSDetailActivity extends BaseActivity {
                 }
                 bs_detail_content.loadData(bsDetail.getDescription(), "text/html;charset=UTF-8", null);
                 bs_detail_baoming.setText("我要报名(￥" + bsDetail.getSell_price().replace(".00", "") + ")");
+
                 picInfoList = bsDetail.toList(PicInfo.class);
                 ((TextView) findViewById(R.id.text_apply)).setText(bsDetail.getApply_num() + "/" + bsDetail.getQuota());
 //                if (bsDetail.getApply_num().equals("0")) {
@@ -253,6 +280,8 @@ public class BSDetailActivity extends BaseActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Bundle b = new Bundle();
                         b.putString("fileurl", ((Map) adapterView.getItemAtPosition(i)).get("fileurl").toString());
+                        b.putString("name", ((Map) adapterView.getItemAtPosition(i)).get("name").toString());
+
                         goActivity(BSVideoActivity.class, b);
                     }
                 });

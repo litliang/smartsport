@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Entity;
 import android.content.Intent;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -51,22 +53,22 @@ import top.smartsport.www.widget.QuickIndex;
  */
 @ContentView(R.layout.activity_choicecity)
 public class ChoiceCityActivity extends BaseActivity {
-    @ViewInject( R.id.index_bar)
+    @ViewInject(R.id.index_bar)
     private QuickIndex mIndexBar;
-    @ViewInject( R.id.lv)
+    @ViewInject(R.id.lv)
     private ListView mLv;
-    @ViewInject( R.id.tv_index)
+    @ViewInject(R.id.tv_index)
     private TextView mTv;
     @ViewInject(R.id.gv_hotcity)
     private GridView gv_hotcity;
     @ViewInject(R.id.citychoose_et_searchtext)
-    private EditText  et_searchtext;
+    private EditText et_searchtext;
 
     @ViewInject(R.id.tv1)
     private TextView tv1;
     @ViewInject(R.id.rl1)
     private RelativeLayout rl1;
-    private   NameAdapter2 nameAdapter;
+    private NameAdapter2 nameAdapter;
 
     @ViewInject(R.id.cc_text_location)
     private TextView cc_text_location;
@@ -94,17 +96,17 @@ public class ChoiceCityActivity extends BaseActivity {
             }
         });
         // 填充数据集合
-        nameAdapter=new NameAdapter2(ChoiceCityActivity.this);
+        nameAdapter = new NameAdapter2(ChoiceCityActivity.this);
         fillDataAndSort();
         mLv.setAdapter(nameAdapter);
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlaceItemInfo placeItemInfo = mDatas.get(position);
-                Intent intent =new Intent();
-                intent.putExtra("placeItemInfo",placeItemInfo);
-                SPUtils.put(getApplicationContext(),"city",placeItemInfo.mName);
-                setResult(RESULT_OK,intent);
+                Intent intent = new Intent();
+                intent.putExtra("placeItemInfo", placeItemInfo);
+                SPUtils.put(getApplicationContext(), "city", placeItemInfo.mName);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -113,46 +115,58 @@ public class ChoiceCityActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 HotCity item = hotCityAdapter.getItem(position);
-                PlaceItemInfo info=new PlaceItemInfo(item.getTitle(),item.getArea_id());
-                Intent intent =new Intent();
-                intent.putExtra("placeItemInfo",info);
-                SPUtils.put(getApplicationContext(),"city",info.mName);
-                setResult(RESULT_OK,intent);
+                PlaceItemInfo info = new PlaceItemInfo(item.getTitle(), item.getArea_id());
+                Intent intent = new Intent();
+                intent.putExtra("placeItemInfo", info);
+                SPUtils.put(getApplicationContext(), "city", info.mName);
+                setResult(RESULT_OK, intent);
                 finish();
 
             }
         });
 
 
-        et_searchtext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        et_searchtext.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId== EditorInfo.IME_ACTION_SEARCH){
-                    if(!et_searchtext.getText().toString().equals("")){
-                        String city=et_searchtext.getText().toString();
-                        fillDataAndSort(city);
-                        nameAdapter.notifyDataSetChanged();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                    }else{
-                        fillDataAndSort();
-                        nameAdapter.notifyDataSetChanged();
-                    }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!et_searchtext.getText().toString().equals("")) {
+                    String city = et_searchtext.getText().toString();
+                    fillDataAndSort(city);
+                    nameAdapter.notifyDataSetChanged();
+                } else {
+
+                    fillDataAndSort();
+                    nameAdapter.notifyDataSetChanged();
                 }
-
-                return false;
+                if(!editable.toString().trim().equals("")){
+                    ChoiceCityActivity.this.findViewById(R.id.shortcutarea).setVisibility(View.GONE);
+                }else{
+                    ChoiceCityActivity.this.findViewById(R.id.shortcutarea).setVisibility(View.VISIBLE);
+                }
             }
         });
+
+
     }
 
     /**
      * 初始化定位
-     *
      */
     private AMapLocationClient locationClient = null;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
 
-    private void initLocation(){
+    private void initLocation() {
         //初始化client
         locationClient = new AMapLocationClient(this.getApplicationContext());
         //初始化定位参数
@@ -166,12 +180,12 @@ public class ChoiceCityActivity extends BaseActivity {
                     if (amapLocation.getErrorCode() == 0) {
                         //定位成功回调信息，设置相关消息
                         String city = amapLocation.getCity();
-                        cc_text_location.setText(city+"");
+                        cc_text_location.setText(city + "");
 
 
                     } else {
                         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                        Log.e("AmapError","location Error, ErrCode:"
+                        Log.e("AmapError", "location Error, ErrCode:"
                                 + amapLocation.getErrorCode() + ", errInfo:"
                                 + amapLocation.getErrorInfo());
                     }
@@ -191,7 +205,6 @@ public class ChoiceCityActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -200,6 +213,7 @@ public class ChoiceCityActivity extends BaseActivity {
             locationClient = null;
         }
     }
+
     private ArrayList<PlaceItemInfo> mDatas = new ArrayList<PlaceItemInfo>();
 
     private Handler mHandler = new Handler();
@@ -227,33 +241,33 @@ public class ChoiceCityActivity extends BaseActivity {
         Collections.sort(mDatas);
         nameAdapter.clear();
         nameAdapter.addAll(mDatas);
-        if(mDatas.size()==0){
+        if (mDatas.size() == 0) {
             rl1.setVisibility(View.INVISIBLE);
             tv1.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             rl1.setVisibility(View.VISIBLE);
             tv1.setVisibility(View.INVISIBLE);
         }
     }
 
 
-    private void fillDataAndSort(String name){
+    private void fillDataAndSort(String name) {
         mDatas.clear();
         for (int i = 0; i < comCityList.length; i++) {
             PlaceItemInfo placeItemInfo = new PlaceItemInfo(comCityList[i].getTitle(),
                     comCityList[i].getArea_id()
             );
-            if(placeItemInfo.mName.contains(name)){
+            if (placeItemInfo.mName.contains(name)) {
                 mDatas.add(placeItemInfo);
             }
         }
         Collections.sort(mDatas);
         nameAdapter.clear();
         nameAdapter.addAll(mDatas);
-        if(mDatas.size()==0){
+        if (mDatas.size() == 0) {
             rl1.setVisibility(View.INVISIBLE);
             tv1.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             rl1.setVisibility(View.VISIBLE);
             tv1.setVisibility(View.INVISIBLE);
         }
@@ -265,23 +279,24 @@ public class ChoiceCityActivity extends BaseActivity {
 
 
     private HotCityAdapter hotCityAdapter;
+
     public void getCity() {
 
         List<ComCity> comCity = O.getComAreas();
         List<HotCity> hotCity = O.getHotAreas();
         comCityList = (ComCity[]) comCity.toArray(new ComCity[comCity.size()]);
-        hotCityList= (HotCity[]) hotCity.toArray(new HotCity[hotCity.size()]);
-        hotCityAdapter=new HotCityAdapter(this);
+        hotCityList = (HotCity[]) hotCity.toArray(new HotCity[hotCity.size()]);
+        hotCityAdapter = new HotCityAdapter(this);
         hotCityAdapter.addAll(hotCity);
 
     }
-
 
 
     private class NameAdapter extends BaseAdapter implements ListAdapter {
 
         private String mFirstLetter;
         private String mPreFirstLetter;
+
         @Override
         public int getCount() {
             return mDatas.size();
@@ -338,8 +353,7 @@ public class ChoiceCityActivity extends BaseActivity {
     }
 
 
-
-    private class NameAdapter2 extends EntityListAdapter<PlaceItemInfo,ViewHolder2> {
+    private class NameAdapter2 extends EntityListAdapter<PlaceItemInfo, ViewHolder2> {
 
         public NameAdapter2(Context context) {
             super(context);
@@ -361,13 +375,14 @@ public class ChoiceCityActivity extends BaseActivity {
 
         @Override
         protected void initViewHolder(ViewHolder2 viewHolder2, int position) {
-            if(position==0){
-                viewHolder2.initView(getItem(position),position,getItem(0));
-            }else {
+            if (position == 0) {
+                viewHolder2.initView(getItem(position), position, getItem(0));
+            } else {
                 viewHolder2.initView(getItem(position), position, getItem(position - 1));
             }
         }
     }
+
     static class ViewHolder2 extends top.smartsport.www.utils.ViewHolder {
         @ViewInject(R.id.tv_name)
         private TextView tvName;
@@ -381,7 +396,7 @@ public class ChoiceCityActivity extends BaseActivity {
             super(root);
         }
 
-        public void initView(PlaceItemInfo item,int position,PlaceItemInfo preItem) {
+        public void initView(PlaceItemInfo item, int position, PlaceItemInfo preItem) {
             mFirstLetter = String.valueOf(item.mPinyin.charAt(0));
             // 对于0号索引, 特殊处理
             if (position == 0) {
