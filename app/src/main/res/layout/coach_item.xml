@@ -7,7 +7,7 @@
     >
 
     <ImageView
-        android:id="@+id/iv_picn"
+        android:id="@+id/iv_pic"
         android:layout_width="410px"
         android:layout_height="410px"
         app:layout_auto_baseheight="width"

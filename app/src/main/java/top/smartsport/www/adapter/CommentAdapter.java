@@ -14,18 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
-import top.smartsport.www.bean.ZXInfoNews;
+import top.smartsport.www.bean.ZXInfoComment;
 import top.smartsport.www.utils.ImageUtil;
 
 /**
  * Created by zl on 2017/8/24.
  */
 
-public class ConsultAdapter extends BaseAdapter {
-    private List<ZXInfoNews> list;
-    public void setData(List<ZXInfoNews> newsList){
+public class CommentAdapter extends BaseAdapter {
+    private List<ZXInfoComment> list;
+    public void setData(List<ZXInfoComment> commentList){
         list = new ArrayList<>();
-        list.addAll(newsList);
+        list.addAll(commentList);
         notifyDataSetChanged();
     }
 
@@ -35,7 +35,7 @@ public class ConsultAdapter extends BaseAdapter {
     }
 
     @Override
-    public ZXInfoNews getItem(int i) {
+    public ZXInfoComment getItem(int i) {
         return list.get(i);
     }
 
@@ -47,37 +47,31 @@ public class ConsultAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
-        ZXInfoNews news = list.get(i);
+        ZXInfoComment comment = list.get(i);
         if (view == null){
             holder = new ViewHolder();
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.consult_list_item, viewGroup, false);
-            holder.pic = (ImageView) view.findViewById(R.id.iv_pic);
-            holder.title = (TextView) view.findViewById(R.id.tv_title);
-            holder.time = (TextView) view.findViewById(R.id.tv_date);
-            holder.action = (TextView) view.findViewById(R.id.tv_action);
-            holder.describe = (TextView) view.findViewById(R.id.tv_describe);
-            holder.read = (TextView) view.findViewById(R.id.tv_read_count);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_comment, viewGroup, false);
+            holder.pic = (ImageView) view.findViewById(R.id.iv_head_icon);
+            holder.time = (TextView) view.findViewById(R.id.tv_comment_time);
+            holder.describe = (TextView) view.findViewById(R.id.tv_comment);
+            holder.name = (TextView) view.findViewById(R.id.tv_name);
             view.setTag(holder);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(view);
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        ImageLoader.getInstance().displayImage(news.getCover_url(), holder.pic, ImageUtil.getOptions());
-        holder.title.setText(news.getTitle());
-        holder.describe.setText(news.getDescription());
-        holder.time.setText(news.getCtime());
-        holder.action.setText(news.getCate_name());
-        holder.read.setText(news.getHits());
+        ImageLoader.getInstance().displayImage(comment.getHeader_url(), holder.pic, ImageUtil.getOptions());
+        holder.name.setText(comment.getUsername());
+        holder.describe.setText(comment.getContent());
+        holder.time.setText(comment.getComment_time());
         return view;
     }
 
     class ViewHolder {
-        TextView title;
+        TextView name;
         TextView time;
-        TextView action;
         ImageView pic;
         TextView describe;
-        TextView read;
     }
 }

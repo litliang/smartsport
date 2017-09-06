@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <FrameLayout
         android:id="@+id/action_bar"
@@ -117,36 +118,36 @@
                     android:text="文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，"
                     android:layout_marginTop="@dimen/list_item_top"
                     />
-                <ImageView
-                    android:id="@+id/iv_mid1"
-                    android:layout_width="match_parent"
-                    android:layout_height="480px"
-                    android:src="@mipmap/timg"
-                    android:scaleType="fitXY"
-                    android:layout_marginTop="@dimen/list_item_top"
-                    />
-                <TextView
-                    android:id="@+id/tv_content2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，"
-                    android:layout_marginTop="@dimen/list_item_top"
-                />
-                <ImageView
-                    android:id="@+id/iv_mid2"
-                    android:layout_width="match_parent"
-                    android:layout_height="480px"
-                    android:src="@mipmap/timg"
-                    android:scaleType="fitXY"
-                    android:layout_marginTop="@dimen/list_item_top"
-                    />
-                <TextView
-                    android:id="@+id/tv_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="文章结尾。"
-                    android:layout_marginTop="@dimen/list_item_top"
-                    />
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_mid1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="480px"-->
+                    <!--android:src="@mipmap/timg"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:layout_marginTop="@dimen/list_item_top"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_content2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，文章正文内容，"-->
+                    <!--android:layout_marginTop="@dimen/list_item_top"-->
+                <!--/>-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_mid2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="480px"-->
+                    <!--android:src="@mipmap/timg"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:layout_marginTop="@dimen/list_item_top"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_end"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="文章结尾。"-->
+                    <!--android:layout_marginTop="@dimen/list_item_top"-->
+                    <!--/>-->
 
         </LinearLayout>
         <TextView
@@ -174,61 +175,17 @@
             android:textSize="@dimen/text_size"
             android:layout_marginLeft="@dimen/margin_left"
             />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/diver_color"
-            />
-        <RelativeLayout
+        <top.smartsport.www.widget.MyListView
+            android:id="@+id/lv_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_left"
-            >
-            <ImageView
-                android:id="@+id/iv_head_icon2"
-                android:layout_width="100px"
-                android:layout_height="100px"
-                app:layout_auto_baseheight="width"
-                android:src="@mipmap/tuijian_touxiang6"
-                />
-            <TextView
-                android:id="@+id/tv_name2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="评论者名字"
-                android:layout_toRightOf="@+id/iv_head_icon2"
-                android:layout_marginLeft="@dimen/margin_top"
-                android:layout_marginTop="30px"
-                android:textSize="@dimen/text_size_notice"
-                android:textColor="@color/font_main"
-                />
-            <TextView
-                android:id="@+id/tv_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="评论描述文字。评论描述文字。评论描述文字。评论描述文字。评论描述文字。评论描述文字。"
-                android:layout_alignLeft="@+id/tv_name2"
-                android:layout_below="@+id/tv_name2"
-                android:layout_marginTop="@dimen/margin_left"
-                android:textSize="@dimen/text_consult"
-                android:textColor="@color/font_gray"
-                />
-            <TextView
-                android:id="@+id/tv_comment_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2小时前"
-                android:layout_alignLeft="@+id/tv_name2"
-                android:layout_below="@+id/tv_comment"
-                android:layout_marginTop="@dimen/margin_left"
-                android:textSize="@dimen/text_consult"
-                android:textColor="@color/font_gray"
-                />
-        </RelativeLayout>
+            android:divider="@color/diver_color"
+            android:dividerHeight="0.5dp"
+            />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="@dimen/list_item_top"
             android:background="@color/diver_color"
             />
         <LinearLayout
