@@ -40,7 +40,8 @@ public class AddMemberActivity extends BaseActivity {
 
     boolean add;
     private String teamid;
-boolean saved;
+    boolean saved;
+
     @Override
     protected void initView() {
 
@@ -146,10 +147,10 @@ boolean saved;
 
     }
 
-
     @Override
-    public void finish() {
-        if(!saved){
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (!saved) {
             MapBuilder m = MapBuilder.build().add("action", "delMyTeam");
 //            if (getIntent().hasExtra("id")) {
 //                m.add("team_id", getIntent().getStringExtra("id"));
@@ -164,15 +165,21 @@ boolean saved;
                 @Override
                 public void onFailure(Object result, List object) {
 
+
                 }
 
                 @Override
                 public void onCallback(Object result, List object) {
-
+                    finish();
                 }
             });
-        }else{
+        } else {
             super.finish();
         }
+    }
+
+    @Override
+    public void finish() {
+
     }
 }

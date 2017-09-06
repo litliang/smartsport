@@ -131,13 +131,13 @@ public class BSDetailActivity extends BaseActivity {
                 });
             }
             if (states.equals("进行中")) {
-                bs_detail_baoming.setVisibility(View.GONE);//报名隐藏
+                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
                 bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
                 bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
                 adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_blue);
             }
             if (states.equals("已结束")) {
-                bs_detail_baoming.setVisibility(View.GONE);//报名隐藏
+                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
                 bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
                 bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
                 adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);

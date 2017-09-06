@@ -176,7 +176,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_contact"
+                    android:text="@string/sign_up_contact"
                     android:textColor="@android:color/black"
                     android:textSize="15dip"
                     android:layout_marginLeft="10dp"/>
@@ -243,7 +243,8 @@
                         android:enabled="false"
                         android:id="@+id/sign_up_phone_tv"
                         android:textSize="15dip"
-                        android:hint="16316491317"
+                        android:hint="12345678901"
+                        android:inputType="number"
                         android:layout_toLeftOf="@id/sign_up_phone_iv"
                         android:layout_centerVertical="true"
                         android:layout_width="wrap_content"

@@ -62,6 +62,38 @@ public class KCBActivity extends BaseActivity {
         callHttp(MapBuilder.build().add("match_id", getIntent().getStringExtra("match_id")).add("action", "getSchedule").get(), new QXFunCallback() {
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
+                List list = new ArrayList();
+                if (!result.getData().toString().equals("null")) {
+
+                    list = (List) JsonUtil.extractJsonRightValue(result.getData().toString());
+
+                }
+                count = list.size();
+
+                List<String> titles = new ArrayList<String>();
+                Map m = MapBuilder.build().add("1", "一").add("2", "二").add("3", "三").add("4", "四").add("5", "五").add("6", "六").add("7", "七").add("8", "九").add("9", "十").get();
+                listFM = new ArrayList<>();
+                Map<Integer, Object> views = new HashMap<Integer, Object>();
+                for (int i = 0; i < count; i++) {
+                    views.put(i, ((Map) list.get(i)).get("list"));
+                    titles.add("第" + m.get(i + 1 + "").toString() + "场");
+                }
+
+
+                qxzxAdapter = new ViewPagerAdapter(views, titles);
+                qx_viewpager.setAdapter(qxzxAdapter);
+
+
+                qx_tab.setViewPager(qx_viewpager);
+
+
+                if (count > 0) {
+                    findViewById(R.id.empty).setVisibility(View.GONE);
+                    qx_tab.setVisibility(View.VISIBLE);
+                } else {
+                    findViewById(R.id.empty).setVisibility(View.VISIBLE);
+                    qx_tab.setVisibility(View.GONE);
+                }
 
             }
 
@@ -72,29 +104,7 @@ public class KCBActivity extends BaseActivity {
 
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
-                List list = (List) JsonUtil.extractJsonRightValue(result.getData().toString());
-                count = list.size();
-                List<String> titles = new ArrayList<String>();
-                Map m = MapBuilder.build().add("1", "一").add("2", "二").add("3", "三").add("4", "四").add("5", "五").add("6", "六").add("7", "七").add("8", "九").add("9", "十").get();
-                listFM = new ArrayList<>();
-                Map<Integer, Object> views = new HashMap<Integer, Object>();
-                for (int i = 0; i < count; i++) {
-                    views.put(i,((Map)list.get(i)).get("list"));
-                    titles.add("第" + m.get(i + 1 + "").toString() + "场");
-                }
 
-
-
-                qxzxAdapter = new ViewPagerAdapter(views,titles);
-                qx_viewpager.setAdapter(qxzxAdapter);
-
-
-                qx_tab.setViewPager(qx_viewpager);
-                findViewById(R.id.bs_ll_choice).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
-                });
             }
         });
     }
@@ -137,15 +147,15 @@ public class KCBActivity extends BaseActivity {
         // 当要显示的图片可以进行缓存的时候，会调用这个方法进行显示图片的初始化，我们将要显示的ImageView加入到ViewGroup中，然后作为返回值返回即可
         @Override
         public Object instantiateItem(ViewGroup view, int position) {
-            if(view.getChildCount()-1==position){
+            if (view.getChildCount() - 1 == position) {
                 return view.getChildAt(position);
             }
-            View v = new ViewInflater(KCBActivity.this).inflate(R.layout.fragment_bssc,null);
+            View v = new ViewInflater(KCBActivity.this).inflate(R.layout.fragment_bssc, null);
             view.addView(v);
 
             MapConf mc = MapConf.with(view.getContext()).pair("home_name->home_name").pair("home_score->home_score").pair("home_logo->home_logo").pair("away_name->away_name").pair("away_score->away_score").pair("away_logo->away_logo").pair("start_time->start_time").source(R.layout.scb_item);
             MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.lv)).match();
-            views.put(position,v);
+            views.put(position, v);
             return v;
         }
     }
