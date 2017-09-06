@@ -1,9 +1,12 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -16,11 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.SSXWAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.News;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.bean.TokenInfo;
@@ -79,6 +84,12 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
 
         ssxwAdapter = new SSXWAdapter(getActivity());
         ptrlv.setAdapter(ssxwAdapter);
+        ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
+            }
+        });
         getData(true);
 
 

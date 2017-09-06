@@ -31,7 +31,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    >
 
 
                     <ImageView
@@ -43,7 +44,7 @@
                         android:layout_marginTop="40px"
                         android:src="@mipmap/account_set_header" />
 
-                    <TextView
+                    <TextView android:id="@+id/touxiang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -153,7 +154,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="ShowChoicebox(account_age,年龄,5->45)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -194,7 +195,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="ShowChoicebox(account_sex,性别,男-女)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -235,7 +236,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="ShowChoicebox(account_height,身高 cm,120->180,cm)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -276,7 +277,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout  android:tag="ShowChoicebox(account_weight,体重 kg,25->100,kg)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -316,7 +317,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="ShowChoicebox(account_habit,惯用脚,左脚-右脚-左右脚)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -446,7 +447,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout  android:tag="ShowChoicebox(account_ql,球龄,1->30,年)"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
                     android:background="@color/white">

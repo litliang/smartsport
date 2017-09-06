@@ -19,8 +19,8 @@
         android:layout_height="120px"
         android:layout_alignParentBottom="true"
         android:background="@color/theme_color"
-        android:textColor="@color/white"
-        android:text="添加"></Button>
+        android:text="添加"
+        android:textColor="@color/white"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,12 +52,12 @@
 
             <TextView
                 android:id="@+id/et_team_name"
-                android:minWidth="200px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@null"
+                android:minWidth="200px"
 
                 android:textColor="@color/font_main"
                 android:textSize="@dimen/text_size" />
@@ -68,11 +68,12 @@
             android:layout_height="0.5dp"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:id="@+id/weizhi_click"
+        <RelativeLayout
+            android:id="@+id/weizhi_click"
             android:layout_width="match_parent"
-
             android:layout_height="120px"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:tag="Showchoicebox(weizhi,位置,前锋-后卫-门将-后腰-边锋-边卫)">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,10 +111,12 @@
             android:layout_height="0.5dp"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:id="@+id/haoma_click"
+        <RelativeLayout
+            android:id="@+id/haoma_click"
             android:layout_width="match_parent"
             android:layout_height="120px"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:tag="Showchoicebox(weizhi,号码,1->17)">
 
             <TextView
                 android:layout_width="wrap_content"

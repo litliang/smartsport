@@ -50,7 +50,7 @@ public class Actions {
     public Actions parse(String actionGroup) {
         Actions actions = this;
         this.setActionGroup(actionGroup);
-        if (!actionGroup.contains("-")) {
+//        if (!actionGroup.contains("-")) {
             String[] g = actionGroup.split(";");
             for (String s : g) {
                 if (s == null || s.trim().equals("")) {
@@ -58,7 +58,7 @@ public class Actions {
                 }
                 actions.actions.add((Action) new Action(s).addParams(objects).setEventView(view));
             }
-        }
+//        }
         return actions;
     }
 

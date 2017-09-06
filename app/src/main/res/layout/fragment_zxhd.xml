@@ -15,7 +15,7 @@
             <include
                 layout="@layout/layout_banner"
                 android:layout_width="match_parent"
-                android:layout_height="450px"
+                android:layout_height="550px"
                 android:background="@color/white" />
             <top.smartsport.www.widget.MyListView
                 android:id="@+id/ptrlv"

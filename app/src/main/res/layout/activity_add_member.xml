@@ -30,7 +30,8 @@
             android:layout_height="0.5dp"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:tag="ShowInputbox(et_team_name,球队名称)" android:id="@+id/teamname"
+        <RelativeLayout android:tag="ShowInputbox(et_team_name,球队名称)"
+            android:id="@+id/teamname"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height"
             android:background="#ffffff"

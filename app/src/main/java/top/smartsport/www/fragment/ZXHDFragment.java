@@ -1,5 +1,6 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -19,12 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseFragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.News;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.widget.Banner;
@@ -88,11 +91,7 @@ public class ZXHDFragment extends BaseFragment{
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                BSzbInfo info = bSzbAdapter.getItem(position-1);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable(ZBDetailActivity.TAG,info);
-//                toActivity(ZBDetailActivity.class,bundle);
-//                toActivity(LeTvPlayActivity.class);
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(position)).getId() + ""));
             }
         });
 
