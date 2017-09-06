@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="320px"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="30px">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal">
+
+        android:orientation="horizontal"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -20,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/home_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130px"
+                android:layout_height="130px"
                 android:src="@drawable/ic_launcher" />
 
             <TextView
@@ -57,14 +60,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23px">
 
-                <TextView android:id="@+id/home_score"
-                    android:layout_marginLeft="90px"
+                <TextView
+                    android:id="@+id/home_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="90px"
+                    android:text="1"
                     android:textColor="@color/black"
                     android:textSize="68px"
-                    android:text="1"
                     android:textStyle="bold" />
 
                 <TextView
@@ -78,13 +82,13 @@
 
                 <TextView
                     android:id="@+id/away_score"
-                    android:paddingRight="90px"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:paddingRight="90px"
+                    android:text="2"
                     android:textColor="@color/black"
                     android:textSize="70px"
-                    android:text="2"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -109,8 +113,8 @@
 
             <ImageView
                 android:id="@+id/away_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130px"
+                android:layout_height="130px"
                 android:src="@drawable/ic_launcher" />
 
             <TextView

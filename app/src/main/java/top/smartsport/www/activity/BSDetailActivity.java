@@ -168,7 +168,8 @@ public class BSDetailActivity extends BaseActivity {
         findViewById(R.id.rl_sp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), KCBActivity.class));
+
+                startActivity(new Intent(getBaseContext(),KCBActivity.class).putExtra("match_id",id));
             }
         });findViewById(R.id.rl_sc).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +200,6 @@ public class BSDetailActivity extends BaseActivity {
                 goActivity(SJFXActivity.class);
                 break;
             case R.id.rl_sp://赛程表
-                goActivity(KCBActivity.class);
                 break;
         }
     }

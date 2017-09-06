@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevInfor>
+
+    <!-- 如果不需要支持某平台，可缺省该平台的配置 -->
+
+    <SinaWeibo
+        AppKey="1478825912"
+        AppSecret="9c6ae97db2209a2b66ad0c952be6e287"
+        RedirectUrl="微博开放平台填写的授权回调页"/>
+
+    <QQ
+        AppId="1106274178"
+        AppKey="ugoTtYudu12CqMo4"/>
+
+
+    <Wechat
+        AppId="wx5939ba19b940fea1"
+        AppSecret="9cee8335774c42ddaad7b0e74f2e7e5f"/>
+
+</DevInfor>

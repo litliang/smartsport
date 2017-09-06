@@ -41,7 +41,7 @@ public class MapConf {
     private Context context;
     private List<Integer> viewsid = new ArrayList<Integer>();
 
-    public static MapConf  with(Context context) {
+    public static MapConf with(Context context) {
         MapConf conf = build();
         conf.context = context;
         return conf;
@@ -61,21 +61,25 @@ public class MapConf {
 
     public Object item;
     private View convertView;
+
     public MapConf source(Object item, android.support.v4.app.Fragment convertView) {
         this.item = item;
         this.convertView = convertView.getView();
         return this;
     }
+
     public MapConf source(Object item, Fragment convertView) {
         this.item = item;
         this.convertView = convertView.getView();
         return this;
     }
+
     public MapConf source(Object item, Activity convertView) {
         this.item = item;
         this.convertView = convertView.getWindow().getDecorView();
         return this;
     }
+
     public MapConf source(Object item, View convertView) {
         this.item = item;
         this.convertView = convertView;
@@ -93,9 +97,20 @@ public class MapConf {
         return this;
     }
 
+    public MapConf source(int viewlayout,MapConf conf) {
+        viewlayoutid = viewlayout;
+
+        confs.put(viewlayoutid+"", conf);
+        return this;
+    }
+
     public void match() {
         if (item instanceof String) {
             item = JsonUtil.extractJsonRightValue(((String) item));
+        }
+        if (fieldnames.size() == 0 && viewsid.size() == 0) {
+            link();
+            return;
         }
         String name;
         Object value;
@@ -112,7 +127,7 @@ public class MapConf {
                 if (items.containsKey(n)) {
                     value = items.get(n);
                     if (value != null) {
-                        findAndBindView(convertView, item, name, value,i);
+                        findAndBindView(convertView, item, name, value, i);
                     }
                 }
 
@@ -121,8 +136,12 @@ public class MapConf {
         }
     }
 
+    private void link() {
+        setView(item, item, "", convertView, convertView);
+    }
+
     protected boolean findAndBindView(View convertView, Object item,
-                                      String name, Object value,int fieldpos) {
+                                      String name, Object value, int fieldpos) {
         if (value == null) {
             throw new IllegalArgumentException(
                     "check the 'value' data:ensure it is not null.thanq");
@@ -190,6 +209,11 @@ public class MapConf {
         return this;
     }
 
+    public MapConf conf(MapConf mc) {
+        confs.put("",mc);
+        return this;
+    }
+
     public static abstract class Tackle {
         public abstract void tackleBefore(Object item, Object value, String name,
                                           View convertView, View theView);
@@ -214,10 +238,12 @@ public class MapConf {
         if (tackle != null) {
             tackle.tackleBefore(item, value, name, convertView, theView);
         }
-
+        if(value!=null&&value.toString().toLowerCase().equals("null")){
+            value = "";
+        }
         if (name.toString().contains(":")) {
             String[] ns = name.toString().split(":");
-            if (!(ns[1].contains("(") && ns[1].contains(")")&&ns[1].contains("#"))) {
+            if (!(ns[1].contains("(") && ns[1].contains(")") && ns[1].contains("#"))) {
                 if (ns[1].contains("%s")) {
                     value = ns[1].replace("%s", value.toString());
                 }
