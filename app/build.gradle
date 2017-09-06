@@ -99,11 +99,16 @@ repositories {
 
 dependencies {
     compile 'com.github.Rukey7:IjkPlayerView:1+'
-    compile 'cn.jiguang.sdk:jshare:1.2.0'  // 此处以JShare 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
-    compile 'cn.jiguang.sdk:jshare-qqmodel:1.2.0'  // 此处以jshare-qqmodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
-    compile 'cn.jiguang.sdk:jshare-wechatmodel:1.2.0'  // 此处以jshare-wechatmodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
-    compile 'cn.jiguang.sdk:jshare-sinamodel:1.2.0'  // 此处以jshare-sinamodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
-    compile 'cn.jiguang.sdk:jcore:1.1.5'  // 此处以JCore 1.1.5版本为例，具体版本请参考压缩包libs的jar包版本。
+    compile 'cn.jiguang.sdk:jshare:1.2.0'
+    // 此处以JShare 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
+    compile 'cn.jiguang.sdk:jshare-qqmodel:1.2.0'
+    // 此处以jshare-qqmodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
+    compile 'cn.jiguang.sdk:jshare-wechatmodel:1.2.0'
+    // 此处以jshare-wechatmodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
+    compile 'cn.jiguang.sdk:jshare-sinamodel:1.2.0'
+    // 此处以jshare-sinamodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
+    compile 'cn.jiguang.sdk:jcore:1.1.5'
+    // 此处以JCore 1.1.5版本为例，具体版本请参考压缩包libs的jar包版本。
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -114,23 +119,25 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-        compile 'com.contrarywind:Android-PickerView:3.2.4'
+    compile 'com.contrarywind:Android-PickerView:3.2.4'
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/AMap_Location_V3.4.1_20170629.jar')
-    compile project(path:':LePlayerSkin')
-    compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4', classifier: 'jdk15'
-
+    compile project(path: ':LePlayerSkin')
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-
-    compile project(path:':autolayout')
+    compile project(path: ':autolayout')
     compile 'com.android.support:support-v4:25.0.0'
     compile project(path: ':Android-PullToRefresh')
-    compile 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
+    compile 'cn.jiguang.sdk:janalytics:1.1.1'
+    // 此处以JAnalytics 1.1.1 版本为例。
     compile files('libs/pinyin4j-2.5.0.jar')
-    compile files('libs/wechat-sdk-android-withView-mta-1.0.2.jar')
-//    compile files('libs/libammsdk.jar')
+    //    compile files('libs/libammsdk.jar')
+
+    //    compile 'net.sf.json-lib:json-lib:2.1'
+    compile files('libs/alipaySdk-20160223.jar')
+    compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
+    compile files('libs/json-lib-2.4-jdk15.jar')
 }
     configurations {
         all*.exclude group: 'commons-logging', module: 'commons-logging'
