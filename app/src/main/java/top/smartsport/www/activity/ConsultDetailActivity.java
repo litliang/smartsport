@@ -67,6 +67,9 @@ public class ConsultDetailActivity extends BaseActivity {
     private CommentAdapter adapterComment;
     @Override
     protected void initView() {
+        ivTop.setFocusable(true);
+        ivTop.setFocusableInTouchMode(true);
+        ivTop.requestFocus();
         id = getIntent().getStringExtra("id");
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
