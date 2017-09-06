@@ -10,7 +10,7 @@ import top.smartsport.www.utils.JsonUtil;
  * Created by Aaron on 2017/7/25.
  */
 
-public class BSDetail {
+public class ZXDetail {
     /** {
      "status": true,
      "errno": "0",
