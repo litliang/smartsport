@@ -123,7 +123,7 @@ class BSssViewHolder extends ViewHolder{
 //                }
 //            });
         }
-        ImageLoader.getInstance().displayImage(info.getCover(), adapter_bsss_img, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(info.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
         adapter_bsss_title.setText(info.getName());
         adapter_bsss_date.setText(info.getStart_time()+"至"+info.getEnd_time());
         adapter_bsss_address.setText(info.getAddress());

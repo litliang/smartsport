@@ -9,7 +9,8 @@
         android:layout_width="400px"
         android:layout_height="400px"
         android:layout_marginRight="30px"
-        android:src="@mipmap/login_logo" />
+        android:src="@mipmap/login_logo"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/course_name"

@@ -54,7 +54,7 @@ class ZJViewHolder extends ViewHolder{
     }
 
     public void init(ZJInfo info){
-//        ImageLoader.getInstance().displayImage(info.getPosition(), adapter_home_header, ImageUtil.getOptions());
+//        ImageLoader.getInstance().displayImage(info.getPosition(), adapter_home_header, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         adapter_home_name.setText(info.getName());
         adapter_home_content.setText(info.getPosition());
     }

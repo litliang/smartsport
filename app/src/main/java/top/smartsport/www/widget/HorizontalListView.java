@@ -54,10 +54,10 @@ import app.base.action.ItemClickAction;
 public class HorizontalListView extends AdapterView<ListAdapter> {
 
 	public static View.OnTouchListener hlv = new View.OnTouchListener() {
+			PointF downP = new PointF();
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 			// TODO Auto-generated method stub
-			PointF downP = new PointF();
 			PointF curP = new PointF();
 			int act = event.getAction();
 			if (act == MotionEvent.ACTION_DOWN) {
@@ -68,14 +68,21 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 				curP.y = event.getY();
 				curP.x = event.getX();
 			}
+			if (act == MotionEvent.ACTION_UP) {
+				downP = new PointF();
+			}
 			if (curP.x != 0 || curP.y != 0) {
 				if ((Math.abs(curP.y - downP.y)) < (Math.abs(curP.x
 						- downP.x))) {
 					((HorizontalListView) v)
 							.requestDisallowInterceptTouchEvent(true);
+				}else{
+					((HorizontalListView) v)
+							.requestDisallowInterceptTouchEvent(false);
 				}
 			}
-			return false;
+			return true;
+
 		}
 	};
 
@@ -109,9 +116,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if(viewPager!=null){
-			viewPager.requestDisallowInterceptTouchEvent(true);
-		}
+
 		boolean handled = super.dispatchTouchEvent(ev);
 		handled |= mGesture.onTouchEvent(ev);
 		return handled;
@@ -120,17 +125,13 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		if(viewPager!=null){
-			viewPager.requestDisallowInterceptTouchEvent(true);
-		}
+
 		return mGesture.onTouchEvent(ev);
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(viewPager!=null){
-			viewPager.requestDisallowInterceptTouchEvent(true);
-		}
+
 		return mGesture.onTouchEvent(event);
 	}
 	

@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.multidex.MultiDex;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -12,6 +13,8 @@ import com.lecloud.sdk.api.stats.IAppStats;
 import com.lecloud.sdk.api.stats.ICdeSetting;
 import com.lecloud.sdk.config.LeCloudPlayerConfig;
 import com.lecloud.sdk.listener.OnInitCmfListener;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.config.AutoLayoutConifg;
@@ -24,6 +27,7 @@ import java.util.List;
 import app.base.RRes;
 import app.base.framework.Init;
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
+import cn.jpush.android.api.JPushInterface;
 import top.smartsport.www.handler.CrashHandler;
 import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.SerialUtil;
@@ -35,12 +39,17 @@ import top.smartsport.www.utils.SerialUtil;
 public class BaseApplication extends Init {
     private static BaseApplication application;
     public static IWXAPI mWxApi;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        MultiDex.install(this);
 
         application = this;
+        JPushInterface.init(getBaseContext());
+        JPushInterface.setDebugMode(true);
+        JPushInterface.initCrashHandler(this);
+
         JAnalyticsInterface.init(getApplication());
         JAnalyticsInterface.initCrashHandler(this);
         JAnalyticsInterface.setDebugMode(true);
@@ -51,6 +60,8 @@ public class BaseApplication extends Init {
         ImageUtil.initImageLoader(this);
         //AutoLayout初始化
         AutoLayoutConifg.getInstance().useDeviceSize().init(this);
+
+        Bugly.init(getApplicationContext(), "7797887a18", true);
 
         mWxApi = WXAPIFactory.createWXAPI(getBaseContext(), "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
@@ -129,7 +140,7 @@ public class BaseApplication extends Init {
 
     /**
      * 乐视直播
-     * */
+     */
     public static boolean cdeInitSuccess;
 
     public static String getProcessName(Context cxt, int pid) {

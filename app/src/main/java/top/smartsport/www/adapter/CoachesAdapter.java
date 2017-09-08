@@ -53,7 +53,7 @@ class CoachesHolder extends ViewHolder{
     }
 
     public void init(Coaches info){
-        ImageLoader.getInstance().displayImage(info.getHeader_url(), coaches_img, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(info.getHeader_url(), coaches_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         coaches_name.setText(info.getName());
         coaches_dis.setText(info.getTeam_name());
 

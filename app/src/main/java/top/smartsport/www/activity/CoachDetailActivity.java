@@ -123,7 +123,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                 CoachInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),CoachInfoDetail.class);
                 List<CoachInfoCourse> course =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course",data).toString(), CoachInfoCourse.class);
                 List<Coaches> others =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach",data).toString(), Coaches.class);
-                ImageLoader.getInstance().displayImage(details.getHeader_url(), ivTop, ImageUtil.getOptions());
+                ImageLoader.getInstance().displayImage(details.getHeader_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 tvName.setText(details.getName());
                 tvTeam.setText(details.getTeam_name());
                 introduce.setText(Html.fromHtml(details.getIntroduce()));

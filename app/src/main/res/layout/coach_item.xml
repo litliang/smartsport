@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_pic"
-        android:layout_width="410px"
-        android:layout_height="410px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_auto_baseheight="width"
         android:scaleType="fitXY"
         android:src="@mipmap/timg" />

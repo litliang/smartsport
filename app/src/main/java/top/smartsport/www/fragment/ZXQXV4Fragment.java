@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
@@ -89,7 +92,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
     private MyListView fm_list_top_news;
 
     @ViewInject(R.id.scrollView)
-    private ScrollView scrollView;
+    private PullToRefreshScrollView scrollView;
     private ViewPager viewpager;
 
 
@@ -104,6 +107,18 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
 
     @Override
     protected void initView() {
+
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                getData();
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
         fm_grid_tjkc.setOnTouchListener(HorizontalListView.hlv);
         fm_grid_tjjl.setOnTouchListener(HorizontalListView.hlv);
         listview.setOnTouchListener(HorizontalListView.hlv);
@@ -216,12 +231,17 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
                 playerses = data.toListplayers(Players.class);
                 hotNewses = data.toHot(HotNews.class);
                 initBanner(carousels);
+                coursesAdapter.clear();
+                newsAdapter.clear();
+                coachesAdapter.clear();
+                playersAdapter.clear();
+                newsHotAdapter.clear();
                 coursesAdapter.addAll(courses);
                 newsAdapter.addAll(newses);
                 coachesAdapter.addAll(coaches);
                 playersAdapter.addAll(playerses);
                 newsHotAdapter.addAll(hotNewses);
-
+                scrollView.onRefreshComplete();
             }
         });
     }

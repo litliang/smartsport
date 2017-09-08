@@ -56,7 +56,7 @@ class PlayersHolder extends ViewHolder{
         super(root);
     }
     public void init(Players info){
-        ImageLoader.getInstance().displayImage(info.getCover_url(), players_img, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(info.getCover_url(), players_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         players_num.setText(info.getStage()+"\n"+"期");
         players_name.setText(info.getName());
         players_dis.setText(info.getTeam_name());

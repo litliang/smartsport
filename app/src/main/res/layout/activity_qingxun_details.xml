@@ -38,7 +38,7 @@
             <ImageView
                 android:id="@+id/details_title_iv"
                 android:layout_width="match_parent"
-                android:layout_height="550px"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"/>
 
             <TextView

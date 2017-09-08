@@ -127,7 +127,7 @@ public class SSBMActivity extends BaseActivity {
                 BMmatch bMmatch=data.toMatch(BMmatch.class);
                 BMvideo bMvideo = data.toVideo(BMvideo.class);
                 BMmyteam bMmyteam = data.toMyteam(BMmyteam.class);
-                ImageLoader.getInstance().displayImage(bMmatch.getCover(), ssbm_img_pic, ImageUtil.getOptions());
+                ImageLoader.getInstance().displayImage(bMmatch.getCover(), ssbm_img_pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 ssbm_text_title.setText(bMmatch.getName());
                 ssbm_text_time.setText(bMmatch.getStart_time());
                 ssbm_text_adress.setText(bMmatch.getCounty());

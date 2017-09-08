@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
@@ -40,7 +43,7 @@ import top.smartsport.www.xutils3.X;
 @ContentView(R.layout.fragment_zxss)
 public class ZXSSV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.mScrollView)
-    private ScrollView mScrollView;
+    private PullToRefreshScrollView mScrollView;
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
 
@@ -69,8 +72,18 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-        mScrollView.scrollTo(0,0);
+        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                getData(true);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
+        mScrollView.scrollTo(0,0);
         ptrlv.setFocusable(false);
 //        proceeds_listview = ptrlv.getRefreshableView();
 
@@ -87,7 +100,7 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((SSXWInfo) adapterView.getItemAtPosition(i)).getId() + ""));
             }
         });
         getData(true);
@@ -142,9 +155,10 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
                 carousels = data.toListcarousel(Carousel.class);
 
                 ssxwInfos= data.toListnews(SSXWInfo.class);
-
+                ssxwAdapter.clear();
                 ssxwAdapter.addAll(ssxwInfos);
                 initBanner(carousels);
+                mScrollView.onRefreshComplete();
 
             }
         });

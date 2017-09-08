@@ -67,7 +67,7 @@ public class TrainningAdapter extends BaseAdapter {
         holder.address.setText(course.getAddress());
         holder.tag.setText("U"+course.getLevel());
         holder.price.setText("¥"+course.getSell_price());
-        ImageLoader.getInstance().displayImage(course.getCover_url(), holder.pic, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(course.getCover_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         return view;
     }
 

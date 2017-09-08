@@ -34,7 +34,7 @@
         <ImageView
             android:id="@+id/bszb_detail_bszb_img"
             android:layout_width="match_parent"
-            android:layout_height="600px"
+            android:layout_height="wrap_content"
             android:src="@mipmap/aa_ting"
             android:scaleType="fitXY" />
 

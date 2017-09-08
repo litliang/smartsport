@@ -127,6 +127,7 @@ public abstract class EntityListAdapter<T, VH extends ViewHolder> implements Lis
         if (collection == null) {
             return;
         }
+
         synchronized (mLock) {
             mList.addAll(collection);
         }

@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/adapter_bsss_img"
             android:layout_width="match_parent"
-            android:layout_height="650px"
+            android:layout_height="wrap_content"
             android:src="@mipmap/aa_tim"
             android:scaleType="fitXY" />
         <TextView

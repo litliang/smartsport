@@ -59,6 +59,7 @@ public class Actions {
                 actions.actions.add((Action) new Action(s).addParams(objects).setEventView(view));
             }
 //        }
+
         return actions;
     }
 

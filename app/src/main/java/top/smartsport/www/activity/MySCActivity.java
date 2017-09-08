@@ -11,6 +11,8 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseActivity;
@@ -28,6 +30,7 @@ import top.smartsport.www.widget.PagerSlidingTabStrip;
  */
 @ContentView(R.layout.activity_mysc)
 public class MySCActivity extends BaseActivity {
+
     @ViewInject(R.id.qx_tab)
     private PagerSlidingTabStrip qx_tab;
     @ViewInject(R.id.qx_viewpager)
@@ -52,6 +55,23 @@ public class MySCActivity extends BaseActivity {
     }
 
     private void addFragment(){
+
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("type","").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
+            }
+        });
         listFM = new ArrayList<>();
         listFM.add(SCQXKTV4Fragment.newInstance());
         listFM.add(SCZXJAV4Fragment.newInstance());

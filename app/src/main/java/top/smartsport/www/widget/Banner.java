@@ -55,9 +55,11 @@ public class Banner {
         if (adapter == null && list.size() > 0) {
             adapter = new BannerAdapter(context, list);
             adapter.setOnMultiItemClickListener(listener);
+            vpBanner.removeAllViews();
             vpBanner.setAdapter(adapter);
             if (adapter.getCount() > 1) {
                 dotArray = new View[adapter.getCount() - 2];
+                llDot.removeAllViews();
                 for (int i = 0; i < adapter.getCount() - 2; i++) {
                     View dot = LayoutInflater.from(context).inflate(R.layout.layout_dot, llDot, false);
                     llDot.addView(dot);
@@ -148,6 +150,7 @@ public class Banner {
         private List<? extends BannerData> list;
         private View[] views;
         private MultiItemClickListener listener;
+
 
         public BannerAdapter(Context context, List<? extends BannerData> list) {
             if (list == null) {

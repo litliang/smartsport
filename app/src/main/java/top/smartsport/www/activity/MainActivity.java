@@ -24,6 +24,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import top.smartsport.www.H;
 import top.smartsport.www.O;
@@ -251,7 +252,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
      */
 
     private void getRegInfo(String imei) {
-        mdImei = MD5Util.encrypt(imei);
+        mdImei = MD5Util.encrypt(new Random().nextLong()+"");
         JSONObject json = new JSONObject();
         try {
             json.put("imei", imei + "");

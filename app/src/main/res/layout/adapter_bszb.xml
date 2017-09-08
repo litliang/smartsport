@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/adapter_bszb_img"
             android:layout_width="match_parent"
-            android:layout_height="650px"
+            android:layout_height="491px"
             android:src="@mipmap/aa_ting"
             android:scaleType="fitXY" />
 

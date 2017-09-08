@@ -55,7 +55,7 @@ class HDZXHoder extends ViewHolder{
     }
 
     public void init(HDZXInfo info){
-        ImageLoader.getInstance().displayImage(info.getCover_url(), news_img, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(info.getCover_url(), news_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         news_name.setText(info.getTitle());
         news_dis.setText(info.getDescription());
         news_date.setText(info.getCtime());

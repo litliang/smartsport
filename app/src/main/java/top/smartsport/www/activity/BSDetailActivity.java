@@ -234,7 +234,7 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
-                ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions());
+                ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 adapter_bsss_state.setText(states);
                 ShareParams shareParams = new ShareParams();
                 shareParams.setShareType(Platform.SHARE_TEXT);

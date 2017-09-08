@@ -13,7 +13,7 @@
             android:layout_marginTop="20px"
             android:id="@+id/adapter_bsss_img"
             android:layout_width="match_parent"
-            android:layout_height="450px"
+            android:layout_height="491px"
             android:src="@mipmap/aa_tim"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"

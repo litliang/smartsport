@@ -166,7 +166,7 @@ public class ZBDetailActivity extends BaseActivity {
             finish();
         }
 
-        ImageLoader.getInstance().displayImage(bSzbInfo.getCoverImgUrl(), bszb_detail_bszb_img, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(bSzbInfo.getCoverImgUrl(), bszb_detail_bszb_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
         bszb_detail_bszb_title.setText(bSzbInfo.getActivityName());
         bszb_detail__bszb_date.setText(bSzbInfo.getStartTime());
         bszb_detail__bszb_address.setText(bSzbInfo.getDescription());
@@ -384,8 +384,8 @@ public class ZBDetailActivity extends BaseActivity {
 
                 Data data = entity.toObj(Data.class);
                 Schedule info = data.toSchedule(Schedule.class);
-                ImageLoader.getInstance().displayImage(info.getHome_logo(), bszb_detail_a_img, ImageUtil.getOptions());
-                ImageLoader.getInstance().displayImage(info.getAway_logo(), bszb_detail_b_img, ImageUtil.getOptions());
+                ImageLoader.getInstance().displayImage(info.getHome_logo(), bszb_detail_a_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+                ImageLoader.getInstance().displayImage(info.getAway_logo(), bszb_detail_b_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
                 bszb_detail_a_name.setText(info.getHome_team());
                 bszb_detail_b_name.setText(info.getAway_team());
                 bszb_detail_num.setText(info.getRound());

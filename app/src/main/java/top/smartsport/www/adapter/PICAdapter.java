@@ -50,7 +50,7 @@ class PICViewHolder extends ViewHolder{
     }
 
     public void init(PicInfo info){
-        ImageLoader.getInstance().displayImage(info.getFileurl(), image, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(info.getFileurl(), image, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
     }
 
 }

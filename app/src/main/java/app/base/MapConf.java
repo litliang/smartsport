@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -276,7 +279,13 @@ public class MapConf {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
 
-                Glide.with(context).load(value.toString()).into((ImageView) theView);
+                Glide.with(context).load(value.toString()).into(new GlideDrawableImageViewTarget((ImageView) theView) {
+
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                        super.onResourceReady(resource, animation);
+                    }
+                });
             }
 
         } else if (theView instanceof CheckBox) {

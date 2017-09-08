@@ -63,7 +63,7 @@ public class ConsultAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        ImageLoader.getInstance().displayImage(news.getCover_url(), holder.pic, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(news.getCover_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         holder.title.setText(news.getTitle());
         holder.describe.setText(news.getDescription());
         holder.time.setText(news.getCtime());

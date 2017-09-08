@@ -46,7 +46,7 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder>{
         Coaches coach = list.get(position);
         holder.name.setText(coach.getName());
         holder.team.setText(coach.getTeam_name());
-        ImageLoader.getInstance().displayImage(coach.getHeader_url(), holder.pic, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(coach.getHeader_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

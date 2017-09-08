@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+
+def int getVer() {
+    //249 2 150 1
+    int date2017 = 247;
+    int year = Calendar.getInstance().get(Calendar.YEAR) - 2017;
+    int vercode = Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 365 * year - date2017;
+    return vercode;
+}
+
 android {
+
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
@@ -36,18 +46,19 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         compileSdkVersion 25
-        versionCode 2
+        versionCode getVer()
         versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             // 设置支持的SO库架构
-            abiFilters 'armeabi-v7a','x86'
+            abiFilters 'armeabi-v7a', 'x86','armeabi'
         }
         manifestPlaceholders = [
-                JSHARE_PKGNAME : applicationId,
-                JPUSH_APPKEY : "5d9e5476b83fc95046e1c2ba", //极光控制台创建应用得到的AppKey.
+                JPUSH_PKGNAME : "top.smartsport.www",
+                JSHARE_PKGNAME: "top.smartsport.www",
+                JPUSH_APPKEY  : "5d9e5476b83fc95046e1c2ba", //极光控制台创建应用得到的AppKey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-                TENCENT_APPID: "1106274178",//腾讯开放平台注册应用得到的appId
+                TENCENT_APPID : "1106274178",//腾讯开放平台注册应用得到的appId
         ]
         multiDexEnabled true
 
@@ -65,14 +76,16 @@ android {
 
     productFlavors {
         smartsport {
-            versionCode 2
+            versionCode = getVer()
             versionName "1.0.1"
         }
     }
 
+
+
     android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            output.outputFile = new File(output.outputFile.parent, ((variant.name.length()>4 && "www_".equals(variant.name.substring(0,4)) && Character.isDigit(variant.name.charAt(4)))?variant.name.replaceFirst("www_","").replace("Release","-Release"):variant.name.replace("Release","-Release")) + "-c-v" + variant.versionName + "-" + variant.versionCode + ".apk");
+            output.outputFile = new File(output.outputFile.parent, ((variant.name.length() > 4 && "www_".equals(variant.name.substring(0, 4)) && Character.isDigit(variant.name.charAt(4))) ? variant.name.replaceFirst("www_", "").replace("Release", "-Release") : variant.name.replace("Release", "-Release")) + "-c-v" + variant.versionName + "-" + variant.versionCode + ".apk");
         }
     }
 
@@ -98,6 +111,8 @@ repositories {
 
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.0'
+
     compile 'com.github.Rukey7:IjkPlayerView:1+'
     compile 'cn.jiguang.sdk:jshare:1.2.0'
     // 此处以JShare 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
@@ -109,6 +124,8 @@ dependencies {
     // 此处以jshare-sinamodel 1.1.1 版本为例，具体版本请参考压缩包libs的jar包版本。
     compile 'cn.jiguang.sdk:jcore:1.1.5'
     // 此处以JCore 1.1.5版本为例，具体版本请参考压缩包libs的jar包版本。
+
+    compile 'cn.jiguang.sdk:jpush:3.0.3'  // 此处以JPush 3.0.3 版本为例。
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -117,6 +134,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support:cardview-v7:25.3.0'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.contrarywind:Android-PickerView:3.2.4'
@@ -138,9 +156,17 @@ dependencies {
     compile files('libs/alipaySdk-20160223.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
     compile files('libs/json-lib-2.4-jdk15.jar')
+
+    compile 'org.xutils:xutils:3.5.0'
+
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    compile 'com.tencent.bugly:nativecrashreport:latest.release' //
 }
-    configurations {
-        all*.exclude group: 'commons-logging', module: 'commons-logging'
-        all*.exclude group: 'commons-collections', module: 'commons-collections'
-    }
+configurations {
+
+
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+    all*.exclude group: 'commons-collections', module: 'commons-collections'
+}
 build.mustRunAfter ':LePlayerSkin:build'

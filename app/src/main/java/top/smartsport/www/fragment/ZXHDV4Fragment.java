@@ -1,5 +1,6 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -7,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ScrollView;
+
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,12 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.News;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.widget.Banner;
@@ -37,7 +43,7 @@ import top.smartsport.www.xutils3.X;
 public class ZXHDV4Fragment extends BaseV4Fragment {
 
     @ViewInject(R.id.mScrollView)
-    private ScrollView mScrollView;
+    private PullToRefreshScrollView mScrollView;
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
 
@@ -66,6 +72,17 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
+        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+        @Override
+        public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+            getData(true);
+        }
+
+        @Override
+        public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+        }
+    });
         mScrollView.scrollTo(0,0);
 
         ptrlv.setFocusable(false);
@@ -86,11 +103,8 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//                BSzbInfo info = bSzbAdapter.getItem(position-1);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable(ZBDetailActivity.TAG,info);
-//                toActivity(ZBDetailActivity.class,bundle);
-//                toActivity(LeTvPlayActivity.class);
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((HDZXInfo) adapterView.getItemAtPosition(position)).getId() + ""));
+
             }
         });
 
@@ -143,9 +157,12 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
                 carousels = data.toListcarousel(Carousel.class);
 
                 hdzxInfos = data.toListnews(HDZXInfo.class);
+
+                hdzxAdapter.clear();
                 hdzxAdapter.addAll(hdzxInfos);
 
                 initBanner(carousels);
+                mScrollView.onRefreshComplete();
 
 //
             }

@@ -1,10 +1,14 @@
 package top.smartsport.www.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Environment;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -12,10 +16,12 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
@@ -65,6 +71,8 @@ public class ImageUtil {
         com.nostra13.universalimageloader.utils.L.writeLogs(false);
     }
 
+    private static ImageLoadingListener imageLoadingListener;
+
     static {
         options = new DisplayImageOptions.Builder().showImageOnLoading(R.mipmap.default_img).showImageForEmptyUri(R.mipmap.default_img)
                 .showImageOnFail(R.mipmap.default_img).cacheInMemory(true).cacheOnDisk(true).imageScaleType(ImageScaleType.EXACTLY)
@@ -87,7 +95,67 @@ public class ImageUtil {
                 .displayer(new RoundedBitmapDisplayer(10)).build();
 
         pauseScrollListener = new PauseOnScrollListener(ImageLoader.getInstance(), true, true);
+
     }
+    public static Bitmap scaleImage(Bitmap bm, int newWidth, int newHeight) {
+        if (bm == null) {
+            return null;
+        }
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,
+                true);
+        if (bm != null & !bm.isRecycled()) {
+            bm.recycle();
+            bm = null;
+        }
+        return newbm;
+    }
+
+
+    public static ImageLoadingListener getImageLoadingListener() {
+        return getImageLoadingListener(false);
+    }
+    public static ImageLoadingListener getImageLoadingListener(final boolean palignwidth) {
+
+        return new ImageLoadingListener() {
+            boolean alignviewwidth;
+            @Override
+            public void onLoadingStarted(String s, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                this.alignviewwidth = palignwidth;
+                int w = ((Activity) view.getContext()).getWindowManager().getDefaultDisplay().getWidth();
+                if (alignviewwidth) {
+                    int height = view.getWidth() * bitmap.getHeight() / bitmap.getWidth();
+                    view.getLayoutParams().height = height;
+                    view.measure(view.getWidth(),height);
+                    view.invalidate();
+                    view.requestLayout();
+                    ((ImageView) view).setImageBitmap(scaleImage(bitmap, view.getWidth(), view.getHeight()));
+
+                }
+            }
+
+            @Override
+            public void onLoadingCancelled(String s, View view) {
+
+            }
+        };
+    }
+
 
     public static DisplayImageOptions getOptions() {
         return options;

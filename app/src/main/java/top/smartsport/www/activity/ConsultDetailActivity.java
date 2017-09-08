@@ -109,7 +109,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 ZXInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),ZXInfoDetail.class);
                 List<ZXInfoNews> news =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_news",data).toString(), ZXInfoNews.class);
                 List<ZXInfoComment> coments =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments",data).toString(), ZXInfoComment.class);
-                ImageLoader.getInstance().displayImage(details.getCover_url(), ivTop, ImageUtil.getOptions());
+                ImageLoader.getInstance().displayImage(details.getCover_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 tvTitle.setText(details.getTitle());
                 tvTime.setText(details.getCtime());
                 tvAction.setText(details.getCate_name());

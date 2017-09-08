@@ -61,7 +61,7 @@ public class CommentAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        ImageLoader.getInstance().displayImage(comment.getHeader_url(), holder.pic, ImageUtil.getOptions());
+        ImageLoader.getInstance().displayImage(comment.getHeader_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         holder.name.setText(comment.getUsername());
         holder.describe.setText(comment.getContent());
         holder.time.setText(comment.getComment_time());

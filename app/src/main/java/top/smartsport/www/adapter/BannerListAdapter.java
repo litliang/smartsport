@@ -139,7 +139,7 @@ public class BannerListAdapter extends BaseAdapter {
             viewHolder.date.setText(list.get(position).getCtime());
             viewHolder.dis.setText(list.get(position).getDescription());
             viewHolder.hint.setText("阅读："+list.get(position).getHits());
-            ImageLoader.getInstance().displayImage(list.get(position).getCover_url(), viewHolder.img, ImageUtil.getOptions());
+            ImageLoader.getInstance().displayImage(list.get(position).getCover_url(), viewHolder.img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         }
 
 
