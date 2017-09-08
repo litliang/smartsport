@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -24,6 +25,8 @@ import intf.QXFunCallback;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.fragment.ScoreboardFragment;
+import top.smartsport.www.fragment.ScorerFragment;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 
 /**
@@ -37,6 +40,10 @@ public class SJFXActivity extends BaseActivity {
     private PagerSlidingTabStrip qx_tab;
     @ViewInject(R.id.qx_viewpager)
     private ViewPager qx_viewpager;
+
+    @ViewInject(R.id.empty)
+    LinearLayout mEmptyLayout;
+
     private ViewPagerAdapter qxzxAdapter;//比赛,直播adapter
     private FragmentManager fragmentManager;
 
@@ -54,17 +61,12 @@ public class SJFXActivity extends BaseActivity {
         };
     @Override
     protected void initView() {
-        final Map<Integer, Object> views = new HashMap<Integer, Object>();
         count = 3;
         back();
         int type = 0;
-        callShuju(views, type);
+//        callShuju(views, type);
+        addFragment();
 
-        qxzxAdapter = new ViewPagerAdapter(views, titles);
-        qx_viewpager.setAdapter(qxzxAdapter);
-
-
-        qx_tab.setViewPager(qx_viewpager);
     }
 
     private void callShuju(final Map<Integer, Object> views, final int type) {
@@ -72,7 +74,7 @@ public class SJFXActivity extends BaseActivity {
         callHttp(MapBuilder.build().add("match_id", getIntent().getStringExtra("mathch_id")).add("action", "viewMatchAnalysis").add("type", (type + 1) + "").get(), new QXFunCallback() {
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-
+                refreshUI(result);
             }
 
             @Override
@@ -88,6 +90,39 @@ public class SJFXActivity extends BaseActivity {
                 titles.add(finalTitle);
             }
         });
+    }
+
+    private void refreshUI(NetEntity result) {
+        List list = new ArrayList();
+        if (!result.getData().toString().equals("null")) {
+
+            list = (List) JsonUtil.extractJsonRightValue(result.getData().toString());
+
+        }
+        count = list.size();
+
+        List<String> titles = new ArrayList<String>();
+        listFM = new ArrayList<>();
+        Map<Integer, Object> views = new HashMap<Integer, Object>();
+        for (int i = 0; i < count; i++) {
+            views.put(i, ((Map) list.get(i)).get("list"));
+        }
+
+
+        qxzxAdapter = new ViewPagerAdapter(views, titles);
+        qx_viewpager.setAdapter(qxzxAdapter);
+
+
+        qx_tab.setViewPager(qx_viewpager);
+
+
+        if (count > 0) {
+            findViewById(R.id.empty).setVisibility(View.GONE);
+            qx_tab.setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.empty).setVisibility(View.VISIBLE);
+            qx_tab.setVisibility(View.GONE);
+        }
     }
 
     private class ViewPagerAdapter extends PagerAdapter {
@@ -131,13 +166,46 @@ public class SJFXActivity extends BaseActivity {
             if (view.getChildCount() - 1 == position) {
                 return view.getChildAt(position);
             }
-            View v = new ViewInflater(SJFXActivity.this).inflate(R.layout.fragment_bssc, null);
-            view.addView(v);
+            View v;
+            MapConf mc;
+            if (position == 0){
+                v = new ViewInflater(SJFXActivity.this).inflate(R.layout.fragment_scoreboard, null);
+                view.addView(v);
+                mc = MapConf.with(view.getContext()).pair("position->item_number_tv")
+                        .pair("result->item_result_tv")
+                        .pair("card->item_card_tv")
+                        .source(R.layout.adapter_scoreboard_item);
+                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scoreboard_list)).match();
+            }else{
+                v = new ViewInflater(SJFXActivity.this).inflate(R.layout.fragment_scorer, null);
+                view.addView(v);
+                mc = MapConf.with(view.getContext()).pair("position->scorer_item_number_tv").source(R.layout.adapter_scorer_item);
+                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scorer_list)).match();
+            }
 
-            MapConf mc = MapConf.with(view.getContext()).pair("home_name->home_name").pair("home_score->home_score").pair("home_logo->home_logo").pair("away_name->away_name").pair("away_score->away_score").pair("away_logo->away_logo").pair("start_time->start_time").source(R.layout.scb_item);
-            MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.lv)).match();
+//            MapConf mc = MapConf.with(view.getContext()).pair("home_name->home_name").pair("home_score->home_score").pair("home_logo->home_logo").pair("away_name->away_name").pair("away_score->away_score").pair("away_logo->away_logo").pair("start_time->start_time").source(R.layout.scb_item);
+//            MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.lv)).match();
             views.put(position, v);
             return v;
         }
+    }
+
+    private void addFragment(){
+        final Map<Integer, Object> views = new HashMap<Integer, Object>();
+        fragmentManager = getSupportFragmentManager();
+//        listFM = new ArrayList<>();
+//        listFM.add(new ScoreboardFragment());
+//        listFM.add(new ScorerFragment());
+//        listFM.add(new ScorerFragment());
+        mEmptyLayout.setVisibility(View.GONE);
+        qx_tab.setVisibility(View.VISIBLE);
+        views.put(0, new ScoreboardFragment());
+        views.put(1, new ScorerFragment());
+        views.put(2, new ScorerFragment());
+        qxzxAdapter = new ViewPagerAdapter(views, titles);
+        qx_viewpager.setAdapter(qxzxAdapter);
+
+
+        qx_tab.setViewPager(qx_viewpager);
     }
 }
