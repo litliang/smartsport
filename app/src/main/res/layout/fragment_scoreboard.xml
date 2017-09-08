@@ -33,7 +33,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/text_gray"/>
+        android:background="@color/background_gray"/>
     <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
         android:id="@+id/scoreboard_list"
         android:layout_width="match_parent"
