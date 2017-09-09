@@ -16,21 +16,50 @@ import android.widget.TextView;
 
 import com.zhy.autolayout.utils.AutoUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+
+import app.base.JsonUtil;
+import app.base.MapAdapter;
+import app.base.MapConf;
+import app.base.MapContent;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.MyOrderActivity;
 import top.smartsport.www.activity.OrderDetailsActivity;
+import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
+import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
+import top.smartsport.www.widget.MyGridView;
+import top.smartsport.www.xutils3.MyCallBack;
+import top.smartsport.www.xutils3.X;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
-public class OrderFragment extends Fragment {
+@ContentView(R.layout.fragment_list)
+public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.OnRefreshListener<ListView> {
     private static final String PAY_STATUS = "pay_status";
-    //    @BindView(R.id.id_listview)
-    ListView mlistview;
+    @ViewInject(R.id.id_listview)
+    PullToRefreshListView mlistview;
     private View mView;
-    private List<PayOrder> mList;
+    private List<Object> mList;
     private Context mContext;
     private int status;
+    private int page =1;
+    private RegInfo regInfo;
+    private TokenInfo tokenInfo;
+    private String client_id;
+    private String state;
+    private String url;
+    private String access_token;
+    private MyAdapter adapter;
+
 
     public static OrderFragment newInstance(int status) {
         Bundle args = new Bundle();
@@ -40,83 +69,139 @@ public class OrderFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             status = bundle.getInt(PAY_STATUS);
         }
+        mList= new ArrayList<>();
+        regInfo = RegInfo.newInstance();
+        tokenInfo = TokenInfo.newInstance();
+
+        client_id = regInfo.getApp_key();
+        state = regInfo.getSeed_secret();
+        url = regInfo.getSource_url();
+        access_token = tokenInfo.getAccess_token();
+        mlistview.setOnRefreshListener(this);
+        adapter = new MyAdapter(mList);
+        mlistview.getRefreshableView().setAdapter(adapter);
+        getData(true);
+    }
+//
+//    private void initView(View view) {
+//        mList = new ArrayList<>();
+//        mContext = getActivity();
+//        PayOrder order1 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 0);
+//        PayOrder order2 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 1);
+//        PayOrder order3 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 2);
+//        switch (status) {
+//            case 0:
+//                mList.add(order1);
+//                mList.add(order2);
+//                mList.add(order3);
+//                break;
+//            case 1:
+//                mList.add(order1);
+//                mList.add(order2);
+//                break;
+//            case 2:
+//                mList.add(order3);
+//                break;
+//        }
+//
+//
+//    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        page = 1;
+        getData(true);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_list, container, false);
-//        ButterKnife.bind(this,mView);
-        initView(mView);
-        return mView;
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        page ++;
+        getData(false);
     }
 
-    private void initView(View view) {
-        mList = new ArrayList<>();
-        mlistview = (ListView) view.findViewById(R.id.id_listview);
-        mContext = getActivity();
-        PayOrder order1 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 0);
-        PayOrder order2 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 1);
-        PayOrder order3 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 2);
-        switch (status) {
-            case 0:
-                mList.add(order1);
-                mList.add(order2);
-                mList.add(order3);
-                break;
-            case 1:
-                mList.add(order1);
-                mList.add(order2);
-                break;
-            case 2:
-                mList.add(order3);
-                break;
+    private void getData(final boolean refresh) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("client_id",client_id);
+            json.put("state",state);
+            json.put("access_token",access_token);
+            json.put("action","getMyOrders");
+            json.put("page",page);
+            if (status!=2){
+                json.put("pay_status",status);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        MyAdapter adapter = new MyAdapter();
-        mlistview.setAdapter(adapter);
+        X.Post(url, json, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+                showToast(message);
+                if (refresh){
+                    mlistview.onPullUpRefreshComplete();
+                }else {
+                    mlistview.onPullDownRefreshComplete();
+                }
+            }
 
+            @Override
+            public void onSuccess(NetEntity entity) {
+                if (refresh){
+                mlistview.onPullUpRefreshComplete();
+            }else {
+                    mlistview.onPullDownRefreshComplete();
+            }
+                String data = entity.getData().toString();
+                mList = (List) JsonUtil.extractJsonRightValue(entity.getData().toString());
+                adapter.setData(mList);
+                MapConf mc = MapConf.with(getContext())
+                        .pair("cover_url->iv_pic")
+                        .pair("title->tv_title")
+                        .pair("end_time->tv_date")
+                        .pair("address->tv_address")
+                        .pair("pay_total:￥%s->tv_price")
+                        .source(R.layout.list_item);
+                MapConf.with(getContext()).conf(mc).source(data, mlistview.getRefreshableView()).match();
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                super.onError(throwable, b);
+            }
+        });
     }
 
     class MyAdapter extends BaseAdapter {
-//        private List<PayOrder> list;
-//        public MyAdapter() {
-//            list = new ArrayList<PayOrder>();
-//            switch (status){
-//                case 0:
-//                    list = mList;
-//                    break;
-//                case 1:
-//                    for (PayOrder po : mList) {
-//                        if (po.status == 0 || po.status == 1) {
-//                            list.add(po);
-//                        }
-//                    }
-//                    break;
-//                case 2:
-//                    for (PayOrder po : mList) {
-//                        if (po.status == 2) {
-//                            list.add(po);
-//                        }
-//                    }
-//                    break;
-//            }
-//
-//        }
+        private List<Object> list;
 
+        public MyAdapter(List<Object> list) {
+            this.list = list;
+        }
+        public void setData(List<Object> l){
+            if (page==1){
+                this.list = l;
+            }else {
+                list = new ArrayList<>();
+                list.addAll(l);
+                notifyDataSetChanged();
+            }
+        }
         @Override
         public int getCount() {
-            return mList.size();
+            return list!=null?list.size():0;
         }
 
         @Override
         public Object getItem(int arg0) {
-            return mList.get(arg0);
+            return list.get(arg0);
         }
 
         @Override
@@ -143,19 +228,15 @@ public class OrderFragment extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
             String txt = "";
-            switch (mList.get(position).status) {
-                case 0:
-                    txt = "去支付";
-                    break;
-                case 1:
-                    txt = "审核中";
-                    break;
-                case 2:
-                    txt = "已完成";
-                    break;
-            }
-            holder.tv_Status.setBackgroundResource(mList.get(position).status == 0 ? R.drawable.shape_go_pay : R.drawable.shape_wait_pay);
-            holder.tv_Status.setTextColor(Color.parseColor(mList.get(position).status == 0 ? "#3bb862" : "#e5e5e5"));
+          if( JsonUtil.findJsonLink("pay_status",list.get(position)).toString().equals("0")) {
+              txt = "去支付";
+              holder.tv_Status.setBackgroundResource(R.drawable.shape_go_pay );
+              holder.tv_Status.setTextColor(Color.parseColor("#3bb862"));
+            }else {
+              txt = "已完成";
+              holder.tv_Status.setBackgroundResource(R.drawable.shape_wait_pay);
+              holder.tv_Status.setTextColor(Color.parseColor("#e5e5e5"));
+          }
             holder.tv_Status.setText(txt);
             holder.tv_Status.setOnClickListener(new View.OnClickListener() {
                 @Override

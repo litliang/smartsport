@@ -76,7 +76,8 @@ public class LoginActivity extends BaseActivity {
 
         TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         //获取手机imei
-        imei = tm.getDeviceId();
+//        imei = tm.getDeviceId();
+        imei = "00000012313313";
         getRegInfo(imei);
 
     }

@@ -3,6 +3,7 @@ package top.smartsport.www.fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,107 +18,89 @@ import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.adapter.NewsAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.bean.BSssInfo;
+import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.News;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
 /**
  * Created by Aaron on 2017/7/24.
- * 资讯--活动资讯
+ * 资讯--收藏
  */
 @ContentView(R.layout.fragment_sczx)
 public class SCZXV4Fragment extends BaseV4Fragment {
-    public static final String TAG = "SSFragment";
+    public static final String TAG = "SCZXV4Fragment";
     @ViewInject(R.id.pullrefreshlistview)
     PullToRefreshListView pullrefreshlistview;
+    @ViewInject(R.id.mykcempty)
+    ViewGroup empty;
+    private NewsAdapter newsAdapter;
+    private int page =1;
+    private List<News> newses;
 
-    public static SCQXKTV4Fragment newInstance() {
-        SCQXKTV4Fragment fragment = new SCQXKTV4Fragment();
+    public static SCZXV4Fragment newInstance() {
+        SCZXV4Fragment fragment = new SCZXV4Fragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
 
     }
 
-    MapAdapter mapadapter;
 
     @Override
     protected void initView() {
-        pullrefreshlistview = (PullToRefreshListView) root.findViewById(R.id.pullrefreshlistview);
-        MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
-        adaptinfo.addListviewItemLayoutId(R.layout.qingxun_qingxunkecheng);
-        adaptinfo.addViewIds(new Integer[]{R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge});
-        adaptinfo.addObjectFields(new String[]{"cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus"});
-        mapadapter = new MapAdapter(getContext(), adaptinfo) {
-            @Override
-            protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
-                if (name.equals("level")) {
-                    value = "U" + value;
-                } else if (name.equals("sell_price")) {
-                    value = "￥" + value.toString().replace(".00", "") + "/年";
-                } else if (name.equals("surplus")) {
-
-                    if (value.toString().equals("0")) {
-                        convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.GONE);
-                        Drawable drawable = context.getResources().getDrawable(R.mipmap.yibaoman, null);
-                        convertView.findViewById(R.id.woyaobaoming).setBackground(drawable);
-                        ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.text_hint,null));
-
-                    } else {
-                        convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.VISIBLE);
-                        Drawable drawable = context.getResources().getDrawable(R.drawable.shape_bg_round_corner_green, null);
-                        convertView.findViewById(R.id.woyaobaoming).setBackground(drawable);
-                        ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.theme_color,null));
-                    }
-                    value = "还剩" + value + "个名额";
-                }
-                super.findAndBindView(convertView, pos, item, name, value);
-
-                return true;
-            }
-        };
-//        reload(mapadapter);
-        pullrefreshlistview.getFooterLoadingLayout().setVisibility(View.GONE);
+        newsAdapter = new NewsAdapter(getActivity());
+        pullrefreshlistview.getRefreshableView().setAdapter(newsAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                reload(mapadapter);
+                page =1;
+                reload(true);
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                page ++;
+                reload(false);
             }
         });
-
+        reload(true);
     }
 
-    private void reload(final MapAdapter mapadapter) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").get(), new FunCallback<NetEntity, String, NetEntity>() {
+    private void reload(final boolean refresh) {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 4).get(), new FunCallback<NetEntity, String, NetEntity>() {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-
+                if (refresh){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
+                empty.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String result, List<Object> object) {
-
+                if (refresh){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
             }
 
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
-                pullrefreshlistview.onPullDownRefreshComplete();
                 String data = result.getData().toString();
-                List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
-                mapadapter.setItemDataSrc(new MapContent(list));
-                pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
-                mapadapter.notifyDataSetChanged();
-
-
+                String newDate  = data.replace("null,","");
+                newses =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("news",newDate).toString(), News.class);
+                newsAdapter.addAll(newses);
             }
         });
     }

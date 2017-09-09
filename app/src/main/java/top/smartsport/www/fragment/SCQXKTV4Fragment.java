@@ -3,15 +3,18 @@ package top.smartsport.www.fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.base.MapAdapter;
+import app.base.MapConf;
 import app.base.MapContent;
 import intf.FunCallback;
 import intf.JsonUtil;
@@ -31,6 +34,10 @@ import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 public class SCQXKTV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.pullrefreshlistview)
     PullToRefreshListView pullrefreshlistview;
+    @ViewInject(R.id.mykcempty)
+    ViewGroup empty;
+    private List mList;
+    private int page =1;
 
     public static SCQXKTV4Fragment newInstance() {
         SCQXKTV4Fragment fragment = new SCQXKTV4Fragment();
@@ -77,29 +84,31 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
                 return true;
             }
         };
-//        reload(mapadapter);
+        reload(mapadapter);
         pullrefreshlistview.getFooterLoadingLayout().setVisibility(View.GONE);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                page = 1;
                 reload(mapadapter);
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                page++;
+                reload(mapadapter);
             }
         });
 
     }
 
     private void reload(final MapAdapter mapadapter) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").get(), new FunCallback<NetEntity, String, NetEntity>() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 1).get(), new FunCallback<NetEntity, String, NetEntity>() {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-
+                empty.setVisibility(View.GONE);
             }
 
             @Override
@@ -109,14 +118,18 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
-                pullrefreshlistview.onPullDownRefreshComplete();
+                if (page ==1) {
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                    mList = new ArrayList();
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
                 String data = result.getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
-                mapadapter.setItemDataSrc(new MapContent(list));
+                mList.addAll(list);
+                mapadapter.setItemDataSrc(new MapContent(mList));
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
                 mapadapter.notifyDataSetChanged();
-
-
             }
         });
     }

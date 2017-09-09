@@ -3,6 +3,7 @@ package top.smartsport.www.fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,7 +32,8 @@ import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 public class MYQXKTV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.pullrefreshlistview)
     PullToRefreshListView pullrefreshlistview;
-
+    @ViewInject(R.id.mykcempty)
+    ViewGroup empty;
     public static MYQXKTV4Fragment newInstance() {
         MYQXKTV4Fragment fragment = new MYQXKTV4Fragment();
         Bundle bundle = new Bundle();
@@ -77,7 +79,7 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                 return true;
             }
         };
-//        reload(mapadapter);
+        reload(mapadapter);
         pullrefreshlistview.getFooterLoadingLayout().setVisibility(View.GONE);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -99,7 +101,7 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-
+                    empty.setVisibility(View.GONE);
             }
 
             @Override

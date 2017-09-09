@@ -6,10 +6,11 @@
     <!--<top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView android:id="@+id/pullrefreshlistview"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent">-->
-    <FrameLayout
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/pullrefreshlistview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
                 android:id="@+id/rumenjigrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:numColumns="2"
                 android:scrollbars="none" />
 
             <TextView
@@ -44,6 +46,7 @@
                 android:id="@+id/chujigrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:numColumns="2"
                 android:scrollbars="none" />
 
             <TextView
@@ -59,15 +62,18 @@
                 android:id="@+id/zhongjigrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:numColumns="2"
                 android:scrollbars="none" />
 
         </LinearLayout>
-    </FrameLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
     <!--</top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView>-->
     <RelativeLayout
         android:id="@+id/mykcempty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        >
 
         <TextView android:visibility="invisible"
             android:id="@+id/gojoinlesson"
@@ -111,4 +117,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
 </RelativeLayout>

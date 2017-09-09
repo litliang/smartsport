@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
@@ -54,9 +55,9 @@ public class MyOrderActivity extends BaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         go = (Button) findViewById(R.id.btn_go);
         list = new ArrayList<Fragment>();
+        list.add(OrderFragment.newInstance(2));
         list.add(OrderFragment.newInstance(0));
         list.add(OrderFragment.newInstance(1));
-        list.add(OrderFragment.newInstance(2));
         Log.e("list", list.size() + "---");
         MyPagerAdapter mAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);

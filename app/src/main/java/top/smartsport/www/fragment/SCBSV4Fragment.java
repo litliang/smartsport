@@ -1,11 +1,17 @@
 package top.smartsport.www.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -17,109 +23,172 @@ import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.BSDetailActivity;
+import top.smartsport.www.activity.BSDetailBMActivity;
+import top.smartsport.www.adapter.BSssAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.bean.BSssInfo;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.bean.ZXInfoDetail;
+import top.smartsport.www.bean.ZXInfoNews;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
+import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.xutils3.MyCallBack;
+import top.smartsport.www.xutils3.X;
 
 /**
  * Created by Aaron on 2017/7/13.
  * 比赛
  */
-@ContentView(R.layout.fragment_scss)
+@ContentView(R.layout.fragment_bs)
 public class SCBSV4Fragment extends BaseV4Fragment {
-    public static final String TAG = "SSFragment";
-    @ViewInject(R.id.pullrefreshlistview)
-    PullToRefreshListView pullrefreshlistview;
+    private int page;
+    @ViewInject(R.id.ptrlv)
+    private PullToRefreshListView ptrlv;
+    @ViewInject(R.id.tvHint)
+    private TextView tvHint;
 
-    public static SCQXKTV4Fragment newInstance() {
-        SCQXKTV4Fragment fragment = new SCQXKTV4Fragment();
+    private BSssAdapter bSssAdapter;
+    private List<BSssInfo> bSssInfoList;
+
+    private RegInfo regInfo;
+    private TokenInfo tokenInfo;
+
+    private String client_id;
+    private String state;
+    private String url;
+    private String access_token;
+
+    public static SCBSV4Fragment newInstance() {
+        SCBSV4Fragment fragment = new SCBSV4Fragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
-
     }
 
-    MapAdapter mapadapter;
 
     @Override
     protected void initView() {
-        pullrefreshlistview = (PullToRefreshListView) root.findViewById(R.id.pullrefreshlistview);
-        MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
-        adaptinfo.addListviewItemLayoutId(R.layout.qingxun_qingxunkecheng);
-        adaptinfo.addViewIds(new Integer[]{R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge});
-        adaptinfo.addObjectFields(new String[]{"cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus"});
-        mapadapter = new MapAdapter(getContext(), adaptinfo) {
+        regInfo = RegInfo.newInstance();
+        tokenInfo = TokenInfo.newInstance();
+
+        client_id = regInfo.getApp_key();
+        state = regInfo.getSeed_secret();
+        url = regInfo.getSource_url();
+        access_token = tokenInfo.getAccess_token();
+
+        bSssAdapter = new BSssAdapter(getActivity());
+        ptrlv = (PullToRefreshListView) root.findViewById(R.id.ptrlv);
+        ptrlv.getRefreshableView().setAdapter(bSssAdapter);
+        ptrlv.setOnRefreshListener(new top.smartsport.www.listview_pulltorefresh.PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
-                if (name.equals("level")) {
-                    value = "U" + value;
-                } else if (name.equals("sell_price")) {
-                    value = "￥" + value.toString().replace(".00", "") + "/年";
-                } else if (name.equals("surplus")) {
+            public void onPullDownToRefresh(top.smartsport.www.listview_pulltorefresh.PullToRefreshBase<ListView> refreshView) {
+                getData(true);
+                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
-                    if (value.toString().equals("0")) {
-                        convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.GONE);
-                        Drawable drawable = context.getResources().getDrawable(R.mipmap.yibaoman, null);
-                        convertView.findViewById(R.id.woyaobaoming).setBackground(drawable);
-                        ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.text_hint,null));
-
-                    } else {
-                        convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.VISIBLE);
-                        Drawable drawable = context.getResources().getDrawable(R.drawable.shape_bg_round_corner_green, null);
-                        convertView.findViewById(R.id.woyaobaoming).setBackground(drawable);
-                        ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.theme_color,null));
-                    }
-                    value = "还剩" + value + "个名额";
-                }
-                super.findAndBindView(convertView, pos, item, name, value);
-
-                return true;
-            }
-        };
-//        reload(mapadapter);
-        pullrefreshlistview.getFooterLoadingLayout().setVisibility(View.GONE);
-        pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                reload(mapadapter);
-
+                // Update the LastUpdatedLabel
+                refreshView.getHeaderLoadingLayout().setLastUpdatedLabel(label);
             }
 
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onPullUpToRefresh(top.smartsport.www.listview_pulltorefresh.PullToRefreshBase<ListView> refreshView) {
+                getData(false);
+                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
+                // Update the LastUpdatedLabel
+                refreshView.getFooterLoadingLayout().setLastUpdatedLabel(label);
             }
         });
+        ptrlv.getRefreshableView().setDivider(new ColorDrawable(Color.parseColor("#F2F2F2")));
+        ptrlv.getRefreshableView().setDividerHeight(20);
+        ptrlv.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                BSssInfo info = bSssAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(BSDetailActivity.TAG, info.getId());
+                bundle.putString("states", info.getStatus());
+                if(info.getStatus().equals("报名中")){
+                    toActivity(BSDetailBMActivity.class, bundle);
+                }else {
+                    toActivity(BSDetailActivity.class, bundle);
+                }
+            }
+        });
+        getData(true);
+
 
     }
 
-    private void reload(final MapAdapter mapadapter) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").get(), new FunCallback<NetEntity, String, NetEntity>() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        getData(true);
+    }
 
+    /**
+     * 获取数据接口
+     */
+    private void getData(final boolean refresh) {
+        if (refresh) {
+            page = 1;
+        } else {
+            page++;
+        }
+        JSONObject json = new JSONObject();
+        try {
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "getMyCollection");
+            json.put("page", page);
+            json.put("type", 3);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        X.Post(url, json, new MyCallBack<String>() {
             @Override
-            public void onSuccess(NetEntity result, List<Object> object) {
+            protected void onFailure(String message) {
+                showToast(message);
+                if (refresh) {
+                    ptrlv.onPullDownRefreshComplete();
 
+                } else {
+                    ptrlv.onPullUpRefreshComplete();
+                }
             }
 
             @Override
-            public void onFailure(String result, List<Object> object) {
+            public void onSuccess(NetEntity entity) {
+                if (refresh) {
+                    ptrlv.onPullDownRefreshComplete();
 
-            }
+                } else {
+                    ptrlv.onPullUpRefreshComplete();
+                }
+                String data = entity.getData().toString();
+                bSssInfoList =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("matches",data).toString(), BSssInfo.class);
 
-            @Override
-            public void onCallback(NetEntity result, List<Object> object) {
-                pullrefreshlistview.onPullDownRefreshComplete();
-                String data = result.getData().toString();
-                List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
-                mapadapter.setItemDataSrc(new MapContent(list));
-                pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
-                mapadapter.notifyDataSetChanged();
-
+                if (refresh) {
+                    bSssAdapter.clear();
+                } else {
+                    if (bSssInfoList.size() == 0) {
+                        return;
+                    }
+                }
+                bSssAdapter.addAll(bSssInfoList);
 
             }
         });
+
     }
 
 

@@ -3,67 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--<top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView android:id="@+id/pullrefreshlistview"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <FrameLayout
+    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
+        android:id="@+id/pullrefreshlistview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
-                android:layout_marginTop="20px"
-                android:text="入门级"
-                android:textColor="@color/black"
-                android:textSize="58px" />
-
-            <top.smartsport.www.widget.MyGridView
-                android:id="@+id/rumenjigrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
-                android:layout_marginTop="20px"
-                android:text="初级"
-                android:textColor="@color/black"
-                android:textSize="58px" />
-
-            <top.smartsport.www.widget.MyGridView
-                android:id="@+id/chujigrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40px"
-                android:layout_marginTop="20px"
-                android:text="中级"
-                android:textColor="@color/black"
-                android:textSize="58px" />
-
-            <top.smartsport.www.widget.MyGridView
-                android:id="@+id/zhongjigrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
-
-        </LinearLayout>
-    </FrameLayout>
-    <!--</top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView>-->
+        android:layout_height="match_parent"></top.smartsport.www.listview_pulltorefresh.PullToRefreshListView>
     <RelativeLayout
         android:id="@+id/mykcempty"
         android:layout_width="match_parent"

@@ -55,23 +55,6 @@ public class MySCActivity extends BaseActivity {
     }
 
     private void addFragment(){
-
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("type","").get(), new FunCallback() {
-            @Override
-            public void onSuccess(Object result, List object) {
-
-            }
-
-            @Override
-            public void onFailure(Object result, List object) {
-
-            }
-
-            @Override
-            public void onCallback(Object result, List object) {
-
-            }
-        });
         listFM = new ArrayList<>();
         listFM.add(SCQXKTV4Fragment.newInstance());
         listFM.add(SCZXJAV4Fragment.newInstance());
