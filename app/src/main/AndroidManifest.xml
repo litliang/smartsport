@@ -481,7 +481,14 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
-
+        <!-- 数据分析-->
+        <activity
+            android:name=".activity.ActivityDataAnalysis"
+            android:label="数据分析" />
+        <!-- 在线视频 -->
+        <activity
+            android:name=".activity.ActivityOnLineVideo"
+            android:label="在线视频" />
     </application>
 
 </manifest>

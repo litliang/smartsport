@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="analysis_tab_value">
+        <item>积分榜</item>
+        <item>射手榜</item>
+        <item>助攻榜</item>
+    </string-array>
+</resources>

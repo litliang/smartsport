@@ -68,6 +68,27 @@
     <string name="picture_save_fail">保存图片失败</string>
     <string name="picture_next_album">下一组：</string>
     <string name="picture_previous_album">上一组：</string>
+    
+    <!-- 数据分析页面 strings -->
+    <string name="data_analysis">数据分析</string>
+    <string name="data_analysis_scoreboard">积分榜</string>
+    <string name="data_analysis_scorer">射手榜</string>
+    <string name="data_analysis_assist">助攻榜</string>
+
+    <!-- 积分榜 strings -->
+    <string name="scoreboard_team">球队</string>
+    <string name="scoreboard_result">胜/平/负</string>
+    <string name="scoreboard_scored">进/失球</string>
+    <string name="scoreboard_card">红黄牌</string>
+    <string name="scoreboard_score">积分</string>
+
+    <!-- 射手榜 strings -->
+    <string name="scorer_member">球员</string>
+    <string name="scorer_in">进球</string>
 
 
+    <!-- 在线视频 strings -->
+    <string name="online_video_title">在线视频</string>
+    <string name="online_video_all">全部视频</string>
+    <string name="online_video_watched">观看</string>
 </resources>

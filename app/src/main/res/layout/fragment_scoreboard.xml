@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/bg_gray">
+        <TextView
+            style="@style/scoreboard_title_tv_style"
+            android:layout_weight="2.2"
+            android:text="@string/scoreboard_team" />
+        <TextView
+            style="@style/scoreboard_title_tv_style"
+            android:layout_weight="1.5"
+            android:text="@string/scoreboard_result" />
+        <TextView
+            style="@style/scoreboard_title_tv_style"
+            android:layout_weight="1"
+            android:text="@string/scoreboard_scored" />
+        <TextView
+            style="@style/scoreboard_title_tv_style"
+            android:layout_weight="1"
+            android:text="@string/scoreboard_card" />
+        <TextView
+            style="@style/scoreboard_title_tv_style"
+            android:layout_weight="1"
+            android:text="@string/scoreboard_score" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_gray"/>
+    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
+        android:id="@+id/scoreboard_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/bg_gray"
+        android:dividerHeight="20px"
+        android:scrollbars="none" />
+</LinearLayout>
