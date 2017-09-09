@@ -302,6 +302,7 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:text="@string/sign_up_pay"
+        android:gravity="center"
         android:textColor="@android:color/white"
         android:background="@android:color/holo_red_light"
         android:textSize="17sp"/>

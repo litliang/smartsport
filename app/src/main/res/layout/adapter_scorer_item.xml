@@ -11,6 +11,7 @@
         style="@style/scoreboard_title_tv_style"
         android:layout_weight="0.8"
         android:textColor="@color/text_gray"
+        android:textSize="14sp"
         android:text="1" />
     <LinearLayout
         android:layout_width="0dp"
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
+            android:textSize="14sp"
             android:text="球员名字" />
     </LinearLayout>
     <TextView
@@ -36,11 +38,13 @@
         android:layout_weight="2"
         android:textColor="@color/text_gray"
         android:gravity="left|center_vertical"
+        android:textSize="14sp"
         android:text="球队名字" />
     <TextView
         android:id="@+id/scorer_item_score_tv"
         style="@style/scoreboard_title_tv_style"
         android:layout_weight="1"
         android:textColor="@color/text_gray"
+        android:textSize="14sp"
         android:text="13" />
 </LinearLayout>

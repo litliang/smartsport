@@ -1,7 +1,6 @@
 package top.smartsport.www.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
@@ -29,7 +28,7 @@ import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
 public class ScoreboardFragment extends Fragment {
 
-//    @ViewInject(R.id.scoreboard_list)
+    @ViewInject(R.id.scoreboard_list)
     PullToRefreshListView  mList;
 
     private Activity mThis;
@@ -103,8 +102,6 @@ public class ScoreboardFragment extends Fragment {
         }
         mList.onPullDownRefreshComplete();
         mList.onPullUpRefreshComplete();
-//        scoreboardAdapter = new ScoreboardAdapter(mThis, list);
-//        mList.getRefreshableView().setAdapter(scoreboardAdapter);
         scoreboardAdapter.clear();
         scoreboardAdapter.addAll(list);
     }

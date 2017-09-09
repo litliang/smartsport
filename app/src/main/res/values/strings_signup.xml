@@ -47,4 +47,12 @@
     <string name="about_email_address">邮件地址</string>
     <string name="about_service_agreement">服务协议</string>
     <string name="about_copyright">数苗足球有限公司版权所有</string>
+    
+    <!-- BiSai 报名-->
+    <string name="bs_sign_up_title">比赛报名</string>
+    <string name="bs_buy_video">购买定制视频</string>
+    <string name="bs_team">报名球队</string>
+    <string name="bs_member">参赛队员</string>
+    <string name="bs_team_hint">球队名字</string>
+
 </resources>
