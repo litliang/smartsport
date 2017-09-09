@@ -86,4 +86,9 @@
     <string name="scorer_member">球员</string>
     <string name="scorer_in">进球</string>
 
+
+    <!-- 在线视频 strings -->
+    <string name="online_video_title">在线视频</string>
+    <string name="online_video_all">全部视频</string>
+    <string name="online_video_watched">观看</string>
 </resources>
