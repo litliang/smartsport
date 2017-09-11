@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content"
+                android:paddingBottom="10dip"
+    >
     <TextView
         android:id="@+id/tv_head"
         android:layout_width="wrap_content"
@@ -65,8 +67,11 @@
     <View android:layout_width="match_parent" android:layout_height="0.8dip" android:background="@color/text_hint"/>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="40dip">
         <top.smartsport.www.widget.RoundImageView android:id="@+id/coach_head" android:layout_marginLeft="10dip" android:layout_height="25dip" android:layout_width="25dip" android:layout_centerVertical="true"
+            android:src="@mipmap/tuijian_touxiang6"
         />
-        <TextView android:layout_width="wrap_content" android:layout_marginLeft="10dip" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/coach_head" android:id="@+id/coach_name"/>
+        <TextView android:layout_width="wrap_content" android:layout_marginLeft="10dip" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toRightOf="@+id/coach_head" android:id="@+id/coach_name"
+            android:text="？？？"
+            />
         <TextView android:layout_width="wrap_content" android:layout_marginRight="10dip" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_alignParentRight="true" android:id="@+id/woyaobaoming"
         android:background="@drawable/shape_bg_round_corner_green"  android:text="我要报名" android:textColor="@color/theme_color"
         android:paddingLeft="8dip" android:paddingRight="8dip" android:paddingTop="2dip" android:paddingBottom="2dip"/>
@@ -88,7 +93,7 @@
             android:textSize="19dip"
             android:layout_margin="10dip"
             />
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="80px"
                 android:orientation="horizontal"
@@ -100,15 +105,18 @@
                     android:text="耐力"
                     android:textColor="@android:color/darker_gray"
                     android:layout_marginLeft="70dip"
+                    android:layout_centerVertical="true"
                     />
                 <LinearLayout
                     android:id="@+id/ll_nl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="120dip"
+                    android:layout_centerVertical="true"
                     android:orientation="horizontal">
                 </LinearLayout>
-            </LinearLayout>
-        <LinearLayout
+            </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"
@@ -119,16 +127,19 @@
                 android:layout_height="wrap_content"
                 android:text="爆发力"
                 android:textColor="@android:color/darker_gray"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="70dip"
                 />
             <LinearLayout
                 android:id="@+id/ll_bfl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="120dip"
+                android:layout_centerVertical="true"
                 android:orientation="horizontal">
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"
@@ -139,16 +150,19 @@
                 android:layout_height="wrap_content"
                 android:text="技术"
                 android:textColor="@android:color/darker_gray"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="70dip"
                 />
             <LinearLayout
                 android:id="@+id/ll_js"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="120dip"
                 android:orientation="horizontal">
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"
@@ -159,16 +173,19 @@
                 android:layout_height="wrap_content"
                 android:text="合作"
                 android:textColor="@android:color/darker_gray"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="70dip"
                 />
             <LinearLayout
                 android:id="@+id/ll_hz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="120dip"
                 android:orientation="horizontal">
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80px"
             android:orientation="horizontal"
@@ -179,15 +196,18 @@
                 android:layout_height="wrap_content"
                 android:text="速度"
                 android:textColor="@android:color/darker_gray"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="70dip"
                 />
             <LinearLayout
                 android:id="@+id/ll_sd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="120dip"
                 android:orientation="horizontal">
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height">
@@ -198,8 +218,11 @@
                 android:layout_width="50dip"
                 android:layout_marginTop="10dip"
                 android:layout_centerVertical="true"
+                android:src="@mipmap/tuijian_touxiang6"
                 />
-            <TextView android:layout_width="wrap_content" android:layout_marginLeft="70dip" android:layout_height="wrap_content" android:layout_centerVertical="true" android:id="@+id/coach_name2" android:text="11111"/>
+            <TextView android:layout_width="wrap_content" android:layout_marginLeft="70dip" android:layout_height="wrap_content" android:layout_centerVertical="true" android:id="@+id/coach_name2" android:text="？？？"
+                android:textColor="@android:color/darker_gray"
+                />
         </RelativeLayout>
         <TextView
             android:id="@+id/content"
@@ -209,7 +232,7 @@
             android:layout_marginTop="10dip"
             android:layout_marginRight="25dip"
             android:textColor="@android:color/darker_gray"
+            android:text="？？？"
             />
     </LinearLayout>
-    <View android:layout_width="match_parent" android:layout_height="12dip" android:background="@color/line_color"/>
 </LinearLayout>
