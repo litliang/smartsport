@@ -78,12 +78,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-                if (refresh){
-                    pullrefreshlistview.onPullDownRefreshComplete();
-                }else {
-                    pullrefreshlistview.onPullUpRefreshComplete();
-                }
-                empty.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -100,6 +95,17 @@ public class SCZXV4Fragment extends BaseV4Fragment {
                 String data = result.getData().toString();
                 String newDate  = data.replace("null,","");
                 newses =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("news",newDate).toString(), News.class);
+                if (refresh){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                    if(newses !=null && newses.size()> 0){
+                        empty.setVisibility(View.GONE);
+                    }else {
+                        empty.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
+                empty.setVisibility(View.GONE);
                 newsAdapter.addAll(newses);
             }
         });

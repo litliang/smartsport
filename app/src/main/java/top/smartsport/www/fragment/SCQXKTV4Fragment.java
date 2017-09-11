@@ -108,7 +108,6 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-                empty.setVisibility(View.GONE);
             }
 
             @Override
@@ -126,6 +125,14 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
                 }
                 String data = result.getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
+                if (page==1){
+                    if (!(list.size()>0)){
+                        empty.setVisibility(View.GONE);
+                        return;
+                    }
+                }else {
+                        empty.setVisibility(View.GONE);
+                }
                 mList.addAll(list);
                 mapadapter.setItemDataSrc(new MapContent(mList));
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);

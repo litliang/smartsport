@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,13 +46,13 @@ import top.smartsport.www.xutils3.X;
  * Created by Aaron on 2017/7/13.
  * 比赛
  */
-@ContentView(R.layout.fragment_bs)
+@ContentView(R.layout.fragment_scss)
 public class SCBSV4Fragment extends BaseV4Fragment {
     private int page;
     @ViewInject(R.id.ptrlv)
     private PullToRefreshListView ptrlv;
-    @ViewInject(R.id.tvHint)
-    private TextView tvHint;
+    @ViewInject(R.id.mykcempty)
+    private ViewGroup empty;
 
     private BSssAdapter bSssAdapter;
     private List<BSssInfo> bSssInfoList;
@@ -130,7 +131,7 @@ public class SCBSV4Fragment extends BaseV4Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getData(true);
+//        getData(true);
     }
 
     /**
@@ -176,9 +177,13 @@ public class SCBSV4Fragment extends BaseV4Fragment {
                 }
                 String data = entity.getData().toString();
                 bSssInfoList =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("matches",data).toString(), BSssInfo.class);
-
                 if (refresh) {
                     bSssAdapter.clear();
+                    if (bSssInfoList.size()>0){
+                        empty.setVisibility(View.GONE);
+                    }else {
+                        empty.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     if (bSssInfoList.size() == 0) {
                         return;

@@ -40,6 +40,8 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
     private static final String PAY_STATUS = "pay_status";
     @ViewInject(R.id.id_listview)
     PullToRefreshListView mlistview;
+    @ViewInject(R.id.mykcempty)
+    ViewGroup empty;
     private View mView;
     private List<Object> mList;
     private Context mContext;
@@ -84,29 +86,6 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
         getData(true);
     }
 //
-//    private void initView(View view) {
-//        mList = new ArrayList<>();
-//        mContext = getActivity();
-//        PayOrder order1 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 0);
-//        PayOrder order2 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 1);
-//        PayOrder order3 = new PayOrder("比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题，比赛活动标题", "2017-05-28", "上海市虹口体育馆", "¥1999/年", 2);
-//        switch (status) {
-//            case 0:
-//                mList.add(order1);
-//                mList.add(order2);
-//                mList.add(order3);
-//                break;
-//            case 1:
-//                mList.add(order1);
-//                mList.add(order2);
-//                break;
-//            case 2:
-//                mList.add(order3);
-//                break;
-//        }
-//
-//
-//    }
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -147,13 +126,19 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
 
             @Override
             public void onSuccess(NetEntity entity) {
-                if (refresh){
-                mlistview.onPullUpRefreshComplete();
-            }else {
-                    mlistview.onPullDownRefreshComplete();
-            }
                 String data = entity.getData().toString();
                 mList = (List) JsonUtil.extractJsonRightValue(entity.getData().toString());
+                if (refresh){
+                    mlistview.onPullUpRefreshComplete();
+                    if (mList !=null &&mList.size()>0){
+                        empty.setVisibility(View.GONE);
+                    }else {
+                        empty.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    mlistview.onPullDownRefreshComplete();
+                }
+
                 adapter.setData(mList);
                 MapConf mc = MapConf.with(getContext())
                         .pair("cover_url->iv_pic")
