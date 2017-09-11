@@ -169,19 +169,37 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity result, List<Object> object) {
-                    empty.setVisibility(View.GONE);
+
             }
 
             @Override
             public void onFailure(String result, List<Object> object) {
-
+                if (page == 1){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                }else{
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
             }
 
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
-                pullrefreshlistview.onPullDownRefreshComplete();
                 String data = result.getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(data);
+                if (page == 1){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                    if (list!=null && list.size()>0){
+                        empty.setVisibility(View.GONE);
+                    }else {
+                        empty.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                    if (list!=null && list.size()>0){
+                        empty.setVisibility(View.GONE);
+                    }else {
+                        return;
+                    }
+                }
                 mapadapter.setItemDataSrc(new MapContent(list));
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
                 mapadapter.notifyDataSetChanged();

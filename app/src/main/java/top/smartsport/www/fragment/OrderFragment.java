@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +19,12 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import app.base.JsonUtil;
-import app.base.MapAdapter;
 import app.base.MapConf;
-import app.base.MapContent;
 import top.smartsport.www.R;
-import top.smartsport.www.activity.MyOrderActivity;
 import top.smartsport.www.activity.OrderDetailsActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
@@ -34,13 +32,8 @@ import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
-import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
 
 @ContentView(R.layout.fragment_list)
 public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.OnRefreshListener<ListView> {
@@ -259,20 +252,4 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
         ImageView ivPic;
     }
 
-    private class PayOrder {
-        public String title;
-        public String date;
-        public String address;
-        public String price;
-        public int status;
-
-
-        public PayOrder(String title, String date, String address, String price, int status) {
-            this.title = title;
-            this.date = date;
-            this.address = address;
-            this.price = price;
-            this.status = status;
-        }
-    }
 }
