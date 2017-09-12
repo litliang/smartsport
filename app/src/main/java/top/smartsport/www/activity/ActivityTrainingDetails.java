@@ -100,12 +100,12 @@ String data;
                 data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
                 MapConf.build().with(ActivityTrainingDetails.this)
+                        .pair("collect_status->details_collect_iv","0:mipmap.collect_uncheck;1:mipmap.collect_checked")
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
                         .pair("level:U%s->details_img")
                         .pair("surplus:还剩%s个名额->details_quota_tv")
-                        .pair("collect_status->details_collect_iv","0:mipmap.collect_uncheck;1:mipmap.collect_checked")
                         .pair("sell_price:￥%s/年->details_amount_tv")
                         .pair("coach_name->details_name_tv")
                         .pair("cover_url->details_title_iv")

@@ -612,7 +612,7 @@ public class MapAdapter extends BaseAdapter {
 
 		if (item instanceof Cursor || item instanceof SQLiteCursor) {
 			treatCursor(item, convertView, position);
-		} else if (item instanceof Map) {
+		} else if (item instanceof Map||item instanceof JSONObject) {
 			if(mapconf!=null){
 				if(mapconf.viewlayoutid!=0){
 				mapconf.source(item,convertView).toView();

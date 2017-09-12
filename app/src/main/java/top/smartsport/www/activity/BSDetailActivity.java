@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.base.MapAdapter;
+import app.base.MapConf;
 import app.base.MapContent;
 import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
@@ -239,6 +240,12 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
+                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",entity.getData().toString()).toString();
+
+                MapConf.build().with(BSDetailActivity.this)
+                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),BSDetailActivity.this).toView();
+                setFaved(!collect_status.equals("0"));
+
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 adapter_bsss_state.setText(states);
                 ShareParams shareParams = new ShareParams();

@@ -122,7 +122,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             return;
         }
         getTopBar().findViewById(R.id.ivRight_text).setOnClickListener(new View.OnClickListener() {
-            boolean tofav = true;
+
 
             @Override
             public void onClick(View view) {
@@ -135,7 +135,11 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
     }
 
+    public void setFaved(boolean faved) {
+        this.tofav = !faved;
+    }
 
+    boolean tofav = true;
     public Fav fav = new Fav();
     public void favImpl(final View view,boolean unfav){
 

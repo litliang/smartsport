@@ -15,6 +15,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
@@ -70,6 +71,8 @@ public class ConsultDetailActivity extends BaseActivity {
     private MyListView lvComment;
     private ConsultAdapter adapterNews;
     private CommentAdapter adapterComment;
+    private String data;
+
     @Override
     protected void initView() {
         ivTop.setFocusable(true);
@@ -150,7 +153,12 @@ public class ConsultDetailActivity extends BaseActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
-                String data = entity.getData().toString();
+                 data = entity.getData().toString();
+                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",data).toString();
+
+                MapConf.build().with(ConsultDetailActivity.this)
+                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(data,ConsultDetailActivity.this).toView();
+                setFaved(!collect_status.equals("0"));
                 ZXInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),ZXInfoDetail.class);
                 List<ZXInfoNews> news =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_news",data).toString(), ZXInfoNews.class);
                 List<ZXInfoComment> coments =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments",data).toString(), ZXInfoComment.class);
@@ -162,6 +170,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 tvContent.setText(Html.fromHtml(details.getBody()));
                 adapterNews.setData(news);
                 adapterComment.setData(coments);
+
             }
         });
 

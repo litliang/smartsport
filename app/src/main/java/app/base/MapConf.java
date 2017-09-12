@@ -143,9 +143,9 @@ public class MapConf {
 
     public void toView() {
         try {
-            if (item instanceof String) {
-                item = JsonUtil.extractJsonRightValue(((String) item));
-            }
+//            if (item instanceof String) {
+//                item = JsonUtil.extractJsonRightValue(((String) item));
+//            }
             if (fieldnames.size() == 0 && viewsid.size() == 0) {
                 link();
                 return;
@@ -167,6 +167,23 @@ public class MapConf {
                         if (value != null) {
                             findAndBindView(convertView, item, name, value, i);
                         }
+                    }
+
+
+                }
+            } else {
+                for (int i = 0; i < this.fieldnames.size(); i++) {
+                    name = this.fieldnames.get(i);
+                    String n;
+                    if (name.contains(":")) {
+                        n = name.split(":")[0];
+                    } else {
+                        n = name;
+                    }
+                    value = JsonUtil.findJsonLink(n, item);
+
+                    if (value != null) {
+                        findAndBindView(convertView, item, name, value, i);
                     }
 
 

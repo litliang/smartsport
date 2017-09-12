@@ -223,6 +223,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity entity) {
+
                 Data data = entity.toObj(Data.class);
                 carousels = data.toListcarousel(Carousel.class);
                 coaches = data.toListcoaches(Coaches.class);
