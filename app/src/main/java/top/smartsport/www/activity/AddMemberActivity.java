@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +26,7 @@ import top.smartsport.www.bean.NetEntity;
  */
 @ContentView(R.layout.activity_add_member)
 public class AddMemberActivity extends BaseActivity {
-
+    public  static final int ADD_MEMBER = 1;
 
     private MapAdapter mapadapter;
 
@@ -34,6 +35,9 @@ public class AddMemberActivity extends BaseActivity {
     boolean saved;
 
     String id;
+    private ListView mListView;
+    private TeamMemberAdapter mAdapter;
+
     @Override
     protected void initView() {
 
@@ -44,7 +48,6 @@ public class AddMemberActivity extends BaseActivity {
         }
         String team_id = getIntent().getStringExtra("id");
         id = team_id == null ? "" : team_id;
-
 
         findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
 
@@ -79,8 +82,6 @@ public class AddMemberActivity extends BaseActivity {
             }
         });
         if (getIntent().hasExtra("id")) {
-
-
             ((TextView) findViewById(R.id.ivRight_text)).setText("删除");
             (findViewById(R.id.ivRight)).setVisibility(View.GONE);
             findViewById(R.id.ivRight_text).setOnClickListener(new View.OnClickListener() {
@@ -105,30 +106,7 @@ public class AddMemberActivity extends BaseActivity {
                 }
             });
 
-            callHttp(MapBuilder.build().add("action", "getMyTeamDetail").add("team_id", id).get(), new FunCallback() {
-
-                @Override
-                public void onSuccess(Object result, List object) {
-
-                    String data = ((NetEntity) result).getData().toString();
-                    MapConf.with(AddMemberActivity.this)
-                            .pair("team_name->et_team_name")
-                            .pair("coach[0]-name->et_main_coach_name")
-                            .pair("assists[0]-name->et_coach1_name")
-                            .pair("assists[1]-name->et_coach2_name")
-                            .source(data, AddMemberActivity.this).toView();
-
-                }
-
-                @Override
-                public void onFailure(Object result, List object) {
-
-                }
-
-                @Override
-                public void onCallback(Object result, List object) {
-                }
-            });
+            getMyTeam();
 
 
         } else {
@@ -158,20 +136,19 @@ public class AddMemberActivity extends BaseActivity {
         }
 
         back();
-        ListView mListView = (ListView) findViewById(R.id.lv_team);
-        final TeamMemberAdapter adapter = new TeamMemberAdapter();
-        mListView.setAdapter(adapter);
+        mListView = (ListView) findViewById(R.id.lv_team);
+         mAdapter = new TeamMemberAdapter();
+        mListView.setAdapter(mAdapter);
         TextView tvAddMember = (TextView) findViewById(R.id.tv_add_member);
         tvAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.addMember();
+                    startActivityForResult(getIntent().setClass(AddMemberActivity.this, AddMemberDetailActivity.class).putExtra("team_id",id),ADD_MEMBER);
             }
         });
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(getIntent().setClass(AddMemberActivity.this, AddMemberDetailActivity.class));
             }
         });
 
@@ -203,6 +180,49 @@ public class AddMemberActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == ADD_MEMBER){
+            getMyTeam();
+        }
+    }
+
+    private void getMyTeam() {
+        callHttp(MapBuilder.build().add("action", "getMyTeamDetail").add("team_id", id).get(), new FunCallback() {
+
+            @Override
+            public void onSuccess(Object result, List object) {
+
+                String data = ((NetEntity) result).getData().toString();
+                List list = (List) intf.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("player", data));
+                MapConf.with(AddMemberActivity.this)
+                        .pair("team_name->et_team_name")
+                        .pair("coach[0]-name->et_main_coach_name")
+                        .pair("assists[0]-name->et_coach1_name")
+                        .pair("assists[1]-name->et_coach2_name")
+                        .source(data, AddMemberActivity.this).toView();
+                mAdapter.setData(list);
+                MapConf mc = MapConf.with(AddMemberActivity.this)
+                        .pair("name:name-%s->view_member","", "addMember()")
+                        .pair("positon:position-%s->view_member","","addMember()")
+                        .pair("number:number-%s->view_member","","addMember()")
+                        .source(R.layout.member_list);
+                MapConf.with(AddMemberActivity.this).conf(mc).source(list, mListView).toView();
+
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+            }
+        });
+
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -6,6 +6,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.zhy.autolayout.utils.AutoUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import top.smartsport.www.R;
 import top.smartsport.www.widget.TeamMemberView;
 
@@ -15,21 +19,22 @@ import top.smartsport.www.widget.TeamMemberView;
 
 public class TeamMemberAdapter extends BaseAdapter {
     private int count;
+    private List list;
 
-
-    public void addMember(){
-        count++;
+    public void setData(List l){
+        list = new ArrayList();
+        list.addAll(l);
         notifyDataSetChanged();
     }
     @Override
     public int getCount() {
-        return count;
+        return list!=null?list.size():0;
 
     }
 
     @Override
     public Object getItem(int postion) {
-        return postion;
+        return list.get(postion);
     }
 
     @Override
