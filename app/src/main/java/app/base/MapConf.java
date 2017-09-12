@@ -293,9 +293,9 @@ public class MapConf {
             if (mSwitchcase.get(rawname).containsKey(value.toString())) {
                 casevalue = value.toString();
                 value = mSwitchcase.get(rawname).get(value.toString()).toString();
-
             }
         }
+
         if (name.toString().contains(":")) {
             String[] ns = name.toString().split(":");
             if (!(ns[1].contains("(") && ns[1].contains(")") && ns[1].contains("#"))) {
