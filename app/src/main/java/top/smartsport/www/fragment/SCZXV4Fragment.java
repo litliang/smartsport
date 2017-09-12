@@ -1,8 +1,10 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.xutils.view.annotation.ContentView;
@@ -13,6 +15,7 @@ import java.util.List;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.NewsAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
@@ -64,6 +67,12 @@ public class SCZXV4Fragment extends BaseV4Fragment {
             }
         });
         reload(true);
+        pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
+            }
+        });
     }
 
     private void reload(final boolean refresh) {

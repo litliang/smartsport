@@ -1,8 +1,14 @@
 package top.smartsport.www.fragment;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -14,21 +20,20 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
+import app.base.DialogUtil;
 import app.base.JsonUtil;
 import app.base.MapAdapter;
 import app.base.MapContent;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.MyHYActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
-import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
@@ -78,6 +83,7 @@ public class SCZXJAV4Fragment extends BaseV4Fragment {
             }
         });
         getData();
+
     }
 
 
@@ -146,8 +152,40 @@ public class SCZXJAV4Fragment extends BaseV4Fragment {
             empty.setVisibility(View.GONE);
         }
         mapadapter.setItemDataSrc(new MapContent(list));
+        ((MyGridView) root.findViewById(gridid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                showDialog((Activity) view.getContext());
+//                startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
+                ;
+            }
+        });
         ((MyGridView) root.findViewById(gridid)).setAdapter(mapadapter);
     }
+    public Dialog dialog;
+    public void showDialog(final Activity ay) {
 
+        DialogUtil.DialogInfo dialogInfo = new DialogUtil.DialogInfo(ay);
+        dialogInfo.aty = ay;
+        dialogInfo.title = "会员权限";
+        dialogInfo.message = new SpannableStringBuilder("观看在线教案需要成为会员");
+
+        dialogInfo.positiveButtonText = "取消";
+        dialogInfo.positiveButtonClickListener = DialogUtil.getNewCancelOption(ay);
+        dialogInfo.negativeButtonText = "开启会员";
+        dialogInfo.negativeButtonClickListener = new DialogInterface.OnClickListener() {
+
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+                dialog.cancel();
+                ay.startActivity(new Intent(ay,MyHYActivity.class));
+            }
+        };
+
+        dialog = DialogUtil.showChoiceDialog(dialogInfo, true);
+        dialog.show();
+    }
     Map map = MapBuilder.build().add("1", "一").add("2", "二").add("3", "三").add("4", "四").add("5", "五").add("6", "六").add("7", "七").add("8", "八").add("9", "九").get();
 }

@@ -1,9 +1,11 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,14 +14,15 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.base.MapAdapter;
-import app.base.MapConf;
 import app.base.MapContent;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
@@ -98,6 +101,13 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 page++;
                 reload(mapadapter);
+            }
+        });
+        pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Map map = (Map) adapterView.getItemAtPosition(i);
+                startActivity(new Intent(getActivity(),ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()));
             }
         });
 

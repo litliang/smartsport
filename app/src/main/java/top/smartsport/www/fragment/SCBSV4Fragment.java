@@ -2,14 +2,12 @@ package top.smartsport.www.fragment;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,27 +16,16 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
-import app.base.MapAdapter;
-import app.base.MapContent;
-import intf.FunCallback;
-import intf.JsonUtil;
-import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.BSDetailActivity;
 import top.smartsport.www.activity.BSDetailBMActivity;
 import top.smartsport.www.adapter.BSssAdapter;
-import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.BSssInfo;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
-import top.smartsport.www.bean.ZXInfoDetail;
-import top.smartsport.www.bean.ZXInfoNews;
-import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
-import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -125,6 +112,20 @@ public class SCBSV4Fragment extends BaseV4Fragment {
         });
         getData(true);
 
+        ptrlv.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                BSssInfo info = bSssAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(BSDetailActivity.TAG, info.getId());
+                bundle.putString("states", info.getStatus());
+                if(info.getStatus().equals("报名中")){
+                    toActivity(BSDetailBMActivity.class, bundle);
+                }else {
+                    toActivity(BSDetailActivity.class, bundle);
+                }
+            }
+        });
 
     }
 
