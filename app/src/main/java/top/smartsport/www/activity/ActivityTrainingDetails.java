@@ -44,7 +44,7 @@ public class ActivityTrainingDetails extends BaseActivity {
     List<TrainingClassBean> classList = new ArrayList<>();
 
     String id;
-
+String data;
     @Override
     protected void initView() {
         initUI();
@@ -97,26 +97,27 @@ public class ActivityTrainingDetails extends BaseActivity {
 
             @Override
             public void onCallback(Object result, List object) {
-                String data = ((NetEntity) result).getData().toString();
+                data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
-                String other_course = JsonUtil.findJsonLink("other_course", data).toString();
-                MapConf.build().with(getBaseContext())
+                MapConf.build().with(ActivityTrainingDetails.this)
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
                         .pair("level:U%s->details_img")
                         .pair("surplus:还剩%s个名额->details_quota_tv")
-                        .pair("collect_status->details_collect_iv")
+                        .pair("collect_status->details_collect_iv","0:mipmap.collect_uncheck;1:mipmap.collect_checked")
                         .pair("sell_price:￥%s/年->details_amount_tv")
-                        .pair("coach_name->details_name_tv"/*,"0:mipmap.collect_uncheck;1:mipmap.collect_checked"*/)
+                        .pair("coach_name->details_name_tv")
                         .pair("cover_url->details_title_iv")
                         .pair("coach_header->details_icon_iv")
                         .pair("coach_team->details_school_name_tv")
                         .pair("schedules->details_time_tv")
                         .pair("recruit_students->details_student_tv")
                         .pair("content->details_introduction_tv")
-                        .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn").pair("other_course->details_class_listview", MapConf.build().pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv")).source(detail, getWindow().getDecorView()).toView();
-                MapConf.build().with(getBaseContext()).pair("other_course->details_class_listview", MapConf.build().with(getBaseContext()).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
+                        .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn")
+                        .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
+                        .source(detail, getWindow().getDecorView()).toView();
+                MapConf.with(ActivityTrainingDetails.this).pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
             }
         });
 
@@ -126,6 +127,7 @@ public class ActivityTrainingDetails extends BaseActivity {
 
             @Override
             public void onClick(View view) {
+                tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
                 favImpl(view,tofav);
 
 

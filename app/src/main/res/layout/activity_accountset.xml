@@ -75,7 +75,7 @@
                     android:layout_height="2px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="Showinputbox(username,用户名)"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
                     android:gravity="center_vertical">
@@ -115,7 +115,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="Showinputbox(truename,真实姓名)"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
                     android:gravity="center_vertical">
@@ -355,7 +355,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <LinearLayout android:tag="Showinputbox(account_jz,居住地)"
                 android:layout_marginTop="40px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -405,7 +405,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout
+                <RelativeLayout android:tag="Showinputbox(account_jlb,俱乐部)"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
                     android:background="@color/white">

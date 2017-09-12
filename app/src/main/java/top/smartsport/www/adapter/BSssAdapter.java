@@ -89,7 +89,7 @@ class BSssViewHolder extends ViewHolder{
         Object status = map.get(info.getStatus());//1报名中2进行中 3已结束 4已报满5已报名
         status = status==null?info.getStatus():status;
         adapter_bsss_state.setText(status.toString());
-        String state = info.getStatus();
+        String state = status.toString();
         if(state.equals("报名中")){
             adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button);
             adapter_bsss_rl_pay.setVisibility(View.VISIBLE);

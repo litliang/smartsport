@@ -48,6 +48,8 @@ public class Fav extends Task {
             BaseActivity.callHttp(MapBuilder.build().add("action", "collect").add("type", type + "").add("source_id", id).get(), new FunCallback() {
                 @Override
                 public void onSuccess(Object result, List object) {
+                    favIcon(view, true);
+                    isinit = !isinit;
 
                 }
 
@@ -59,8 +61,6 @@ public class Fav extends Task {
                 @Override
                 public void onCallback(Object result, List object) {
                     Toast.makeText(view.getContext(), result.toString(), Toast.LENGTH_SHORT).show();
-                    favIcon(view, true);
-                    isinit = !isinit;
                     allow = true;
                 }
             });
@@ -70,6 +70,8 @@ public class Fav extends Task {
             BaseActivity.callHttp(MapBuilder.build().add("action", "cancelCollect").add("type", type + "").add("id", id).get(), new FunCallback() {
                 @Override
                 public void onSuccess(Object result, List object) {
+                    favIcon(view, false);
+                    isinit = !isinit;
                 }
 
                 @Override
@@ -80,8 +82,7 @@ public class Fav extends Task {
                 @Override
                 public void onCallback(Object result, List object) {
                     Toast.makeText(view.getContext(), result.toString(), Toast.LENGTH_SHORT).show();
-                    favIcon(view, false);
-                    isinit = !isinit;
+
                     allow = true;
                 }
             });

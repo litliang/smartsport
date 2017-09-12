@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import app.base.action.Action;
 import intf.MapBuilder;
@@ -140,34 +142,38 @@ public class MapConf {
 
 
     public void toView() {
-        if (item instanceof String) {
-            item = JsonUtil.extractJsonRightValue(((String) item));
-        }
-        if (fieldnames.size() == 0 && viewsid.size() == 0) {
-            link();
-            return;
-        }
-        String name;
-        Object value;
-        if (item instanceof Map) {
-            Map<String, Object> items = (Map<String, Object>) item;
-            for (int i = 0; i < this.fieldnames.size(); i++) {
-                name = this.fieldnames.get(i);
-                String n;
-                if (name.contains(":")) {
-                    n = name.split(":")[0];
-                } else {
-                    n = name;
-                }
-                if (items.containsKey(n)) {
-                    value = items.get(n);
-                    if (value != null) {
-                        findAndBindView(convertView, item, name, value, i);
-                    }
-                }
-
-
+        try {
+            if (item instanceof String) {
+                item = JsonUtil.extractJsonRightValue(((String) item));
             }
+            if (fieldnames.size() == 0 && viewsid.size() == 0) {
+                link();
+                return;
+            }
+            String name;
+            Object value;
+            if (item instanceof Map) {
+                Map<String, Object> items = (Map<String, Object>) item;
+                for (int i = 0; i < this.fieldnames.size(); i++) {
+                    name = this.fieldnames.get(i);
+                    String n;
+                    if (name.contains(":")) {
+                        n = name.split(":")[0];
+                    } else {
+                        n = name;
+                    }
+                    if (items.containsKey(n)) {
+                        value = items.get(n);
+                        if (value != null) {
+                            findAndBindView(convertView, item, name, value, i);
+                        }
+                    }
+
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -209,9 +215,12 @@ public class MapConf {
     }
 
     public MapConf pair(String p, MapConf conf) {
-
-
-        return pair(p.split("->")[0].split(":")[0], conf);
+        String mc = p.split("->")[0];
+        if (mc.contains(":")) {
+            mc = mc.split(":")[0];
+        }
+        confs.put(mc, conf);
+        return pair(p);
     }
 
     public MapConf pair(String p) {
@@ -240,8 +249,8 @@ public class MapConf {
         return this;
     }
 
-    public MapConf pair(String p, String switchcase,String saction) {
-        pair(p,switchcase);
+    public MapConf pair(String p, String switchcase, String saction) {
+        pair(p, switchcase);
         Action action = null;
         try {
             action = Action.parseAction(new Action(saction));
@@ -268,6 +277,14 @@ public class MapConf {
                                          View convertView, View theView);
     }
 
+    Set<String> resMaps = new TreeSet<String>();
+
+    {
+        resMaps.add("mipmap");
+        resMaps.add("drawable");
+    }
+
+
     public MapConf addTackle(Tackle tackle) {
         this.tackle = tackle;
         return this;
@@ -277,7 +294,7 @@ public class MapConf {
 
     protected boolean setView(Object item, Object value, String name,
                               View convertView, View theView) {
-        String rawname = name.split(":")[0];
+
         if (theView == null) {
             return false;
         }
@@ -289,10 +306,18 @@ public class MapConf {
             value = "";
         }
         String casevalue = "";
+        String rawname = name;
+        if (name.contains(":")) {
+            rawname = name.split(":")[0];
+        }
         if (mSwitchcase.containsKey(rawname)) {
             if (mSwitchcase.get(rawname).containsKey(value.toString())) {
                 casevalue = value.toString();
                 value = mSwitchcase.get(rawname).get(value.toString()).toString();
+                if (value.toString().contains(".") && resMaps.contains(value.toString().split("\\.")[0]) && value.toString().split("\\.")[0].length() != value.toString().length()) {
+                    value = "R." + value.toString();
+                    value = new Integer(RRes.get(value.toString()).getAndroidValue());
+                }
             }
         }
 
@@ -306,8 +331,8 @@ public class MapConf {
         }
 
 
-        if(mAction.containsKey(rawname)){
-            mAction.get(rawname).addParams(0,Arrays.asList(item,name,value,casevalue,convertView)).setEventView(theView).innerrun();
+        if (mAction.containsKey(rawname)) {
+            mAction.get(rawname).addParams(0, Arrays.asList(item, name, value, casevalue, convertView)).setEventView(theView).innerrun();
         }
         theView.setVisibility(View.VISIBLE);
         StyleBox styleBox = null;
