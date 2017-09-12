@@ -91,4 +91,8 @@
     <string name="online_video_title">在线视频</string>
     <string name="online_video_all">全部视频</string>
     <string name="online_video_watched">观看</string>
+
+    <!-- 修改头像 -->
+    <string name="contest_camera">拍照</string>
+    <string name="contest_photo">从相册选择</string>
 </resources>

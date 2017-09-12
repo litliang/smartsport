@@ -109,4 +109,5 @@
         <item name="android:textColor">@color/text_gray</item>
     </style>
 
+    <style name="my_dialog" parent="android:Theme.Translucent.NoTitleBar"/>
 </resources>
