@@ -5,8 +5,10 @@ package top.smartsport.www.bean;
  */
 public class ScoreboardInfo {
     private String position;
-    private String result;
-    private String card;
+    private String team_name;
+    private String member_name;
+    private String header;
+    private String goal;
 
     public String getPosition() {
         return position;
@@ -16,19 +18,35 @@ public class ScoreboardInfo {
         this.position = position;
     }
 
-    public String getResult() {
-        return result;
+    public String getTeam_name() {
+        return team_name;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
     }
 
-    public String getCard() {
-        return card;
+    public String getHeader() {
+        return header;
     }
 
-    public void setCard(String card) {
-        this.card = card;
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
+
+    public String getMember_name() {
+        return member_name;
+    }
+
+    public void setMember_name(String member_name) {
+        this.member_name = member_name;
     }
 }

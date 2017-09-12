@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -132,7 +133,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
 
         });
-        getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
+//        getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
     }
 
 
@@ -176,6 +177,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             json.put("state", state);
             json.put("access_token", access_token);
             for (Object o : map.keySet()) {
+                Log.e("smile", "key  = " + o.toString() + "  value = " + map.get(o.toString()));
                 json.put(o.toString(), map.get(o.toString()));
             }
         } catch (Exception e) {

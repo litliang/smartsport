@@ -63,15 +63,15 @@ class ScoreboardViewHolder extends ViewHolder {
     }
 
     public void init(ScoreboardInfo info){
-        mNumTv.setText(info.getPosition());
-        String temp = info.getCard();
-        SpannableStringBuilder builder = new SpannableStringBuilder(temp);
-        int start_index = temp.indexOf("红");
-        int start_index1 = temp.indexOf("黄");
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF3B30")), start_index, start_index + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FFD700")), start_index1, start_index1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        mCardTv.setText(builder);
-        mResultTv.setText(info.getResult());
+//        mNumTv.setText(info.getPosition());
+//        String temp = info.getCard();
+//        SpannableStringBuilder builder = new SpannableStringBuilder(temp);
+//        int start_index = temp.indexOf("红");
+//        int start_index1 = temp.indexOf("黄");
+//        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF3B30")), start_index, start_index + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FFD700")), start_index1, start_index1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//        mCardTv.setText(builder);
+//        mResultTv.setText(info.getResult());
     }
 }

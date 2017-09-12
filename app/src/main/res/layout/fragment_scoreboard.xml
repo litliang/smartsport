@@ -34,11 +34,43 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/background_gray"/>
-    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
-        android:id="@+id/scoreboard_list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/bg_gray"
-        android:dividerHeight="20px"
-        android:scrollbars="none" />
+        android:layout_height="match_parent">
+        <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
+            android:id="@+id/scoreboard_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/bg_gray"
+            android:dividerHeight="20px"
+            android:scrollbars="none" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:id="@+id/empty">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30px"
+                    android:src="@mipmap/myfavempty" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂无数据"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17dip" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>
