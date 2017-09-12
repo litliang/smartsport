@@ -243,7 +243,7 @@ public class BSDetailActivity extends BaseActivity {
                 String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",entity.getData().toString()).toString();
 
                 MapConf.build().with(BSDetailActivity.this)
-                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),BSDetailActivity.this).toView();
+                        .pair("collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),BSDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
 
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));

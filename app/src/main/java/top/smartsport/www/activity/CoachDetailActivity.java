@@ -19,6 +19,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import app.base.MapConf;
 import top.smartsport.www.R;
 import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.CoachAdapter;
@@ -77,6 +78,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
         back();
+        fav();
         trainingAdapter = new TrainningAdapter();
         lvTraining.setAdapter(trainingAdapter);
         LinearLayoutManager linearLayoutManagerHorizontal = new LinearLayoutManager(this);
@@ -121,6 +123,12 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             @Override
             public void onSuccess(NetEntity entity) {
                 String data = entity.getData().toString();
+                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",entity.getData().toString()).toString();
+
+                MapConf.build().with(CoachDetailActivity.this)
+                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),CoachDetailActivity.this).toView();
+                setFaved(!collect_status.equals("0"));
+
                 CoachInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),CoachInfoDetail.class);
                 List<CoachInfoCourse> course =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course",data).toString(), CoachInfoCourse.class);
                 List<Coaches> others =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach",data).toString(), Coaches.class);
