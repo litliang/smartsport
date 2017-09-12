@@ -62,7 +62,6 @@ public class AccountSetActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        Log.e("smile", "onClick --------");
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
 
@@ -102,7 +101,6 @@ public class AccountSetActivity extends BaseActivity {
         mSetIconRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("smile", "onClick --------");
                 Intent intent = new Intent(AccountSetActivity.this, ActivityChooseIcon.class);
                 startActivityForResult(intent, CODE_CHOOSE_ICON);
             }
