@@ -1,11 +1,9 @@
 package top.smartsport.www.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -13,19 +11,14 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.base.MapAdapter;
-import app.base.MapConf;
-import app.base.MapContent;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.adapter.CoachAdapter;
 import top.smartsport.www.adapter.SCCoatchAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
-import top.smartsport.www.bean.News;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
@@ -87,8 +80,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
                 String data = result.getData().toString();
-                String newDate  = data.replace("null","");
-                List list = (List) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",newDate).toString());
+                List list = (List) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
                 if (list.size() > 0){
                     empty.setVisibility(View.GONE);
                 }

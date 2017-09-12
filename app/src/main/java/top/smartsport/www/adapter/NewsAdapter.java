@@ -36,7 +36,9 @@ public class NewsAdapter extends EntityListAdapter<News,NewsHolder> {
 
     @Override
     protected void initViewHolder(NewsHolder newsHolder, int position) {
-        newsHolder.init(getItem(position));
+        if (getItem(position) != null) {
+            newsHolder.init(getItem(position));
+        }
 
     }
 }

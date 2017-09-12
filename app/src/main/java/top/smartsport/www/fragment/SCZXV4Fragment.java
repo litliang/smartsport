@@ -1,28 +1,21 @@
 package top.smartsport.www.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
-import app.base.MapAdapter;
-import app.base.MapContent;
 import intf.FunCallback;
-import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.NewsAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
-import top.smartsport.www.bean.BSssInfo;
-import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.News;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
@@ -41,7 +34,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
     ViewGroup empty;
     private NewsAdapter newsAdapter;
     private int page =1;
-    private List<News> newses;
+    private List newses;
 
     public static SCZXV4Fragment newInstance() {
         SCZXV4Fragment fragment = new SCZXV4Fragment();
@@ -93,8 +86,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
                 String data = result.getData().toString();
-                String newDate  = data.replace("null,","");
-                newses =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("news",newDate).toString(), News.class);
+                newses = top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("news",data).toString(), News.class);
                 if (refresh){
                     pullrefreshlistview.onPullDownRefreshComplete();
                     if(newses !=null && newses.size()> 0){

@@ -45,6 +45,8 @@ public class ActivityAbout extends BaseActivity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.about_agreement_layout:
                 //TODO 服务协议
+                Intent intent_temp = new Intent(this, AboutServiceActivity.class);
+                startActivity(intent_temp);
                 break;
             case R.id.about_service_phone:
                 //TODO 服务协议
