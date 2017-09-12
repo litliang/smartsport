@@ -62,35 +62,7 @@ public class WDV4Fragment extends BaseV4Fragment {
                 String data = ((NetEntity)result).getData().toString();
 
                 SPUtils.put(getContext(), "getUserInfo", data);
-                //MapConf.withView(getContext()).pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg").source(app.base.JsonUtil.extractJsonRightValue(data), root).match();
-                MapConf.with(getContext()).addPair("username", R.id.status).addPair("height", R.id.height).addPair("weight", R.id.weight).addPair("leg", R.id.leg).addTackle(new MapConf.Tackle() {
-
-
-                    @Override
-                    public void tackleBefore(Object item, Object value, String name, View convertView, View theView) {
-
-                    }
-
-                    @Override
-                    public void tackleAfter(Object item, Object value, String name, View convertView, View theView) {
-                        if (name.equals("height")) {
-                            ((TextView) theView).setText("身高：" + value);
-                        } else if (name.equals("weight")) {
-                            ((TextView) theView).setText("体重：" + value);
-                        } else if (name.equals("leg")) {
-                            String leg = "";
-                            if (value.toString().equals("1")) {
-                                leg = "左脚";
-                            } else if (value.toString().equals("2")) {
-                                leg = "右脚";
-                            } else if (value.toString().equals("3")) {
-                                leg = "左右脚";
-                            }
-                            ((TextView) theView).setText("惯用脚：" + leg);
-                        }
-                    }
-                }).source(app.base.JsonUtil.extractJsonRightValue(data), root).match();
-
+                MapConf.with(getContext()).pair("is_vip->phone","1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg","1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
             }
         });
         String phone = (String) SPUtils.get(getContext(), "USER", "");

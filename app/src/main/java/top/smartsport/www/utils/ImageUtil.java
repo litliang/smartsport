@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
@@ -97,18 +100,27 @@ public class ImageUtil {
         pauseScrollListener = new PauseOnScrollListener(ImageLoader.getInstance(), true, true);
 
     }
+
     public static Bitmap scaleImage(Bitmap bm, int newWidth, int newHeight) {
         if (bm == null) {
             return null;
         }
         int width = bm.getWidth();
         int height = bm.getHeight();
+        if (width <= 0 || height <= 0) {
+            return bm;
+        }
         float scaleWidth = ((float) newWidth) / width;
         float scaleHeight = ((float) newHeight) / height;
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,
-                true);
+        Bitmap newbm;
+        try {
+            newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix,
+                    true);
+        } catch (Exception e) {
+            return bm;
+        }
         if (bm != null & !bm.isRecycled()) {
             bm.recycle();
             bm = null;
@@ -120,10 +132,12 @@ public class ImageUtil {
     public static ImageLoadingListener getImageLoadingListener() {
         return getImageLoadingListener(false);
     }
+
     public static ImageLoadingListener getImageLoadingListener(final boolean palignwidth) {
 
         return new ImageLoadingListener() {
             boolean alignviewwidth;
+
             @Override
             public void onLoadingStarted(String s, View view) {
 
@@ -135,16 +149,23 @@ public class ImageUtil {
             }
 
             @Override
-            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+            public void onLoadingComplete(String s, final View view, final Bitmap bitmap) {
                 this.alignviewwidth = palignwidth;
                 int w = ((Activity) view.getContext()).getWindowManager().getDefaultDisplay().getWidth();
                 if (alignviewwidth) {
                     int height = view.getWidth() * bitmap.getHeight() / bitmap.getWidth();
                     view.getLayoutParams().height = height;
-                    view.measure(view.getWidth(),height);
+                    view.measure(view.getWidth(), height);
                     view.invalidate();
                     view.requestLayout();
-                    ((ImageView) view).setImageBitmap(scaleImage(bitmap, view.getWidth(), view.getHeight()));
+                    new Handler(Looper.getMainLooper(), new Handler.Callback() {
+
+                        @Override
+                        public boolean handleMessage(Message message) {
+                            ((ImageView) view).setImageBitmap(scaleImage(bitmap, view.getWidth(), view.getHeight()));
+                            return false;
+                        }
+                    }).sendEmptyMessageDelayed(0, 100);
 
                 }
             }

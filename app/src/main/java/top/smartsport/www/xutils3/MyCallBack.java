@@ -10,9 +10,9 @@ import top.smartsport.www.utils.JsonUtil;
 
 
 /**
- *   @describe 回调方法
+ * @describe 回调方法
  */
-public abstract class MyCallBack<ResultType> implements Callback.ProgressCallback<ResultType>{
+public abstract class MyCallBack<ResultType> implements Callback.ProgressCallback<ResultType> {
     @Override
     public void onWaiting() {
 
@@ -35,8 +35,8 @@ public abstract class MyCallBack<ResultType> implements Callback.ProgressCallbac
             onSuccess(entity);
         } else {
 
-                onFailure(entity.getErrmsg());
-            }
+            onFailure(entity.getErrmsg());
+        }
 
     }
 

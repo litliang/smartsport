@@ -44,6 +44,8 @@ public class QXKTV4Fragment extends BaseV4Fragment {
 
     }
 
+
+
     MapAdapter mapadapter;
 
     @Override

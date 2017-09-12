@@ -11,6 +11,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.Map;
+
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.BSDetailActivity;
 import top.smartsport.www.base.EntityListAdapter;
@@ -82,7 +85,10 @@ class BSssViewHolder extends ViewHolder{
     }
 
     public void init(BSssInfo info, final Context context){
-        adapter_bsss_state.setText(info.getStatus());
+        Map map = MapBuilder.build().add("1","报名中").add("2","进行中").add("3","已结束").add("4","已报满").add("5","已报名").get();
+        Object status = map.get(info.getStatus());//1报名中2进行中 3已结束 4已报满5已报名
+        status = status==null?info.getStatus():status;
+        adapter_bsss_state.setText(status.toString());
         String state = info.getStatus();
         if(state.equals("报名中")){
             adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button);

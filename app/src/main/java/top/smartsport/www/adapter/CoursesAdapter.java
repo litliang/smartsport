@@ -53,6 +53,6 @@ class CoursesHolder extends ViewHolder{
     public void init(Courses info){
         ImageLoader.getInstance().displayImage(info.getCover_url(), course_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         course_name.setText(info.getTitle());
-        course_money.setText("￥"+info.getSell_price());
+        course_money.setText("￥"+info.getSell_price()+"/年");
     }
 }

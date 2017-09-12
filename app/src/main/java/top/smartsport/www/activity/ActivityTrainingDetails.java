@@ -11,13 +11,13 @@ import org.xutils.view.annotation.ContentView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import app.base.JsonUtil;
 import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.AdapterTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
@@ -42,6 +42,8 @@ public class ActivityTrainingDetails extends BaseActivity {
     AdapterTrainingDetails mClassAdapter;
 
     List<TrainingClassBean> classList = new ArrayList<>();
+
+    String id;
 
     @Override
     protected void initView() {
@@ -82,7 +84,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         mHorizontaList.setAdapter(mClassAdapter);
 
 
-        callHttp(MapBuilder.build().add("action", "getQxCourseDetail").add("id", getIntent().getSerializableExtra("id").toString()).get(), new FunCallback() {
+        callHttp(MapBuilder.build().add("action", "getQxCourseDetail").add("id", id = getIntent().getSerializableExtra("id").toString()).get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
 
@@ -95,28 +97,46 @@ public class ActivityTrainingDetails extends BaseActivity {
 
             @Override
             public void onCallback(Object result, List object) {
-                String data = ((NetEntity)result).getData().toString();
-                String detail =  JsonUtil.findJsonLink("detail",data).toString();
-                String other_course =  JsonUtil.findJsonLink("other_course",data).toString();
+                String data = ((NetEntity) result).getData().toString();
+                String detail = JsonUtil.findJsonLink("detail", data).toString();
+                String other_course = JsonUtil.findJsonLink("other_course", data).toString();
                 MapConf.build().with(getBaseContext())
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
                         .pair("level:U%s->details_img")
                         .pair("surplus:还剩%s个名额->details_quota_tv")
-                        .pair("status->")
+                        .pair("collect_status->details_collect_iv")
                         .pair("sell_price:￥%s/年->details_amount_tv")
-                        .pair("coach_name->details_name_tv")
+                        .pair("coach_name->details_name_tv"/*,"0:mipmap.collect_uncheck;1:mipmap.collect_checked"*/)
                         .pair("cover_url->details_title_iv")
                         .pair("coach_header->details_icon_iv")
                         .pair("coach_team->details_school_name_tv")
                         .pair("schedules->details_time_tv")
                         .pair("recruit_students->details_student_tv")
                         .pair("content->details_introduction_tv")
-                        .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn").pair("other_course->details_class_listview",MapConf.build().pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv")).source(detail,getWindow().getDecorView()).match();
-                MapConf.build().with(getBaseContext()).pair("other_course->details_class_listview",MapConf.build().with(getBaseContext()).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data,getWindow().getDecorView()).match();
+                        .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn").pair("other_course->details_class_listview", MapConf.build().pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv")).source(detail, getWindow().getDecorView()).toView();
+                MapConf.build().with(getBaseContext()).pair("other_course->details_class_listview", MapConf.build().with(getBaseContext()).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
+            }
+        });
+
+        findViewById(R.id.details_collect_iv).setOnClickListener(new View.OnClickListener() {
+
+            boolean tofav = true;
+
+            @Override
+            public void onClick(View view) {
+                favImpl(view,tofav);
+
+
             }
         });
     }
 
+    @Override
+    public void favImpl(View view,boolean unfav) {
+
+        fav.run(view,unfav+"",1,id,"mipmap.collect_checked","mipmap.collect_uncheck");
+
+    }
 }

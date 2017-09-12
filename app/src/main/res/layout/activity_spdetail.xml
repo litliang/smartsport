@@ -15,8 +15,7 @@
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="140px"
-        android:background="@color/theme_color"
+        android:layout_height="145px"         android:background="@color/theme_color"
         android:orientation="horizontal"
         android:visibility="gone">
 
@@ -68,7 +67,7 @@
                 <com.dl7.player.media.IjkPlayerView
                     android:id="@+id/player_view"
                     android:layout_width="match_parent"
-                    android:layout_height="600px"/>
+                    android:layout_height="600px" />
             </RelativeLayout>
 
             <ImageView
@@ -77,7 +76,7 @@
                 android:layout_height="600px"
                 android:scaleType="fitXY"
                 android:src="@mipmap/aa_ting"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/zb_detail_bq_zhibo"
@@ -104,12 +103,13 @@
                 android:textSize="36px"
                 android:visibility="gone" />
 
-            <TextView android:visibility="gone"
+            <TextView
                 android:id="@+id/zb_detail_bq_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@mipmap/bq_start" />
+                android:background="@mipmap/bq_start"
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -189,7 +189,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="40px"
                     android:src="@mipmap/icon_share"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

@@ -30,6 +30,7 @@ import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
 import intf.JsonUtil;
 import top.smartsport.www.R;
+import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.PICAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSDetail;
@@ -169,24 +170,28 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getBaseContext(),KCBActivity.class).putExtra("match_id",id));
+                startActivity(new Intent(getBaseContext(), KCBActivity.class).putExtra("match_id", id));
             }
-        });findViewById(R.id.rl_sc).setOnClickListener(new View.OnClickListener() {
+        });
+        findViewById(R.id.rl_sc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(),SJFXActivity.class));
+                startActivity(new Intent(getBaseContext(), ActivityDataAnalysis.class));
             }
         });
         findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(),BSSignUpActivity.class));
+                startActivity(new Intent(getBaseContext(), BSSignUpActivity.class));
             }
         });
 
     }
 
-
+    @Override
+    public void favImpl(View view, boolean unfav) {
+        fav.run(view,unfav+"",3,id);
+    }
 
     @Event(value = {R.id.rl_kc, R.id.rl_sc, R.id.rl_sp})
     private void getEvent(View v) {
@@ -197,7 +202,7 @@ public class BSDetailActivity extends BaseActivity {
                 goActivity(CSQDActivity.class, bundle);
                 break;
             case R.id.rl_sc://数据分析
-                goActivity(SJFXActivity.class);
+                goActivity(ActivityDataAnalysis.class);
                 break;
             case R.id.rl_sp://赛程表
                 break;
@@ -240,7 +245,7 @@ public class BSDetailActivity extends BaseActivity {
                 shareParams.setShareType(Platform.SHARE_TEXT);
                 shareParams.setText(bsDetail.getName());//必须
 
-                share(shareParams,Sharetype.TEXT);
+                share(shareParams, Sharetype.TEXT);
                 adapter_bsss_title.setText(bsDetail.getName());
                 adapter_bsss_date.setText(bsDetail.getStart_time() + "至" + bsDetail.getEnd_time());
                 adapter_bsss_address.setText(bsDetail.getAddress());

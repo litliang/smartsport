@@ -30,23 +30,7 @@ public class WDQDActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        callHttp(MapBuilder.build().add("action", "getMyTeamList").get(), new FunCallback() {
-            @Override
-            public void onSuccess(Object result, List object) {
 
-            }
-
-            @Override
-            public void onFailure(Object result, List object) {
-
-            }
-
-            @Override
-            public void onCallback(Object result, List object) {
-                String data = ((NetEntity) result).getData().toString();
-                mapadapter.setItemDataSrc(new MapContent(JsonUtil.extractJsonRightValue(data)));
-            }
-        });
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.wdqd_item);
         adaptinfo.addViewIds(new Integer[]{R.id.name});
@@ -69,5 +53,46 @@ public class WDQDActivity extends BaseActivity {
         back();
     }
 
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refresh();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        refresh();
+    }
+
+    private void refresh() {
+        callHttp(MapBuilder.build().add("action", "getMyTeamList").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+
+                String data = ((NetEntity) result).getData().toString();
+                mapadapter.setItemDataSrc(new MapContent(JsonUtil.extractJsonRightValue(data)));
+                mapadapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+            }
+        });
+    }
+
     MapAdapter mapadapter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
 }

@@ -59,6 +59,12 @@ public class Action extends Epr {
         params.addAll(objects);
         return this;
     }
+
+    public Action addParams(int pos, List objects) {
+        params.addAll(pos, objects);
+        return this;
+    }
+
     public String taskname;
 
 

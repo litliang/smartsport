@@ -35,7 +35,7 @@ public class Showinputbox extends Task {
     public Object run(final View view, Object... params) {
         final int changeid = RRes.get("R.id." + params[0].toString()).getAndroidValue();
         String title = params[1].toString();
-        showDialog((Activity) view.getContext(), ((TextView) ((Activity) view.getContext()).findViewById(changeid)).getText().toString(), title, new FunCallback() {
+        return showDialog((Activity) view.getContext(), ((TextView) ((Activity) view.getContext()).findViewById(changeid)).getText().toString(), title, new FunCallback() {
 
             @Override
             public void onSuccess(Object result, List object) {
@@ -52,11 +52,10 @@ public class Showinputbox extends Task {
                 ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString());
             }
         });
-        return null;
     }
 
 
-    public void showDialog(Activity ay, String txt, String title, final FunCallback fb) {
+    public Dialog showDialog(Activity ay, String txt, String title, final FunCallback fb) {
         final DialogUtil.DialogInfo dialogInfo = new DialogUtil.DialogInfo(ay);
         dialogInfo.aty = ay;
         dialogInfo.title = title;
@@ -73,7 +72,8 @@ public class Showinputbox extends Task {
                 dialog.cancel();
             }
         });
-        dialog = DialogUtil.showNeutralDialog(dialogInfo);
+        dialog = DialogUtil.showNeutralDialog(dialogInfo,true);
+        return dialog;
     }
 
 }

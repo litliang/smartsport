@@ -22,7 +22,8 @@
         android:background="@color/line_color"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160px">
+        android:layout_height="165px"
+        android:background="@color/white">
 
         <RadioGroup
             android:layout_centerVertical="true"

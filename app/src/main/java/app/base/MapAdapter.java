@@ -1,8 +1,6 @@
 package app.base;
 
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,7 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.bumptech.glide.Glide;
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +33,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.base.MapAdapter.AdaptInfo.Style;
@@ -618,7 +615,7 @@ public class MapAdapter extends BaseAdapter {
 		} else if (item instanceof Map) {
 			if(mapconf!=null){
 				if(mapconf.viewlayoutid!=0){
-				mapconf.source(item,convertView).match();
+				mapconf.source(item,convertView).toView();
 				return;
 
 				}
@@ -627,7 +624,7 @@ public class MapAdapter extends BaseAdapter {
 			treatMap(item, convertView, position);
 		} else if (item instanceof Entity) {
 			if(mapconf!=null){
-				mapconf.source(((Entity) item).fieldContents,convertView).match();
+				mapconf.source(((Entity) item).fieldContents,convertView).toView();
 				return;
 			}
 			treatMap(((Entity) item).fieldContents, convertView, position);

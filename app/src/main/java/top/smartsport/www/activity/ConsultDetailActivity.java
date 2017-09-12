@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.app.Activity;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +15,11 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.actions.Fav;
+import top.smartsport.www.actions.Showinputbox;
 import top.smartsport.www.adapter.CommentAdapter;
 import top.smartsport.www.adapter.ConsultAdapter;
 import top.smartsport.www.base.BaseActivity;
@@ -78,14 +83,54 @@ public class ConsultDetailActivity extends BaseActivity {
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
         back();
-
+        fav();
         adapterNews = new ConsultAdapter();
         lvConsult.setAdapter(adapterNews);
         adapterComment = new CommentAdapter();
         lvComment.setAdapter(adapterComment);
+        findViewById(R.id.send_comment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                new Showinputbox().showDialog((Activity) view.getContext(), "", "评论", new FunCallback() {
+                    @Override
+                    public void onSuccess(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onCallback(Object result, List object) {
+                        BaseActivity.callHttp(MapBuilder.build().add("action", "comment").add("type","1").add("content",result.toString()).add("obj_id",id).get(), new FunCallback() {
+                            @Override
+                            public void onSuccess(Object result, List object) {
+                                getData();
+                            }
+
+                            @Override
+                            public void onFailure(Object result, List object) {
+
+                            }
+
+                            @Override
+                            public void onCallback(Object result, List object) {
+
+                            }
+                        });
+                    }
+                });
+            }
+        });
         getData();
     }
+    @Override
+    public void favImpl(View view,boolean unfav) {
 
+        fav.run(view,unfav+"",4,id);
+    }
     private void getData() {
         JSONObject json = new JSONObject();
         try {

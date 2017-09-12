@@ -1,15 +1,11 @@
 package top.smartsport.www.activity;
 
-import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import app.base.JsonUtil;
 import app.base.MapConf;
@@ -21,17 +17,12 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import top.smartsport.www.R;
-import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 
-import top.smartsport.www.fragment.BSSCFragment;
-
-import top.smartsport.www.fragment.QXV4Fragment;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,7 +145,7 @@ public class KCBActivity extends BaseActivity {
             view.addView(v);
 
             MapConf mc = MapConf.with(view.getContext()).pair("home_name->home_name").pair("home_score->home_score").pair("home_logo->home_logo").pair("away_name->away_name").pair("away_score->away_score").pair("away_logo->away_logo").pair("start_time->start_time").source(R.layout.scb_item);
-            MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.lv)).match();
+            MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.lv)).toView();
             views.put(position, v);
             return v;
         }

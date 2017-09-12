@@ -8,8 +8,7 @@
     <RelativeLayout
         android:id="@+id/wd_title"
         android:layout_width="match_parent"
-        android:layout_height="140px"
-        android:background="@color/theme_color"
+        android:layout_height="145px"         android:background="@color/theme_color"
         android:orientation="horizontal">
 
         <ImageView
@@ -17,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="50px"
             android:src="@mipmap/wd_set" />
 
         <TextView
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20px"
+            android:layout_marginRight="50px"
             android:src="@mipmap/wd_msg" />
 
     </RelativeLayout>
@@ -109,6 +108,7 @@
             android:background="@color/white"
             android:layout_below="@+id/rl_account_set"
             android:layout_marginTop="45px"
+
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        android:layout_marginTop="30px">
+        android:layout_marginTop="55px">
 
         <RelativeLayout
             android:id="@+id/rl_kc"
@@ -183,11 +183,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="40px"
                 android:layout_toRightOf="@+id/wd_kc"
                 android:text="我的课程"
                 android:textColor="@color/text_black"
-                android:textSize="45px" />
+                android:textSize="42px" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -225,11 +225,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="40px"
                 android:layout_toRightOf="@+id/wd_sc"
                 android:text="我的收藏"
                 android:textColor="@color/text_black"
-                android:textSize="45px" />
+                android:textSize="42px" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -268,11 +268,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="40px"
                 android:layout_toRightOf="@+id/wd_sp"
                 android:text="我的视频"
                 android:textColor="@color/text_black"
-                android:textSize="45px" />
+                android:textSize="42px" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -311,11 +311,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30px"
+                android:layout_marginLeft="40px"
                 android:layout_toRightOf="@+id/wd_qd"
                 android:text="我的球队"
                 android:textColor="@color/text_black"
-                android:textSize="45px" />
+                android:textSize="42px" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -336,7 +336,7 @@
         android:layout_width="match_parent"
         android:layout_height="120px"
         android:background="@color/white"
-        android:layout_marginTop="45px">
+        android:layout_marginTop="55px">
 
         <ImageView
             android:id="@+id/wd_yl"
@@ -351,11 +351,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="40px"
             android:layout_toRightOf="@+id/wd_yl"
             android:text="娱乐"
             android:textColor="@color/text_black"
-            android:textSize="45px" />
+            android:textSize="42px" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -372,7 +372,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:layout_marginTop="45px">
+        android:layout_marginTop="55px">
 
     <RelativeLayout
         android:id="@+id/rl_hy"
@@ -392,11 +392,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="40px"
             android:layout_toRightOf="@+id/wd_hy"
             android:text="我的会员"
             android:textColor="@color/text_black"
-            android:textSize="45px" />
+            android:textSize="42px" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -434,11 +434,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="40px"
             android:layout_toRightOf="@+id/wd_dd"
             android:text="我的订单"
             android:textColor="@color/text_black"
-            android:textSize="45px" />
+            android:textSize="42px" />
 
         <ImageView
             android:layout_width="wrap_content"

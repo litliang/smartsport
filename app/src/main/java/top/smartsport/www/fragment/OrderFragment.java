@@ -146,8 +146,9 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
                         .pair("end_time->tv_date")
                         .pair("address->tv_address")
                         .pair("pay_total:￥%s->tv_price")
+                        .pair("pay_status->pay_status","0:未支付;1:已支付","showPayStatus()")
                         .source(R.layout.list_item);
-                MapConf.with(getContext()).conf(mc).source(data, mlistview.getRefreshableView()).match();
+                MapConf.with(getContext()).conf(mc).source(data, mlistview.getRefreshableView()).toView();
             }
 
             @Override

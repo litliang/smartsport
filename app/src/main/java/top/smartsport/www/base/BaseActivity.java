@@ -15,11 +15,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -27,19 +25,18 @@ import com.zhy.autolayout.AutoLayoutActivity;
 import app.base.action.ViewInflater;
 import cn.jiguang.share.android.api.ShareParams;
 import intf.FunCallback;
-import intf.QueryBuilder;
 
 import org.json.JSONObject;
-import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.Inflater;
 
+import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.actions.Fav;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
@@ -125,20 +122,25 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             return;
         }
         getTopBar().findViewById(R.id.ivRight_text).setOnClickListener(new View.OnClickListener() {
-            boolean isinit = false;
+            boolean tofav = true;
 
             @Override
             public void onClick(View view) {
-                if (!isinit) {
-                    view.setBackground(getResources().getDrawable(R.mipmap.fav_done, null));
-                } else {
-                    view.setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
-                }
-                isinit = !isinit;
+                favImpl(view,tofav);
+                tofav = !tofav;
             }
+
+
         });
         getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
     }
+
+
+    public Fav fav = new Fav();
+    public void favImpl(final View view,boolean unfav){
+
+    }
+
 
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
@@ -183,12 +185,19 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             @Override
             protected void onFailure(String message) {
                 funcall.<String>onFailureConnected(message);
+                funcall.<NetEntity>onCallbackConnected(message);
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
                 funcall.<NetEntity>onSuccessConnected(entity);
                 funcall.<NetEntity>onCallbackConnected(entity);
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                super.onError(throwable, b);
+               // funcall.onCallbackConnected(throwable);
             }
         });
     }

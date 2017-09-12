@@ -64,7 +64,7 @@ public class AccountSetActivity extends BaseActivity {
                             ((TextView) theView).setText(value.toString());
                         }
                     }
-                }).with(getBaseContext()).source(app.base.JsonUtil.extractJsonRightValue(data), getWindow().getDecorView()).match();
+                }).with(getBaseContext()).source(app.base.JsonUtil.extractJsonRightValue(data), getWindow().getDecorView()).toView();
     }
 
     @Event(value = {R.id.account_btn_login_out})

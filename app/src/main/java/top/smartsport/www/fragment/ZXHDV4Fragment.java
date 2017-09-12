@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -69,21 +70,12 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         fragment.setArguments(bundle);
         return fragment;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
-        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-        @Override
-        public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-            getData(true);
-        }
 
-        @Override
-        public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-        }
-    });
-        mScrollView.scrollTo(0,0);
+        mScrollView.scrollTo(0, 0);
 
         ptrlv.setFocusable(false);
         regInfo = RegInfo.newInstance();
@@ -93,12 +85,31 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         state = regInfo.getSeed_secret();
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
+        mScrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                getData(true);
+                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+                // Update the LastUpdatedLabel
+                refreshView.setLastUpdatedLabel(label);
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                getData(false);
+                String label = DateUtils.formatDateTime(getActivity(), System.currentTimeMillis(),
+                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+                // Update the LastUpdatedLabel
+                refreshView.setLastUpdatedLabel(label);
+            }
+        });
 
 
         hdzxAdapter = new HDZXAdapter(getActivity());
         ptrlv.setAdapter(hdzxAdapter);
-//        ptrlv.setOnRefreshListener(this);
-//        ptrlv.setMode(PullToRefreshBase.Mode.PULL_UP_TO_REFRESH);
         getData(true);
         ptrlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,20 +135,21 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
 
 
     }
-    private void getData(final boolean refresh){
-        if(refresh){
+
+    private void getData(final boolean refresh) {
+        if (refresh) {
             page = 1;
-        }else {
+        } else {
             page++;
         }
         JSONObject json = new JSONObject();
         try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","getNews");
-            json.put("type","2");//活动资讯
-            json.put("page",page);
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "getNews");
+            json.put("type", "2");//活动资讯
+            json.put("page", page);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -151,28 +163,28 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity entity) {
-//                ptrlv.onRefreshComplete();
+                mScrollView.onRefreshComplete();
                 Data data = entity.toObj(Data.class);
 
                 carousels = data.toListcarousel(Carousel.class);
 
                 hdzxInfos = data.toListnews(HDZXInfo.class);
 
-                hdzxAdapter.clear();
-                hdzxAdapter.addAll(hdzxInfos);
 
                 initBanner(carousels);
-                mScrollView.onRefreshComplete();
 
-//
+                if (refresh) {
+                    hdzxAdapter.clear();
+                } else {
+                    if (hdzxInfos.size() == 0) {
+                        return;
+                    }
+                }
+                hdzxAdapter.addAll(hdzxInfos);
             }
         });
 
     }
-
-
-
-
 
 
 }

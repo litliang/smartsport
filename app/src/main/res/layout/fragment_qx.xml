@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140px"
-        android:background="@color/theme_color"
+        android:layout_height="145px"         android:background="@color/theme_color"
         android:orientation="horizontal">
 
         <TextView

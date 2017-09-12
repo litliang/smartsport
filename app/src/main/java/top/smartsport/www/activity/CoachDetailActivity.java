@@ -20,6 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.CoachAdapter;
 import top.smartsport.www.adapter.TrainningAdapter;
 import top.smartsport.www.base.BaseActivity;
@@ -144,5 +145,10 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
         Intent intent = new Intent(this,CoachDetailActivity.class);
         intent.putExtra("data",coachAdapter.getItem(position));
         startActivity(intent);
+    }
+
+    @Override
+    public void favImpl(View view, boolean unfav) {
+        fav.run(view,unfav+"",5,id);
     }
 }

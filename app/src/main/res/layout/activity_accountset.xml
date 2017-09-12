@@ -154,7 +154,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="ShowChoicebox(account_age,年龄,5->45)"
+                <RelativeLayout android:tag="Showlistbox(account_age,年龄,5->45)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -195,7 +195,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="ShowChoicebox(account_sex,性别,男-女)"
+                <RelativeLayout android:tag="Showlistbox(account_sex,性别,男-女)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -236,7 +236,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="ShowChoicebox(account_height,身高 cm,120->180,cm)"
+                <RelativeLayout android:tag="Showlistbox(account_height,身高 cm,120->180,cm)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -277,7 +277,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout  android:tag="ShowChoicebox(account_weight,体重 kg,25->100,kg)"
+                <RelativeLayout  android:tag="Showlistbox(account_weight,体重 kg,25->100,kg)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -317,7 +317,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="ShowChoicebox(account_habit,惯用脚,左脚-右脚-左右脚)"
+                <RelativeLayout android:tag="Showlistbox(account_habit,惯用脚,左脚-右脚-左右脚)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -447,7 +447,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout  android:tag="ShowChoicebox(account_ql,球龄,1->30,年)"
+                <RelativeLayout  android:tag="Showlistbox(account_ql,球龄,1->30,年)"
                     android:layout_width="match_parent"
                     android:layout_height="120px"
                     android:background="@color/white">

@@ -15,6 +15,7 @@ import org.xutils.view.annotation.ContentView;
 
 import java.util.List;
 
+import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
@@ -69,24 +70,27 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
             @Override
             public void onClick(View view) {
                 mPayBtn.setEnabled(false);
-                BaseActivity.callHttp(MapBuilder.build().add("action", "matchApplyPay").add("total", "").add("match_id", "").add("team_id", "").add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
-                    @Override
-                    public void onSuccess(Object result, List object) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Object result, List object) {
-                        mPayBtn.setEnabled(true);
-                    }
-
-                    @Override
-                    public void onCallback(Object result, List object) {
-                        String root = ((NetEntity) result).getData().toString();
-                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class).putExtra("data", root));
-//                MapConf.with(BSSignUpActivity.this).pair("->").source()
-                    }
-                });
+//                MapConf.with(ActivitySignUp.this).pair("total","sign_up_price_tv:￥%s/年").pair("match_id",":").pair("team_id",":").pair("members",":").pair("coach_name","").pair("coach_mobile","").toMap();
+//                BaseActivity.callHttp(MapBuilder.build().add("action", "matchApplyPay").add("total", "0.01").add("match_id", "").add("team_id", "").add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
+//
+//                    @Override
+//                    public void onSuccess(Object result, List object) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Object result, List object) {
+//                        mPayBtn.setEnabled(true);
+//                    }
+//
+//                    @Override
+//                    public void onCallback(Object result, List object) {
+//                        String root = ((NetEntity) result).getData().toString();
+//                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class).putExtra("data", root));
+////                MapConf.with(BSSignUpActivity.this).pair("->").source()
+//                    }
+//                });
+                startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
             }
         });
     }

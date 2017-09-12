@@ -175,12 +175,12 @@ public class SJFXActivity extends BaseActivity {
                         .pair("result->item_result_tv")
                         .pair("card->item_card_tv")
                         .source(R.layout.adapter_scoreboard_item);
-                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scoreboard_list)).match();
+                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scoreboard_list)).toView();
             }else{
                 v = new ViewInflater(SJFXActivity.this).inflate(R.layout.fragment_scorer, null);
                 view.addView(v);
                 mc = MapConf.with(view.getContext()).pair("position->scorer_item_number_tv").source(R.layout.adapter_scorer_item);
-                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scorer_list)).match();
+                MapConf.with(view.getContext()).conf(mc).source(viewMaps.get(position), v.findViewById(R.id.scorer_list)).toView();
             }
 
 //            MapConf mc = MapConf.with(view.getContext()).pair("home_name->home_name").pair("home_score->home_score").pair("home_logo->home_logo").pair("away_name->away_name").pair("away_score->away_score").pair("away_logo->away_logo").pair("start_time->start_time").source(R.layout.scb_item);

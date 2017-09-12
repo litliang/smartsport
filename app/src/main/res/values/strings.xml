@@ -68,7 +68,7 @@
     <string name="picture_save_fail">保存图片失败</string>
     <string name="picture_next_album">下一组：</string>
     <string name="picture_previous_album">上一组：</string>
-    
+
     <!-- 数据分析页面 strings -->
     <string name="data_analysis">数据分析</string>
     <string name="data_analysis_scoreboard">积分榜</string>
