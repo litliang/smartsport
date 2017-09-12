@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -240,8 +241,13 @@ public class MapConf {
         return this;
     }
 
+
     public MapConf pair(String p, String switchcase,String saction) {
-        pair(p,switchcase);
+        if (TextUtils.isEmpty(switchcase)){
+            pair(p);
+        }else {
+            pair(p, switchcase);
+        }
         Action action = null;
         try {
             action = Action.parseAction(new Action(saction));
