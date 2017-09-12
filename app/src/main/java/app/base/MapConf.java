@@ -150,6 +150,10 @@ public class MapConf {
                 link();
                 return;
             }
+            if (fieldnames.size() == 0 && viewsid.size() == 0) {
+                link();
+                return;
+            }
             String name;
             Object value;
             if (item instanceof Map) {
@@ -171,7 +175,7 @@ public class MapConf {
 
 
                 }
-            } else {
+            } else if (item instanceof String) {
                 for (int i = 0; i < this.fieldnames.size(); i++) {
                     name = this.fieldnames.get(i);
                     String n;
@@ -253,15 +257,17 @@ public class MapConf {
     public MapConf pair(String p, String switchcase) {
         pair(p);
         String sc = switchcase;
-        String[] s = sc.split(";");
-        MapBuilder mapBuilder = MapBuilder.build();
-        for (String c : s) {
-            String[] cays = c.split(":");
-            mapBuilder.add(cays[0], cays[1]);
+        if (switchcase.contains(":")) {
+            String[] s = sc.split(";");
+            MapBuilder mapBuilder = MapBuilder.build();
+            for (String c : s) {
+                String[] cays = c.split(":");
+                mapBuilder.add(cays[0], cays[1]);
+            }
+            mSwitchcase.put(p.split("->")[0].split(":")[0], mapBuilder.get());
+
         }
 
-
-        mSwitchcase.put(p.split("->")[0].split(":")[0], mapBuilder.get());
 
         return this;
     }
