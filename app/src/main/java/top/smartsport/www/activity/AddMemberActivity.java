@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.xutils.view.annotation.ContentView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import app.base.JsonUtil;
 import app.base.MapAdapter;
@@ -205,10 +207,12 @@ public class AddMemberActivity extends BaseActivity {
                 mAdapter.setData(list);
                 MapConf mc = MapConf.with(AddMemberActivity.this)
                         .pair("name:name-%s->view_member","", "addMember()")
-                        .pair("positon:position-%s->view_member","","addMember()")
+                        .pair("position:position-%s->view_member","","addMember()")
                         .pair("number:number-%s->view_member","","addMember()")
                         .source(R.layout.member_list);
-                MapConf.with(AddMemberActivity.this).conf(mc).source(list, mListView).toView();
+                    MapConf.with(AddMemberActivity.this).conf(mc).source(list, mListView).toView();
+//                    Map map = new TreeMap();
+//                    MapConf.with(AddMemberActivity.this).pair("name->et_team_name").pair("position->weizhi").pair("number->haoma").source(map, onItemClickItemView).toMap();
 
             }
 

@@ -400,9 +400,13 @@ public class MapConf {
             }
 
         } else if (theView instanceof TextView) {
-            ((TextView) theView)
-                    .setText(value instanceof SpannableStringBuilder ? (SpannableStringBuilder) value
-                            : value.toString());
+            if (value instanceof Integer) {
+                theView.setBackgroundResource((Integer) value);
+            } else {
+                ((TextView) theView)
+                        .setText(value instanceof SpannableStringBuilder ? (SpannableStringBuilder) value
+                                : value.toString());
+            }
 
         }
         if (tackle != null) {
