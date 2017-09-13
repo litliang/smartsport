@@ -26,7 +26,6 @@ import top.smartsport.www.utils.SPUtils;
 @ContentView(R.layout.activity_welcome)
 public class WelcomeActivity extends Activity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
