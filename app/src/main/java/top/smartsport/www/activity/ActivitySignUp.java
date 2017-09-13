@@ -9,18 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhy.autolayout.AutoLinearLayout;
-import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.xutils.view.annotation.ContentView;
 
-import java.util.List;
-
-import app.base.MapConf;
-import intf.FunCallback;
-import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.bean.NetEntity;
 
 /**
  * Created by bajieaichirou on 17/8/17.

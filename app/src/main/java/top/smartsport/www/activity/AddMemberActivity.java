@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 
@@ -37,6 +38,8 @@ public class AddMemberActivity extends BaseActivity {
     String id;
     private ListView mListView;
     private TeamMemberAdapter mAdapter;
+    private List list;
+    private String data;
 
     @Override
     protected void initView() {
@@ -143,12 +146,17 @@ public class AddMemberActivity extends BaseActivity {
         tvAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    startActivityForResult(getIntent().setClass(AddMemberActivity.this, AddMemberDetailActivity.class).putExtra("team_id",id),ADD_MEMBER);
+                    if (mAdapter.getCount()<12) {
+                        startActivityForResult(getIntent().setClass(AddMemberActivity.this, AddMemberDetailActivity.class).putExtra("team_id", id), ADD_MEMBER);
+                    }else {
+                        Toast.makeText(AddMemberActivity.this,"最多添加11名队员",Toast.LENGTH_SHORT).show();
+                    }
             }
         });
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivityForResult(getIntent().setClass(AddMemberActivity.this, AddMemberDetailActivity.class).putExtra("member",data).putExtra("position",i).putExtra("team_id",id), ADD_MEMBER);
             }
         });
 
@@ -194,8 +202,8 @@ public class AddMemberActivity extends BaseActivity {
             @Override
             public void onSuccess(Object result, List object) {
 
-                String data = ((NetEntity) result).getData().toString();
-                List list = (List) intf.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("player", data));
+               data = ((NetEntity) result).getData().toString();
+                list = (List) intf.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("player",data));
                 MapConf.with(AddMemberActivity.this)
                         .pair("team_name->et_team_name")
                         .pair("coach[0]-name->et_main_coach_name")
@@ -205,11 +213,10 @@ public class AddMemberActivity extends BaseActivity {
                 mAdapter.setData(list);
                 MapConf mc = MapConf.with(AddMemberActivity.this)
                         .pair("name:name-%s->view_member","", "addMember()")
-                        .pair("positon:position-%s->view_member","","addMember()")
+                        .pair("position:position-%s->view_member","","addMember()")
                         .pair("number:number-%s->view_member","","addMember()")
                         .source(R.layout.member_list);
                 MapConf.with(AddMemberActivity.this).conf(mc).source(list, mListView).toView();
-
             }
 
             @Override
