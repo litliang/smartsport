@@ -9,6 +9,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Environment;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * Created by bajieaichirou on 17/9/12.
  */
@@ -84,5 +87,29 @@ public class AppUtil {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, src, dst, paint);
         return output;
+    }
+
+    /**
+     * Close outputStream
+     *
+     * @param stream
+     */
+    public static void closeStream(Closeable stream) {
+        if (stream != null) {
+            try {
+                stream.close();
+                stream = null;
+            } catch (IOException e) {
+            } finally {
+                if (stream != null) {
+                    try {
+                        stream.close();
+                    } catch (IOException e) {
+                        stream = null;
+                    }
+                    stream = null;
+                }
+            }
+        }
     }
 }

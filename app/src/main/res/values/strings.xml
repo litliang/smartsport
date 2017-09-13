@@ -95,4 +95,6 @@
     <!-- 修改头像 -->
     <string name="contest_camera">拍照</string>
     <string name="contest_photo">从相册选择</string>
+    <string name="icon_post_fail">头像上传失败,请稍后再试!</string>
+    <string name="icon_post_success">设置头像成功!</string>
 </resources>

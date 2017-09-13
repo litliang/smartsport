@@ -155,8 +155,7 @@ public class ScoreboardFragment extends BaseV4Fragment{
                     mList.onPullUpRefreshComplete();
                 }
                 String data = result.getData().toString();
-                Log.e("smile", "ScoreBoardFragment --------- data = " + data);
-                if (data == null){
+                if (data.equals("null")){
                     mEmptyLayout.setVisibility(View.VISIBLE);
                 }else{
                     List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("courses", data));
