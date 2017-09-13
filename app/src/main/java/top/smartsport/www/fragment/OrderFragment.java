@@ -2,7 +2,6 @@ package top.smartsport.www.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -206,17 +205,7 @@ public class OrderFragment extends BaseV4Fragment implements PullToRefreshBase.O
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            String txt = "";
-          if( JsonUtil.findJsonLink("pay_status",list.get(position)).toString().equals("0")) {
-              txt = "去支付";
-              holder.tv_Status.setBackgroundResource(R.drawable.shape_go_pay );
-              holder.tv_Status.setTextColor(Color.parseColor("#3bb862"));
-            }else {
-              txt = "已完成";
-              holder.tv_Status.setBackgroundResource(R.drawable.shape_wait_pay);
-              holder.tv_Status.setTextColor(Color.parseColor("#e5e5e5"));
-          }
-            holder.tv_Status.setText(txt);
+
             holder.tv_Status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

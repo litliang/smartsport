@@ -12,6 +12,7 @@
         android:layout_centerVertical="true"
         android:textSize="@dimen/text_size"
         android:textColor="@color/font_main"
+        android:text="球员"
         android:layout_marginLeft="@dimen/margin_left" />
 
     <!-- text -->
@@ -23,7 +24,8 @@
         android:layout_toRightOf="@+id/tv_laber"
         android:layout_marginLeft="@dimen/margin_leftx1.5"
         android:hint="球员姓名"
-        android:textColor="@color/font_gray"
+        android:textColorHint="@color/font_gray"
+        android:textColor="@color/font_main"
         android:textSize="@dimen/text_size"
         />
     <TextView
@@ -34,7 +36,8 @@
         android:layout_toRightOf="@+id/tv_name"
         android:layout_marginLeft="@dimen/layout_height"
         android:hint="位置"
-        android:textColor="@color/font_gray"
+        android:textColorHint="@color/font_gray"
+        android:textColor="@color/font_main"
         android:textSize="@dimen/text_size"
         />
     <TextView
@@ -45,7 +48,8 @@
         android:layout_toLeftOf="@+id/imv_right"
         android:layout_marginRight="30px"
         android:hint="球衣号码"
-        android:textColor="@color/font_gray"
+        android:textColorHint="@color/font_gray"
+        android:textColor="@color/font_main"
         android:textSize="@dimen/text_size"
         />
 

@@ -31,7 +31,7 @@ import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
 /**
  * Created by Aaron on 2017/7/24.
- * 青训--青训课堂
+ * 我的收藏--青训课堂
  */
 @ContentView(R.layout.fragment_scqxkt)
 public class SCQXKTV4Fragment extends BaseV4Fragment {
@@ -41,6 +41,9 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
     ViewGroup empty;
     private List mList;
     private int page =1;
+    public static  int DETAIL =1;
+    private int position;
+    private boolean isDelete;
 
     public static SCQXKTV4Fragment newInstance() {
         SCQXKTV4Fragment fragment = new SCQXKTV4Fragment();
@@ -107,7 +110,7 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Map map = (Map) adapterView.getItemAtPosition(i);
-                startActivity(new Intent(getActivity(),ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()));
+                startActivityForResult(new Intent(getActivity(),ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()).putExtra("position",i),DETAIL);
             }
         });
 
@@ -146,5 +149,27 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+            if (resultCode == getActivity().RESULT_OK && requestCode == DETAIL){
+                position = data.getIntExtra("position",-1);
+                isDelete = data.getBooleanExtra("isDelete",false);
+           
+            }
+        }
+    }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            if (isDelete){
+                mList.remove(position);
+                mapadapter.setItemDataSrc(new MapContent(mList));
+                mapadapter.notifyDataSetChanged();
+            }
+        }
+    }
 }
