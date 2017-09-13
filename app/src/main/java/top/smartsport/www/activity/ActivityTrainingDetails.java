@@ -130,7 +130,7 @@ String data;
             public void onClick(View view) {
                 tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
                 favImpl(view,tofav);
-                setResult(RESULT_OK,new Intent().putExtra("isDelete",tofav).putExtra("position",position));
+                setResult(RESULT_OK);
             }
         });
     }
