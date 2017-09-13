@@ -19,6 +19,7 @@ import top.smartsport.www.activity.ChoiceCityActivity;
 import top.smartsport.www.adapter.ZXALLAdapter;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.fragment.information.ZXHDV4Fragment;
 import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 
@@ -64,7 +65,7 @@ public class ZXV4Fragment extends BaseV4Fragment {
     private void addFragment(){
         listFM = new ArrayList<>();
         listFM.add(ZXQXV4Fragment.newInstance().setViewpager(zx_viewpager));
-        listFM.add(ZXHDV4Fragment.newInstance());
+        listFM.add(new ZXHDV4Fragment());
         listFM.add(ZXSSV4Fragment.newInstance());
         zxallAdapter = new ZXALLAdapter(getActivity(),fragmentManager,tabTitle,listFM);
         zx_viewpager.setAdapter(zxallAdapter);
