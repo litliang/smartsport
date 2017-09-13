@@ -25,6 +25,7 @@ public class NetEntity {
     private String message;
     private String current;//当前页数
     private String total;//总页数
+    private String img_id;//头像id
 
 
     public JsonElement getData() {
@@ -85,6 +86,14 @@ public class NetEntity {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getImg_id() {
+        return img_id;
+    }
+
+    public void setImg_id(String img_id) {
+        this.img_id = img_id;
     }
 }
 

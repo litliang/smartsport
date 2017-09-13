@@ -258,12 +258,13 @@ public class AccountSetActivity extends BaseActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
-                String data = entity.getStatus();
-                if (data.equals("true")){
+                String entity_data = entity.getStatus();
+                if (entity_data.equals("true")){
                     Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_success), Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
                 }
+                MapConf.with(AccountSetActivity.this).pair("header", entity.getImg_id()).toMap();
             }
 
             @Override
@@ -271,6 +272,10 @@ public class AccountSetActivity extends BaseActivity {
                 super.onError(throwable, b);
             }
         });
+    }
+
+    private void postData(){
+
     }
 
     @Override
