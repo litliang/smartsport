@@ -54,7 +54,7 @@ public class TeamMemberAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.viewMember.setLaber("球员"+(position+1));
+//        viewHolder.viewMember.setLaber("球员"+(position+1));
         return convertView;
     }
 

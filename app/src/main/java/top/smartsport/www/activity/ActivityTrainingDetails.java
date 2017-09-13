@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import org.xutils.view.annotation.ContentView;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.AdapterTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
@@ -45,12 +43,15 @@ public class ActivityTrainingDetails extends BaseActivity {
 
     String id;
 String data;
+    private int position;
+
     @Override
     protected void initView() {
         initUI();
     }
 
     private void initUI() {
+        position = getIntent().getIntExtra("position",-1);
         mDetailsIv = (ImageView) findViewById(R.id.details_title_iv);
         mDetailsTitleTv = (TextView) findViewById(R.id.details_title_tv);
         mDateTv = (TextView) findViewById(R.id.details_date_tv);
@@ -129,8 +130,7 @@ String data;
             public void onClick(View view) {
                 tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
                 favImpl(view,tofav);
-
-
+                setResult(RESULT_OK,new Intent().putExtra("isDelete",tofav).putExtra("position",position));
             }
         });
     }
