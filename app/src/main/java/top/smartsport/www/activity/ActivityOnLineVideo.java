@@ -4,7 +4,10 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.dl7.player.media.IjkPlayerView;
 
 import org.xutils.view.annotation.ContentView;
 
@@ -12,12 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.base.MapConf;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.OnLineVideoAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.OnLineVideoInfo;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
+import top.smartsport.www.widget.MyListView;
 
 /**
  * Created by bajieaichirou on 17/9/9.
@@ -29,55 +36,60 @@ public class ActivityOnLineVideo extends BaseActivity {
     private ImageView mIv;
     private TextView mNameTv, mGradeTv, mCountryTv,
             mSportTv, mCountTv;
-    private PullToRefreshListView mListView;
+    private MyListView mListView;
 
     private OnLineVideoAdapter onLineVideoAdapter;
     private OnLineVideoInfo info;
     private List<OnLineVideoInfo> list = new ArrayList<>();
 
+    private IjkPlayerView mPlayerView;
+
     @Override
     protected void initView() {
-        setTitle(getResources().getString(R.string.online_video_title));
         initUI();
         fav();
-        getData(true);
+//        getData(true);
     }
 
+    String id;
     public void favImpl(final View view, boolean unfav) {
         fav.run(view, unfav+"", 2, getIntent().getStringExtra("id"));
     }
 
+
+
     private void initUI() {
-        mIv = (ImageView) findViewById(R.id.online_iv);
+        id = getIntent().getStringExtra("id");
         mNameTv = (TextView) findViewById(R.id.online_name_tv);
         mGradeTv = (TextView) findViewById(R.id.online_grade_tv);
         mCountryTv = (TextView) findViewById(R.id.online_country_tv);
         mSportTv = (TextView) findViewById(R.id.online_sport_tv);
         mCountTv = (TextView) findViewById(R.id.online_watched_time_tv);
-        mListView = (PullToRefreshListView) findViewById(R.id.online_list);
 
-        onLineVideoAdapter = new OnLineVideoAdapter(this);
-        mListView.getRefreshableView().setAdapter(onLineVideoAdapter);
-        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+
+
+        callHttp(MapBuilder.build().add("action", "getVideoDetail").add("video_id", id).get(), new FunCallback() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onSuccess(Object result, List object) {
+                mListView = (MyListView) findViewById(R.id.online_list);
 
-                getData(true);
-                String label = DateUtils.formatDateTime(ActivityOnLineVideo.this, System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                // Update the LastUpdatedLabel
-                refreshView.getHeaderLoadingLayout().setLastUpdatedLabel(label);
+                onLineVideoAdapter = new OnLineVideoAdapter(getBaseContext());
+                mListView.setAdapter(onLineVideoAdapter);
+                MapConf listconf = MapConf.with(getBaseContext()).pair("name->online_name_tv").pair("fileurl->player_view","","setToPlayerView").source(R.layout.adapter_bsdetail_shipin);
+                MapConf.with(getBaseContext()).pair("name->online_name_tv").pair("fileurl->online_iv").pair("other->online_list",listconf)
+                        .source(((NetEntity)result).getData().toString(),getWindow().getDecorView()).toView();
+                ((ScrollView)findViewById(R.id.scrollview)).getChildAt(0).scrollTo(0,0);
+                mPlayerView = (IjkPlayerView) findViewById(R.id.player_view);
             }
 
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                getData(false);
-                String label = DateUtils.formatDateTime(ActivityOnLineVideo.this, System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+            public void onFailure(Object result, List object) {
 
-                // Update the LastUpdatedLabel
-                refreshView.getFooterLoadingLayout().setLastUpdatedLabel(label);
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
             }
         });
 //        MapConf.build().with(getBaseContext())
@@ -106,8 +118,6 @@ public class ActivityOnLineVideo extends BaseActivity {
             info.setViedoName("在线视频 " + i);
             list.add(info);
         }
-        mListView.onPullDownRefreshComplete();
-        mListView.onPullUpRefreshComplete();
         onLineVideoAdapter.clear();
         onLineVideoAdapter.addAll(list);
     }

@@ -10,6 +10,7 @@ import org.xutils.view.annotation.Event;
 
 import java.util.List;
 
+import app.base.JsonUtil;
 import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
@@ -62,6 +63,7 @@ public class WDV4Fragment extends BaseV4Fragment {
                 String data = ((NetEntity)result).getData().toString();
 
                 SPUtils.put(getContext(), "getUserInfo", data);
+                SPUtils.put(getContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
                 MapConf.with(getContext()).pair("is_vip->phone","1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg","1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
             }
         });

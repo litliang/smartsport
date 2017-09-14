@@ -29,6 +29,23 @@ public class MyHYActivity extends BaseActivity{
     @Override
     protected void initView() {
         back();
+        String isvip = (String) SPUtils.get(getBaseContext(), "is_vip","");
+
+        if(!isvip.equals("1")){
+            findViewById(R.id.btn_buy).setVisibility(View.VISIBLE);
+        }else {
+            findViewById(R.id.btn_buy).setVisibility(View.INVISIBLE);
+            findViewById(R.id.btn_buy).setEnabled(false);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refreshPaystatus();
+    }
+
+    private void refreshPaystatus() {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getUserInfo").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
@@ -45,17 +62,19 @@ public class MyHYActivity extends BaseActivity{
                 String data = ((NetEntity)result).getData().toString();
 
                 SPUtils.put(getBaseContext(), "getUserInfo", data);
+                SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data).toString());
                 if(JsonUtil.findJsonLink("is_vip",data).toString().equals("0")){
                     findViewById(R.id.btn_buy).setVisibility(View.VISIBLE);
                 }else{
-                    findViewById(R.id.btn_buy).setVisibility(View.GONE);
+                    findViewById(R.id.btn_buy).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.btn_buy).setEnabled(false);
                 }
             }
         });
         findViewById(R.id.btn_buy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","199"));
+                startActivityForResult(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","199"),0);
             }
         });
     }

@@ -31,6 +31,7 @@ import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
@@ -149,7 +150,13 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
         ((MyGridView) root.findViewById(gridid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showDialog((Activity) view.getContext());
+                String isvip = (String) SPUtils.get(view.getContext(), "is_vip","");
+
+                if(!isvip.equals("1")){
+                    showDialog((Activity) view.getContext());
+                }else {
+                    startActivity(new Intent(getActivity(),ActivityOnLineVideo.class).putExtra("id",((Map)adapterView.getItemAtPosition(i)).get("id").toString()));
+                }
 //                startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
                 ;
             }
