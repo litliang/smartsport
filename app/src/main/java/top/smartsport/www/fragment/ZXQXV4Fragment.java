@@ -22,6 +22,7 @@ import java.util.List;
 
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
+import top.smartsport.www.activity.AllJiaolianActivity;
 import top.smartsport.www.activity.AllKechengActivity;
 import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.activity.ConsultDetailActivity;
@@ -100,6 +101,8 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
 
     @ViewInject(R.id.fm_text_qbkc)
     private TextView fm_text_qbkc;
+    @ViewInject(R.id.fm_text_)
+    private TextView fm_text_;
 
     public static ZXQXV4Fragment newInstance() {
         ZXQXV4Fragment fragment = new ZXQXV4Fragment();
@@ -135,7 +138,12 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
                 startActivity(new Intent(getContext(), AllKechengActivity.class));
             }
         });
-
+        fm_text_.setOnClickListener(new OnClickThrottleListener() {
+            @Override
+            protected void onThrottleClick(View v) {
+                startActivity(new Intent(getContext(), AllJiaolianActivity.class));
+            }
+        });
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
 
