@@ -39,7 +39,6 @@ public class AllJiaolianActivity extends BaseActivity {
             }
             @Override
             public void onCallback(NetEntity result, List<Object> object) {
-//                pullrefreshlistview.onRefreshComplete();
                 String jsonResult = result.getData().toString();
                 try{
                     JSONObject jsonObject = new JSONObject(jsonResult);
@@ -49,15 +48,11 @@ public class AllJiaolianActivity extends BaseActivity {
                     MapConf mc = MapConf.with(AllJiaolianActivity.this)
                             .pair("header->head_iv")
                             .source(R.layout.item_all_jiaolian);
+
                     MapConf.with(AllJiaolianActivity.this).conf(mc).source(data, mlistview.getRefreshableView()).toView();
 
                 }catch (Exception e){
                 }
-//                List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("coaches", data));
-//                mapadapter.setItemDataSrc(new MapContent(list));
-//                pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
-//                mapadapter.notifyDataSetChanged();
-
 
             }
         });
