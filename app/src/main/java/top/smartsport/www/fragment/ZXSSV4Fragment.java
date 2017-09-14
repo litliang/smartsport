@@ -2,9 +2,12 @@ package top.smartsport.www.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -25,6 +28,7 @@ import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
 import top.smartsport.www.utils.ScreenUtils;
+import top.smartsport.www.widget.banner.Banner;
 
 /**
  * deprecation:赛事新闻
@@ -35,7 +39,7 @@ import top.smartsport.www.utils.ScreenUtils;
 public class ZXSSV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.pull_to_refresh_list_view)
     private PullToRefreshListView mPullToRefreshView;//刷新控件
-    private top.smartsport.www.widget.banner.Banner mBanner;//轮播图控件
+    private Banner mBanner;//轮播图控件
 
     private SSXWAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
@@ -44,7 +48,9 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     @Override
     protected void initView() {
         Context context = getContext();
-        mBanner = new top.smartsport.www.widget.banner.Banner(getContext());
+        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.head_information,null);
+        ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("赛事新闻");
+        mBanner = (Banner) headerView.findViewById(R.id.banner);
         int screenWidth = ScreenUtils.getWidth(context);
         int screenHeight = ScreenUtils.getHeight(context);
         int bannerHeight = (int) ((float)ScreenUtils.dip2px(context,250)*(float)screenWidth/(float)screenHeight);
@@ -55,7 +61,7 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
         ListView listView = mPullToRefreshView.getRefreshableView();
         mInformationAdapter = new SSXWAdapter(getContext());
         listView.setAdapter(mInformationAdapter);
-        listView.addHeaderView(mBanner);
+        listView.addHeaderView(headerView);
         getData(true);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
