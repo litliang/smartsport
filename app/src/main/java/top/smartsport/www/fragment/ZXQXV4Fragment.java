@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
+import top.smartsport.www.activity.AllKechengActivity;
 import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.activity.StarDetailActivity;
@@ -40,6 +42,7 @@ import top.smartsport.www.bean.News;
 import top.smartsport.www.bean.Players;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.listener.OnClickThrottleListener;
 import top.smartsport.www.utils.JsonUtil;
 import top.smartsport.www.widget.Banner;
 import top.smartsport.www.widget.HorizontalListView;
@@ -95,6 +98,8 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
     private PullToRefreshScrollView scrollView;
     private ViewPager viewpager;
 
+    @ViewInject(R.id.fm_text_qbkc)
+    private TextView fm_text_qbkc;
 
     public static ZXQXV4Fragment newInstance() {
         ZXQXV4Fragment fragment = new ZXQXV4Fragment();
@@ -102,8 +107,6 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-
 
     @Override
     protected void initView() {
@@ -126,6 +129,13 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         listview.setFocusable(false);
 //        thtc_gridView = (GridView) scrollView.findViewById(R.id.thtc_layout).findViewById(R.id.gridview);
 //
+        fm_text_qbkc.setOnClickListener(new OnClickThrottleListener() {
+            @Override
+            protected void onThrottleClick(View v) {
+                startActivity(new Intent(getContext(), AllKechengActivity.class));
+            }
+        });
+
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
 
