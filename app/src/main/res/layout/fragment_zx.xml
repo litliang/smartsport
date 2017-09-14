@@ -22,7 +22,7 @@
                 android:id="@+id/zx_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20px"
+                android:layout_marginLeft="50px"
                 android:layout_marginRight="20px"
                 android:text="上海市"
                 android:textColor="@color/white"

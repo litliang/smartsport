@@ -11,6 +11,7 @@ import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.NetEntity;
 
 /**
  * Created by admin on 2017/9/3.
@@ -60,7 +61,13 @@ public class Fav extends Task {
 
                 @Override
                 public void onCallback(Object result, List object) {
-                    Toast.makeText(view.getContext(), result.toString(), Toast.LENGTH_SHORT).show();
+                    String toast = "";
+                    if(result instanceof String){
+                        toast = result.toString();
+                    }else if(result instanceof NetEntity){
+                        toast = ((NetEntity)result).getData().toString();
+                    }
+                    Toast.makeText(view.getContext(), toast, Toast.LENGTH_SHORT).show();
                     allow = true;
                 }
             });

@@ -55,9 +55,7 @@ public class MyHYActivity extends BaseActivity{
         findViewById(R.id.btn_buy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map map= MapBuilder.build().add("total","199").add("type","3").add("product_id","1").get();
-
-                startActivity(new Intent(getBaseContext(),ActivityOrderConfirm.class).putExtra("data", (Serializable) map));
+                startActivity(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","199"));
             }
         });
     }
