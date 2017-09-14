@@ -1,4 +1,4 @@
-package top.smartsport.www.fragment.information;
+package top.smartsport.www.fragment;
 
 import android.graphics.Color;
 import android.view.ViewGroup;
@@ -7,7 +7,6 @@ import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.zhy.autolayout.AutoFrameLayout;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -19,12 +18,9 @@ import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.HDZXInfo;
-import top.smartsport.www.bean.NetEntity;
-import top.smartsport.www.bean.RegInfo;
-import top.smartsport.www.utils.ScreenUtils;
+import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
+import top.smartsport.www.adapter.ZXBannerAdapter;
 import top.smartsport.www.widget.banner.Banner;
-import top.smartsport.www.xutils3.MyCallBack;
-import top.smartsport.www.xutils3.X;
 
 /**
  * deprecation:活动资讯
