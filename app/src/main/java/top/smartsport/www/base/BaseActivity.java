@@ -2,6 +2,7 @@ package top.smartsport.www.base;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import app.base.action.ViewInflater;
+import app.base.framework.Init;
 import cn.jiguang.share.android.api.ShareParams;
 import intf.FunCallback;
 
@@ -168,7 +170,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
         super.setContentView(new ViewInflater(this).inflate(layoutResID,null));
     }
-
     public static void callHttp(final Map map, final FunCallback funcall) {
         RegInfo regInfo = RegInfo.newInstance();
         TokenInfo tokenInfo = TokenInfo.newInstance();

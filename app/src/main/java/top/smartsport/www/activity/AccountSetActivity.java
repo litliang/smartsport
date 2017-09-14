@@ -110,6 +110,13 @@ public class AccountSetActivity extends BaseActivity {
                 startActivityForResult(intent, CODE_CHOOSE_ICON);
             }
         });
+
+        findViewById(R.id.chpwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(),ForgetPSWActivity.class).putExtra("title","修改密码"));
+            }
+        });
     }
 
     @Event(value = {R.id.account_btn_login_out})

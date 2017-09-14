@@ -484,6 +484,44 @@
                 </RelativeLayout>
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="40px"
+                android:id="@+id/chpwd"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:background="@color/white">
+
+                <TextView android:id="@+id/account_left_arrow11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="60px"
+                    android:text="修改密码"
+                    android:textColor="@color/black"
+                    android:textSize="45px" />
+
+                <TextView
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:layout_toLeftOf="@+id/account_left_arrow11"
+                    android:text="6年"
+                    android:textColor="@color/text_gray"
+                    android:textSize="45px" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="60px"
+                    android:src="@mipmap/left_arrow" />
+
+            </RelativeLayout>
+
             <Button
                 android:id="@+id/account_btn_login_out"
                 android:layout_width="match_parent"

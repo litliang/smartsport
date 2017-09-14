@@ -313,9 +313,9 @@
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
 
-                <TextView
+                <WebView
                     android:id="@+id/details_introduction_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，青训课程详细安排，

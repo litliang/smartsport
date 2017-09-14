@@ -176,7 +176,7 @@
             android:label="@string/label_my_sp" />
         <!-- 娱乐 -->
         <activity
-            android:name=".activity.MyYLActivity"
+            android:name=".activity.YuleActivity"
             android:label="@string/label_yl" />
         <!-- 我的会员 -->
         <activity

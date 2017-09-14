@@ -54,6 +54,8 @@ public class ForgetPSWActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        String changepwd = getIntent().getStringExtra("title");
+        setTitle(changepwd);
         forget_text_send_code = (TextView) findViewById(R.id.forget_text_send_code);
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
@@ -62,12 +64,12 @@ public class ForgetPSWActivity extends BaseActivity {
         state = regInfo.getSeed_secret();
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
-        time= new TimeCount(60000,1000);
+        time = new TimeCount(60000, 1000);
     }
 
-    @Event(value = {R.id.forget_text_send_code,R.id.forget_next_btn_reg})
-    private void getEvent(View v){
-        switch (v.getId()){
+    @Event(value = {R.id.forget_text_send_code, R.id.forget_next_btn_reg})
+    private void getEvent(View v) {
+        switch (v.getId()) {
             case R.id.forget_text_send_code:
                 getSms();
                 break;
@@ -79,52 +81,52 @@ public class ForgetPSWActivity extends BaseActivity {
 
     /**
      * 确认提交按钮
-     * */
-    private void forget(){
+     */
+    private void forget() {
         phone = forget_edit_phone.getText().toString().trim();
         code = forget_next_edit_code.getText().toString().trim();
         psd = forget_next_edit_psw.getText().toString().trim();
-        psd_again= forget_next_edit_psw_again.getText().toString().trim();
-        if(phone.isEmpty()){
+        psd_again = forget_next_edit_psw_again.getText().toString().trim();
+        if (phone.isEmpty()) {
             time.onFinish();
             showToast("手机号码不能为空");
             return;
         }
-        if(code.isEmpty()){
+        if (code.isEmpty()) {
             time.onFinish();
             showToast("验证码不能为空");
             return;
         }
-        if(psd.isEmpty()){
+        if (psd.isEmpty()) {
             time.onFinish();
             showToast("密码不能为空");
             return;
         }
-        if(psd.length()<6){
+        if (psd.length() < 6) {
             time.onFinish();
             showToast("密码长度不能小于6位");
             return;
         }
-        if(psd_again.isEmpty()){
+        if (psd_again.isEmpty()) {
             time.onFinish();
             showToast("重复密码不能为空");
         }
-        if(!psd.equals(psd_again)){
+        if (!psd.equals(psd_again)) {
             time.onFinish();
             showToast("两次密码输入不一致");
             return;
         }
         JSONObject json = new JSONObject();
         try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","forget");
-            json.put("mobile",phone);
-            json.put("vericode",code);
-            json.put("password",psd);
-            json.put("repassword",psd_again);
-            json.put("use_type","forget");
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "forget");
+            json.put("mobile", phone);
+            json.put("vericode", code);
+            json.put("password", psd);
+            json.put("repassword", psd_again);
+            json.put("use_type", "forget");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -134,7 +136,7 @@ public class ForgetPSWActivity extends BaseActivity {
             protected void onFailure(String message) {
                 showToast(message);
                 time.onFinish();
-                Log.i("________()____",message);
+                Log.i("________()____", message);
             }
 
             @Override
@@ -144,7 +146,7 @@ public class ForgetPSWActivity extends BaseActivity {
                 goActivity(LoginActivity.class);
                 finish();
 
-                Log.i("________",entity.getMessage());
+                Log.i("________", entity.getMessage());
             }
         });
 
@@ -174,21 +176,21 @@ public class ForgetPSWActivity extends BaseActivity {
 
     /**
      * 获取验证码接口
-     * */
-    private void getSms(){
+     */
+    private void getSms() {
         phone = forget_edit_phone.getText().toString().trim();
-        if(phone.isEmpty()){
+        if (phone.isEmpty()) {
             showToast("请输入手机号");
             return;
         }
         JSONObject json = new JSONObject();
         try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","sendSmsCode");
-            json.put("mobile",phone);
-            json.put("use_type","forget");
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "sendSmsCode");
+            json.put("mobile", phone);
+            json.put("use_type", "forget");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -198,7 +200,7 @@ public class ForgetPSWActivity extends BaseActivity {
             protected void onFailure(String message) {
                 showToast(message);
 
-                Log.i("________()____",message);
+                Log.i("________()____", message);
             }
 
             @Override
@@ -206,7 +208,7 @@ public class ForgetPSWActivity extends BaseActivity {
                 showToast(entity.getErrmsg());
                 time.start();
 
-                Log.i("________",entity.getMessage());
+                Log.i("________", entity.getMessage());
             }
         });
 

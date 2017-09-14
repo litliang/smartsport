@@ -2,6 +2,7 @@ package top.smartsport.www.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,10 +35,10 @@ public class ActivityTrainingDetails extends BaseActivity {
     ImageView mDetailsIv, mIconImg;
     TextView mDetailsTitleTv, mDateTv, mAddressTv, mAmountTv,
             mNameTv, mLevelTv, mSchoolNameTv, mStudentTv, mTimeTv,
-            mGroundTv, mIntroductionTv, mQuotaTv;
+            mGroundTv, mQuotaTv;
     HorizontalListView mHorizontaList;
     Button mSignUpBtn;
-
+    WebView mIntroductionTv;
     TrainingClassBean classBean;
     AdapterTrainingDetails mClassAdapter;
 
@@ -67,7 +68,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         mStudentTv = (TextView) findViewById(R.id.details_student_tv);
         mTimeTv = (TextView) findViewById(R.id.details_time_tv);
         mGroundTv = (TextView) findViewById(R.id.details_training_ground_tv);
-        mIntroductionTv = (TextView) findViewById(R.id.details_introduction_tv);
+        mIntroductionTv = (WebView) findViewById(R.id.details_introduction_tv);
         mQuotaTv = (TextView) findViewById(R.id.details_quota_tv);
         mHorizontaList = (HorizontalListView) findViewById(R.id.details_class_listview);
         mSignUpBtn = (Button) findViewById(R.id.details_sign_up_btn);

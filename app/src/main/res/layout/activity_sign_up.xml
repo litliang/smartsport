@@ -197,7 +197,7 @@
                         android:src="@mipmap/edit"
                         android:tag="enableEditText(sign_up_member_tv)" />
 
-                    <EditText
+                    <EditText android:gravity="right"
                         android:id="@+id/sign_up_member_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                         android:tag="enableEditText(sign_up_phone_tv)" />
 
                     <EditText
-
+                        android:gravity="right"
                         android:id="@+id/sign_up_phone_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

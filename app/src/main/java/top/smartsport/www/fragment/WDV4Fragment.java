@@ -93,7 +93,7 @@ public class WDV4Fragment extends BaseV4Fragment {
                 toActivity(WDQDActivity.class);
                 break;
             case R.id.rl_yl://娱乐
-                toActivity(MyYLActivity.class);
+                toActivity(YuleActivity.class);
                 break;
             case R.id.rl_hy://我的会员
                 toActivity(MyHYActivity.class);

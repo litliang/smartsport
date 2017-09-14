@@ -12,6 +12,7 @@ import com.zhy.autolayout.AutoLinearLayout;
 
 import org.xutils.view.annotation.ContentView;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -90,22 +91,23 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
 //                    }
 //                });
 
-                Map map = MapConf.with(getBaseContext()).pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv").toMap(ActivitySignUp.this);
+                final Map map = MapConf.with(getBaseContext()).pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_tv").toMap(ActivitySignUp.this);
                 callHttp(MapBuilder.withMap(map).add("action", "qxCourseApplyPay").add("qx_course_id", parammap.get("qx_course_id").toString()).get(), new FunCallback() {
                     @Override
                     public void onSuccess(Object result, List object) {
-                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
+                        Map p = MapBuilder.build().add("type","1").add("product_id",parammap.get("qx_course_id").toString()).add("total",map.get("total").toString()).get();
+                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class).putExtra("data", (Serializable) p));
 
                     }
 
                     @Override
                     public void onFailure(Object result, List object) {
-
                     }
 
                     @Override
                     public void onCallback(Object result, List object) {
-
+                        showToast(result.toString());
+                        mPayBtn.setEnabled(true);
                     }
                 });
             }

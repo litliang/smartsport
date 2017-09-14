@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import app.base.action.Action;
+import cn.jiguang.share.wechat.Wechat;
 import intf.MapBuilder;
 
 /**
@@ -148,10 +150,10 @@ public class MapConf {
 //            if (item instanceof String) {
 //                item = JsonUtil.extractJsonRightValue(((String) item));
 //            }
-            if (fieldnames.size() == 0 && viewsid.size() == 0) {
-                link();
-                return;
-            }
+//            if (fieldnames.size() == 0 && viewsid.size() == 0) {
+//                link();
+//                return;
+//            }
             if (fieldnames.size() == 0 && viewsid.size() == 0) {
                 link();
                 return;
@@ -187,10 +189,11 @@ public class MapConf {
                         n = name;
                     }
                     value = JsonUtil.findJsonLink(n, item);
-
+                    value = JsonUtil.extractJsonRightValue(value.toString());
                     if (value != null) {
                         findAndBindView(convertView, item, name, value, i);
                     }
+
 
 
                 }
@@ -295,13 +298,16 @@ public class MapConf {
                 if (view instanceof TextView) {
                     String text = ((TextView) view).getText().toString();
                     Object o = RRes.getAttrValue_itsname().get(((TextView) view).getId());
-                    if (o != null && text != null && !text.toString().trim().equals("")) {
+                    if (o != null && text != null) {
                         if (viewsid.size() > 0) {
                             if (viewsid.contains(view.getId())) {
-                                map.put(o.toString().substring(3), text);
+                                String name = fieldnames.get(viewsid.indexOf(view.getId()));
+                                map.put(name, text);
                             }
                         } else {
-                            map.put(o.toString().substring(3), text);
+                            if (!text.toString().trim().equals("")) {
+                                map.put(o.toString().substring(3), text);
+                            }
                         }
                     }
                 }
@@ -389,7 +395,11 @@ public class MapConf {
 
         theView.setVisibility(View.VISIBLE);
         StyleBox styleBox = null;
-        if (theView instanceof AdapterView) {
+        if (theView instanceof WebView) {
+            if (value instanceof String) {
+                ((WebView) theView).loadData(value.toString(), "text/html;charset=UTF-8", null);
+            }
+        } else if (theView instanceof AdapterView) {
             MapConf conf = confs.get(name);
             if (conf != null) {
                 ((AdapterView) theView).setAdapter(new MapAdapter(context));
