@@ -19,7 +19,6 @@ import top.smartsport.www.activity.ChoiceCityActivity;
 import top.smartsport.www.adapter.ZXALLAdapter;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
-import top.smartsport.www.fragment.information.ZXHDV4Fragment;
 import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
 

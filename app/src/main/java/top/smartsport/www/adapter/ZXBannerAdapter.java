@@ -1,4 +1,4 @@
-package top.smartsport.www.fragment.information;
+package top.smartsport.www.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;

@@ -8,9 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/autolayout/autolayout.iml" filepath="$PROJECT_DIR$/autolayout/autolayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/smartsport.iml" filepath="$PROJECT_DIR$/smartsport.iml" />
-      <module fileurl="file://$PROJECT_DIR$/smartsport_android.iml" filepath="$PROJECT_DIR$/smartsport_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/smartsport_android2.iml" filepath="$PROJECT_DIR$/smartsport_android2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/smartsport_android3.iml" filepath="$PROJECT_DIR$/smartsport_android3.iml" />
     </modules>
   </component>
 </project>
