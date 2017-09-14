@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,15 +18,21 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import app.base.MapConf;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.ActivityStack;
 import top.smartsport.www.utils.AppUtil;
+import top.smartsport.www.utils.FileHelper;
 import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.xutils3.MyCallBack;
+import top.smartsport.www.xutils3.X;
 
 /**
  * Created by Aaron on 2017/7/18.
@@ -216,8 +221,61 @@ public class AccountSetActivity extends BaseActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 iconBitMap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 mIcon.setImageBitmap(iconBitMap);
+                saveIcon(baos);
             }
         }
+    }
+
+    private void saveIcon(ByteArrayOutputStream baos) {
+        //头像存本地
+        File baseFile = FileHelper.getBaseFile(FileHelper.PATH_PHOTOGRAPH);
+        if (baseFile == null) {
+            Toast.makeText(AccountSetActivity.this, "SD卡不存在，请插入SD卡",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        FileHelper.saveBitmap(iconBitMap, ICON_NAME, baseFile);
+        String imagePath = Environment
+                .getExternalStorageDirectory()
+                + File.separator
+                + FileHelper.PATH_PHOTOGRAPH + ICON_NAME;
+        postIcon(imagePath);
+    }
+
+    private void postIcon(final String fileName) {
+        File file = new File(fileName);
+        Map<String,Object> map = new HashMap<>();
+        map.put("client_id",client_id);
+        map.put("state",state);
+        map.put("access_token",access_token);
+        map.put("action","uploadImg");
+        map.put("image", file);
+        X.Post(url, map, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+                Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(NetEntity entity) {
+                String entity_data = entity.getStatus();
+                if (entity_data.equals("true")){
+                    Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_success), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
+                }
+                MapConf.with(AccountSetActivity.this).pair("header", entity.getImg_id()).toMap();
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                super.onError(throwable, b);
+            }
+        });
+    }
+
+    private void postData(){
+
     }
 
     @Override

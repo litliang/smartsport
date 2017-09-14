@@ -42,8 +42,6 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
     private List mList;
     private int page =1;
     public static  int DETAIL =1;
-    private int position;
-    private boolean isDelete;
 
     public static SCQXKTV4Fragment newInstance() {
         SCQXKTV4Fragment fragment = new SCQXKTV4Fragment();
@@ -153,23 +151,8 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null){
-            if (resultCode == getActivity().RESULT_OK && requestCode == DETAIL){
-                position = data.getIntExtra("position",-1);
-                isDelete = data.getBooleanExtra("isDelete",false);
-           
-            }
+            reload(mapadapter);
         }
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden){
-            if (isDelete){
-                mList.remove(position);
-                mapadapter.setItemDataSrc(new MapContent(mList));
-                mapadapter.notifyDataSetChanged();
-            }
-        }
-    }
 }
