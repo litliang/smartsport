@@ -36,7 +36,6 @@ public class ZXV4Fragment extends BaseV4Fragment {
     private String[] tabTitle = {"青训资讯","活动资讯","赛事新闻"};
     private ZXALLAdapter zxallAdapter;//比赛,直播adapter
     private FragmentManager fragmentManager;
-
     private List<Fragment> listFM;
 
     public static ZXV4Fragment newInstance() {

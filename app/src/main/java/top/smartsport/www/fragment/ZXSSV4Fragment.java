@@ -39,7 +39,6 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
 
     private SSXWAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
-
     private int mCurrentPage;//当前页码
 
     @Override

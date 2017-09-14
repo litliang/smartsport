@@ -24,7 +24,6 @@ import top.smartsport.www.xutils3.X;
  */
 public class InformationOperateUtils {
     private static final String NET_ERROR = "网络异常，请刷新重试";
-
     /**
      * 获取活动资讯数据
      * @param page  页码

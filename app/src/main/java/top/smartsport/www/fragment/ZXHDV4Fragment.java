@@ -36,7 +36,6 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
 
     private HDZXAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
-
     private int mCurrentPage;//当前页码
 
     @Override
