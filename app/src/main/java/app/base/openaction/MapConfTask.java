@@ -12,7 +12,7 @@ import app.base.action.Task;
  * Created by admin on 2017/9/11.
  */
 
-public abstract class AdapterViewTask extends Task {
+public abstract class MapConfTask extends Task {
 
     @Override
     public Object run(View view, Object... params) {
@@ -24,9 +24,9 @@ public abstract class AdapterViewTask extends Task {
         List list = new ArrayList(Arrays.asList(params));
         list.remove(0);list.remove(0);list.remove(0);list.remove(0);list.remove(0);
 
-        adaptitem(view,item,name,value,casevalue,convertView,list.toArray());
+        run(view,item,name,value,casevalue,convertView,list.toArray());
         return null;
     }
 
-    public abstract void adaptitem(View view,Object item, String name, Object value, Object casevalue, View convertView, Object... objects);
+    public abstract void run(View view, Object item, String name, Object value, Object casevalue, View convertView, Object... objects);
 }

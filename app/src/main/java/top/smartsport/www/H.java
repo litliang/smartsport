@@ -5,7 +5,7 @@ package top.smartsport.www;
  */
 
 public class H {
-    public static final String HOST = "http://api.smartsport.top";
+    public static final String HOST = "https://ssapi.baibaobike.com";
 
 
     //1.客户端

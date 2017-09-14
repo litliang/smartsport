@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -284,6 +286,37 @@ public class MapConf {
         return this;
     }
 
+    private void toMap(Map map, ViewGroup vg) {
+        for (int i = 0; i < vg.getChildCount(); i++) {
+            View view = vg.getChildAt(i);
+            if (view instanceof ViewGroup) {
+                toMap(map, (ViewGroup) view);
+            } else {
+                if (view instanceof TextView) {
+                    String text = ((TextView) view).getText().toString();
+                    Object o = RRes.getAttrValue_itsname().get(((TextView) view).getId());
+                    if (o != null && text != null && !text.toString().trim().equals("")) {
+                        if (viewsid.size() > 0) {
+                            if (viewsid.contains(view.getId())) {
+                                map.put(o.toString().substring(3), text);
+                            }
+                        } else {
+                            map.put(o.toString().substring(3), text);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public Map toMap(Activity aty) {
+        Map map = new TreeMap();
+        ViewGroup vg = (ViewGroup) aty.getWindow().getDecorView();
+        toMap(map, vg);
+        return map;
+    }
+
     Map<String, Map> mSwitchcase = new TreeMap<String, Map>();
     Map<String, Action> mAction = new TreeMap<String, Action>();
 
@@ -354,9 +387,6 @@ public class MapConf {
         }
 
 
-        if (mAction.containsKey(rawname)) {
-            mAction.get(rawname).addParams(0, Arrays.asList(item, name, value, casevalue, convertView)).setEventView(theView).innerrun();
-        }
         theView.setVisibility(View.VISIBLE);
         StyleBox styleBox = null;
         if (theView instanceof AdapterView) {
@@ -411,6 +441,9 @@ public class MapConf {
         }
         if (tackle != null) {
             tackle.tackleAfter(item, value, name, convertView, theView);
+        }
+        if (mAction.containsKey(rawname)) {
+            mAction.get(rawname).addParams(0, Arrays.asList(item, name, value, casevalue, convertView)).setEventView(theView).innerrun();
         }
         return false;
     }

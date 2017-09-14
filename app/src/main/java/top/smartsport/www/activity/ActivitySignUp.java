@@ -12,6 +12,12 @@ import com.zhy.autolayout.AutoLinearLayout;
 
 import org.xutils.view.annotation.ContentView;
 
+import java.util.List;
+import java.util.Map;
+
+import app.base.MapConf;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 
@@ -39,9 +45,9 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
     }
 
     private void initUI() {
+        final Map parammap = (Map) getIntent().getSerializableExtra("data");
         mIv = (ImageView) findViewById(R.id.sign_up_iv);
         mTitleTv = (TextView) findViewById(R.id.sign_up_title_tv);
-        mTitleHintTv = (TextView) findViewById(R.id.sign_up_hint_tv);
         mPriceTv = (TextView) findViewById(R.id.sign_up_price_tv);
         mOldPriceTv = (TextView) findViewById(R.id.sign_up_old_price_tv);
         mTotalPriceTv = (TextView) findViewById(R.id.sign_up_total_price_tv);
@@ -83,9 +89,34 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
 ////                MapConf.with(BSSignUpActivity.this).pair("->").source()
 //                    }
 //                });
-                startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
+
+                Map map = MapConf.with(getBaseContext()).pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv").toMap(ActivitySignUp.this);
+                callHttp(MapBuilder.withMap(map).add("action", "qxCourseApplyPay").add("qx_course_id", parammap.get("qx_course_id").toString()).get(), new FunCallback() {
+                    @Override
+                    public void onSuccess(Object result, List object) {
+                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
+
+                    }
+
+                    @Override
+                    public void onFailure(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onCallback(Object result, List object) {
+
+                    }
+                });
             }
         });
+
+        MapConf.with(getBaseContext()).pair("details_title_tv->sign_up_title_tv")
+                .pair("details_time_tv->sign_up_hint_date_tv")
+                .pair("details_training_ground_tv->sign_up_hint_location_tv")
+                .pair("details_amount_tv->sign_up_price_tv").pair("details_amount_tv->sign_up_total_price_tv","","getprice()")
+                .source(parammap,this).toView();
+
     }
 
     @Override

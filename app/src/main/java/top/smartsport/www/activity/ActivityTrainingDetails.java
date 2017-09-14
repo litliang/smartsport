@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import org.xutils.view.annotation.ContentView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.base.JsonUtil;
 import app.base.MapConf;
@@ -42,7 +44,7 @@ public class ActivityTrainingDetails extends BaseActivity {
     List<TrainingClassBean> classList = new ArrayList<>();
 
     String id;
-String data;
+    String data;
     private int position;
 
     @Override
@@ -51,7 +53,7 @@ String data;
     }
 
     private void initUI() {
-        position = getIntent().getIntExtra("position",-1);
+        position = getIntent().getIntExtra("position", -1);
         mDetailsIv = (ImageView) findViewById(R.id.details_title_iv);
         mDetailsTitleTv = (TextView) findViewById(R.id.details_title_tv);
         mDateTv = (TextView) findViewById(R.id.details_date_tv);
@@ -72,15 +74,18 @@ String data;
         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), ActivitySignUp.class));
+
+                Map map = MapConf.with(getBaseContext()).toMap(ActivityTrainingDetails.this);
+                map.put("qx_course_id", id);
+                startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
             }
         });
-        for (int i = 0; i < 5; i++) {
-            classBean = new TrainingClassBean();
-            classBean.setClassTitle("青训瑜伽" + i);
-            classBean.setClassPrice("￥" + i + 1000 + i * 3);
-            classList.add(classBean);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            classBean = new TrainingClassBean();
+//            classBean.setClassTitle("青训瑜伽" + i);
+//            classBean.setClassPrice("￥" + i + 1000 + i * 3);
+//            classList.add(classBean);
+//        }
         mClassAdapter = new AdapterTrainingDetails(this, classList);
         mHorizontaList.setAdapter(mClassAdapter);
 
@@ -101,7 +106,7 @@ String data;
                 data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
                 MapConf.build().with(ActivityTrainingDetails.this)
-                        .pair("collect_status->details_collect_iv","0:mipmap.collect_uncheck;1:mipmap.collect_checked")
+                        .pair("collect_status->details_collect_iv", "0:mipmap.collect_uncheck;1:mipmap.collect_checked")
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
@@ -129,16 +134,16 @@ String data;
             @Override
             public void onClick(View view) {
                 tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
-                favImpl(view,tofav);
-                setResult(RESULT_OK,new Intent().putExtra("isDelete",tofav).putExtra("position",position));
+                favImpl(view, tofav);
+                setResult(RESULT_OK, new Intent().putExtra("isDelete", tofav).putExtra("position", position));
             }
         });
     }
 
     @Override
-    public void favImpl(View view,boolean unfav) {
+    public void favImpl(View view, boolean unfav) {
 
-        fav.run(view,unfav+"",1,id,"mipmap.collect_checked","mipmap.collect_uncheck");
+        fav.run(view, unfav + "", 1, id, "mipmap.collect_checked", "mipmap.collect_uncheck");
 
     }
 }

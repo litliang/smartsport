@@ -49,6 +49,7 @@ public class BSSignUpActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initUI() {
+
         mIv = (ImageView) findViewById(R.id.bs_sign_up_iv);
         mTitleTv = (TextView) findViewById(R.id.bs_sign_up_title_tv);
         mTitleHintTv = (TextView) findViewById(R.id.bs_sign_up_hint_tv);
@@ -78,27 +79,33 @@ public class BSSignUpActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 mPayBtn.setEnabled(false);
-                BaseActivity.callHttp(MapBuilder.build().add("action", "matchApplyPay").add("total", "").add("match_id", "").add("team_id", "").add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
-                    @Override
-                    public void onSuccess(Object result, List object) {
 
-                    }
-
-                    @Override
-                    public void onFailure(Object result, List object) {
-                        mPayBtn.setEnabled(true);
-                    }
-
-                    @Override
-                    public void onCallback(Object result, List object) {
-                        String root = ((NetEntity) result).getData().toString();
-                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class).putExtra("data", root));
-//                MapConf.with(BSSignUpActivity.this).pair("->").source()
-                    }
-                });
+//                BaseActivity.callHttp(MapBuilder.build().add("action", "matchApplyPay").add("total", "").add("match_id", "").add("team_id", "").add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
+//                    @Override
+//                    public void onSuccess(Object result, List object) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Object result, List object) {
+//                        mPayBtn.setEnabled(true);
+//                    }
+//
+//                    @Override
+//                    public void onCallback(Object result, List object) {
+//                        String root = ((NetEntity) result).getData().toString();
+//                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class).putExtra("data", root));
+////                MapConf.with(BSSignUpActivity.this).pair("->").source()
+//                    }
+//                });
             }
         });
-
+findViewById(R.id.buyvideo).setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","111"));
+    }
+});
     }
 
     @Override

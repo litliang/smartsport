@@ -109,12 +109,14 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             return;
         }
         ShareActivity.shareparams = shareParams;
+        getTopBar().findViewById(R.id.ivRight).setVisibility(View.VISIBLE);
         getTopBar().findViewById(R.id.ivRight).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getBaseContext(), ShareActivity.class));
             }
         });
+
         getTopBar().findViewById(R.id.ivRight).setBackground(getResources().getDrawable(R.mipmap.share, null));
     }
 
@@ -390,7 +392,10 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA
+
+
     };
 
     private static final int PERMISSON_REQUESTCODE = 0;

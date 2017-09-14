@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 
 import java.util.List;
+import java.util.Map;
 
 import app.base.JsonUtil;
 import app.base.MapConf;
@@ -47,12 +48,13 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
     @Override
     protected void initView() {
         initUI();
-
     }
 
-
+    Map map;
     private void initUI() {
 
+        map = (Map) getIntent().getSerializableExtra("data");
+        String total = (String) map.get("total");
         mAmountTv = (TextView) findViewById(R.id.confirm_pay_amount_tv);
         mTimeLeftTv = (TextView) findViewById(R.id.confirm_time_left_tv);
         mAliLayout = (AutoRelativeLayout) findViewById(R.id.confirm_alipay_layout);
@@ -69,7 +71,7 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
         mPayBtn.setOnClickListener(this);
 
         MapConf.with(this).pair("total->confirm_pay_amount_tv").source(getIntent().getStringExtra("data"), this);
-
+        mAmountTv.setText(total);
     }
 
     int i = 3;
@@ -91,10 +93,10 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
                 payway = "wxPay";
                 break;
             case R.id.confirm_pay_btn:
-                String data = getIntent().getStringExtra("data");
-                String total = (String) JsonUtil.findJsonLink("total", data);
-                String type = (String) JsonUtil.findJsonLink("type", data);
-                String prd_id = (String) JsonUtil.findJsonLink("product_id", data);
+
+                String total = (String) map.get("total");
+                String type = (String) map.get("type");
+                String prd_id = (String) map.get("product_id");
 
                 callPay(this, total, payway, prd_id, type);
                 break;

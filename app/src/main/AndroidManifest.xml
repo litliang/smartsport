@@ -47,11 +47,12 @@
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
     <application
         android:name=".base.BaseApplication"
@@ -354,12 +355,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -443,7 +444,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
@@ -486,7 +487,7 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
-        <!-- 数据分析-->
+        <!-- 数据分析 -->
         <activity
             android:name=".activity.ActivityDataAnalysis"
             android:label="数据分析" />
@@ -494,9 +495,16 @@
         <activity
             android:name=".activity.ActivityOnLineVideo"
             android:label="在线视频" />
-		<activity android:name=".activity.AllJiaolianActivity" android:label="全部教练"></activity>
-        <activity android:name=".activity.AllKechenActivity" android:label="全部课程" ></activity><activity android:name=".activity.ActivityDataAnalysis" android:label="数据分析"></activity>
-        <!-- 服务协议-->
+        <activity
+            android:name=".activity.AllJiaolianActivity"
+            android:label="全部教练" />
+        <activity
+            android:name=".activity.AllKechenActivity"
+            android:label="全部课程" />
+        <activity
+            android:name=".activity.ActivityDataAnalysis"
+            android:label="数据分析" />
+        <!-- 服务协议 -->
         <activity
             android:name=".activity.AboutServiceActivity"
             android:label="服务协议" />
@@ -504,7 +512,8 @@
         <!-- 选择头像 -->
         <activity
             android:name=".activity.ActivityChooseIcon"
-            android:theme="@style/my_dialog"/>
+            android:theme="@style/my_dialog" />
+        <activity android:name=".activity.BuyVipActivity"></activity>
     </application>
 
 </manifest>

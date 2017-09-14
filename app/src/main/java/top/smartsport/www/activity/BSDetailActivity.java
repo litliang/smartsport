@@ -29,7 +29,9 @@ import app.base.MapConf;
 import app.base.MapContent;
 import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
+import intf.FunCallback;
 import intf.JsonUtil;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.PICAdapter;
@@ -116,8 +118,11 @@ public class BSDetailActivity extends BaseActivity {
 
 //        ((TextView) actionbar.findViewById(R.id.tvTitle)).setText("比赛");
         id = (String) getObj(BSDetailActivity.TAG);
-        states = (String) getObj("states");
-        if (null != state) {
+        String s = (String) getObj("states");
+
+
+        if (null != s) {Map map = MapBuilder.build().add("1","报名中").add("3","已结束").get();
+            states = map.get(s).toString();
             if (states.equals("报名中")) {
                 bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
                 bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
@@ -183,6 +188,26 @@ public class BSDetailActivity extends BaseActivity {
         findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Map map = MapConf.with(getBaseContext())
+//                        .pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv")
+                        .toMap(BSDetailActivity.this);
+                callHttp(MapBuilder.withMap(map).add("action", "matchApplyPay").add("match_id", id).add("team_id", id).add("members","").add("coach_name","").add("coach_mobile","").get(), new FunCallback() {
+                    @Override
+                    public void onSuccess(Object result, List object) {
+                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
+
+                    }
+
+                    @Override
+                    public void onFailure(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onCallback(Object result, List object) {
+
+                    }
+                });
                 startActivity(new Intent(getBaseContext(), BSSignUpActivity.class));
             }
         });
@@ -240,13 +265,16 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
-                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",entity.getData().toString()).toString();
+                String collect_status =app.base.JsonUtil.findJsonLink("collect_status",entity.getData().toString()).toString();
+                String status =app.base.JsonUtil.findJsonLink("status",entity.getData().toString()).toString();
 
+                Map map = MapBuilder.build().add("1","报名中").add("3","已结束").get();
                 MapConf.build().with(BSDetailActivity.this)
                         .pair("collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),BSDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
 
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
+                states = map.get(status).toString();
                 adapter_bsss_state.setText(states);
                 ShareParams shareParams = new ShareParams();
                 shareParams.setShareType(Platform.SHARE_TEXT);

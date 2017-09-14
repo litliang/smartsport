@@ -169,7 +169,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         listview.setAdapter(playersAdapter);
 
         newsHotAdapter = new NewsHotAdapter(getActivity());
-        fm_list_top_news.setAdapter(newsAdapter);
+        fm_list_top_news.setAdapter(newsHotAdapter);
         fm_list_top_news.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
