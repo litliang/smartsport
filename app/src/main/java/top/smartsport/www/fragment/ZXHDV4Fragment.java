@@ -18,6 +18,7 @@ import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.HDZXInfo;
+import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
 import top.smartsport.www.adapter.ZXBannerAdapter;
 import top.smartsport.www.widget.banner.Banner;
@@ -36,7 +37,6 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     private HDZXAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
 
-    private boolean isRequesting;//是否正在请求
     private int mCurrentPage;//当前页码
 
     @Override
@@ -55,7 +55,7 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (isRequesting) return;
+                mPullToRefreshView.setMode(PullToRefreshBase.Mode.BOTH);
                 getData(true);
             }
             @Override
@@ -66,22 +66,23 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     }
 
     private void getData(final boolean isRefresh) {
-        if (isRequesting) return;
-        isRequesting = true;
         if (isRefresh) {
             mCurrentPage = 1;
         } else {
             mCurrentPage++;
         }
-        InformationOperateUtils.requestActivityInformation(mCurrentPage, new InformationOperateUtils.ActivityInformationAPICallBack() {
+        InformationOperateUtils.requestActivityInformation(mCurrentPage,"2", new InformationOperateUtils.ActivityInformationAPICallBack() {
             @Override
-            public void onSuccess(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
+            public void onSuccessTypeTwo(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
                 //refresh information
                 if (informationResources != null && informationResources.size() > 0){
                     if (isRefresh) {
                         mInformationAdapter.clear();
                     }
                     mInformationAdapter.addAll(informationResources);
+                }else {
+                    showToast("已经到底了");
+                    mPullToRefreshView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                 }
                 //refresh banner
                 if (bannerResources != null){
@@ -91,12 +92,15 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
                 }
             }
             @Override
+            public void onSuccessTypeThree(List<Carousel> bannerResources, List<SSXWInfo> informationResources) {
+
+            }
+            @Override
             public void onError(String errorMsg) {
                 showToast(errorMsg);
             }
             @Override
             public void onFinished() {
-                isRequesting = false;
                 mPullToRefreshView.onRefreshComplete();
             }
         });
