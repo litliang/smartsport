@@ -1,9 +1,13 @@
 package top.smartsport.www.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -18,8 +22,10 @@ import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.HDZXInfo;
+import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
 import top.smartsport.www.adapter.ZXBannerAdapter;
+import top.smartsport.www.utils.ScreenUtils;
 import top.smartsport.www.widget.banner.Banner;
 
 /**
@@ -35,14 +41,17 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
 
     private HDZXAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
-
-    private boolean isRequesting;//是否正在请求
     private int mCurrentPage;//当前页码
 
     @Override
     protected void initView() {
-        mBanner = new Banner(getContext());
-        int bannerHeight = 550;
+        Context context = getContext();
+        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.head_information,null);
+        ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("活动资讯");
+        mBanner = (Banner) headerView.findViewById(R.id.banner);
+        int screenWidth = ScreenUtils.getWidth(context);
+        int screenHeight = ScreenUtils.getHeight(context);
+        int bannerHeight = (int) ((float)ScreenUtils.dip2px(context,250)*(float)screenWidth/(float)screenHeight);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,bannerHeight);
         mBanner.setLayoutParams(params);
         mBannerAdapter = new ZXBannerAdapter();
@@ -50,12 +59,12 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         ListView listView = mPullToRefreshView.getRefreshableView();
         mInformationAdapter = new HDZXAdapter(getContext());
         listView.setAdapter(mInformationAdapter);
-        listView.addHeaderView(mBanner);
+        listView.addHeaderView(headerView);
         getData(true);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                if (isRequesting) return;
+                mPullToRefreshView.setMode(PullToRefreshBase.Mode.BOTH);
                 getData(true);
             }
             @Override
@@ -66,22 +75,23 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     }
 
     private void getData(final boolean isRefresh) {
-        if (isRequesting) return;
-        isRequesting = true;
         if (isRefresh) {
             mCurrentPage = 1;
         } else {
             mCurrentPage++;
         }
-        InformationOperateUtils.requestActivityInformation(mCurrentPage, new InformationOperateUtils.ActivityInformationAPICallBack() {
+        InformationOperateUtils.requestActivityInformation(mCurrentPage,"2", new InformationOperateUtils.ActivityInformationAPICallBack() {
             @Override
-            public void onSuccess(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
+            public void onSuccessTypeTwo(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
                 //refresh information
                 if (informationResources != null && informationResources.size() > 0){
                     if (isRefresh) {
                         mInformationAdapter.clear();
                     }
                     mInformationAdapter.addAll(informationResources);
+                }else {
+                    showToast("已经到底了");
+                    mPullToRefreshView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                 }
                 //refresh banner
                 if (bannerResources != null){
@@ -91,12 +101,15 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
                 }
             }
             @Override
+            public void onSuccessTypeThree(List<Carousel> bannerResources, List<SSXWInfo> informationResources) {
+
+            }
+            @Override
             public void onError(String errorMsg) {
                 showToast(errorMsg);
             }
             @Override
             public void onFinished() {
-                isRequesting = false;
                 mPullToRefreshView.onRefreshComplete();
             }
         });

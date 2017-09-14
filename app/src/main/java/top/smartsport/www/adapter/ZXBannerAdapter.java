@@ -18,7 +18,6 @@ import top.smartsport.www.widget.banner.AutoFlingPagerAdapter;
  * time:2017/9/24
  */
 public class ZXBannerAdapter extends AutoFlingPagerAdapter<Carousel> {
-
     @Override
     public View instantiateView(Context context) {
         ImageView convertView = new ImageView(context);

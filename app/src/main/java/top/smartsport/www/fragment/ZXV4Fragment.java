@@ -36,7 +36,6 @@ public class ZXV4Fragment extends BaseV4Fragment {
     private String[] tabTitle = {"青训资讯","活动资讯","赛事新闻"};
     private ZXALLAdapter zxallAdapter;//比赛,直播adapter
     private FragmentManager fragmentManager;
-
     private List<Fragment> listFM;
 
     public static ZXV4Fragment newInstance() {
@@ -65,7 +64,7 @@ public class ZXV4Fragment extends BaseV4Fragment {
         listFM = new ArrayList<>();
         listFM.add(ZXQXV4Fragment.newInstance().setViewpager(zx_viewpager));
         listFM.add(new ZXHDV4Fragment());
-        listFM.add(ZXSSV4Fragment.newInstance());
+        listFM.add(new ZXSSV4Fragment());
         zxallAdapter = new ZXALLAdapter(getActivity(),fragmentManager,tabTitle,listFM);
         zx_viewpager.setAdapter(zxallAdapter);
         zx_tab.setViewPager(zx_viewpager);
