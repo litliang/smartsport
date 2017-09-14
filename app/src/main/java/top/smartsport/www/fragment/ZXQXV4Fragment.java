@@ -173,7 +173,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         fm_list_top_news.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((HotNews) adapterView.getItemAtPosition(i)).getId() + ""));
             }
         });
         listview.setViewPager(viewpager);

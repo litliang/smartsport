@@ -46,8 +46,8 @@ public class ActivityOnLineVideo extends BaseActivity {
 
     @Override
     protected void initView() {
-        initUI();
         fav();
+        initUI();
 //        getData(true);
     }
 

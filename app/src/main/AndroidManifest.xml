@@ -494,7 +494,7 @@
         <!-- 在线视频 -->
         <activity
             android:name=".activity.ActivityOnLineVideo"
-            android:label="在线视频" />
+            android:label="在线教案" />
         <activity
             android:name=".activity.AllJiaolianActivity"
             android:label="全部教练" />

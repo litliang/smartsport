@@ -2,109 +2,131 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorGray">
+    android:background="@color/colorGray"
+    android:orientation="vertical">
+
     <FrameLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
-    <include layout="@layout/layout_actionbar" />
+        <include layout="@layout/layout_actionbar" />
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/online_iv"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/aa_ting"/>
-    <TextView
-        android:id="@+id/online_name_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:ellipsize="end"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:text="在线视频, 视频名称,视频名称,视频名称,视频名称123456789"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
-            <TextView
-                android:id="@+id/online_grade_tv"
-                style="@style/online_video_tv_style"
-                android:text="初级"/>
-            <View
-                android:id="@+id/online_grade_split"
-                android:layout_toRightOf="@id/online_grade_tv"
-                android:layout_width="1dp"
-                android:layout_height="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorGray"/>
-            <TextView
-                android:id="@+id/online_country_tv"
-                android:layout_toRightOf="@id/online_grade_split"
-                style="@style/online_video_tv_style"
-                android:text="欧洲"/>
-            <View
-                android:id="@+id/online_country_split"
-                android:layout_toRightOf="@id/online_country_tv"
-                android:layout_width="1dp"
-                android:layout_height="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@color/colorGray"/>
-            <TextView
-                android:id="@+id/online_sport_tv"
-                android:layout_toRightOf="@id/online_country_split"
-                style="@style/online_video_tv_style"
-                android:text="射门"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true">
-                <TextView
-                    style="@style/online_video_tv_style"
-                    android:text="@string/online_video_watched"/>
-                <TextView
-                    android:id="@+id/online_watched_time_tv"
-                    style="@style/online_video_tv_style"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="398"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/online_video_all"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"/>
-    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
-        android:id="@+id/online_list"
+    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/colorGray"
-        android:dividerHeight="20px"
-        android:scrollbars="none"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/white"/>
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.dl7.player.media.IjkPlayerView
+                android:id="@+id/player_view"
+                android:layout_width="match_parent"
+                android:layout_height="600px" />
+
+            <TextView
+                android:id="@+id/online_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="在线视频, 视频名称,视频名称,视频名称,视频名称123456789"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/online_grade_tv"
+                    style="@style/online_video_tv_style"
+                    android:text="初级" />
+
+                <View
+                    android:id="@+id/online_grade_split"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@id/online_grade_tv"
+                    android:background="@color/colorGray" />
+
+                <TextView
+                    android:id="@+id/online_country_tv"
+                    style="@style/online_video_tv_style"
+                    android:layout_toRightOf="@id/online_grade_split"
+                    android:text="欧洲" />
+
+                <View
+                    android:id="@+id/online_country_split"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@id/online_country_tv"
+                    android:background="@color/colorGray" />
+
+                <TextView
+                    android:id="@+id/online_sport_tv"
+                    style="@style/online_video_tv_style"
+                    android:layout_toRightOf="@id/online_country_split"
+                    android:text="射门" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/online_video_tv_style"
+                        android:text="@string/online_video_watched" />
+
+                    <TextView
+                        android:id="@+id/online_watched_time_tv"
+                        style="@style/online_video_tv_style"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="？" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/online_video_all"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <top.smartsport.www.widget.MyListView
+                android:id="@+id/online_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:divider="@color/colorGray"
+                android:dividerHeight="20px"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
