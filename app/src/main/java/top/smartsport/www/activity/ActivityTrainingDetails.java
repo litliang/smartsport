@@ -134,7 +134,7 @@ public class ActivityTrainingDetails extends BaseActivity {
             @Override
             public void onClick(View view) {
                 tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
-                setResult(RESULT_OK,new Intent().putExtra("isDelete",tofav).putExtra("position",position));
+                favImpl(view, tofav);
             }
         });
     }

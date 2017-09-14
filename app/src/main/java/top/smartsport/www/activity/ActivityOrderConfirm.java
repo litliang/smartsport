@@ -71,7 +71,7 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
         mPayBtn.setOnClickListener(this);
 
         MapConf.with(this).pair("total->confirm_pay_amount_tv").source(getIntent().getStringExtra("data"), this);
-        mAmountTv.setText(total);
+        mAmountTv.setText("￥"+total);
     }
 
     int i = 3;
