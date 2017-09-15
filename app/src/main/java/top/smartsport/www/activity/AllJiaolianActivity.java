@@ -54,6 +54,7 @@ public class AllJiaolianActivity extends BaseActivity {
                 }catch (Exception e){
                 }
 
+
             }
         });
     }

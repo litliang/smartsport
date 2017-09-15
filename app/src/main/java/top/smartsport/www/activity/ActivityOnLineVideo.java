@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,10 +21,9 @@ import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.OnLineVideoAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseComptActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.OnLineVideoInfo;
-import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
-import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 import top.smartsport.www.widget.MyListView;
 
 /**
@@ -31,7 +31,7 @@ import top.smartsport.www.widget.MyListView;
  */
 
 @ContentView(R.layout.activity_online_video)
-public class ActivityOnLineVideo extends BaseActivity {
+public class ActivityOnLineVideo extends BaseComptActivity {
 
     private ImageView mIv;
     private TextView mNameTv, mGradeTv, mCountryTv,
@@ -46,6 +46,7 @@ public class ActivityOnLineVideo extends BaseActivity {
 
     @Override
     protected void initView() {
+        back();
         fav();
         initUI();
 //        getData(true);
@@ -59,27 +60,27 @@ public class ActivityOnLineVideo extends BaseActivity {
 
 
     private void initUI() {
+
         id = getIntent().getStringExtra("id");
         mNameTv = (TextView) findViewById(R.id.online_name_tv);
         mGradeTv = (TextView) findViewById(R.id.online_grade_tv);
         mCountryTv = (TextView) findViewById(R.id.online_country_tv);
         mSportTv = (TextView) findViewById(R.id.online_sport_tv);
         mCountTv = (TextView) findViewById(R.id.online_watched_time_tv);
+        mListView = (MyListView) findViewById(R.id.online_list);
 
+        onLineVideoAdapter = new OnLineVideoAdapter(getBaseContext());
+        mListView.setAdapter(onLineVideoAdapter);
 
 
         callHttp(MapBuilder.build().add("action", "getVideoDetail").add("video_id", id).get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-                mListView = (MyListView) findViewById(R.id.online_list);
 
-                onLineVideoAdapter = new OnLineVideoAdapter(getBaseContext());
-                mListView.setAdapter(onLineVideoAdapter);
-                MapConf listconf = MapConf.with(getBaseContext()).pair("name->online_name_tv").pair("fileurl->player_view","","setToPlayerView").source(R.layout.adapter_bsdetail_shipin);
-                MapConf.with(getBaseContext()).pair("name->online_name_tv").pair("fileurl->online_iv").pair("other->online_list",listconf)
+                MapConf listconf = MapConf.with(getBaseContext()).pair("name->news_name").pair("fileurl->news_img").pair("ctime->news_date").source(R.layout.adapter_bsdetail_shipin);
+                MapConf.with(getBaseContext()).pair("detail-name->online_name_tv").pair("detail-fileurl->player_view","","setToPlayerView()").pair("other->online_list",listconf)
                         .source(((NetEntity)result).getData().toString(),getWindow().getDecorView()).toView();
                 ((ScrollView)findViewById(R.id.scrollview)).getChildAt(0).scrollTo(0,0);
-                mPlayerView = (IjkPlayerView) findViewById(R.id.player_view);
             }
 
             @Override
@@ -112,13 +113,4 @@ public class ActivityOnLineVideo extends BaseActivity {
 
     }
 
-    private void getData(final boolean refresh) {
-        for (int i = 0; i < 5; i++) {
-            info = new OnLineVideoInfo();
-            info.setViedoName("在线视频 " + i);
-            list.add(info);
-        }
-        onLineVideoAdapter.clear();
-        onLineVideoAdapter.addAll(list);
-    }
 }

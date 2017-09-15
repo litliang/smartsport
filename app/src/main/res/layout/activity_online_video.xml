@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="600px" />
 
+
             <TextView
                 android:id="@+id/online_name_tv"
                 android:layout_width="match_parent"

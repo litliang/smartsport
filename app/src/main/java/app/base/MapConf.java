@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
+import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -21,7 +23,6 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import app.base.action.Action;
-import cn.jiguang.share.wechat.Wechat;
 import intf.MapBuilder;
 
 /**
@@ -37,6 +37,11 @@ import intf.MapBuilder;
  */
 public class MapConf {
 
+    private static int defaultImg;
+
+    public  static void initDefaultInmg(int pdefaultInmg) {
+        defaultImg = pdefaultInmg;
+    }
 
     public Map<String, MapConf> confs = new TreeMap<String, MapConf>();
 
@@ -195,7 +200,6 @@ public class MapConf {
                     }
 
 
-
                 }
             }
         } catch (Exception e) {
@@ -285,7 +289,11 @@ public class MapConf {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mAction.put(p.split("->")[0].split(":")[0], action);
+        String name = p.split("->")[0];
+        if (name.contains(":")) {
+            name = name.split(":")[0];
+        }
+        mAction.put(name, action);
         return this;
     }
 
@@ -424,7 +432,15 @@ public class MapConf {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
 
-                Glide.with(context).load(value.toString()).into(new GlideDrawableImageViewTarget((ImageView) theView) {
+
+                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
+                DrawableRequestBuilder drawableRequestBuilder;
+                if (defaultImg != 0) {
+                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg);
+                } else {
+                    drawableRequestBuilder = drawableTypeRequest.clone();
+                }
+                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
 
                     @Override
                     public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {

@@ -494,10 +494,10 @@
         <!-- 在线视频 -->
         <activity
             android:name=".activity.ActivityOnLineVideo"
-            
             android:label="在线教案" />
 		<activity android:name=".activity.AllJiaolianActivity" android:label="全部教练"></activity>
-        <activity android:name=".activity.AllKechengActivity" android:label="全部课程" ></activity><activity android:name=".activity.ActivityDataAnalysis" android:label="数据分析"></activity>
+        <activity android:name=".activity.AllKechengActivity" android:label="全部课程" ></activity>
+        <activity android:name=".activity.ActivityDataAnalysis" android:label="数据分析"></activity>
         <!-- 服务协议-->
         <activity
             android:name=".activity.AboutServiceActivity"

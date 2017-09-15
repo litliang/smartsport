@@ -26,6 +26,7 @@ public class ViewInflater extends LayoutInflater {
 
     static {
         uiNames.put("WebView", "android.webkit.");
+//        uiNames.put("IjkPlayerView", "com.dl7.player.media.");
     }
 
     Set<String> layoutlog = new TreeSet<String>();

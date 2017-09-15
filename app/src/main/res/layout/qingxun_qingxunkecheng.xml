@@ -17,7 +17,7 @@
 
                 <TextView android:id="@+id/title" android:gravity="center_vertical" android:layout_width="match_parent"
                           android:layout_height="match_parent" android:maxLines="2"
-                          android:textStyle="bold" android:textSize="19dip" android:textColor="@color/black"
+                          android:textStyle="bold" android:textSize="16dip" android:textColor="@color/black"
                           android:text="青训课程标题 青训课程标题 青训课程标题 "/>
             </LinearLayout>
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
