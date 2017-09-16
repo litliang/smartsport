@@ -66,6 +66,8 @@ public class Fav extends Task {
                         toast = result.toString();
                     }else if(result instanceof NetEntity){
                         toast = ((NetEntity)result).getData().toString();
+                    }else{
+                        toast = result.toString();
                     }
                     Toast.makeText(view.getContext(), toast, Toast.LENGTH_SHORT).show();
                     allow = true;

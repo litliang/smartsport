@@ -12,10 +12,10 @@ import app.base.openaction.MapConfTask;
  * Created by admin on 2017/9/3.
  */
 
-public class Getprice extends MapConfTask {
+public class Replace extends MapConfTask {
 
     @Override
     public void run(View view, Object item, String name, Object value, Object casevalue, View convertView, Object... objects) {
-        ((TextView)view).setText(value.toString().replace("￥","").replace(".00","").replace("/年",""));
+        ((TextView)view).setText(value.toString().replace(objects[0].toString(),""));
     }
 }

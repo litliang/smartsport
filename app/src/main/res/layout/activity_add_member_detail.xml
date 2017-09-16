@@ -37,7 +37,7 @@
             android:gravity="center_vertical">
 
 
-            <ImageView
+            <top.smartsport.www.widget.RoundImageView
                 android:id="@+id/account_header"
                 android:layout_width="213px"
                 android:layout_height="213px"
@@ -101,8 +101,9 @@
                 android:layout_centerVertical="true"
                 android:background="@null"
                 android:minWidth="200px"
+                android:gravity="right"
 
-                android:textColor="@color/font_main"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/text_size" />
         </RelativeLayout>
 

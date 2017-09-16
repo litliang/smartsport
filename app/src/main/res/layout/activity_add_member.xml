@@ -30,7 +30,7 @@
             android:layout_height="0.5dp"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:tag="ShowInputbox(et_team_name,球队名称)"
+        <RelativeLayout
             android:id="@+id/teamname"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height"
@@ -81,7 +81,7 @@
             android:layout_marginTop="@dimen/margin_top"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:tag="ShowInputBox(et_main_coach_name,主教练名字)" android:id="@+id/majorcoach"
+        <RelativeLayout  android:id="@+id/majorcoach"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height"
             android:background="#ffffff"
@@ -117,7 +117,7 @@
             android:layout_height="0.5dp"
             android:background="@mipmap/line_h" />
 
-        <RelativeLayout android:tag="Showinputbox(et_coach1_name,助理教练1名字)" android:id="@+id/assit1"
+        <RelativeLayout  android:id="@+id/assit1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_height"
             android:paddingLeft="@dimen/margin_left"

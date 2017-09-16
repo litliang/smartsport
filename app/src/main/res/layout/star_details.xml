@@ -45,16 +45,16 @@
                     android:textColor="@color/font_main"
                     android:textSize="@dimen/text_size" />
 
-                <TextView android:visibility="gone"
+                <TextView
                     android:id="@+id/tv_team"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10px"
-                    android:text="所属球队名称"
+                    android:text="\\?"
                     android:textColor="@color/font_gray"
                     android:textSize="@dimen/text_size_notice" />
 
-                <TextView android:visibility="gone"
+                <TextView
                     android:id="@+id/tv_introduce_star"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

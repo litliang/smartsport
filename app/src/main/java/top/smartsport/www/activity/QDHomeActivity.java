@@ -10,6 +10,9 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.base.MapConf;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.JLAdapter;
 import top.smartsport.www.adapter.QYAdapter;
@@ -86,62 +89,80 @@ public class QDHomeActivity extends BaseActivity{
     private List<ZJInfo> zjInfoList = new ArrayList<>();
     private List<QYInfo> qyInfoList = new ArrayList<>();
     private void getData(){
-        JSONObject json = new JSONObject();
-        try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","getMyTeamDetail");
-            json.put("team_id",team_id);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        X.Post(url, json, new MyCallBack<String>() {
+
+        callHttp(MapBuilder.build().add("action", "getTeamHomePage").add("team_id", team_id).get(), new FunCallback() {
             @Override
-            protected void onFailure(String message) {
-                showToast(message);
+            public void onSuccess(Object result, List object) {
+                String data = ((NetEntity)result).getData().toString();
+                MapConf.with(getBaseContext()).pair("win->").pair("coach->qd_home_listView_jiaolian").conf(MapConf.with(getBaseContext()).pair("name->name").pair("title->job").pair("header_url->header").source(R.layout.item_adapter_zl)).source(data,getWindow().getDecorView()).toView();
             }
 
             @Override
-            public void onSuccess(NetEntity entity) {
-                Data data = entity.toObj(Data.class);
-                membersList = data.toMembers(Members.class);
-                for(int i = 0;i<membersList.size();i++){
-                    Members members = membersList.get(i);
-                    if(members.getType().equals("0")){//球员
-                        QYInfo qyInfo = new QYInfo();
-                        qyInfo.setId(members.getId());
-                        qyInfo.setName(members.getName());
-                        qyInfo.setNumber(members.getNumber());
-                        qyInfo.setPosition(members.getPosition());
-                        qyInfo.setType(members.getType());
-                        qyInfoList.add(qyInfo);
-                    }
-                    if(members.getType().equals("1")){//助教
-                        ZJInfo zjInfo = new ZJInfo();
-                        zjInfo.setId(members.getId());
-                        zjInfo.setName(members.getName());
-                        zjInfo.setPosition(members.getPosition());
-                        zjInfo.setNumber(members.getNumber());
-                        zjInfo.setType(members.getType());
-                        zjInfoList.add(zjInfo);
-                    }
+            public void onFailure(Object result, List object) {
 
-                    if(members.getType().equals("2")){
-                        JLInfo jlInfo = new JLInfo();
-                        jlInfo.setId(members.getId());
-                        jlInfo.setName(members.getName());
-                        jlInfo.setPosition(members.getPosition());
-                        jlInfo.setNumber(members.getNumber());
-                        jlInfo.setType(members.getType());
-                        jlInfoList.add(jlInfo);
-                    }
-                }
-                qyAdapter.addAll(qyInfoList);
-                zjAdapter.addAll(zjInfoList);
-                jlAdapter.addAll(jlInfoList);
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
 
             }
         });
+//        JSONObject json = new JSONObject();
+//        try {
+//            json.put("client_id",client_id);
+//            json.put("state",state);
+//            json.put("access_token",access_token);
+//            json.put("action","getMyTeamDetail");
+//            json.put("team_id",team_id);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        X.Post(url, json, new MyCallBack<String>() {
+//            @Override
+//            protected void onFailure(String message) {
+//                showToast(message);
+//            }
+//
+//            @Override
+//            public void onSuccess(NetEntity entity) {
+//                Data data = entity.toObj(Data.class);
+//                membersList = data.toMembers(Members.class);
+//                for(int i = 0;i<membersList.size();i++){
+//                    Members members = membersList.get(i);
+//                    if(members.getType().equals("0")){//球员
+//                        QYInfo qyInfo = new QYInfo();
+//                        qyInfo.setId(members.getId());
+//                        qyInfo.setName(members.getName());
+//                        qyInfo.setNumber(members.getNumber());
+//                        qyInfo.setPosition(members.getPosition());
+//                        qyInfo.setType(members.getType());
+//                        qyInfoList.add(qyInfo);
+//                    }
+//                    if(members.getType().equals("1")){//助教
+//                        ZJInfo zjInfo = new ZJInfo();
+//                        zjInfo.setId(members.getId());
+//                        zjInfo.setName(members.getName());
+//                        zjInfo.setPosition(members.getPosition());
+//                        zjInfo.setNumber(members.getNumber());
+//                        zjInfo.setType(members.getType());
+//                        zjInfoList.add(zjInfo);
+//                    }
+//
+//                    if(members.getType().equals("2")){
+//                        JLInfo jlInfo = new JLInfo();
+//                        jlInfo.setId(members.getId());
+//                        jlInfo.setName(members.getName());
+//                        jlInfo.setPosition(members.getPosition());
+//                        jlInfo.setNumber(members.getNumber());
+//                        jlInfo.setType(members.getType());
+//                        jlInfoList.add(jlInfo);
+//                    }
+//                }
+//                qyAdapter.addAll(qyInfoList);
+//                zjAdapter.addAll(zjInfoList);
+//                jlAdapter.addAll(jlInfoList);
+//
+//            }
+//        });
     }
 }

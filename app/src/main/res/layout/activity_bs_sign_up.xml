@@ -81,7 +81,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/darker_gray"
                         android:text="￥2000/年"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        android:visibility="gone"/>
                 </com.zhy.autolayout.AutoLinearLayout>
                 <View
                     android:layout_width="match_parent"

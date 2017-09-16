@@ -105,22 +105,24 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             public void onSuccess(NetEntity entity) {
                 String name = "begin";
                 int gridid = R.id.rumenjigrid;
-                setGrid(entity, name, gridid);
-                setGrid(entity, "primary", R.id.chujigrid);
-                setGrid(entity, "middle", R.id.zhongjigrid);
-                setGrid(entity, "senior", R.id.gaojigrid);
+                setGrid(entity, name, gridid,R.id.titlerumenji);
+                setGrid(entity, "primary", R.id.chujigrid,R.id.titlechuji);
+                setGrid(entity, "middle", R.id.zhongjigrid,R.id.titlezhongji);
+                setGrid(entity, "senior", R.id.gaojigrid,R.id.titlegaoji);
                 pullToRefreshScrollView.onRefreshComplete();
             }
 
             @Override
             public void onError(Throwable throwable, boolean b) {
+
                 super.onError(throwable, b);
+                pullToRefreshScrollView.onRefreshComplete();
             }
         });
 
     }
 
-    private void setGrid(NetEntity entity, String name, int gridid) {
+    private void setGrid(NetEntity entity, String name, int gridid, int titleji) {
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.qingxun_zaixianjiaoan);
         adaptinfo.addObjectFields(new String[]{"cover", "hours", "title"});
@@ -143,19 +145,24 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
                 ((TextView) convertView.findViewById(R.id.xueqi_hours)).setText(time);
             }
         };
-
-        List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink(name, entity.getData().toString()).toString());
+        String type = JsonUtil.findJsonLink(name, entity.getData().toString()).toString();
+        if (type.equals("")) {
+            ((MyGridView) root.findViewById(gridid)).setVisibility(View.GONE);
+            root.findViewById(titleji).setVisibility(View.GONE  );
+            return;
+        }
+        List list = (List) JsonUtil.extractJsonRightValue(type);
 
         mapadapter.setItemDataSrc(new MapContent(list));
         ((MyGridView) root.findViewById(gridid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String isvip = (String) SPUtils.get(view.getContext(), "is_vip","");
+                String isvip = (String) SPUtils.get(view.getContext(), "is_vip", "");
 
-                if(!isvip.equals("1")){
+                if (!isvip.equals("1")) {
                     showDialog((Activity) view.getContext());
-                }else {
-                    startActivity(new Intent(getActivity(),ActivityOnLineVideo.class).putExtra("id",((Map)adapterView.getItemAtPosition(i)).get("id").toString()));
+                } else {
+                    startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
                 }
 //                startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
                 ;
@@ -165,6 +172,7 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
     }
 
     public Dialog dialog;
+
     public void showDialog(final Activity ay) {
 
         DialogUtil.DialogInfo dialogInfo = new DialogUtil.DialogInfo(ay);
@@ -182,7 +190,7 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialog.dismiss();
                 dialog.cancel();
-                ay.startActivity(new Intent(ay,MyHYActivity.class));
+                ay.startActivity(new Intent(ay, MyHYActivity.class));
             }
         };
 

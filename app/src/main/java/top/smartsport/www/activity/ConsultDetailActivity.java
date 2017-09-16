@@ -1,9 +1,12 @@
 package top.smartsport.www.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,6 +27,7 @@ import top.smartsport.www.actions.Showinputbox;
 import top.smartsport.www.adapter.CommentAdapter;
 import top.smartsport.www.adapter.ConsultAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
@@ -128,6 +132,13 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
         getData();
+        ((ListView)lvConsult).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getBaseContext(), ConsultDetailActivity.class).putExtra("id", ((ZXInfoNews) adapterView.getItemAtPosition(i)).getId() + ""));
+
+            }
+        });
     }
     @Override
     public void favImpl(View view,boolean unfav) {

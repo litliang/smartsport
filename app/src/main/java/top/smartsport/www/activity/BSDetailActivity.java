@@ -121,7 +121,7 @@ public class BSDetailActivity extends BaseActivity {
         String s = (String) getObj("states");
 
 
-        if (null != s) {Map map = MapBuilder.build().add("1","报名中").add("3","已结束").get();
+        if (null != s) {Map map = MapBuilder.build().add("1","报名中").add("3","已结束").add("2","进行中").get();
             states = map.get(s).toString();
             if (states.equals("报名中")) {
                 bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
@@ -248,10 +248,11 @@ public class BSDetailActivity extends BaseActivity {
             json.put("access_token", access_token);
             json.put("action", "getMatchDetail");
             json.put("id", id);
+
             //‘view_img’ : 1,  //选填 为1时显示全部赛事图片，不填默认显示4张
             //‘view_video’ : 1,  //选填 为1时显示全部赛事视频，不填默认显示6部
-//            json.put("view_img","");
-//            json.put("view_video","");
+            json.put("view_img","1");
+            json.put("view_video","1");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -304,7 +305,7 @@ public class BSDetailActivity extends BaseActivity {
 //                        }
 //                    });
 //                }
-                picAdapter.addAll(picInfoList);
+                picAdapter.addAll(picInfoList.subList(0,3));
                 if (picAdapter.getCount() == 0) {
                     findViewById(R.id.pictitle).setVisibility(View.GONE);
                 }

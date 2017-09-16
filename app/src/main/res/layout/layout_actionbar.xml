@@ -11,8 +11,9 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:focusable="true"
-        android:paddingLeft="50px"
+        android:layout_marginLeft="30px"
         android:text="返回"
+        android:textSize="38px"
         android:gravity="center_vertical"
         android:textColor="@color/white"
         android:drawableLeft="@drawable/arrow_left" />

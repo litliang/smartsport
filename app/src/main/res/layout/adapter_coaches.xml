@@ -11,6 +11,7 @@
         android:layout_height="400px"
         android:layout_marginRight="30px"
         android:src="@mipmap/login_logo"
+        android:scaleType="fitXY"
         />
 
     <TextView

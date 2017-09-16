@@ -1,5 +1,7 @@
 package app.base;
 
+import intf.JsonUtil;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -20,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,15 +34,19 @@ import java.util.TreeSet;
 
 import app.base.action.Action;
 import intf.MapBuilder;
+import top.smartsport.www.utils.ImageUtil;
 
 /**
  * Created by admin on 2017/8/16.
  */
 public class MapConf {
 
+    private Map<String, String> vmap = new TreeMap<String, String>();
+
+
     private static int defaultImg;
 
-    public  static void initDefaultInmg(int pdefaultInmg) {
+    public static void initDefaultInmg(int pdefaultInmg) {
         defaultImg = pdefaultInmg;
     }
 
@@ -164,7 +171,7 @@ public class MapConf {
                 return;
             }
             String name;
-            Object value;
+            Object value = null;
             if (item instanceof Map) {
                 Map<String, Object> items = (Map<String, Object>) item;
                 for (int i = 0; i < this.fieldnames.size(); i++) {
@@ -187,16 +194,38 @@ public class MapConf {
             } else if (item instanceof String) {
                 for (int i = 0; i < this.fieldnames.size(); i++) {
                     name = this.fieldnames.get(i);
-                    String n;
-                    if (name.contains(":")) {
-                        n = name.split(":")[0];
+
+                    if (name.contains(",")) {
+                        Map values = new TreeMap();
+                        String[] names = name.split(",");
+                        for (String ne : names) {
+
+                            String n;
+                            if (ne.contains(":")) {
+                                n = ne.split(":")[0];
+                            } else {
+                                n = ne;
+                            }
+                            value = JsonUtil.findJsonLink(n, item);
+                            value = JsonUtil.extractJsonRightValue(value.toString());
+                            values.put(n,value);
+                        }
+                        if (values != null) {
+                            findAndBindView(convertView, item, name, values, i);
+                        }
+
                     } else {
-                        n = name;
-                    }
-                    value = JsonUtil.findJsonLink(n, item);
-                    value = JsonUtil.extractJsonRightValue(value.toString());
-                    if (value != null) {
-                        findAndBindView(convertView, item, name, value, i);
+                        String n;
+                        if (name.contains(":")) {
+                            n = name.split(":")[0];
+                        } else {
+                            n = name;
+                        }
+                        value = JsonUtil.findJsonLink(n, item);
+                        value = JsonUtil.extractJsonRightValue(value.toString());
+                        if (value != null) {
+                            findAndBindView(convertView, item, name, value, i);
+                        }
                     }
 
 
@@ -297,6 +326,7 @@ public class MapConf {
         return this;
     }
 
+
     private void toMap(Map map, ViewGroup vg) {
         for (int i = 0; i < vg.getChildCount(); i++) {
             View view = vg.getChildAt(i);
@@ -375,11 +405,18 @@ public class MapConf {
         if (value != null && value.toString().toLowerCase().equals("null")) {
             value = "";
         }
+        if(value instanceof  Map){
+            if (mAction.containsKey(name)) {
+                mAction.get(name).addParams(0, Arrays.asList(item, name, value, "", convertView)).setEventView(theView).innerrun();
+            }
+            return false;
+        }
         String casevalue = "";
         String rawname = name;
         if (name.contains(":")) {
             rawname = name.split(":")[0];
         }
+
         if (mSwitchcase.containsKey(rawname)) {
             if (mSwitchcase.get(rawname).containsKey(value.toString())) {
                 casevalue = value.toString();
@@ -395,12 +432,22 @@ public class MapConf {
             String[] ns = name.toString().split(":");
             if (!(ns[1].contains("(") && ns[1].contains(")") && ns[1].contains("#"))) {
                 if (ns[1].contains("%s")) {
-                    value = ns[1].replace("%s", value.toString());
+                    value = ns[1].replaceAll("%s", value.toString());
                 }
+
+                String fepr = ns[1];
+                int l = -1, r = -1;
+                while ((l = fepr.indexOf("%")) != -1 && (r = fepr.indexOf("%", l + 1)) != -1) {
+                    String inner = fepr.substring(l + 1, r);
+                    if (vmap.containsKey(inner)) {
+                        value = ns[1].replaceAll("%" + inner + "%", vmap.get(inner).toString());
+                    }
+                }
+
             }
         }
 
-
+        vmap.put(rawname, value.toString());
         theView.setVisibility(View.VISIBLE);
         StyleBox styleBox = null;
         if (theView instanceof WebView) {
@@ -431,22 +478,21 @@ public class MapConf {
             } else if (value instanceof Drawable) {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
-
-
-                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
-                DrawableRequestBuilder drawableRequestBuilder;
-                if (defaultImg != 0) {
-                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg);
-                } else {
-                    drawableRequestBuilder = drawableTypeRequest.clone();
-                }
-                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
-
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation);
-                    }
-                });
+                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+//                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
+//                DrawableRequestBuilder drawableRequestBuilder;
+//                if (defaultImg != 0) {
+//                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg);
+//                } else {
+//                    drawableRequestBuilder = drawableTypeRequest.clone();
+//                }
+//                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
+//
+//                    @Override
+//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+//                        super.onResourceReady(resource, animation);
+//                    }
+//                });
             }
 
         } else if (theView instanceof CheckBox) {

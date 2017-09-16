@@ -37,6 +37,12 @@ public class MyHYActivity extends BaseActivity{
             findViewById(R.id.btn_buy).setVisibility(View.INVISIBLE);
             findViewById(R.id.btn_buy).setEnabled(false);
         }
+        findViewById(R.id.btn_buy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","199"),0);
+            }
+        });
     }
 
     @Override
@@ -71,11 +77,6 @@ public class MyHYActivity extends BaseActivity{
                 }
             }
         });
-        findViewById(R.id.btn_buy).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","199"),0);
-            }
-        });
+
     }
 }

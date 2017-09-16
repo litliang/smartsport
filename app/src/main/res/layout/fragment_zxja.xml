@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <TextView android:id="@+id/titlerumenji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
@@ -22,7 +22,7 @@
                     android:layout_marginBottom="20px"
                 android:text="入门级"
                 android:textColor="@color/black"
-                android:textSize="58px" />
+                android:textSize="48px" />
 
             <top.smartsport.www.widget.MyGridView
                 android:id="@+id/rumenjigrid"
@@ -32,7 +32,7 @@
                 android:gravity="center_horizontal"
                 android:scrollbars="none" />
 
-            <TextView
+            <TextView android:id="@+id/titlechuji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="20px"
                 android:text="初级"
                 android:textColor="@color/black"
-                android:textSize="58px" />
+                android:textSize="48px" />
 
             <top.smartsport.www.widget.MyGridView
                 android:id="@+id/chujigrid"
@@ -50,7 +50,7 @@
                 android:numColumns="2"
                 android:scrollbars="none" />
 
-            <TextView
+            <TextView android:id="@+id/titlezhongji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
@@ -59,7 +59,7 @@
                 android:layout_marginBottom="20px"
                 android:text="中级"
                 android:textColor="@color/black"
-                android:textSize="58px" />
+                android:textSize="48px" />
 
             <top.smartsport.www.widget.MyGridView
                 android:id="@+id/zhongjigrid"
@@ -68,7 +68,7 @@
                 android:numColumns="2"
                 android:scrollbars="none" />
 
-            <TextView
+            <TextView android:id="@+id/titlegaoji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40px"
@@ -77,7 +77,7 @@
                 android:layout_marginBottom="20px"
                 android:text="高级"
                 android:textColor="@color/black"
-                android:textSize="58px" />
+                android:textSize="48px" />
 
             <top.smartsport.www.widget.MyGridView
                 android:id="@+id/gaojigrid"

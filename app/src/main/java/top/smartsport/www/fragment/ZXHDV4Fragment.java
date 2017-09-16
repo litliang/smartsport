@@ -1,10 +1,12 @@
 package top.smartsport.www.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
@@ -49,11 +52,6 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         View headerView = LayoutInflater.from(getContext()).inflate(R.layout.head_information,null);
         ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("活动资讯");
         mBanner = (Banner) headerView.findViewById(R.id.banner);
-        int screenWidth = ScreenUtils.getWidth(context);
-        int screenHeight = ScreenUtils.getHeight(context);
-        int bannerHeight = (int) ((float)ScreenUtils.dip2px(context,250)*(float)screenWidth/(float)screenHeight);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,bannerHeight);
-        mBanner.setLayoutParams(params);
         mBannerAdapter = new ZXBannerAdapter();
         mBanner.setAdapter(mBannerAdapter);
         ListView listView = mPullToRefreshView.getRefreshableView();
@@ -72,6 +70,15 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
                 getData(false);
             }
         });
+        ((ListView)mPullToRefreshView.getRefreshableView()).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((HDZXInfo) adapterView.getItemAtPosition(i)).getId() + ""));
+
+            }
+        });
+
+
     }
 
     private void getData(final boolean isRefresh) {

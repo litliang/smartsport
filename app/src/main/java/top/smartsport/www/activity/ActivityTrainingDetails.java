@@ -115,7 +115,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("surplus:还剩%s个名额->details_quota_tv")
                         .pair("sell_price:￥%s/年->details_amount_tv")
                         .pair("coach_name->details_name_tv")
-                        .pair("cover_url->details_title_iv")
+                        .pair("cover_url->details_title_iv","","scaleToWidth()")
                         .pair("coach_header->details_icon_iv")
                         .pair("coach_team->details_school_name_tv")
                         .pair("schedules->details_time_tv")

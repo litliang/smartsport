@@ -22,6 +22,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,13 @@ import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.AppUtil;
+import top.smartsport.www.utils.FileHelper;
+import top.smartsport.www.xutils3.MyCallBack;
+import top.smartsport.www.xutils3.X;
 
 /**
  * Created by Administrator on 2017/8/17.
@@ -73,7 +80,7 @@ public class AddMemberDetailActivity extends BaseActivity {
         if (!TextUtils.isEmpty(member)){
             list =(List) intf.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("player",member));
             Map map = (Map) list.get(position);
-            MapConf.build().with(AddMemberDetailActivity.this).pair("name->et_team_name").pair("position->weizhi").pair("number->haoma").source(map, getWindow().getDecorView()).toView();
+            MapConf.build().with(AddMemberDetailActivity.this).pair("header_url->account_header").pair("name->et_team_name").pair("position->weizhi").pair("number->haoma").source(map, getWindow().getDecorView()).toView();
             setTitle("编辑球员");
             add.setText("确定");
         }
@@ -119,6 +126,9 @@ public class AddMemberDetailActivity extends BaseActivity {
             m.add("position", weizhi.getText().toString());
         if (!TextUtils.isEmpty(member)){
             m.add("member_id",((Map)list.get(position)).get("id"));
+        }
+        if(imageid!=null){
+            m.add("header",imageid);
         }
             callHttp(m.get(), func);
     }
@@ -192,10 +202,41 @@ public class AddMemberDetailActivity extends BaseActivity {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 iconBitMap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                 mIcon.setImageBitmap(iconBitMap);
+                postIcon(saveIcon(baos), new FunCallback() {
+                    @Override
+                    public void onSuccess(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onCallback(Object result, List object) {
+
+                    }
+                });
             }
         }
     }
+    private String saveIcon(ByteArrayOutputStream baos) {
+        //头像存本地
+        File baseFile = FileHelper.getBaseFile(FileHelper.PATH_PHOTOGRAPH);
+        if (baseFile == null) {
+            Toast.makeText(this, "SD卡不存在，请插入SD卡",
+                    Toast.LENGTH_LONG).show();
+            return "";
+        }
+        FileHelper.saveBitmap(iconBitMap, ICON_NAME, baseFile);
+        String imagePath = Environment
+                .getExternalStorageDirectory()
+                + File.separator
+                + FileHelper.PATH_PHOTOGRAPH + ICON_NAME;
+        return imagePath;
 
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -203,5 +244,44 @@ public class AddMemberDetailActivity extends BaseActivity {
             iconBitMap.recycle();
         }
     }
+    String imageid;
+    private void postIcon(final String fileName,FunCallback funCallback) {
+        RegInfo regInfo = RegInfo.newInstance();
+        TokenInfo tokenInfo = TokenInfo.newInstance();
 
+        String client_id = regInfo.getApp_key();
+        String state = regInfo.getSeed_secret();
+        String url = regInfo.getSource_url();
+        String access_token = tokenInfo.getAccess_token();
+        File file = new File(fileName);
+        Map<String,Object> map = new HashMap<>();
+        map.put("client_id",client_id);
+        map.put("state",state);
+        map.put("access_token",access_token);
+        map.put("action","uploadImg");
+        map.put("image", file);
+
+        X.Post(url, map, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+                Toast.makeText(AddMemberDetailActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(NetEntity entity) {
+                String entity_data = entity.getStatus();
+                if (entity_data.equals("true")){
+                    Toast.makeText(AddMemberDetailActivity.this, getResources().getString(R.string.icon_post_success), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(AddMemberDetailActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
+                }
+                imageid = entity.getImg_id();
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                super.onError(throwable, b);
+            }
+        });
+    }
 }

@@ -61,10 +61,10 @@
             android:gravity="center_vertical">
 
 
-            <ImageView
+            <top.smartsport.www.widget.RoundImageView
                 android:id="@+id/wd_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="213px"
+                android:layout_height="213px"
                 android:layout_marginLeft="50px"
                 android:src="@mipmap/head_default" />
 

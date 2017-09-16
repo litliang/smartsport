@@ -109,7 +109,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="￥1999/年"
                     android:textColor="@android:color/holo_red_light"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/sign_up_old_price_tv"
@@ -117,7 +117,8 @@
                     android:layout_height="wrap_content"
                     android:text="￥2000/年"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone"/>
             </com.zhy.autolayout.AutoLinearLayout>
 
             <View

@@ -116,7 +116,7 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
         MapConf.with(getBaseContext()).pair("details_title_tv->sign_up_title_tv")
                 .pair("details_time_tv->sign_up_hint_date_tv")
                 .pair("details_training_ground_tv->sign_up_hint_location_tv")
-                .pair("details_amount_tv->sign_up_price_tv").pair("details_amount_tv->sign_up_total_price_tv","","getprice()")
+                .pair("details_amount_tv->sign_up_price_tv","","replace(/年)").pair("details_amount_tv->sign_up_total_price_tv","","replace(/年)")
                 .source(parammap,this).toView();
 
     }

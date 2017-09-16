@@ -26,6 +26,7 @@ public class ViewInflater extends LayoutInflater {
 
     static {
         uiNames.put("WebView", "android.webkit.");
+        uiNames.put("CircleImageView", "android.support.v4.widget.");
 //        uiNames.put("IjkPlayerView", "com.dl7.player.media.");
     }
 

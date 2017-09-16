@@ -15,7 +15,12 @@ import app.base.framework.Init;
 
 public class Action extends Epr {
 
-    public static Action parseAction(Action action) throws Exception {
+
+    public static Action parseAction(String action)  {
+        return new Action(action);
+    }
+
+        public static Action parseAction(Action action) throws Exception {
         String raw = action.raw;
         String parameters = action.parameters;
         String taskname = action.taskname;
@@ -122,6 +127,7 @@ public class Action extends Epr {
 
 
     public static Action parseParams(Action action) {
+
         String param = action.parameters;
         List<Epr> ps = new ArrayList<Epr>();
         String[] params = param.split(",");

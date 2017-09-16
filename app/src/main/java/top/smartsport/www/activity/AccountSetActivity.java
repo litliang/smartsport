@@ -19,9 +19,13 @@ import org.xutils.view.annotation.ViewInject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import app.base.JsonUtil;
 import app.base.MapConf;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
@@ -76,32 +80,58 @@ public class AccountSetActivity extends BaseActivity {
         access_token = tokenInfo.getAccess_token();
         String data = (String) SPUtils.get(getBaseContext()
                 , "getUserInfo", "");
-        MapConf.build().addPair("header_url", R.id.account_header).addPair("username", R.id.username).addPair("truename", R.id.truename).addPair("age", R.id.account_age).addPair("sex", R.id.account_sex).addPair("height", R.id.account_height).addPair("weight", R.id.account_weight).addPair("leg", R.id.leg).addPair("address", R.id.account_jz)
-//                .addPair("soccer_age",R.id.soccer_age")"" +
-                .addTackle(new MapConf.Tackle() {
-                    @Override
-                    public void tackleBefore(Object item, Object value, String name, View convertView, View theView) {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getUserInfo").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
 
-                    }
+            }
 
-                    @Override
-                    public void tackleAfter(Object item, Object value, String name, View convertView, View theView) {
-                        if (name.equals("height")) {
-                            value += " cm";
-                        } else if (name.equals("weight")) {
-                            value += " kg";
-                        } else if (name.equals("sex")) {
-                            if (value.equals("0")) {
-                                value = "女";
-                            } else if (value.equals("1")) {
-                                value = "男";
-                            }
-                        }
-                        if(theView instanceof  TextView) {
-                            ((TextView) theView).setText(value.toString());
-                        }
-                    }
-                }).with(getBaseContext()).source(app.base.JsonUtil.extractJsonRightValue(data), getWindow().getDecorView()).toView();
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+                String data = ((NetEntity)result).getData().toString();
+
+                SPUtils.put(getBaseContext(), "getUserInfo", data);
+                SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
+                MapConf.with(getBaseContext()).pair("username->username").pair("username->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
+                        .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
+                        .pair("header_url->account_header")
+                        .pair("soccer_age->account_ql")
+                        .pair("address->account_jz")
+                        .source(data, getWindow().getDecorView()).toView();
+            }
+        });
+
+//        MapConf.build().addPair("header_url", R.id.account_header).addPair("username", R.id.username).addPair("truename", R.id.truename).addPair("age", R.id.account_age).addPair("sex", R.id.account_sex).addPair("height", R.id.account_height).addPair("weight", R.id.account_weight).addPair("leg", R.id.leg).addPair("address", R.id.account_jz)
+////                .addPair("soccer_age",R.id.soccer_age")"" +
+//                .addTackle(new MapConf.Tackle() {
+//                    @Override
+//                    public void tackleBefore(Object item, Object value, String name, View convertView, View theView) {
+//
+//                    }
+//
+//                    @Override
+//                    public void tackleAfter(Object item, Object value, String name, View convertView, View theView) {
+//                        if (name.equals("height")) {
+//                            value += " cm";
+//                        } else if (name.equals("weight")) {
+//                            value += " kg";
+//                        } else if (name.equals("sex")) {
+//                            if (value.equals("0")) {
+//                                value = "女";
+//                            } else if (value.equals("1")) {
+//                                value = "男";
+//                            }
+//                        }
+//                        if(theView instanceof  TextView) {
+//                            ((TextView) theView).setText(value.toString());
+//                        }
+//                    }
+//                }).with(getBaseContext()).source(app.base.JsonUtil.extractJsonRightValue(data), getWindow().getDecorView()).toView();
 
         mSetIconRl.setOnClickListener(new View.OnClickListener() {
             @Override

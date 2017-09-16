@@ -35,7 +35,7 @@
                     >
 
 
-                    <ImageView
+                    <top.smartsport.www.widget.RoundImageView
                         android:id="@+id/account_header"
                         android:layout_width="213px"
                         android:layout_height="213px"
@@ -375,18 +375,20 @@
                         android:layout_marginLeft="60px"
                         android:text="居住地"
                         android:textColor="@color/black"
-                        android:textSize="45px" />
+                        android:textSize="45px"
+                        android:id="@+id/textView3" />
 
                     <TextView
                         android:id="@+id/account_jz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="20px"
-                        android:layout_toLeftOf="@+id/account_left_arrow8"
                         android:text="上海杨浦区"
                         android:textColor="@color/text_gray"
-                        android:textSize="45px" />
+                        android:textSize="45px"
+                        android:layout_alignBaseline="@+id/textView3"
+                        android:layout_alignBottom="@+id/textView3"
+                        android:layout_toLeftOf="@+id/account_left_arrow8"
+                        android:layout_toStartOf="@+id/account_left_arrow8" />
 
                     <ImageView
                         android:id="@+id/account_left_arrow8"

@@ -2,7 +2,6 @@ package top.smartsport.www.base;
 
 import android.Manifest;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,17 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import intf.JsonUtil;
-
 import com.zhy.autolayout.AutoLayoutActivity;
-
-import app.base.action.ViewInflater;
-import app.base.framework.Init;
-import cn.jiguang.share.android.api.ShareParams;
-import intf.FunCallback;
+import com.zhy.autolayout.AutoLayoutCompactActivity;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 import org.xutils.x;
 
 import java.io.Serializable;
@@ -39,14 +31,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import intf.MapBuilder;
+import app.base.action.ViewInflater;
+import cn.jiguang.share.android.api.ShareParams;
+import intf.FunCallback;
 import top.smartsport.www.R;
 import top.smartsport.www.actions.Fav;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.dialog.CustomProgressDialog;
-import top.smartsport.www.listener.OnClickThrottleListener;
 import top.smartsport.www.utils.ActivityStack;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
@@ -55,40 +48,9 @@ import top.smartsport.www.xutils3.X;
  * Created by Aaron on 2017/6/30.
  */
 
-public abstract class BaseActivity extends AutoLayoutActivity {
-
-    public String initData;
-
-    public String getInitData() {
-        return initData;
-    }
-
-    public void setInitData(String initData) {
-        this.initData = initData;
-    }
-
-    public String getField(String s) {
-        Object o = JsonUtil.findJsonLink(s, getInitData());
-        return o==null?"null":o.toString();
-    }
-
+public abstract class BaseComptActivity extends AutoLayoutCompactActivity {
     public CustomProgressDialog pd;
 
-    public String getTextString(int id) {
-        return ((TextView) findViewById(id)).getText().toString();
-    }
-
-    public TextView getTextView(int id) {
-        return (TextView) findViewById(id);
-    }
-
-    public ImageView getImageView(int id) {
-        return (ImageView) findViewById(id);
-    }
-
-    public void setClick(int id, View.OnClickListener onclicklitener) {
-        findViewById(id).setOnClickListener(onclicklitener);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +127,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
             @Override
             public void onClick(View view) {
-                favImpl(view, tofav);
+                favImpl(view,tofav);
                 tofav = !tofav;
             }
 
@@ -180,8 +142,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     boolean tofav = true;
     public Fav fav = new Fav();
-
-    public void favImpl(final View view, boolean unfav) {
+    public void favImpl(final View view,boolean unfav){
 
     }
 
@@ -203,14 +164,9 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
 
-        super.setContentView(new ViewInflater(this).inflate(layoutResID, null));
+        super.setContentView(new ViewInflater(this).inflate(layoutResID,null));
     }
-
     public static void callHttp(final Map map, final FunCallback funcall) {
-        callHttp(map, null, funcall);
-    }
-
-    public static void callHttp(final Map map, final BaseActivity aty, final FunCallback funcall) {
         RegInfo regInfo = RegInfo.newInstance();
         TokenInfo tokenInfo = TokenInfo.newInstance();
 
@@ -235,9 +191,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             protected void onFailure(String message) {
                 funcall.<String>onFailureConnected(message);
                 funcall.<NetEntity>onCallbackConnected(message);
-                if (aty != null) {
-                    aty.showToast(message);
-                }
             }
 
             @Override
@@ -249,11 +202,8 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             @Override
             public void onError(Throwable throwable, boolean b) {
                 super.onError(throwable, b);
-                funcall.onCallbackConnected(throwable);
-//                funcall.onCallbackConnected(throwable);
+               // funcall.onCallbackConnected(throwable);
             }
-
-
         });
     }
 
