@@ -517,6 +517,11 @@
         <activity
             android:name=".activity.ActivityChooseIcon"
             android:theme="@style/my_dialog" />
+
+        <!-- 购买定制视频 -->
+        <activity
+            android:name=".activity.ActivityBuyCustomVedio"
+            android:theme="@style/my_dialog" />
     </application>
 
 </manifest>
