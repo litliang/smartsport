@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.jiguang.share.android.api.Platform;
 import intf.JsonUtil;
 
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -139,8 +140,23 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     public enum Sharetype {
         TEXT, IMAGE, URl, VIDEO
     }
+    public void setShareUrl(String title,String txt,String url){
+        ShareParams shareParams = new ShareParams();
+        shareParams.setTitle(title);
+        shareParams.setText(txt);
+        shareParams.setShareType(Platform.SHARE_VIDEO);
+        String uri = "https://ssapi.baibaobike.com/share.html?tiele="+title+"&content="+txt+"&url="+url;
+        shareParams.setUrl(uri);
+        setShareParams(shareParams, BaseActivity.Sharetype.URl);
+    }
+    public void setShareText(String txt){
+        ShareParams shareParams = new ShareParams();
+        shareParams.setShareType(Platform.SHARE_TEXT);
+        shareParams.setText(txt);//必须
 
-    public void share(ShareParams shareParams, final Sharetype type) {
+        setShareParams(shareParams, Sharetype.TEXT);
+    }
+    public void setShareParams(ShareParams shareParams, final Sharetype type) {
         if (getTopBar() == null) {
             return;
         }
@@ -249,7 +265,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
             @Override
             public void onError(Throwable throwable, boolean b) {
                 super.onError(throwable, b);
-                funcall.onCallbackConnected(throwable);
+                funcall.onCallbackConnected("发生点小问题："+throwable.getMessage());
 //                funcall.onCallbackConnected(throwable);
             }
 

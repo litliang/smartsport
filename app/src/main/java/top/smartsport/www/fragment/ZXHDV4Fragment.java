@@ -19,6 +19,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import app.base.action.ViewInflater;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
@@ -49,7 +50,7 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     @Override
     protected void initView() {
         Context context = getContext();
-        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.head_information,null);
+        View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information,null);
         ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("活动资讯");
         mBanner = (Banner) headerView.findViewById(R.id.banner);
         mBannerAdapter = new ZXBannerAdapter();

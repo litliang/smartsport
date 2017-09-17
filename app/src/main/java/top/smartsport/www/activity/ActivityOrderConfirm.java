@@ -31,6 +31,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.utils.ActivityStack;
 
 /**
  * Created by bajieaichirou on 17/8/17.
@@ -51,6 +52,7 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
     }
 
     Map map;
+
     private void initUI() {
 
         map = (Map) getIntent().getSerializableExtra("data");
@@ -71,7 +73,7 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
         mPayBtn.setOnClickListener(this);
 
         MapConf.with(this).pair("total->confirm_pay_amount_tv").source(getIntent().getStringExtra("data"), this);
-        mAmountTv.setText("￥"+total);
+        mAmountTv.setText("￥" + total);
     }
 
     int i = 3;
@@ -128,8 +130,9 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
                             new Handler(Looper.getMainLooper(), new Handler.Callback() {
                                 @Override
                                 public boolean handleMessage(Message message) {
-
-
+                                    ActivityStack.getInstance().finishActivity(ActivityOrderConfirm.class);
+                                    ActivityStack.getInstance().finishActivity(ActivitySignUp.class);
+                                    ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
                                     return false;
                                 }
                             }).sendEmptyMessage(0);

@@ -12,6 +12,10 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ActivityOrderConfirm;
+import top.smartsport.www.activity.ActivitySignUp;
+import top.smartsport.www.activity.BSSignUpActivity;
+import top.smartsport.www.utils.ActivityStack;
 
 /**
  * Created by admin on 2017/9/1.
@@ -48,6 +52,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
      */
     @Override
     public void onResp(BaseResp resp) {
+        ActivityStack.getInstance().finishActivity(ActivityOrderConfirm.class);
+        ActivityStack.getInstance().finishActivity(ActivitySignUp.class);
+        ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
         finish();
     }
 }

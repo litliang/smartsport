@@ -51,7 +51,7 @@ public class Fav extends Task {
                 public void onSuccess(Object result, List object) {
                     favIcon(view, true);
                     isinit = !isinit;
-
+                    Toast.makeText(view.getContext(), "已收藏", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -61,15 +61,6 @@ public class Fav extends Task {
 
                 @Override
                 public void onCallback(Object result, List object) {
-                    String toast = "";
-                    if(result instanceof String){
-                        toast = result.toString();
-                    }else if(result instanceof NetEntity){
-                        toast = ((NetEntity)result).getData().toString();
-                    }else{
-                        toast = result.toString();
-                    }
-                    Toast.makeText(view.getContext(), toast, Toast.LENGTH_SHORT).show();
                     allow = true;
                 }
             });
@@ -81,6 +72,8 @@ public class Fav extends Task {
                 public void onSuccess(Object result, List object) {
                     favIcon(view, false);
                     isinit = !isinit;
+                    Toast.makeText(view.getContext(), "已为您取消", Toast.LENGTH_SHORT).show();
+
                 }
 
                 @Override
@@ -90,7 +83,6 @@ public class Fav extends Task {
 
                 @Override
                 public void onCallback(Object result, List object) {
-                    Toast.makeText(view.getContext(), result.toString(), Toast.LENGTH_SHORT).show();
 
                     allow = true;
                 }

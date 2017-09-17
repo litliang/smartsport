@@ -192,6 +192,46 @@ public class AddMemberActivity extends BaseActivity {
 
             }
         });
+        setClick(R.id.et_team_name, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Showinputbox().showDialog((Activity) view.getContext(), getTextString(R.id.et_team_name), "设置您的球队名字", new FunCallback() {
+                    @Override
+                    public void onSuccess(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Object result, List object) {
+
+                    }
+
+                    @Override
+                    public void onCallback(Object result, List object) {
+                        getTextView(R.id.et_team_name).setText(result.toString());
+                        MapBuilder builder = MapBuilder.build().add("action", "editMyTeam").add("team_id", id).add("team_name", getTextString(R.id.et_team_name));
+
+
+                        callHttp(builder.get(), new FunCallback() {
+                            @Override
+                            public void onSuccess(Object result, List object) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Object result, List object) {
+
+                            }
+
+                            @Override
+                            public void onCallback(Object result, List object) {
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
         setClick(R.id.majorcoach, new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -478,7 +478,8 @@ public class MapConf {
             } else if (value instanceof Drawable) {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
-                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+
+                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
 //                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
 //                DrawableRequestBuilder drawableRequestBuilder;
 //                if (defaultImg != 0) {

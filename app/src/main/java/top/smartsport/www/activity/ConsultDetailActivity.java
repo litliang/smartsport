@@ -91,6 +91,7 @@ public class ConsultDetailActivity extends BaseActivity {
         access_token = tokenInfo.getAccess_token();
         back();
         fav();
+
         adapterNews = new ConsultAdapter();
         lvConsult.setAdapter(adapterNews);
         adapterComment = new CommentAdapter();
@@ -111,6 +112,7 @@ public class ConsultDetailActivity extends BaseActivity {
 
                     @Override
                     public void onCallback(Object result, List object) {
+
                         BaseActivity.callHttp(MapBuilder.build().add("action", "comment").add("type","1").add("content",result.toString()).add("obj_id",id).get(), new FunCallback() {
                             @Override
                             public void onSuccess(Object result, List object) {
@@ -165,6 +167,7 @@ public class ConsultDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                  data = entity.getData().toString();
+
                 String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",data).toString();
 
                 MapConf.build().with(ConsultDetailActivity.this)
@@ -181,6 +184,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 tvContent.setText(Html.fromHtml(details.getBody()));
                 adapterNews.setData(news);
                 adapterComment.setData(coments);
+                setShareUrl(details.getCtime()+"|"+"资讯详情",details.getTitle(),details.getCover_url());
 
             }
         });

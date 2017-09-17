@@ -17,6 +17,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 
+import com.zhy.autolayout.utils.AutoUtils;
+
 public class ViewInflater extends LayoutInflater {
     Context newContext;
     private boolean scale;
@@ -133,6 +135,7 @@ public class ViewInflater extends LayoutInflater {
                     view.setOnClickListener(new ClickAction());
                 }
             }
+            AutoUtils.autoSize(view);
         } catch (Exception e) {
             e.printStackTrace();
         }

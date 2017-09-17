@@ -169,7 +169,7 @@
             </FrameLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="145px"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="20px"
@@ -205,8 +205,8 @@
             <include
                 android:layout_marginBottom="30px"
                 layout="@layout/layout_horizontal_scrollview"
-                android:layout_width="match_parent"
-                android:layout_height="520px" />
+                android:layout_width="880px"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

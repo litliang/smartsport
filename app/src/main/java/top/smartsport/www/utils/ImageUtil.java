@@ -151,7 +151,6 @@ public class ImageUtil {
             @Override
             public void onLoadingComplete(String s, final View view, final Bitmap bitmap) {
                 this.alignviewwidth = palignwidth;
-                int w = ((Activity) view.getContext()).getWindowManager().getDefaultDisplay().getWidth();
                 if (alignviewwidth) {
                     int height = view.getWidth() * bitmap.getHeight() / bitmap.getWidth();
                     view.getLayoutParams().height = height;

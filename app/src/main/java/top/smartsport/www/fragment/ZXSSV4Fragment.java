@@ -20,6 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import app.base.action.ViewInflater;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
@@ -51,8 +52,8 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     @Override
     protected void initView() {
         Context context = getContext();
-        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.head_information,null);
-        ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("赛事新闻");
+        View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information, null);
+        ((TextView) headerView.findViewById(R.id.title_name_tv)).setText("赛事新闻");
         mBanner = (Banner) headerView.findViewById(R.id.banner);
         mBannerAdapter = new ZXBannerAdapter();
         mBanner.setAdapter(mBannerAdapter);
@@ -67,18 +68,19 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
                 mPullToRefreshView.setMode(PullToRefreshBase.Mode.BOTH);
                 getData(true);
             }
+
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 getData(false);
             }
         });
-        ((ListView)mPullToRefreshView.getRefreshableView()).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((HDZXInfo) adapterView.getItemAtPosition(i)).getId() + ""));
+        ((ListView) mPullToRefreshView.getRefreshableView()).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((SSXWInfo) adapterView.getItemAtPosition(i)).getId() + ""));
 
-        }
-    });
+            }
+        });
     }
 
     private void getData(final boolean isRefresh) {
@@ -87,33 +89,36 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
         } else {
             mCurrentPage++;
         }
-        InformationOperateUtils.requestActivityInformation(mCurrentPage,"3", new InformationOperateUtils.ActivityInformationAPICallBack() {
+        InformationOperateUtils.requestActivityInformation(mCurrentPage, "3", new InformationOperateUtils.ActivityInformationAPICallBack() {
             @Override
             public void onSuccessTypeTwo(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
             }
+
             @Override
             public void onSuccessTypeThree(List<Carousel> bannerResources, List<SSXWInfo> informationResources) {
                 //refresh information
-                if (informationResources != null && informationResources.size() > 0){
+                if (informationResources != null && informationResources.size() > 0) {
                     if (isRefresh) {
                         mInformationAdapter.clear();
                     }
                     mInformationAdapter.addAll(informationResources);
-                }else {
+                } else {
                     showToast("已经到底了");
                     mPullToRefreshView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                 }
                 //refresh banner
-                if (bannerResources != null){
+                if (bannerResources != null) {
                     mBannerAdapter.setData(bannerResources);
                     mBanner.changeIndicatorStyle(bannerResources.size(), 35, Color.TRANSPARENT);
                     mBanner.start();
                 }
             }
+
             @Override
             public void onError(String errorMsg) {
                 showToast(errorMsg);
             }
+
             @Override
             public void onFinished() {
                 mPullToRefreshView.onRefreshComplete();

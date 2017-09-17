@@ -281,7 +281,7 @@ public class BSDetailActivity extends BaseActivity {
                 shareParams.setShareType(Platform.SHARE_TEXT);
                 shareParams.setText(bsDetail.getName());//必须
 
-                share(shareParams, Sharetype.TEXT);
+                setShareParams(shareParams, Sharetype.TEXT);
                 adapter_bsss_title.setText(bsDetail.getName());
                 adapter_bsss_date.setText(bsDetail.getStart_time() + "至" + bsDetail.getEnd_time());
                 adapter_bsss_address.setText(bsDetail.getAddress());
