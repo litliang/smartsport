@@ -109,16 +109,6 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
         callHttp(MapBuilder.build().add("action", payway).add("total", price).add("type", type).add("product_id", prdid + "").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-
-            }
-
-            @Override
-            public void onFailure(Object result, List object) {
-                Toast.makeText(aty, result.toString(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCallback(Object result, List object) {
                 if (payway.toLowerCase().equals("alipay")) {
                     final String order = JsonUtil.findJsonLink("order", ((NetEntity) result).getData().toString()).toString();
                     new Thread() {
@@ -158,6 +148,16 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
                         BaseApplication.mWxApi.sendReq(req);
                     }
                 }
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+                Toast.makeText(aty, result.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
 
 
             }
