@@ -321,7 +321,7 @@ public class MapAdapter extends BaseAdapter {
 		visibleALlCheckBox();
 	}
 
-	public void addItemDataSrcList(List<? extends Object> objs) {
+	public MapAdapter addItemDataSrcList(List<? extends Object> objs) {
 		if (this.getItemDataSrc() == null
 				|| this.getItemDataSrc().getContent() == null) {
 			this.setItemDataSrc(new MapContent(objs));
@@ -329,6 +329,7 @@ public class MapAdapter extends BaseAdapter {
 			((List) this.getItemDataSrc().getContent()).addAll(objs);
 		}
 		visibleALlCheckBox();
+		return this;
 	}
 
 	public void clearSelectOption() {
@@ -528,7 +529,8 @@ public class MapAdapter extends BaseAdapter {
 		this.mapconf = mapconf;
 	}
 
-    public static class ContainerInfo {
+
+	public static class ContainerInfo {
 		public AdaptInfo adaptInfo = new AdaptInfo();
 		public List<Integer> itemsid = new ArrayList<Integer>();
 		public List<String> itemsname = new ArrayList<String>();

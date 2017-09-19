@@ -62,7 +62,7 @@ public class BaseApplication extends Init {
         //AutoLayout初始化
         AutoLayoutConifg.getInstance().useDeviceSize().init(this);
 
-//        Bugly.init(getApplicationContext(), "7797887a18", true);
+        Bugly.init(getApplicationContext(), "7797887a18", true);
 
         mWxApi = WXAPIFactory.createWXAPI(getBaseContext(), "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
@@ -71,7 +71,7 @@ public class BaseApplication extends Init {
         x.Ext.setDebug(true);//设置是否输出debug
         RRes.initR(getBaseContext());
 
-        CrashHandler.getInstance().init(this);
+//        CrashHandler.getInstance().init(this);
 
         /**
          * 乐视直播

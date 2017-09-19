@@ -1,6 +1,7 @@
 package top.smartsport.www.utils.pay;
 
 import intf.JsonUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,10 +43,11 @@ public class PayUtil {
 
     private static PayUtil payutil = new PayUtil();
 
-    private static PayUtil getInstance(){
-        if(payutil == null){
-payutil = new PayUtil();
-        }return payutil;
+    private static PayUtil getInstance() {
+        if (payutil == null) {
+            payutil = new PayUtil();
+        }
+        return payutil;
     }
 
     private PayUtil() {
@@ -53,18 +55,16 @@ payutil = new PayUtil();
     }
 
     public String wxappid;
-    public   void initWXPay(String appid){
 
-    }
 
-    public static void recharge(final Activity ay, final String action,String type,String total) {
+    public static void pay(final Activity ay, final String action, String type, String total) {
         final IWXAPI mWxApi = WXAPIFactory.createWXAPI(ay, "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
 
         String client_id;
-         String state;
-         String url;
-         String access_token;
+        String state;
+        String url;
+        String access_token;
 
         RegInfo regInfo = RegInfo.newInstance();
         TokenInfo tokenInfo = TokenInfo.newInstance();
