@@ -50,6 +50,14 @@ public class WDV4Fragment extends BaseV4Fragment {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getUserInfo").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
+                if (result instanceof NetEntity) {
+                    String data = ((NetEntity) result).getData().toString();
+
+                    SPUtils.put(getContext(), "getUserInfo", data);
+                    SPUtils.put(getContext(), "is_vip", JsonUtil.findJsonLink("is_vip", data));
+                    MapConf.with(getContext()).pair("header_url->wd_header").pair("is_vip->phone", "1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg", "1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
+
+                }
 
             }
 
@@ -60,11 +68,6 @@ public class WDV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onCallback(Object result, List object) {
-                String data = ((NetEntity)result).getData().toString();
-
-                SPUtils.put(getContext(), "getUserInfo", data);
-                SPUtils.put(getContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
-                MapConf.with(getContext()).pair("header_url->wd_header").pair("is_vip->phone","1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg","1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
             }
         });
         String phone = (String) SPUtils.get(getContext(), "USER", "");

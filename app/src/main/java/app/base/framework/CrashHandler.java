@@ -236,8 +236,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				for (int i = 0; i < eles.length; i++) {
 					errorMsg += i + 1 + "：" + eles[i].toString() + "\n";
 				}
+				Logs.i("----- "+errorMsg);
+				String emsg = Cache.getInstance().getValue(Cache.getInstance().KEY_error).toString();
 				Cache.getInstance().putValue(Cache.getInstance().KEY_error,
-						errorMsg);
+						emsg+"\n"+errorMsg);
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

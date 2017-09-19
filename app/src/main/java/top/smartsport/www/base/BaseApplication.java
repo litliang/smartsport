@@ -25,10 +25,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import app.base.RRes;
+import app.base.SPrefUtil;
+import app.base.framework.CrashHandler;
 import app.base.framework.Init;
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import cn.jpush.android.api.JPushInterface;
-import top.smartsport.www.handler.CrashHandler;
 import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.SerialUtil;
 
@@ -44,14 +45,14 @@ public class BaseApplication extends Init {
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
-
         application = this;
+        SPrefUtil.iniContext(this);
         JPushInterface.init(getBaseContext());
         JPushInterface.setDebugMode(true);
-        JPushInterface.initCrashHandler(this);
+//        JPushInterface.initCrashHandler(this);
 
         JAnalyticsInterface.init(getApplication());
-        JAnalyticsInterface.initCrashHandler(this);
+//        JAnalyticsInterface.initCrashHandler(this);
         JAnalyticsInterface.setDebugMode(true);
         cn.jiguang.share.android.api.JShareInterface.init(this);
         cn.jiguang.share.android.api.JShareInterface.setDebugMode(true);
@@ -61,7 +62,7 @@ public class BaseApplication extends Init {
         //AutoLayout初始化
         AutoLayoutConifg.getInstance().useDeviceSize().init(this);
 
-        Bugly.init(getApplicationContext(), "7797887a18", true);
+//        Bugly.init(getApplicationContext(), "7797887a18", true);
 
         mWxApi = WXAPIFactory.createWXAPI(getBaseContext(), "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
@@ -69,6 +70,9 @@ public class BaseApplication extends Init {
         x.Ext.init(this); //初始化xUtils
         x.Ext.setDebug(true);//设置是否输出debug
         RRes.initR(getBaseContext());
+
+        CrashHandler.getInstance().init(this);
+
         /**
          * 乐视直播
          * */

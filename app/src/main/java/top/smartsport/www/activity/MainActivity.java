@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import app.base.framework.CrashHandler;
 import top.smartsport.www.H;
 import top.smartsport.www.O;
 import top.smartsport.www.R;
@@ -134,6 +135,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         ((RadioButton) findViewById(R.id.main_tabs_home)).setChecked(true);
 //        Epr.parseParam("Print(Clickactivityid($ss:123%s456))",(RadioButton) findViewById(R.id.main_tabs_home)).innerrun();
 //        goActivity(ActivityTrainingDetails.class);
+        CrashHandler.errorDialog();
+
     }
 
     @Override

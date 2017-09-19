@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import app.base.ActivityPool;
+import app.base.SPrefUtil;
+import app.base.framework.CrashHandler;
 import cn.jiguang.share.android.api.Platform;
 import intf.JsonUtil;
 
@@ -96,8 +99,9 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         featureNoTitle();
 
         super.onCreate(savedInstanceState);
-
         x.view().inject(this);
+
+        ActivityPool.getInstance().addActivity(this);
         ActivityStack.getInstance().addActivity(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制是竖屏
         initActionBar();

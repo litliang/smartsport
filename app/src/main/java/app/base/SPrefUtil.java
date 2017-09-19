@@ -44,20 +44,19 @@ public class SPrefUtil {
 	public static void putValue(Context context, String spname, String key,
 			Object value) {
 		SharedPreferences.Editor spedit = onOpen(context, spname).edit();
-		if (value == null) {
-			spedit.putString(key, null);
+		if (value == null||new String(value+"").trim().equals("")) {
+			return;
 		} else if (value instanceof Boolean) {
 			spedit.putBoolean(key, (Boolean) value);
 		} else if (value instanceof Integer) {
 			spedit.putInt(key, (Integer) value);
 		} else if (value instanceof String) {
-			spedit.putString(key, (String) value);
+			spedit.putString(key, value.toString());
 		} else if (value instanceof Float) {
 			spedit.putFloat(key, (Float) value);
 		} else if (value instanceof Long) {
 			spedit.putLong(key, (Long) value);
 		}
-		key_type.put(key, value.getClass());
 		spedit.commit();
 	}
 
@@ -70,7 +69,7 @@ public class SPrefUtil {
 	}
 
 	public Object getValue(String key) {
-		return getValue(this.getCopyName(), key, key_type.containsKey(key)?key_type.get(key):String.class);
+		return getValue(this.getCopyName(), key, String.class);
 	}
 	
 	public static Object getValue(String spname, String key, Class clazz) {
@@ -89,7 +88,7 @@ public class SPrefUtil {
 		} else if (clazz == Long.class) {
 			return sp.getLong(key, -1);
 		}
-		return "";
+		return "3";
 	}
 
 	public static void clear(String spname) {
