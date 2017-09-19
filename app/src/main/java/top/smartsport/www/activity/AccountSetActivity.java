@@ -6,18 +6,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +62,9 @@ public class AccountSetActivity extends BaseActivity {
     private String state;
     private String url;
     private String access_token;
+    private String data = "";
     private Bitmap iconBitMap;
+    private Map data_map;
 
     private final int CODE_CHOOSE_ICON = 3;
     private final int CODE_CHOOSE_ICON_CAMERA = 4;
@@ -78,7 +84,7 @@ public class AccountSetActivity extends BaseActivity {
         state = regInfo.getSeed_secret();
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
-        String data = (String) SPUtils.get(getBaseContext()
+        data = (String) SPUtils.get(getBaseContext()
                 , "getUserInfo", "");
         BaseActivity.callHttp(MapBuilder.build().add("action", "getUserInfo").get(), new FunCallback() {
             @Override
@@ -93,7 +99,7 @@ public class AccountSetActivity extends BaseActivity {
 
             @Override
             public void onCallback(Object result, List object) {
-                String data = ((NetEntity)result).getData().toString();
+                data = ((NetEntity)result).getData().toString();
 
                 SPUtils.put(getBaseContext(), "getUserInfo", data);
                 SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
@@ -301,7 +307,17 @@ public class AccountSetActivity extends BaseActivity {
                 }else{
                     Toast.makeText(AccountSetActivity.this, getResources().getString(R.string.icon_post_fail), Toast.LENGTH_SHORT).show();
                 }
-                MapConf.with(AccountSetActivity.this).pair("header", entity.getImg_id()).toMap();
+                String icon_imgId = entity.getImg_id();
+                Log.e("smile", " onSuccess   entity.getImg_id() =   " + icon_imgId);
+                MapConf.with(getBaseContext()).pair("header", icon_imgId);
+                data_map = MapConf.with(getBaseContext()).pair("username->username").pair("username->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
+                        .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
+                        .pair("header_url->account_header")
+                        .pair("soccer_age->account_ql")
+                        .pair("address->account_jz")
+                        .pair("header", icon_imgId)
+                        .toMap(AccountSetActivity.this);
+                postData(data_map, icon_imgId);
             }
 
             @Override
@@ -311,8 +327,25 @@ public class AccountSetActivity extends BaseActivity {
         });
     }
 
-    private void postData(){
+    /**
+     * 用户信息完善确定
+     * */
+    private void postData(Map map, String img_id){
 
+        callHttp(MapBuilder.withMap(map).add("action", "saveBaseUserInfo").add("header", img_id).get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+                showToast("用户信息已更新");
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+            }
+        });
     }
 
     @Override
