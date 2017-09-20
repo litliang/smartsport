@@ -54,7 +54,7 @@
                     android:textColor="@color/font_gray"
                     android:textSize="@dimen/text_size_notice" />
 
-                <TextView
+                <WebView
                     android:id="@+id/tv_introduce_star"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

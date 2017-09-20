@@ -1,6 +1,7 @@
 package top.smartsport.www.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.listener.OnClickThrottleListener;
 import top.smartsport.www.widget.banner.AutoFlingPagerAdapter;
@@ -29,6 +31,7 @@ public class ZXBannerAdapter extends AutoFlingPagerAdapter<Carousel> {
         return convertView;
     }
 
+
     @Override
     public void bindView(final Carousel carousel, View view, int position) {
         ImageView imageView = (ImageView) view;
@@ -42,6 +45,7 @@ public class ZXBannerAdapter extends AutoFlingPagerAdapter<Carousel> {
             @Override
             protected void onThrottleClick(View v) {
                 //TODO Banner点击事件
+                v.getContext().startActivity(new Intent(v.getContext(),ConsultDetailActivity.class).putExtra("id",carousel.getId()+""));
             }
         });
     }

@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="1080px"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="1080px"
+    android:layout_height="838px"
+    android:layout_marginBottom="25px"
+    android:minWidth="1080px">
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginBottom="50dp">
-
+    android:orientation="vertical">
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="60px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/background_round_white"
+        android:paddingBottom="40px"
+        android:paddingLeft="40px"
+        android:paddingRight="40px"
+        android:paddingTop="40px">
+
         <ImageView
             android:id="@+id/players_img"
-            android:layout_width="match_parent"
+            android:layout_width="880px"
+            android:layout_height="568px"
 
-            android:layout_height="400px"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/login_logo"
-            android:layout_marginTop="40px"/>
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/login_logo" />
 
-        <TextView
-            android:id="@+id/players_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/today_players_num"
-            android:textColor="@color/white"
-            android:textSize="45px"
-            android:gravity="center"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="180px"
-            android:layout_marginTop="38px"
-            android:text="99\n期"/>
+
     </RelativeLayout>
+
     <TextView
         android:id="@+id/players_name"
-        android:layout_marginTop="20px"
-        android:layout_marginLeft="180px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="45px"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="20px"
         android:text="球星"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="45px" />
+
     <TextView
         android:id="@+id/players_dis"
-        android:layout_marginLeft="40px"
-        android:layout_marginTop="10px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="45px"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="20px"
         android:text="球星执行"
-        android:layout_marginBottom="30dp"
-        android:textColor="@color/text_gray"/>
-
-</LinearLayout>
+        android:textColor="@color/text_gray"
+        android:textSize="38px" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/players_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="80px"
+        android:layout_marginTop="30px"
+        android:background="@mipmap/today_players_num"
+        android:gravity="center"
+        android:text="99\n期"
+        android:textColor="@color/white"
+        android:textSize="45px" />
+</RelativeLayout>

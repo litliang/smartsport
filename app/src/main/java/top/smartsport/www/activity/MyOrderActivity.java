@@ -56,7 +56,7 @@ public class MyOrderActivity extends BaseActivity {
         go = (Button) findViewById(R.id.btn_go);
         list = new ArrayList<Fragment>();
         list.add(OrderFragment.newInstance(2));
-        list.add(OrderFragment.newInstance(0));
+        list.add(OrderFragment.newInstance(9));
         list.add(OrderFragment.newInstance(1));
         Log.e("list", list.size() + "---");
         MyPagerAdapter mAdapter = new MyPagerAdapter(getSupportFragmentManager());

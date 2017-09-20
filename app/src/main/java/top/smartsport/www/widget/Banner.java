@@ -47,6 +47,10 @@ public class Banner {
         this.listener = listener;
     }
 
+    public void setListener(MultiItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public interface MultiItemClickListener {
         void onMultiItemClick(BannerData data);
     }
@@ -138,7 +142,7 @@ public class Banner {
 
     public static interface BannerData {
 
-
+        String getId();
         String getImgurl();
 
     }

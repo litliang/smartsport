@@ -3,9 +3,9 @@ package top.smartsport.www.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,7 +21,6 @@ import java.util.List;
 
 import app.base.MapConf;
 import top.smartsport.www.R;
-import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.CoachAdapter;
 import top.smartsport.www.adapter.TrainningAdapter;
 import top.smartsport.www.base.BaseActivity;
@@ -40,7 +39,7 @@ import top.smartsport.www.xutils3.X;
 
 @ContentView(R.layout.coach_details)
 public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewItemListener {
-    private boolean isAll;
+    private boolean isAll = true;
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
     private String client_id;
@@ -53,7 +52,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     @ViewInject(R.id.rc_coach)
     private RecyclerView rcCoach;
     @ViewInject(R.id.tv_introduce)
-    private TextView introduce;
+    private WebView introduce;
     @ViewInject(R.id.tv_see_more)
     private TextView seeMore;
     @ViewInject(R.id.iv_top_pic)
@@ -66,11 +65,17 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     private TextView tvIntroduce;
     private TrainningAdapter trainingAdapter;
     private CoachAdapter coachAdapter;
+    private String tmpIntro = "";
+    private String allIntro;
 
 
     public void initView() {
         Coaches coach = (Coaches) getIntent().getSerializableExtra("data");
-        id = coach.getId();
+        if (coach == null) {
+            id = getIntent().getStringExtra("id");
+        } else
+            id = coach.getId();
+
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
         client_id = regInfo.getApp_key();
@@ -90,16 +95,21 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
         seeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isAll) {
-                    introduce.setMaxLines(4);
-                    introduce.setEllipsize(TextUtils.TruncateAt.END);
+                if (tmpIntro.equals(allIntro)) {
+                    introduce.loadData(allIntro.substring(0,300), "text/html;charset=UTF-8", null);
                 } else {
-                    introduce.setMaxLines(Integer.MAX_VALUE);
-                    introduce.setEllipsize(null);
+                    introduce.loadData(allIntro, "text/html;charset=UTF-8", null);
+                    seeMore.setVisibility(View.GONE);
                 }
+                introduce.invalidate();
+                ((ViewGroup) introduce.getParent()).invalidate();
+                ((ViewGroup) introduce.getParent()).requestLayout();
+
+
                 isAll = !isAll;
             }
         });
+
         getData();
     }
 
@@ -123,19 +133,26 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             @Override
             public void onSuccess(NetEntity entity) {
                 String data = entity.getData().toString();
-                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",entity.getData().toString()).toString();
+                String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", entity.getData().toString()).toString();
 
                 MapConf.build().with(CoachDetailActivity.this)
-                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),CoachDetailActivity.this).toView();
+                        .pair("detail-collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(), CoachDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
 
-                CoachInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),CoachInfoDetail.class);
-                List<CoachInfoCourse> course =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course",data).toString(), CoachInfoCourse.class);
-                List<Coaches> others =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach",data).toString(), Coaches.class);
+                CoachInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), CoachInfoDetail.class);
+                List<CoachInfoCourse> course = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course", data).toString(), CoachInfoCourse.class);
+                List<Coaches> others = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach", data).toString(), Coaches.class);
                 ImageLoader.getInstance().displayImage(details.getHeader_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 tvName.setText(details.getName());
                 tvTeam.setText(details.getTeam_name());
-                introduce.setText(Html.fromHtml(details.getIntroduce()));
+                allIntro = details.getIntroduce();
+                if (details.getIntroduce().length() > 57) {
+                    tmpIntro = details.getIntroduce().substring(0, 57)+"...";
+                } else {
+                    tmpIntro = details.getIntroduce();
+                    seeMore.setVisibility(View.GONE);
+                }
+                introduce.loadData(tmpIntro, "text/html;charset=UTF-8", null);
                 trainingAdapter.setData(course);
                 coachAdapter.setData(others);
             }
@@ -150,13 +167,13 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
 
     @Override
     public void onItemClickListener(View view, int position) {
-        Intent intent = new Intent(this,CoachDetailActivity.class);
-        intent.putExtra("data",coachAdapter.getItem(position));
+        Intent intent = new Intent(this, CoachDetailActivity.class);
+        intent.putExtra("data", coachAdapter.getItem(position));
         startActivity(intent);
     }
 
     @Override
     public void favImpl(View view, boolean unfav) {
-        fav.run(view,unfav+"",5,id);
+        fav.run(view, unfav + "", 5, id);
     }
 }

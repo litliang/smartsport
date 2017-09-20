@@ -85,16 +85,31 @@ public class SCJLV4Fragment extends BaseV4Fragment {
     }
 
     private void reload(final boolean refresh) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 5).get(), new FunCallback<NetEntity, String, NetEntity>() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 5).get(), new FunCallback() {
             @Override
-            public void onSuccess(NetEntity result, List<Object> object) {
+            public void onCallback(Object result, List object) {
+
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+                if (refresh){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
+                empty.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onSuccess(Object result, List object) {
                 if (refresh){
                     pullrefreshlistview.onPullDownRefreshComplete();
                     mList = new ArrayList();
                 }else {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
-                String data = result.getData().toString();
+                String data = ((NetEntity)result).getData().toString();
                 list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
                 if (list.size() > 0){
                     empty.setVisibility(View.GONE);
@@ -110,20 +125,6 @@ public class SCJLV4Fragment extends BaseV4Fragment {
 
             }
 
-            @Override
-            public void onFailure(String result, List<Object> object) {
-                if (refresh){
-                    pullrefreshlistview.onPullDownRefreshComplete();
-                }else {
-                    pullrefreshlistview.onPullUpRefreshComplete();
-                }
-                empty.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onCallback(NetEntity result, List<Object> object) {
-
-            }
         });
     }
 

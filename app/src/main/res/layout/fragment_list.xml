@@ -5,14 +5,14 @@
             android:background="#f8f8f8"
     >
 
-    <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/id_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#f8f8f8"
         android:dividerHeight="25px"
         >
-    </top.smartsport.www.listview_pulltorefresh.PullToRefreshListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
     <RelativeLayout
         android:id="@+id/mykcempty"
         android:layout_width="match_parent"

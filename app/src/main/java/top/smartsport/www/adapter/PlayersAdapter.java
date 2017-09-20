@@ -1,21 +1,21 @@
 package top.smartsport.www.adapter;
 
-import android.content.Context;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.content.Context;
+        import android.view.View;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+        import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.xutils.view.annotation.ViewInject;
+        import org.xutils.view.annotation.ViewInject;
 
-import java.io.Serializable;
+        import java.io.Serializable;
 
-import top.smartsport.www.R;
-import top.smartsport.www.base.EntityListAdapter;
-import top.smartsport.www.bean.Players;
-import top.smartsport.www.utils.ImageUtil;
-import top.smartsport.www.utils.ViewHolder;
+        import top.smartsport.www.R;
+        import top.smartsport.www.base.EntityListAdapter;
+        import top.smartsport.www.bean.Players;
+        import top.smartsport.www.utils.ImageUtil;
+        import top.smartsport.www.utils.ViewHolder;
 
 /**
  * Created by Aaron on 2017/8/10.
@@ -56,7 +56,7 @@ class PlayersHolder extends ViewHolder{
         super(root);
     }
     public void init(Players info){
-        ImageLoader.getInstance().displayImage(info.getCover_url(), players_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+        ImageLoader.getInstance().displayImage(info.getCover_url(), players_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
         players_num.setText(info.getStage()+"\n"+"期");
         players_name.setText(info.getName());
         players_dis.setText(info.getTeam_name());

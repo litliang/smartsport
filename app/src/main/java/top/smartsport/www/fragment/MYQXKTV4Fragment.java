@@ -165,15 +165,15 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
     }
 
     private void reload(final MapAdapter mapadapter) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyOrders").add("pay_status", 1).add("product_type", 1).add("page",page).get(), new FunCallback<NetEntity, String, NetEntity>() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyOrders").add("pay_status", 1).add("product_type", 1).add("page",page).get(), new FunCallback() {
 
             @Override
-            public void onSuccess(NetEntity result, List<Object> object) {
+            public void onCallback(Object result, List object) {
 
             }
 
             @Override
-            public void onFailure(String result, List<Object> object) {
+            public void onFailure(Object result, List object) {
                 if (page == 1){
                     pullrefreshlistview.onPullDownRefreshComplete();
                 }else{
@@ -182,8 +182,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
             }
 
             @Override
-            public void onCallback(NetEntity result, List<Object> object) {
-                String data = result.getData().toString();
+            public void onSuccess(Object result, List object) {
+                String data = ((NetEntity)result).getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(data);
                 if (page == 1){
                     pullrefreshlistview.onPullDownRefreshComplete();
@@ -204,8 +204,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
                 mapadapter.notifyDataSetChanged();
 
-
             }
+
         });
     }
 

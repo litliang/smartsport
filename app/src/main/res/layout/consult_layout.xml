@@ -111,7 +111,7 @@
                         android:gravity="right"
                         />
                 </LinearLayout>
-                <TextView
+                <WebView
                     android:id="@+id/tv_content1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -68,7 +69,7 @@ public class ConsultDetailActivity extends BaseActivity {
     @ViewInject(R.id.read_count)
     private TextView readCount;
     @ViewInject(R.id.tv_content1)
-    private TextView tvContent;
+    private WebView tvContent;
     @ViewInject(R.id.lv_consult)
     private MyListView lvConsult;
     @ViewInject(R.id.lv_comment)
@@ -181,7 +182,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 tvTime.setText(details.getCtime());
                 tvAction.setText(details.getCate_name());
                 readCount.setText("阅读 "+details.getHits());
-                tvContent.setText(Html.fromHtml(details.getBody()));
+                tvContent.loadData(details.getBody(), "text/html;charset=UTF-8", null);
                 adapterNews.setData(news);
                 adapterComment.setData(coments);
                 setShareUrl(details.getCtime()+"|"+"资讯详情",details.getTitle(),details.getCover_url());

@@ -19,7 +19,11 @@ import org.xutils.view.annotation.ViewInject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import app.base.MapConf;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.activity.AllJiaolianActivity;
@@ -32,6 +36,7 @@ import top.smartsport.www.adapter.CoursesAdapter;
 import top.smartsport.www.adapter.NewsAdapter;
 import top.smartsport.www.adapter.NewsHotAdapter;
 import top.smartsport.www.adapter.PlayersAdapter;
+import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.Coaches;
@@ -198,18 +203,34 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(), StarDetailActivity.class).putExtra("data", JsonUtil.entityToJson(adapterView.getItemAtPosition(i))));
+                startActivity(new Intent(getActivity(), StarDetailActivity.class).putExtra("id", ((Map)adapterView.getItemAtPosition(i)).get("id").toString()));
             }
         });
         getData();
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").get(), (BaseActivity) getActivity(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+                MapConf mc = MapConf.with(getContext()).pairs("name->players_name","team_name->players_dis","cover_url->players_img","stage->players_num").source(R.layout.adapter_players);
+                MapConf.with(getContext()).pair("players->listview",mc).source(((NetEntity)result).getData().toString(),getView()).toView();
+            }
 
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
+            }
+        });
     }
 
     private void initBanner(List<Carousel> list) {
         banner = new Banner(root, getActivity(), new Banner.MultiItemClickListener() {
             @Override
             public void onMultiItemClick(Banner.BannerData data) {
-
+                startActivity(new Intent(getContext(),ConsultDetailActivity.class).putExtra("id",data.getId()+""));
             }
 
         });
@@ -258,9 +279,11 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
                 coursesAdapter.addAll(courses);
                 newsAdapter.addAll(newses);
                 coachesAdapter.addAll(coaches);
-                playersAdapter.addAll(playerses);
+//                playersAdapter.addAll(playerses);
                 newsHotAdapter.addAll(hotNewses);
                 scrollView.onRefreshComplete();
+
+
             }
         });
     }

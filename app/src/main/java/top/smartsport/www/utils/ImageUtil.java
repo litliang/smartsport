@@ -150,10 +150,16 @@ public class ImageUtil {
 
             @Override
             public void onLoadingComplete(String s, final View view, final Bitmap bitmap) {
+                if(bitmap.isRecycled()){
+                    return;
+                }
                 this.alignviewwidth = palignwidth;
                 if (alignviewwidth) {
                     int height = view.getWidth() * bitmap.getHeight() / bitmap.getWidth();
                     view.getLayoutParams().height = height;
+                    if(height==0||view.getWidth()==0){
+                        return;
+                    }
                     view.measure(view.getWidth(), height);
                     view.invalidate();
                     view.requestLayout();

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -115,35 +116,42 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
     }
 
     private void reload(final MapAdapter mapadapter) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 1).get(), new FunCallback<NetEntity, String, NetEntity>() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 1).get(), new FunCallback() {
 
             @Override
-            public void onSuccess(NetEntity result, List<Object> object) {
-            }
-
-            @Override
-            public void onFailure(String result, List<Object> object) {
+            public void onCallback(Object result, List object) {
 
             }
 
             @Override
-            public void onCallback(NetEntity result, List<Object> object) {
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result, List object) {
+                if(result instanceof String){
+                    showToast(result.toString());
+                    return;
+                }
                 if (page ==1) {
                     pullrefreshlistview.onPullDownRefreshComplete();
                     mList = new ArrayList();
                 }else {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
-                String data = result.getData().toString();
+                String data = ((NetEntity)result).getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
-                    if (list.size()>0){
-                        empty.setVisibility(View.GONE);
-                    }
+                if (list.size()>0){
+                    empty.setVisibility(View.GONE);
+                }
                 mList.addAll(list);
                 mapadapter.setItemDataSrc(new MapContent(mList));
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
                 mapadapter.notifyDataSetChanged();
             }
+
+
         });
     }
 

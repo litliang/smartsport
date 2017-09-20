@@ -86,6 +86,9 @@ public class RoundImageView extends AppCompatImageView {
         else{
             b = ((BitmapDrawable) drawable).getBitmap();
         }
+        if(b.isRecycled()){
+            return;
+        }
         Bitmap bitmap = b.copy(Config.ARGB_8888, true);
         if (defaultWidth == 0) {  
             defaultWidth = getWidth();  

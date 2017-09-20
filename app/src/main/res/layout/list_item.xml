@@ -12,11 +12,9 @@
         android:id="@+id/iv_pic"
         android:layout_width="255px"
         android:layout_height="255px"
-        app:layout_auto_baseheight="width"
         android:layout_marginTop="@dimen/list_item_top"
         android:layout_marginLeft="@dimen/list_item_top"
-        android:scaleType="fitXY"
-        android:src="@mipmap/tuijian_touxiang6" />
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/tv_title"

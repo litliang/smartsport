@@ -33,9 +33,7 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     >
-
-
-                    <top.smartsport.www.widget.RoundImageView
+                    <top.smartsport.www.widget.utils.RoundImageView
                         android:id="@+id/account_header"
                         android:layout_width="213px"
                         android:layout_height="213px"

@@ -5,14 +5,18 @@ import intf.JsonUtil;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -35,6 +40,7 @@ import java.util.TreeSet;
 import app.base.action.Action;
 import intf.MapBuilder;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.widget.utils.RoundImageView;
 
 /**
  * Created by admin on 2017/8/16.
@@ -208,7 +214,7 @@ public class MapConf {
                             }
                             value = JsonUtil.findJsonLink(n, item);
                             value = JsonUtil.extractJsonRightValue(value.toString());
-                            values.put(n,value);
+                            values.put(n, value);
                         }
                         if (values != null) {
                             findAndBindView(convertView, item, name, values, i);
@@ -237,6 +243,9 @@ public class MapConf {
     }
 
     private void link() {
+        if (item instanceof String) {
+            item = app.base.JsonUtil.extractJsonRightValue((String) item);
+        }
         setView(item, item, "", convertView, convertView);
     }
 
@@ -291,6 +300,14 @@ public class MapConf {
         }
         return this;
     }
+
+    public MapConf pairs(String... ps) {
+        for(String p:ps){
+            pair(p);
+        }
+        return this;
+    }
+
 
     public MapConf pair(String p, String switchcase) {
         pair(p);
@@ -393,7 +410,7 @@ public class MapConf {
     Tackle tackle;
 
     protected boolean setView(Object item, Object value, String name,
-                              View convertView, View theView) {
+                              View convertView, final View theView) {
 
         if (theView == null) {
             return false;
@@ -405,7 +422,7 @@ public class MapConf {
         if (value != null && value.toString().toLowerCase().equals("null")) {
             value = "";
         }
-        if(value instanceof  Map){
+        if (value instanceof Map) {
             if (mAction.containsKey(name)) {
                 mAction.get(name).addParams(0, Arrays.asList(item, name, value, "", convertView)).setEventView(theView).innerrun();
             }
@@ -457,12 +474,17 @@ public class MapConf {
         } else if (theView instanceof AdapterView) {
             MapConf conf = confs.get(name);
             if (conf != null) {
+                MapAdapter mapadapter;
                 ((AdapterView) theView).setAdapter(new MapAdapter(context));
-                if (((AdapterView) theView).getAdapter() instanceof MapAdapter) {
-                    MapAdapter mapadapter = (MapAdapter) ((AdapterView) theView).getAdapter();
-                    mapadapter.setItemDataSrc(new MapContent(value));
+                if (((AdapterView) theView).getAdapter() instanceof HeaderViewListAdapter) {
+                    mapadapter = (MapAdapter) ((HeaderViewListAdapter)((AdapterView) theView).getAdapter()).getWrappedAdapter();
+                }else{
+                    mapadapter = (MapAdapter) ((AdapterView) theView).getAdapter();
+                }
+                if (mapadapter instanceof MapAdapter) {
                     mapadapter.setItemLayout(conf.getViewlayoutid());
                     mapadapter.setMapConf(conf);
+                    mapadapter.setItemDataSrc(new MapContent(value));
                     mapadapter.notifyDataSetChanged();
                 }
             }
@@ -479,21 +501,33 @@ public class MapConf {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
 
-                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
-//                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
-//                DrawableRequestBuilder drawableRequestBuilder;
-//                if (defaultImg != 0) {
-//                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg);
-//                } else {
-//                    drawableRequestBuilder = drawableTypeRequest.clone();
-//                }
-//                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
-//
-//                    @Override
-//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-//                        super.onResourceReady(resource, animation);
-//                    }
-//                });
+//                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
+
+                if(theView instanceof RoundImageView){
+                    Glide.with(context).load(value.toString()).asBitmap().centerCrop().error(defaultImg).placeholder(defaultImg).into(new BitmapImageViewTarget((ImageView) theView) {
+                        @Override
+                        protected void setResource(Bitmap resource) {
+                            RoundedBitmapDrawable circularBitmapDrawable =
+                                    RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                            circularBitmapDrawable.setCircular(true);
+                            ((ImageView)theView).setImageDrawable(circularBitmapDrawable);
+                        }
+                    });
+                }else{
+                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
+                DrawableRequestBuilder drawableRequestBuilder;
+                if (defaultImg != 0) {
+                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg).error(defaultImg);
+                } else {
+                    drawableRequestBuilder = drawableTypeRequest.clone();
+                }
+                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
+
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                        super.onResourceReady(resource, animation);
+                    }
+                });}
             }
 
         } else if (theView instanceof CheckBox) {

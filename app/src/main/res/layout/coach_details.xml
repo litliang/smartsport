@@ -53,9 +53,9 @@
             android:layout_marginRight="@dimen/margin_left"
             />
 
-        <TextView
+        <WebView
             android:id="@+id/tv_introduce"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。教练的个人简介，主要介绍。"
             android:textColor="@color/font_gray"

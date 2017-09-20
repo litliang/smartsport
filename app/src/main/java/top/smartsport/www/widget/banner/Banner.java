@@ -46,6 +46,7 @@ public class Banner extends LinearLayout {
     public void setAdapter(AutoFlingPagerAdapter<?> adapter) {
         mPagerAdapter = adapter;
         mPager.setAdapter(mPagerAdapter);
+
         mPagerAdapter.registerDataSetObserver(
                 new DataSetObserver() {
             @Override

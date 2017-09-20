@@ -135,26 +135,27 @@ public class ScoreboardFragment extends BaseV4Fragment{
                 .add("action","viewMatchAnalysis")
                 .add("match_id","1")
                 .add("type","1")//1积分榜2射手榜3助攻榜
-                .get(), new FunCallback<NetEntity, String, NetEntity>() {
+                .get(), new FunCallback() {
 
             @Override
-            public void onSuccess(NetEntity result, List<Object> object) {
-            }
-
-            @Override
-            public void onFailure(String result, List<Object> object) {
+            public void onCallback(Object result, List object) {
 
             }
 
             @Override
-            public void onCallback(NetEntity result, List<Object> object) {
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result, List object) {
                 if (page ==1) {
                     mList.onPullDownRefreshComplete();
                     list = new ArrayList();
                 }else {
                     mList.onPullUpRefreshComplete();
                 }
-                String data = result.getData().toString();
+                String data = ((NetEntity)result).getData().toString();
                 if (data.equals("null")){
                     mEmptyLayout.setVisibility(View.VISIBLE);
                 }else{
@@ -173,6 +174,7 @@ public class ScoreboardFragment extends BaseV4Fragment{
                     mapadapter.notifyDataSetChanged();
                 }
             }
+
         });
     }
 //    private void getData(final boolean refresh) {

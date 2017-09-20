@@ -111,6 +111,7 @@ repositories {
 
 
 dependencies {
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:multidex:1.0.0'
 
     compile 'com.github.Rukey7:IjkPlayerView:1+'

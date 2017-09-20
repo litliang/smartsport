@@ -53,6 +53,7 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information,null);
         ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("活动资讯");
         mBanner = (Banner) headerView.findViewById(R.id.banner);
+
         mBannerAdapter = new ZXBannerAdapter();
         mBanner.setAdapter(mBannerAdapter);
         ListView listView = mPullToRefreshView.getRefreshableView();

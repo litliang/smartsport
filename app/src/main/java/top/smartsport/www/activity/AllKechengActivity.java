@@ -25,6 +25,7 @@ import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.Coaches;
 import top.smartsport.www.bean.NetEntity;
 
 /**
@@ -42,8 +43,8 @@ public class AllKechengActivity extends BaseActivity {
     protected void initView() {
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.qingxun_qingxunkecheng);
-        adaptinfo.addViewIds(new Integer[]{R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge});
-        adaptinfo.addObjectFields(new String[]{"cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus"});
+        adaptinfo.addViewIds(new Integer[]{R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge, R.id.woyaobaoming});
+        adaptinfo.addObjectFields(new String[]{"cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus","status"});
         mapadapter = new MapAdapter(this, adaptinfo) {
             @TargetApi(Build.VERSION_CODES.M)
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -68,10 +69,48 @@ public class AllKechengActivity extends BaseActivity {
                         ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.theme_color,null));
                     }
                     value = "还剩" + value + "个名额";
+                }else if(name.equals("status")){
+
+                    int val = Integer.valueOf(value.toString());
+                    switch (val){
+                        case 1:value = "报名中";
+                            break;
+
+                        case 2:value = "进行中";
+                            break;
+                        case 3:value = "已结束";
+                            break;
+                        case 4:value = "已报满";
+                            break;
+                        case 5:value = "已报名";
+                            break;
+                    }
                 }
+
                 super.findAndBindView(convertView, pos, item, name, value);
 
                 return true;
+            }
+
+            @Override
+            protected void getViewInDetail(final Object item, int position, View convertView) {
+                super.getViewInDetail(item, position, convertView);
+                convertView.findViewById(R.id.coach_name).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("id").toString()));
+                    }
+                });
+                convertView.findViewById(R.id.coach_head).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("id").toString()));
+
+                    }
+                });
+
             }
         };
         pullrefreshlistview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);

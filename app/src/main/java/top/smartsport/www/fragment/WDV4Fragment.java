@@ -1,5 +1,6 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -76,6 +77,12 @@ public class WDV4Fragment extends BaseV4Fragment {
             ((TextView) root.findViewById(R.id.phone)).setText(phone);
 
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        initUserInfo();
     }
 
     @Event(value = {R.id.ll_account_set, R.id.rl_kc, R.id.rl_sc, R.id.rl_sp,
