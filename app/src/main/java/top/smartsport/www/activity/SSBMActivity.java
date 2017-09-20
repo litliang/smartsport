@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,7 +70,10 @@ public class SSBMActivity extends BaseActivity {
     private TextView ssbm_text_people_name;
     @ViewInject(R.id.ssbm_text_people_phone)
     private TextView ssbm_text_people_phone;
-
+    @ViewInject(R.id.ssbm_refund_tv)
+    private TextView refund_tv;
+    @ViewInject(R.id.ssbm_disclaimer_tv)
+    private TextView disclaimer_tv;
 
 
     @Override
@@ -89,14 +93,27 @@ public class SSBMActivity extends BaseActivity {
 
     }
 
-    @Event(value = {R.id.ssbm_rl_dui,R.id.ssbm_pay})
+    @Event(value = {R.id.ssbm_rl_dui,R.id.ssbm_pay, R.id.ssbm_refund_tv, R.id.ssbm_disclaimer_tv})
     private void getEvent(View view){
+        Intent intent_temp;
         switch (view.getId()){
             case R.id.ssbm_rl_dui://修改球队
                 goActivity(ChangeQDActivity.class);
                 break;
             case R.id.ssbm_pay:
                 goActivity(OrderCMActivity.class);//去支付
+                break;
+            case R.id.ssbm_refund_tv:
+                //退款
+                intent_temp = new Intent(this, AboutServiceActivity.class);
+                intent_temp.putExtra("type", "refund");
+                startActivity(intent_temp);
+                break;
+            case R.id.ssbm_disclaimer_tv:
+                //免责
+                intent_temp = new Intent(this, AboutServiceActivity.class);
+                intent_temp.putExtra("type", "disclaimer");
+                startActivity(intent_temp);
                 break;
         }
     }

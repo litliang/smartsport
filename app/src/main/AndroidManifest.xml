@@ -510,8 +510,7 @@
             android:label="数据分析"></activity>
         <!-- 服务协议-->
         <activity
-            android:name=".activity.AboutServiceActivity"
-            android:label="服务协议" />
+            android:name=".activity.AboutServiceActivity" />
 
         <!-- 选择头像 -->
         <activity

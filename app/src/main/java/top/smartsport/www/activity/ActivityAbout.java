@@ -46,10 +46,10 @@ public class ActivityAbout extends BaseActivity implements View.OnClickListener{
             case R.id.about_agreement_layout:
                 //TODO 服务协议
                 Intent intent_temp = new Intent(this, AboutServiceActivity.class);
+                intent_temp.putExtra("type", "service");
                 startActivity(intent_temp);
                 break;
             case R.id.about_service_phone:
-                //TODO 服务协议
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ((TextView)v).getText().toString()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

@@ -65,6 +65,8 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
         mMemberLayout.setOnClickListener(this);
         mContactLayout.setOnClickListener(this);
         mPhoneLayout.setOnClickListener(this);
+        mRefundTv.setOnClickListener(this);
+        mDisclaimerTv.setOnClickListener(this);
         mPayBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -123,12 +125,25 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        Intent intent_temp;
         switch (v.getId()){
             case R.id.sign_up_member_layout:
                 break;
             case R.id.sign_up_contact_layout:
                 break;
             case R.id.sign_up_phone_layout:
+                break;
+            case R.id.sign_up_refund_tv:
+                //退款
+                intent_temp = new Intent(this, AboutServiceActivity.class);
+                intent_temp.putExtra("type", "refund");
+                startActivity(intent_temp);
+                break;
+            case R.id.sign_up_disclaimer_tv:
+                //免责
+                intent_temp = new Intent(this, AboutServiceActivity.class);
+                intent_temp.putExtra("type", "disclaimer");
+                startActivity(intent_temp);
                 break;
         }
     }
