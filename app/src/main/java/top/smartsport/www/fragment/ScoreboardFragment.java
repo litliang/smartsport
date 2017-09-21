@@ -96,14 +96,13 @@ public class ScoreboardFragment extends BaseV4Fragment{
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
                 ((TextView) convertView.findViewById(R.id.item_number_tv)).setText(pos + "");
                 if (name.equals("card")) {
-                    Log.e("smile", " findAndBindView   name = " + name + "    value = " + value);
                     String temp = String.valueOf(value);
                     SpannableStringBuilder builder = new SpannableStringBuilder(temp);
                     int start_index = temp.indexOf("红");
                     int start_index1 = temp.indexOf("黄");
                     builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FF3B30")), start_index, start_index + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     builder.setSpan(new ForegroundColorSpan(Color.parseColor("#FFD700")), start_index1, start_index1 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    ((TextView) convertView.findViewById(R.id.item_card_tv)).setText(builder);
+                    value = builder;
                 }
                 super.findAndBindView(convertView, pos, item, name, value);
                 return true;
