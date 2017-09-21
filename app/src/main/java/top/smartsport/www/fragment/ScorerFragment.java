@@ -83,9 +83,6 @@ public class ScorerFragment extends BaseV4Fragment {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
                 ((TextView) convertView.findViewById(R.id.scorer_item_number_tv)).setText(pos + "");
-                if (name.equals("header")) {
-                    Glide.with(context).load(value.toString()).into((ImageView) convertView.findViewById(R.id.scorer_item_iv));
-                }
                 super.findAndBindView(convertView, pos, item, name, value);
                 return true;
             }

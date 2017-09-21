@@ -22,8 +22,7 @@
         <ImageView
             android:id="@+id/scorer_item_iv"
             android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_height="35dp"/>
         <TextView
             android:id="@+id/scorer_item_username_tv"
             android:layout_width="wrap_content"
