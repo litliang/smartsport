@@ -89,12 +89,13 @@ public class ScoreboardFragment extends BaseV4Fragment{
         access_token = tokenInfo.getAccess_token();
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.adapter_scoreboard_item);
-        adaptinfo.addViewIds(new Integer[]{R.id.item_number_tv, R.id.item_name_tv, R.id.item_result_tv, R.id.item_scored_tv, R.id.item_card_tv, R.id.item_score_tv});
-        adaptinfo.addObjectFields(new String[]{"position", "name", "result", "scored", "card", "score"});
+        adaptinfo.addViewIds(new Integer[]{/*R.id.item_number_tv, */R.id.item_name_tv, R.id.item_result_tv, R.id.item_scored_tv, R.id.item_card_tv, R.id.item_score_tv});
+        adaptinfo.addObjectFields(new String[]{/*"position", */"team_name", "score", "ball", "card", "integral"});
         mapadapter = new MapAdapter(getContext(), adaptinfo) {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
                 if (name.equals("card")) {
+                    Log.e("smile", " findAndBindView   name = " + name + "    value = " + value);
                     String temp = String.valueOf(value);
                     SpannableStringBuilder builder = new SpannableStringBuilder(temp);
                     int start_index = temp.indexOf("红");
@@ -144,7 +145,11 @@ public class ScoreboardFragment extends BaseV4Fragment{
 
             @Override
             public void onFailure(Object result, List object) {
-
+                if (page == 1){
+                    mList.onPullDownRefreshComplete();
+                }else{
+                    mList.onPullUpRefreshComplete();
+                }
             }
 
             @Override
@@ -156,74 +161,27 @@ public class ScoreboardFragment extends BaseV4Fragment{
                     mList.onPullUpRefreshComplete();
                 }
                 String data = ((NetEntity)result).getData().toString();
-                if (data.equals("null")){
+                if (data.equals("null") || data == null || data.toString().equals("")){
                     mEmptyLayout.setVisibility(View.VISIBLE);
                 }else{
-                    List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("courses", data));
-                    if (page==1){
-                        if (!(list.size()>0)){
+                    List list = (List) intf.JsonUtil.extractJsonRightValue(data);
+                    if (page ==1) {
+                        if (list.size()>0){
+                            mapadapter.setItemDataSrc(new MapContent(list));
+                            mList.getRefreshableView().setAdapter(mapadapter);
+                        }else{
                             mEmptyLayout.setVisibility(View.GONE);
-                            return;
                         }
-                    }else {
+                    }else{
                         mEmptyLayout.setVisibility(View.GONE);
+                        List lt = ((List) mapadapter.getItemDataSrc().getContent());
+                        lt.addAll(list);
+                        mapadapter.setItemDataSrc(new MapContent(lt));
                     }
-                    list.addAll(list);
-                    mapadapter.setItemDataSrc(new MapContent(mList));
-                    mList.getRefreshableView().setAdapter(mapadapter);
                     mapadapter.notifyDataSetChanged();
                 }
             }
 
         });
     }
-//    private void getData(final boolean refresh) {
-//        JSONObject json = new JSONObject();
-//        try {
-//            json.put("client_id",client_id);
-//            json.put("state",state);
-//            json.put("access_token",access_token);
-//            json.put("action","viewMatchAnalysis");
-//            json.put("match_id","1");
-//            json.put("type","1");//1积分榜2射手榜3助攻榜
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        X.Post(url, json, new MyCallBack<String>() {
-//            @Override
-//            protected void onFailure(String message) {
-//                showToast(message);
-//                if (refresh){
-//                    mList.onPullUpRefreshComplete();
-//                }else {
-//                    mList.onPullDownRefreshComplete();
-//                }
-//            }
-//
-//            @Override
-//            public void onSuccess(NetEntity entity) {
-//                if (refresh){
-//                    mList.onPullUpRefreshComplete();
-//                }else {
-//                    mList.onPullDownRefreshComplete();
-//                }
-//                String data = entity.getData().toString();
-//                Log.e("smile", "ScoreBoardFragment --------- data = " + data);
-////                list = (List) JsonUtil.extractJsonRightValue(entity.getData().toString());
-////                scoreboardAdapter.setData(list);
-////                MapConf mc = MapConf.with(getContext())
-////                        .pair("position->item_number_tv")
-////                        .pair("team_name->item_name_tv")
-////                        .pair("member_name->item_card_tv")
-////                        .pair("goal->item_score_tv")
-////                        .source(R.layout.adapter_scoreboard_item);
-////                MapConf.with(getContext()).conf(mc).source(data, mList.getRefreshableView()).toView();
-//            }
-//
-//            @Override
-//            public void onError(Throwable throwable, boolean b) {
-//                super.onError(throwable, b);
-//            }
-//        });
-//    }
 }

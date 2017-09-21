@@ -30,6 +30,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
             android:textSize="14sp"
+            android:lines="1"
+            android:ellipsize="end"
             android:text="球员名字" />
     </LinearLayout>
     <TextView
@@ -39,6 +41,8 @@
         android:textColor="@color/text_gray"
         android:gravity="left|center_vertical"
         android:textSize="14sp"
+        android:lines="1"
+        android:ellipsize="end"
         android:text="球队名字" />
     <TextView
         android:id="@+id/scorer_item_score_tv"
