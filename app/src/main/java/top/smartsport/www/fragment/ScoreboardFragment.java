@@ -89,11 +89,12 @@ public class ScoreboardFragment extends BaseV4Fragment{
         access_token = tokenInfo.getAccess_token();
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.adapter_scoreboard_item);
-        adaptinfo.addViewIds(new Integer[]{/*R.id.item_number_tv, */R.id.item_name_tv, R.id.item_result_tv, R.id.item_scored_tv, R.id.item_card_tv, R.id.item_score_tv});
-        adaptinfo.addObjectFields(new String[]{/*"position", */"team_name", "score", "ball", "card", "integral"});
+        adaptinfo.addViewIds(new Integer[]{/*R.id.item_number_tv, */R.id.item_name_tv, R.id.item_result_tv, R.id.item_scored_tv, R.id.item_score_tv, R.id.item_card_tv});
+        adaptinfo.addObjectFields(new String[]{/*"position", */"team_name", "score", "ball", "integral", "card" });
         mapadapter = new MapAdapter(getContext(), adaptinfo) {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
+                ((TextView) convertView.findViewById(R.id.item_number_tv)).setText(pos + "");
                 if (name.equals("card")) {
                     Log.e("smile", " findAndBindView   name = " + name + "    value = " + value);
                     String temp = String.valueOf(value);

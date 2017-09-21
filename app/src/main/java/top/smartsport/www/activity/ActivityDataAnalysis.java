@@ -13,6 +13,7 @@ import java.util.List;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.AnalysisTabAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.fragment.AssistFragment;
 import top.smartsport.www.fragment.ScoreboardFragment;
 import top.smartsport.www.fragment.ScorerFragment;
 
@@ -28,6 +29,7 @@ public class ActivityDataAnalysis extends BaseActivity{
 
     private ScoreboardFragment scoreboardFragment;
     private ScorerFragment scorerFragment;
+    private AssistFragment assistFragment;
     private AnalysisTabAdapter mTabAdapter;
 
     private List<Fragment> list_fragment;
@@ -51,8 +53,8 @@ public class ActivityDataAnalysis extends BaseActivity{
         list_fragment.add(scoreboardFragment);
         scorerFragment = new ScorerFragment();
         list_fragment.add(scorerFragment);
-        scorerFragment = new ScorerFragment();
-        list_fragment.add(scorerFragment);
+        assistFragment = new AssistFragment();
+        list_fragment.add(assistFragment);
 
         title = getResources().getStringArray(R.array.analysis_tab_value);
         for(int i = 0; i < TAB_COUNT; i ++){

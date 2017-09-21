@@ -1,17 +1,7 @@
 package top.smartsport.www.fragment;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.format.DateUtils;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -24,39 +14,36 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import app.base.MapAdapter;
 import app.base.MapContent;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.adapter.ScorerAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
-import top.smartsport.www.bean.ScoreboardInfo;
 import top.smartsport.www.bean.ScorerInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
 /**
- * Created by bajieaichirou on 17/9/8.
- * 数据分析之射手榜
+ * Created by bajieaichirou on 2017/9/21 0021.
+ * 数据分析之助攻榜
  */
 @ContentView(R.layout.fragment_scorer)
-public class ScorerFragment extends BaseV4Fragment {
+public class AssistFragment extends BaseV4Fragment {
     @ViewInject(R.id.scorer_list)
-    PullToRefreshListView  mList;
+    PullToRefreshListView mList;
 
     @ViewInject(R.id.empty)
     RelativeLayout mEmptyLayout;
 
     private Activity mThis;
     private int page = 1;
-//    private ScorerAdapter scorerAdapter;
+    //    private ScorerAdapter scorerAdapter;
     private List<ScorerInfo> list = new ArrayList<>();
     private MapAdapter mapadapter;
     private RegInfo regInfo;
@@ -117,8 +104,8 @@ public class ScorerFragment extends BaseV4Fragment {
                 .add("state",state)
                 .add("access_token",access_token)
                 .add("action","viewMatchAnalysis")
-                .add("match_id","2")
-                .add("type","1")//1积分榜2射手榜3助攻榜
+                .add("match_id","1")
+                .add("type","3")//1积分榜2射手榜3助攻榜
                 .get(), new FunCallback() {
 
             @Override
