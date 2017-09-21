@@ -10,18 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,26 +85,26 @@ public class AccountSetActivity extends BaseActivity {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getUserInfo").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-
             }
 
             @Override
             public void onFailure(Object result, List object) {
-
             }
 
             @Override
             public void onCallback(Object result, List object) {
-                data = ((NetEntity)result).getData().toString();
+                if (result instanceof NetEntity) {
+                    data = ((NetEntity)result).getData().toString();
 
-                SPUtils.put(getBaseContext(), "getUserInfo", data);
-                SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
-                MapConf.with(getBaseContext()).pair("username->username").pair("username->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
-                        .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
-                        .pair("header_url->account_header")
-                        .pair("soccer_age->account_ql")
-                        .pair("address->account_jz")
-                        .source(data, getWindow().getDecorView()).toView();
+                    SPUtils.put(getBaseContext(), "getUserInfo", data);
+                    SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
+                    MapConf.with(getBaseContext()).pair("username->username").pair("truename->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
+                            .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
+                            .pair("header_url->account_header")
+                            .pair("soccer_age->account_ql")
+                            .pair("address->account_jz")
+                            .source(data, getWindow().getDecorView()).toView();
+                }
             }
         });
 

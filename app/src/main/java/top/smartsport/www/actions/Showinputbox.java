@@ -6,15 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lecloud.xutils.util.LogUtils;
+
 import java.util.List;
 
 import app.base.DialogUtil;
 import app.base.RRes;
 import app.base.action.Task;
 import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.utils.ActivityStack;
+import top.smartsport.www.utils.StringUtil;
 
 /**
  * Created by admin on 2017/9/4.
@@ -34,7 +37,8 @@ public class Showinputbox extends Task {
     @Override
     public Object run(final View view, Object... params) {
         final int changeid = RRes.get("R.id." + params[0].toString()).getAndroidValue();
-        String title = params[1].toString();
+        final String title = params[1].toString();
+        final String findId = params[0].toString();
         return showDialog((Activity) view.getContext(), ((TextView) ((Activity) view.getContext()).findViewById(changeid)).getText().toString(), title, new FunCallback() {
 
             @Override
@@ -49,7 +53,42 @@ public class Showinputbox extends Task {
 
             @Override
             public void onCallback(Object result, List object) {
+                LogUtils.d("-------result-----" + result.toString());
+                LogUtils.d("-------title-----" + title);
+                if(!StringUtil.isEmpty(title) && !StringUtil.isEmpty(findId)) {
+                    String type = "";
+                    String value = result.toString();
+                    if (findId.equals("username")) {
+                        type = "username";
+                    } else if (findId.equals("truename")) {
+                        type = "truename";
+                    } else if (findId.equals("account_jz")) {
+                        type = "address";
+                    } else if (findId.equals("account_jlb")) {
+//                        type = "";
+                    }
+                    if(!StringUtil.isEmpty(type)) {
+                        saveAccount(type, value);
+                    }
+                }
                 ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString());
+            }
+        });
+    }
+
+    private void saveAccount(String type, String value) {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "saveBaseUserInfo").add(type, value).
+                        add("type", "modify").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
             }
         });
     }

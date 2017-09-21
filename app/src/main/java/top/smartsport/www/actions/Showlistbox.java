@@ -2,11 +2,12 @@ package top.smartsport.www.actions;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.lecloud.xutils.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,8 @@ import app.base.action.Task;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.utils.StringUtil;
 
 /**
  * Created by admin on 2017/9/4.
@@ -40,7 +43,9 @@ public class Showlistbox extends Task {
     @Override
     public Object run(final View view, Object... params) {
         final int changeid = RRes.get("R.id." + params[0].toString()).getAndroidValue();
-        String title = params[1].toString();
+        final String findId = params[0].toString();
+        LogUtils.d("-------params[0].toString()-----" + params[0].toString());
+        final String title = params[1].toString();
         String array = params[2].toString();
         String unit = "";
         if (params.length > 3) {
@@ -61,12 +66,61 @@ public class Showlistbox extends Task {
 
             @Override
             public void onCallback(Object result, List object) {
+                LogUtils.d("-------result-----" + result.toString());
+                LogUtils.d("-------title-----" + title);
+                if(!StringUtil.isEmpty(title) && !StringUtil.isEmpty(findId)) {
+                    String type = "";
+                    String value = result.toString();
+                    if (findId.equals("account_age")) {
+                        type = "age";
+                    } else if (findId.equals("account_sex")) { // 传的是参数（0：女， 1：男）
+                        type = "sex";
+                        if(!StringUtil.isEmpty(value) && value.equals("女")) {
+                            value = "0";
+                        } else {
+                            value = "1";
+                        }
+                    } else if (findId.equals("account_height")) {
+                        type = "height";
+                    } else if (findId.equals("account_weight")) {
+                        type = "weight";
+                    } else if (findId.equals("account_habit")) { // 传的是参数: 1左脚  2右脚  3左右均衡
+                        type = "leg";
+                        if(!StringUtil.isEmpty(value) && value.equals("右脚")) {
+                            value = "2";
+                        } else if(!StringUtil.isEmpty(value) && value.equals("左脚")) {
+                            value = "1";
+                        } else {
+                            value = "3";
+                        }
+                    } else if (findId.equals("account_ql")) {
+                        type = "soccer_age";
+                    }
+                    if(!StringUtil.isEmpty(type)) {
+                        saveAccount(type, value);
+                    }
+                }
                 ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString() + finalUnit);
             }
         });
         return null;
     }
 
+    private void saveAccount(String type, String value) {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "saveBaseUserInfo").add(type, value).add("type", "modify").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+            }
+        });
+    }
 
     public void showDialog(Activity ay, String title, String tosplitlist, FunCallback fb) {
         String[] split = tosplitlist.split("->");
