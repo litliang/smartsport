@@ -5,17 +5,15 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
-import intf.MapBuilder;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import intf.MapBuilder;
 import top.smartsport.www.O;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.BSSZAdapter;
@@ -32,7 +31,6 @@ import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSSZInfo;
 import top.smartsport.www.bean.BSZTInfo;
 import top.smartsport.www.bean.City;
-import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.Province;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.SSJBInfo;
@@ -40,8 +38,6 @@ import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.ListViewForScrollView;
 import top.smartsport.www.widget.MyGridView;
-import top.smartsport.www.xutils3.MyCallBack;
-import top.smartsport.www.xutils3.X;
 
 /**
  * Created by Aaron on 2017/7/25.
@@ -401,4 +397,15 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            LogUtil.d("---------------onKeyDown-------------------");
+            setResult(RESULT_OK, new Intent());
+            this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

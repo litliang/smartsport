@@ -1,5 +1,6 @@
 package top.smartsport.www.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -69,10 +70,21 @@ public class BSV4Fragment extends BaseV4Fragment {
     private void getEvent(View view){
         switch (view.getId()){
             case R.id.bs_ll_choice:
-                startActivityForResult(new Intent(getContext(),BSChoiceActivity.class),0);
+                startActivityForResult(new Intent(getContext(),BSChoiceActivity.class), Activity.RESULT_FIRST_USER);
                 break;
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (listFM != null) {
+            for (Fragment fragment : listFM) {
+                if(fragment==null)
+                    continue;
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
 
 }
