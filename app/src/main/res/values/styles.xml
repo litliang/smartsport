@@ -109,5 +109,8 @@
         <item name="android:textColor">@color/text_gray</item>
     </style>
 
-    <style name="my_dialog" parent="android:Theme.Translucent.NoTitleBar"/>
+    <style name="my_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
 </resources>
