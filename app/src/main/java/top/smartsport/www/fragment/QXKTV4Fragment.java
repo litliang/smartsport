@@ -117,21 +117,30 @@ public class QXKTV4Fragment extends BaseV4Fragment {
 
                 return true;
             }
+
             @Override
             protected void getViewInDetail(final Object item, int position, View convertView) {
                 super.getViewInDetail(item, position, convertView);
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Map map = (Map) item;
+                        startActivity(new Intent(view.getContext(), ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()));
+                    }
+                });
                 convertView.findViewById(R.id.coach_name).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
 
-                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("id").toString()));
+                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("id").toString()));
                     }
                 });
                 convertView.findViewById(R.id.coach_head).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("id").toString()));
+                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("id").toString()));
 
                     }
                 });

@@ -94,7 +94,6 @@ public class Showinputbox extends Task {
                 add("type", "modify").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-                aty.showToast(result.toString());
             }
 
             @Override

@@ -121,8 +121,14 @@ public class BSDetailActivity extends BaseActivity {
         String s = (String) getObj("states");
 
 
-        if (null != s) {Map map = MapBuilder.build().add("1","报名中").add("3","已结束").add("2","进行中").get();
-            states = map.get(s).toString();
+        if (null != s) {
+            //1报名中2进行中 3已结束 4已报满5已报名
+            Map map = MapBuilder.build().add("1", "报名中").add("3", "已结束").add("2", "进行中").add("4", "已报满").add("5", "已报名").get();
+            Object o = map.get(s);
+            if (o == null) {
+                return;
+            }
+            states = o.toString();
             if (states.equals("报名中")) {
                 bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
                 bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
@@ -136,14 +142,22 @@ public class BSDetailActivity extends BaseActivity {
                         goActivity(SSBMActivity.class, bundle);
                     }
                 });
-            }
-            if (states.equals("进行中")) {
+            } else if (states.equals("进行中")) {
                 bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
                 bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
                 bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
                 adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_blue);
-            }
-            if (states.equals("已结束")) {
+            } else if (states.equals("已结束")) {
+                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
+            } else if (states.equals("已报满")) {
+                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
+            } else if (states.equals("已报名")) {
                 bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
                 bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
                 bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
@@ -191,7 +205,7 @@ public class BSDetailActivity extends BaseActivity {
                 Map map = MapConf.with(getBaseContext())
 //                        .pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv")
                         .toMap(BSDetailActivity.this);
-                callHttp(MapBuilder.withMap(map).add("action", "matchApplyPay").add("match_id", id).add("team_id", id).add("members","").add("coach_name","").add("coach_mobile","").get(), new FunCallback() {
+                callHttp(MapBuilder.withMap(map).add("action", "matchApplyPay").add("match_id", id).add("team_id", id).add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
                     @Override
                     public void onSuccess(Object result, List object) {
                         startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
@@ -216,7 +230,7 @@ public class BSDetailActivity extends BaseActivity {
 
     @Override
     public void favImpl(View view, boolean unfav) {
-        fav.run(view,unfav+"",3,id);
+        fav.run(view, unfav + "", 3, id);
     }
 
     @Event(value = {R.id.rl_kc, R.id.rl_sc, R.id.rl_sp})
@@ -251,8 +265,8 @@ public class BSDetailActivity extends BaseActivity {
 
             //‘view_img’ : 1,  //选填 为1时显示全部赛事图片，不填默认显示4张
             //‘view_video’ : 1,  //选填 为1时显示全部赛事视频，不填默认显示6部
-            json.put("view_img","1");
-            json.put("view_video","1");
+            json.put("view_img", "1");
+            json.put("view_video", "1");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -266,12 +280,13 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
-                String collect_status =app.base.JsonUtil.findJsonLink("collect_status",entity.getData().toString()).toString();
-                String status =app.base.JsonUtil.findJsonLink("status",entity.getData().toString()).toString();
+                String collect_status = app.base.JsonUtil.findJsonLink("collect_status", entity.getData().toString()).toString();
+                String status = app.base.JsonUtil.findJsonLink("status", entity.getData().toString()).toString();
 
-                Map map = MapBuilder.build().add("1","报名中").add("3","已结束").get();
+
+                Map map = MapBuilder.build().add("1", "报名中").add("3", "已结束").add("2", "进行中").add("4", "已报满").add("5", "已报名").get();
                 MapConf.build().with(BSDetailActivity.this)
-                        .pair("collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(),BSDetailActivity.this).toView();
+                        .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(), BSDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
 
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
@@ -305,7 +320,7 @@ public class BSDetailActivity extends BaseActivity {
 //                        }
 //                    });
 //                }
-                picAdapter.addAll(picInfoList.subList(0,3));
+                picAdapter.addAll(picInfoList.subList(0, 3));
                 if (picAdapter.getCount() == 0) {
                     findViewById(R.id.pictitle).setVisibility(View.GONE);
                 }

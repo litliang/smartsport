@@ -130,12 +130,18 @@ public class ActivityTrainingDetails extends BaseActivity {
 
         findViewById(R.id.details_collect_iv).setOnClickListener(new View.OnClickListener() {
 
-            boolean tofav = true;
+            Boolean unfavored = null;
 
             @Override
             public void onClick(View view) {
-                tofav = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
-                favImpl(view, tofav);
+                if(unfavored ==null) {
+                    unfavored = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
+                }
+
+
+
+                favImpl(view, unfavored);
+                unfavored = !unfavored;
             }
         });
     }
