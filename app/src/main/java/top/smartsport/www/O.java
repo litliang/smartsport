@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +16,11 @@ import java.util.Map;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.BSSZInfo;
 import top.smartsport.www.bean.BSZTInfo;
-import top.smartsport.www.bean.BSssInfo;
 import top.smartsport.www.bean.ComCity;
 import top.smartsport.www.bean.HotCity;
+import top.smartsport.www.bean.KCJBInfo;
+import top.smartsport.www.bean.KCLBInfo;
+import top.smartsport.www.bean.KCLYInfo;
 import top.smartsport.www.bean.Province;
 import top.smartsport.www.bean.SSJBInfo;
 import top.smartsport.www.utils.JsonUtil;
@@ -43,6 +44,10 @@ public final class O {
     private static List<SSJBInfo> ssjbInfoList;
     private static List<BSZTInfo> bsztInfoList;
     private static List<BSSZInfo> bsszInfoList;
+
+    private static List<KCJBInfo> kcjbInfoList;
+    private static List<KCLYInfo> kclyInfoList;
+    private static List<KCLBInfo> kclbInfoList;
 
 
     public static void setHotAreas(List<HotCity> hot_areas) {
@@ -97,6 +102,51 @@ public final class O {
             }
         }
         return bsszInfoList;
+    }
+
+    public static void setKCJB(List<KCJBInfo> kcjbInfoList){
+        O.kcjbInfoList = kcjbInfoList;
+        O.saveList(kcjbInfoList,KCJBInfo.class);
+    }
+
+    public static List<KCJBInfo> getKCJB() {
+        if (kcjbInfoList == null) {
+            kcjbInfoList = O.getList(KCJBInfo.class);
+            if (kcjbInfoList == null) {
+                kcjbInfoList = new ArrayList<KCJBInfo>();
+            }
+        }
+        return kcjbInfoList;
+    }
+
+    public static void setKCLY(List<KCLYInfo> kclyInfoList){
+        O.kclyInfoList = kclyInfoList;
+        O.saveList(kclyInfoList,KCLYInfo.class);
+    }
+
+    public static List<KCLYInfo> getKCLY() {
+        if (kclyInfoList == null) {
+            kclyInfoList = O.getList(KCLYInfo.class);
+            if (kclyInfoList == null) {
+                kclyInfoList = new ArrayList<KCLYInfo>();
+            }
+        }
+        return kclyInfoList;
+    }
+
+    public static void setKCLB(List<KCLBInfo> kcjbInfoList){
+        O.kclbInfoList = kcjbInfoList;
+        O.saveList(kclbInfoList,KCLBInfo.class);
+    }
+
+    public static List<KCLBInfo> getKCLB() {
+        if (kclbInfoList == null) {
+            kclbInfoList = O.getList(KCLBInfo.class);
+            if (kclbInfoList == null) {
+                kclbInfoList = new ArrayList<KCLBInfo>();
+            }
+        }
+        return kclbInfoList;
     }
 
     public static <T> void save(T t, Class<T> clazz) {

@@ -37,6 +37,9 @@ import top.smartsport.www.bean.BSSZInfo;
 import top.smartsport.www.bean.BSZTInfo;
 import top.smartsport.www.bean.ComCity;
 import top.smartsport.www.bean.HotCity;
+import top.smartsport.www.bean.KCJBInfo;
+import top.smartsport.www.bean.KCLBInfo;
+import top.smartsport.www.bean.KCLYInfo;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.Province;
 import top.smartsport.www.bean.RegInfo;
@@ -111,6 +114,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     loadCityList();
                     getCity();
                     getChoice();
+                    getCourseChoice();
                 } else {
 
                 }
@@ -532,6 +536,74 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     O.setSSJB(ssjbInfoList);
                     O.setBSZT(bsztInfoList);
                     O.setBSSZ(bsszInfoList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private List<KCJBInfo> kcjbInfoList = new ArrayList<>();
+    private List<KCLYInfo> kclyInfoList = new ArrayList<>();
+    private List<KCLBInfo> kclbInfoList = new ArrayList<>();
+
+    private void getCourseChoice() {
+        String url = regInfo.getSource_url();
+        JSONObject json = new JSONObject();
+        try {
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "getOnlineCourseFilter");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        X.Post(url, json, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+
+            }
+
+            @Override
+            public void onSuccess(NetEntity entity) {
+                JsonElement jsonElement = entity.getData();
+                try {
+                    JSONObject json = new JSONObject(jsonElement.toString());
+                    JSONArray levelList = json.optJSONArray("level");
+                    JSONArray sourceList = json.optJSONArray("source");
+                    JSONArray categoryList = json.optJSONArray("category");
+                    for (int i = 0; i < levelList.length(); i++) {
+                        JSONObject obj = (JSONObject) levelList.get(i);
+                        String id = obj.optString("id");
+                        String name = obj.optString("name");
+                        KCJBInfo info = new KCJBInfo();
+                        info.setId(id);
+                        info.setName(name);
+                        kcjbInfoList.add(info);
+
+                    }
+                    for (int i = 0; i < sourceList.length(); i++) {
+                        JSONObject obj = (JSONObject) sourceList.get(i);
+                        String id = obj.optString("id");
+                        String name = obj.optString("name");
+                        KCLYInfo info = new KCLYInfo();
+                        info.setId(id);
+                        info.setName(name);
+                        kclyInfoList.add(info);
+                    }
+//
+                    for (int i = 0; i < categoryList.length(); i++) {
+                        JSONObject obj = (JSONObject) categoryList.get(i);
+                        String id = obj.optString("id");
+                        String name = obj.optString("name");
+                        KCLBInfo info = new KCLBInfo();
+                        info.setId(id);
+                        info.setName(name);
+                        kclbInfoList.add(info);
+                    }
+                    O.setKCJB(kcjbInfoList);
+                    O.setKCLY(kclyInfoList);
+                    O.setKCLB(kclbInfoList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

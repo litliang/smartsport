@@ -29,7 +29,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_gray"
                         android:textSize="45px"
-                        android:text="赛事级别"
+                        android:text="青训级别"
                         android:layout_marginTop="20px"
                         android:layout_marginBottom="20px"
                         android:layout_marginLeft="40px"/>
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_gray"
                         android:textSize="45px"
-                        android:text="比赛状态"
+                        android:text="课程状态"
                         android:layout_marginTop="20px"
                         android:layout_marginBottom="20px"
                         android:layout_marginLeft="40px"/>
