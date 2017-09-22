@@ -34,7 +34,7 @@ public class MyOrderActivity extends BaseActivity {
     //    @BindView(R.id.id_viewpager)
     ViewPager mViewPager;
     Button go;
-    private String[] tabs = {"全部", "代付款", "已完成"};
+    private String[] tabs = {"全部", "待付款", "已完成"};
     private List<Fragment> list;
 
     @Override
