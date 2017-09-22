@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="25px"
-    android:layout_marginRight="25px"
-    android:gravity="bottom"
-    android:orientation="vertical">
+    android:background="@android:color/transparent"
+    android:gravity="bottom">
 
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250px"
-        android:background="@drawable/choose_button"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:background="@drawable/choose_button"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/choose_camera"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:text="@string/contest_camera"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="50px"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"/>
+            <TextView
+                android:id="@+id/choose_picture"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="@string/contest_photo"
+                android:textSize="50px"
+                android:gravity="center"/>
+        </com.zhy.autolayout.AutoLinearLayout>
 
         <TextView
-            android:id="@+id/choose_camera"
+            android:id="@+id/choose_cancel"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:text="@string/contest_camera"
+            android:layout_margin="20px"
+            android:layout_height="130px"
+            android:background="@drawable/choose_button"
+            android:text="@string/cancel"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="50px"
-            android:gravity="center"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"/>
-        <TextView
-            android:id="@+id/choose_picture"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:textColor="@android:color/holo_blue_dark"
-            android:text="@string/contest_photo"
             android:textSize="50px"
             android:gravity="center"/>
     </com.zhy.autolayout.AutoLinearLayout>
-
-    <TextView
-        android:id="@+id/choose_cancel"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10px"
-        android:layout_height="130px"
-        android:layout_marginTop="20px"
-        android:background="@drawable/choose_button"
-        android:text="@string/cancel"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="50px"
-        android:gravity="center"/>
-</com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

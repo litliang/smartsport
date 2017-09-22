@@ -107,11 +107,7 @@ public class BSSSV4Fragment extends BaseV4Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(BSDetailActivity.TAG, info.getId());
                 bundle.putString("states", info.getStatus());
-                if(info.getStatus().equals("报名中")){
-                    toActivity(BSDetailBMActivity.class, bundle);
-                }else {
                     toActivity(BSDetailActivity.class, bundle);
-                }
             }
         });
         getData(true);

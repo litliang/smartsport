@@ -16,6 +16,7 @@ import app.base.action.Task;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.AccountSetActivity;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.utils.StringUtil;
 
@@ -53,32 +54,44 @@ public class Showinputbox extends Task {
 
             @Override
             public void onCallback(Object result, List object) {
-                LogUtils.d("-------result-----" + result.toString());
-                LogUtils.d("-------title-----" + title);
-                if(!StringUtil.isEmpty(title) && !StringUtil.isEmpty(findId)) {
-                    String type = "";
-                    String value = result.toString();
-                    if (findId.equals("username")) {
-                        type = "username";
-                    } else if (findId.equals("truename")) {
-                        type = "truename";
-                    } else if (findId.equals("account_jz")) {
-                        type = "address";
-                    } else if (findId.equals("account_jlb")) {
+                String postfix = "";
+                if (view.getContext() instanceof AccountSetActivity) {
+                    LogUtils.d("-------result-----" + result.toString());
+                    LogUtils.d("-------title-----" + title);
+                    if (!StringUtil.isEmpty(title) && !StringUtil.isEmpty(findId)) {
+                        String type = "";
+                        String value = result.toString();
+                        if (findId.equals("username")) {
+                            type = "username";
+                        } else if (findId.equals("truename")) {
+                            type = "truename";
+                        } else if (findId.equals("account_jz")) {
+                            type = "address";
+                        } else if (findId.equals("account_jlb")) {
 //                        type = "";
-                    }
-                    if(!StringUtil.isEmpty(type)) {
-                        saveAccount(type, value);
+                        } else if (findId.equals("account_sex")) {
+                            type = "sex";
+                        } else if (findId.equals("account_height")) {
+                            postfix = "cm";
+                        } else if (findId.equals("account_weight")) {
+                            postfix = "kg";
+                        }
+//                        else if (findId.equals("account_age")) {
+//                            type = "age";
+//                        }
+                        if (!StringUtil.isEmpty(type)) {
+                            saveAccount((BaseActivity) view.getContext(), type, value);
+                        }
                     }
                 }
-                ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString());
+                ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString() + postfix);
             }
         });
     }
 
-    private void saveAccount(String type, String value) {
+    private void saveAccount(final BaseActivity aty, String type, String value) {
         BaseActivity.callHttp(MapBuilder.build().add("action", "saveBaseUserInfo").add(type, value).
-                        add("type", "modify").get(), new FunCallback() {
+                add("type", "modify").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
             }
@@ -111,7 +124,7 @@ public class Showinputbox extends Task {
                 dialog.cancel();
             }
         });
-        dialog = DialogUtil.showNeutralDialog(dialogInfo,true);
+        dialog = DialogUtil.showNeutralDialog(dialogInfo, true);
         return dialog;
     }
 

@@ -104,6 +104,10 @@
         <activity android:name="cn.android.gallery.GoodsGalleryActivity" />
         <!-- 引导页 -->
         <activity android:name=".activity.GuiderActivity" />
+        <!-- 往期球星 -->
+        <activity
+            android:name=".activity.WQQXActivity"
+            android:label="往期球星" />
 
         <!-- 登录 -->
         <activity
@@ -119,6 +123,11 @@
         <activity
             android:name=".activity.RegNextActivity"
             android:label="@string/label_reg_next" />
+
+        <!-- 全部教练 -->
+        <activity
+            android:name=".activity.AllJLActivity"
+            android:label="全部教练" />
 
         <!-- 忘记密码 -->
         <activity

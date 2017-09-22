@@ -1,10 +1,16 @@
 package top.smartsport.www.actions;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import app.base.MapConf;
 import app.base.RRes;
 import app.base.action.Task;
 import intf.FunCallback;
@@ -26,9 +32,7 @@ public class Fav extends Task {
 
     @Override
     public Object run(View view, Object... params) {
-        if (isinit == null) {
-            isinit = Boolean.parseBoolean(params[0].toString());
-        }
+        isinit = Boolean.parseBoolean(params[0].toString());
         if (params.length == 5) {
             dores = params[3].toString();
             undores = params[4].toString();
@@ -50,7 +54,6 @@ public class Fav extends Task {
                 @Override
                 public void onSuccess(Object result, List object) {
                     favIcon(view, true);
-                    isinit = !isinit;
                     Toast.makeText(view.getContext(), "已收藏", Toast.LENGTH_SHORT).show();
                 }
 
@@ -71,7 +74,6 @@ public class Fav extends Task {
                 @Override
                 public void onSuccess(Object result, List object) {
                     favIcon(view, false);
-                    isinit = !isinit;
                     Toast.makeText(view.getContext(), "已为您取消", Toast.LENGTH_SHORT).show();
 
                 }
@@ -91,23 +93,52 @@ public class Fav extends Task {
         }
     }
 
-    public void favIcon(View view, boolean fav) {
-        int doresv;
-        int undoresv;
-        if (dores != null) {
-            doresv = RRes.get("R." + dores).getAndroidValue();
-            undoresv = RRes.get("R." + undores).getAndroidValue();
-            if (fav) {
-                view.setBackground(view.getContext().getResources().getDrawable(doresv, null));
-            } else {
-                view.setBackground(view.getContext().getResources().getDrawable(undoresv, null));
+    public void favIcon(final View view, final boolean fav) {
+        new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+
+                int doresv = 0;
+                int undoresv = 0;
+                if (dores != null) {
+                    doresv = RRes.get("R." + dores).getAndroidValue();
+                    undoresv = RRes.get("R." + undores).getAndroidValue();
+                    if (view instanceof ImageView) {
+
+                        if (fav) {
+                            ((ImageView) view).setImageResource(doresv);
+                        } else {
+                            ((ImageView) view).setImageResource(undoresv);
+                        }
+                    } else {
+                        if (fav) {
+                            view.setBackgroundResource(doresv);
+                        } else {
+                            view.setBackgroundResource(undoresv);
+
+                        }
+                    }
+                    view.invalidate();
+                    return false;
+                } else {
+                    if (view instanceof ImageView) {
+                        if (fav) {
+                            ((ImageView) view).setImageResource(R.mipmap.fav_done);
+                        } else {
+                            ((ImageView) view).setImageResource(R.mipmap.fav_undo);
+                        }
+                    } else {
+                        if (fav) {
+                            view.setBackgroundResource(R.mipmap.fav_done);
+                        } else {
+                            view.setBackgroundResource(R.mipmap.fav_undo);
+                        }
+                    }
+                    view.invalidate();
+                }
+
+                return false;
             }
-            return;
-        }
-        if (fav) {
-            view.setBackground(view.getContext().getResources().getDrawable(R.mipmap.fav_done, null));
-        } else {
-            view.setBackground(view.getContext().getResources().getDrawable(R.mipmap.fav_undo, null));
-        }
+        }).sendEmptyMessage(0);
     }
 }

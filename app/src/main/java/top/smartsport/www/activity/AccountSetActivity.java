@@ -328,7 +328,7 @@ public class AccountSetActivity extends BaseActivity {
      * */
     private void postData(Map map, String img_id){
 
-        callHttp(MapBuilder.withMap(map).add("action", "saveBaseUserInfo").add("header", img_id).get(), new FunCallback() {
+        callHttp(MapBuilder.withMap(map).add("action", "saveBaseUserInfo").add("header", img_id).add("type", "modify").get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
                 showToast("用户信息已更新");

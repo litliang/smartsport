@@ -409,7 +409,7 @@ public class MapConf {
 
     Tackle tackle;
 
-    protected boolean setView(Object item, Object value, String name,
+    public boolean setView(Object item, Object value, String name,
                               View convertView, final View theView) {
 
         if (theView == null) {
