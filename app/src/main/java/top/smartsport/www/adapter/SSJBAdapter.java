@@ -61,10 +61,10 @@ class SSJBViewHolder extends ViewHolder{
             tv_ssjb.setBackgroundResource(R.drawable.shape_bg_hotcity);
             tv_ssjb.setTextColor(Color.parseColor("#8C8C8C"));
         }
-        if(tv_ssjb.getText().toString().startsWith("全部")){
-            tv_ssjb.setText("全部");
-        }else {
+//        if(tv_ssjb.getText().toString().startsWith("全部")){
+//            tv_ssjb.setText("全部");
+//        }else {
             tv_ssjb.setText(info.getName());
-        }
+//        }
     }
 }

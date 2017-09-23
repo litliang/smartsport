@@ -10,27 +10,33 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import intf.MapBuilder;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import top.smartsport.www.O;
-import top.smartsport.www.R;
-import top.smartsport.www.adapter.BSSZAdapter;
-import top.smartsport.www.adapter.BSZTAdapter;
-import top.smartsport.www.adapter.SSJBAdapter;
-import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.bean.*;
-import top.smartsport.www.utils.SPUtils;
-import top.smartsport.www.widget.ListViewForScrollView;
-import top.smartsport.www.widget.MyGridView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import intf.MapBuilder;
+import top.smartsport.www.O;
+import top.smartsport.www.R;
+import top.smartsport.www.adapter.KCZTAdapter;
+import top.smartsport.www.adapter.QXJBAdapter;
+import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.City;
+import top.smartsport.www.bean.KCZTInfo;
+import top.smartsport.www.bean.Province;
+import top.smartsport.www.bean.QXJBInfo;
+import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.widget.ListViewForScrollView;
+import top.smartsport.www.widget.MyGridView;
+
 /**
  * Created by Aaron on 2017/7/25.
- * 比赛--筛选
+ * 青训--筛选
  */
 @ContentView(R.layout.activity_qxchoice)
 public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItemClickListener {
@@ -38,17 +44,12 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private MyGridView bs_choice_gv_type;
     @ViewInject(R.id.bs_choice_gv_state)
     private MyGridView bs_choice_gv_state;
-    @ViewInject(R.id.bs_choice_gv_rule)
-    private MyGridView bs_choice_gv_rule;
 
-    private SSJBAdapter ssjbAdapter;
-    private List<SSJBInfo> ssjbInfoList;
+    private QXJBAdapter qxjbAdapter;
+    private List<QXJBInfo> qxjbInfoList;
 
-    private BSSZAdapter bsszAdapter;
-    private List<BSSZInfo> bsszInfoList;
-
-    private BSZTAdapter bsztAdapter;
-    private List<BSZTInfo> bsztInfoList;
+    private KCZTAdapter kcztAdapter;
+    private List<KCZTInfo> kcztInfoList;
 
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
@@ -78,8 +79,6 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private int indexOfCity = 0;
     private boolean hasAll = true;
 
-
-
     @Override
     protected void initView() {
         regInfo = RegInfo.newInstance();
@@ -99,18 +98,8 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         bs_choice_gv_state.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                checkState(i);
-
+                checkStatus(i);
             }
-        });
-
-        bs_choice_gv_rule.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                checkType(i);
-            }
-
-
         });
 
         mScrollView.setScrollToBottomListener(new ListViewForScrollView.OnScrollToBottomListener() {
@@ -177,16 +166,14 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
             }
         });
 
-        getSSJB();
-        getBSSZ();
-        getBSZT();
+        getQXJB();
+        getKCZT();
         initListView();
         findViewById(R.id.chongzhi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkLevel(0);
-                checkType(0);
-                checkState(0);
+                checkStatus(0);
                 SPUtils.put(getApplicationContext(), "qx-getCounties-city", "");
                 SPUtils.put(getApplicationContext(), "qx-getCounties-county", "");
             }
@@ -198,27 +185,28 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
             }
         });
         checkLevel(0);
-        checkState(0);
-        checkType(0);
+        checkStatus(0);
         SPUtils.put(getApplicationContext(), "qx-getCounties-city", "");
         SPUtils.put(getApplicationContext(), "qx-getCounties-county", "");
     }
 
     private void checkLevel(int i) {
-        ssjbAdapter.setSeclection(i);
-        ssjbAdapter.notifyDataSetChanged();
-        String level = ssjbAdapter.getItem(i).getName().replace("U", "");
+        qxjbAdapter.setSeclection(i);
+        qxjbAdapter.notifyDataSetChanged();
+        String level = qxjbAdapter.getItem(i).getName().replace("U", "");
         if (level.startsWith("全部")) {
             level = "0";
         }
         SPUtils.put(getApplicationContext(), "qx-level", level);
     }
 
-    private void checkState(int i) {
-        bsztAdapter.setSeclection(i);
-        bsztAdapter.notifyDataSetChanged();
-        Map m = MapBuilder.build().add("全部比赛", 0 + "").add("报名中", 1 + "").add("进行中", 2 + "").add("已结束", 3 + "").get();
-        String state = m.get(bsztAdapter.getItem(i).getName()).toString();
+    private void checkStatus(int i) {
+        kcztAdapter.setSeclection(i);
+        kcztAdapter.notifyDataSetChanged();
+        Map m = MapBuilder.build().add("全部课程", 0 + "")
+                .add("报名中", 1 + "")
+                .add("已报满", 2 + "").get();
+        String state = m.get(kcztAdapter.getItem(i).getName()).toString();
 
         if (state.equals("全部")) {
             state = "0";
@@ -226,78 +214,27 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         SPUtils.put(getApplicationContext(), "qx-status", state);
     }
 
-    private void checkType(int i) {
-        bsszAdapter.setSeclection(i);
-        bsszAdapter.notifyDataSetChanged();
-        String type = bsszAdapter.getItem(i).getName().replace("人制", "");
-        if (type.startsWith("全部")) {
-            type = "0";
-        }
-        SPUtils.put(getApplicationContext(), "type", type);
+    /**
+     * 青训级别
+     */
+    private void getQXJB() {
+        qxjbInfoList = new ArrayList<>();
+        qxjbInfoList = O.getQXJB();
+        qxjbAdapter = new QXJBAdapter(this);
+        qxjbAdapter.addAll(qxjbInfoList);
+        bs_choice_gv_type.setAdapter(qxjbAdapter);
     }
 
     /**
-     * 赛事级别
+     * 课程状态
      */
-    private void getSSJB() {
-        ssjbInfoList = new ArrayList<>();
-//        for(int i=0;i<10;i++){
-//            SSJBInfo info = new SSJBInfo();
-//            if(i==0){
-//                info.setTitle("全部级别");
-//            }else {
-//                info.setTitle("U"+i);
-//            }
-//            ssjbInfoList.add(info);
-//        }
-        ssjbInfoList = O.getSSJB();
-        ssjbAdapter = new SSJBAdapter(this);
-        ssjbAdapter.addAll(ssjbInfoList);
-        bs_choice_gv_type.setAdapter(ssjbAdapter);
-
+    private void getKCZT() {
+        kcztInfoList = new ArrayList<>();
+        kcztInfoList = O.getKCZT();
+        kcztAdapter = new KCZTAdapter(this);
+        kcztAdapter.addAll(kcztInfoList);
+        bs_choice_gv_state.setAdapter(kcztAdapter);
     }
-
-    /**
-     * 比赛状态
-     */
-    private void getBSZT() {
-        bsztInfoList = new ArrayList<>();
-//        for(int i=0;i<4;i++){
-//            BSZTInfo info = new BSZTInfo();
-//            if(i==0){
-//                info.setTitle("全部比赛");
-//            }else {
-//                info.setTitle("报名中"+i);
-//            }
-//            bsztInfoList.add(info);
-//        }
-        bsztInfoList = O.getBSZT();
-        bsztAdapter = new BSZTAdapter(this);
-        bsztAdapter.addAll(bsztInfoList);
-        bs_choice_gv_state.setAdapter(bsztAdapter);
-    }
-
-    /**
-     * 比赛赛制
-     */
-    private void getBSSZ() {
-        bsszInfoList = new ArrayList<>();
-//        for(int i=0;i<6;i++){
-//            BSSZInfo info = new BSSZInfo();
-//            if(i==0){
-//                info.setTitle("全部赛制");
-//            }else {
-//                info.setTitle(i+"人制");
-//            }
-//            bsszInfoList.add(info);
-//        }
-        bsszInfoList = O.getBSSZ();
-        bsszAdapter = new BSSZAdapter(this);
-        bsszAdapter.addAll(bsszInfoList);
-        bs_choice_gv_rule.setAdapter(bsszAdapter);
-
-    }
-
 
     private void initListView() {
         List<Province> areas = new ArrayList<>();

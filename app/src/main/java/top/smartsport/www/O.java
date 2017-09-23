@@ -21,7 +21,9 @@ import top.smartsport.www.bean.HotCity;
 import top.smartsport.www.bean.KCJBInfo;
 import top.smartsport.www.bean.KCLBInfo;
 import top.smartsport.www.bean.KCLYInfo;
+import top.smartsport.www.bean.KCZTInfo;
 import top.smartsport.www.bean.Province;
+import top.smartsport.www.bean.QXJBInfo;
 import top.smartsport.www.bean.SSJBInfo;
 import top.smartsport.www.utils.JsonUtil;
 
@@ -49,6 +51,8 @@ public final class O {
     private static List<KCLYInfo> kclyInfoList;
     private static List<KCLBInfo> kclbInfoList;
 
+    private static List<QXJBInfo> qxjbInfoList;
+    private static List<KCZTInfo> kcztInfoList;
 
     public static void setHotAreas(List<HotCity> hot_areas) {
         O.hot_areas = hot_areas;
@@ -102,6 +106,36 @@ public final class O {
             }
         }
         return bsszInfoList;
+    }
+
+    public static void setQXJB(List<QXJBInfo> qxjbInfoList){
+        O.qxjbInfoList = qxjbInfoList;
+        O.saveList(qxjbInfoList,QXJBInfo.class);
+    }
+
+    public static List<QXJBInfo> getQXJB() {
+        if (qxjbInfoList == null) {
+            qxjbInfoList = O.getList(QXJBInfo.class);
+            if (qxjbInfoList == null) {
+                qxjbInfoList = new ArrayList<QXJBInfo>();
+            }
+        }
+        return qxjbInfoList;
+    }
+
+    public static void setKCZT(List<KCZTInfo> kcztInfoList){
+        O.kcztInfoList = kcztInfoList;
+        O.saveList(kcztInfoList,KCZTInfo.class);
+    }
+
+    public static List<KCZTInfo> getKCZT() {
+        if (kcztInfoList == null) {
+            kcztInfoList = O.getList(KCZTInfo.class);
+            if (kcztInfoList == null) {
+                kcztInfoList = new ArrayList<KCZTInfo>();
+            }
+        }
+        return kcztInfoList;
     }
 
     public static void setKCJB(List<KCJBInfo> kcjbInfoList){

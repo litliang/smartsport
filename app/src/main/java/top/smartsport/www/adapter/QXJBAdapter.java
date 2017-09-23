@@ -9,20 +9,19 @@ import org.xutils.view.annotation.ViewInject;
 
 import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
-import top.smartsport.www.bean.BSSZInfo;
+import top.smartsport.www.bean.QXJBInfo;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
- * Created by Aaron on 2017/7/26.
+ * Created by gst-pc on 2017/9/23.
  */
-
-public class BSSZAdapter extends EntityListAdapter<BSSZInfo,BSSZViewHolder> {
+public class QXJBAdapter extends EntityListAdapter<QXJBInfo,QXJBViewHolder> {
     private int clickTemp = -1;
     //标识选择的Item
     public void setSeclection(int position) {
         clickTemp = position;
     }
-    public BSSZAdapter(Context context) {
+    public QXJBAdapter(Context context) {
         super(context);
     }
 
@@ -32,24 +31,24 @@ public class BSSZAdapter extends EntityListAdapter<BSSZInfo,BSSZViewHolder> {
     }
 
     @Override
-    protected BSSZViewHolder getViewHolder(View root) {
-        return new BSSZViewHolder(root);
+    protected QXJBViewHolder getViewHolder(View root) {
+        return new QXJBViewHolder(root);
     }
 
     @Override
-    protected void initViewHolder(BSSZViewHolder bsszViewHolder, int position) {
-        bsszViewHolder.init(getItem(position),position,clickTemp);
+    protected void initViewHolder(QXJBViewHolder qxjbViewHolder, int position) {
+        qxjbViewHolder.init(getItem(position),position,clickTemp);
     }
 }
-class BSSZViewHolder extends ViewHolder{
+class QXJBViewHolder extends ViewHolder {
     @ViewInject(R.id.tv_bssz)
     private TextView tv_bssz;
 
-    public BSSZViewHolder(View root) {
+    public QXJBViewHolder(View root) {
         super(root);
     }
 
-    public void init(BSSZInfo info,int position,int clickTemp){
+    public void init(QXJBInfo info,int position,int clickTemp){
         if(clickTemp==position){
             tv_bssz.setBackgroundResource(R.drawable.shape_bg_hotcity_green);
             tv_bssz.setTextColor(Color.parseColor("#3CB963"));

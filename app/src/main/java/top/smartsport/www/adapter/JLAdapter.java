@@ -5,11 +5,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.xutils.view.annotation.ViewInject;
 
 import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.JLInfo;
+import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
@@ -49,8 +52,8 @@ class JLViewHolder extends ViewHolder{
         super(root);
     }
     public void init(JLInfo info){
-        //        ImageLoader.getInstance().displayImage(info.getPosition(), adapter_home_header, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+        ImageLoader.getInstance().displayImage(info.getHeader_url(), adapter_home_header, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         adapter_home_name.setText(info.getName());
-        adapter_home_content.setText(info.getPosition());
+        adapter_home_content.setText(info.getTitle());
     }
 }
