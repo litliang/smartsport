@@ -24,6 +24,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.adapter.KCZTAdapter;
 import top.smartsport.www.adapter.QXJBAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.City;
 import top.smartsport.www.bean.KCZTInfo;
 import top.smartsport.www.bean.Province;
@@ -78,6 +79,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private int indexOfProvince = 0;
     private int indexOfCity = 0;
     private boolean hasAll = true;
+    private int currentLevelIndex, currentStatusIndex;
 
     @Override
     protected void initView() {
@@ -181,16 +183,29 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SPUtils.put(getApplicationContext(), "qx_currentLevelIndex", currentLevelIndex);
+                SPUtils.put(getApplicationContext(), "qx_currentStatusIndex", currentStatusIndex);
+                setResult(RESULT_OK);
                 finish();
             }
         });
-        checkLevel(0);
-        checkStatus(0);
+        currentLevelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "qx_currentLevelIndex", 0);
+        currentStatusIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "qx_currentStatusIndex", 0);
+        if(currentLevelIndex >= qxjbAdapter.getCount()) {
+            currentLevelIndex = 0;
+        }
+        if(currentStatusIndex >= kcztAdapter.getCount()) {
+            currentStatusIndex = 0;
+        }
+
+        checkLevel(currentLevelIndex);
+        checkStatus(currentStatusIndex);
         SPUtils.put(getApplicationContext(), "qx-getCounties-city", "");
         SPUtils.put(getApplicationContext(), "qx-getCounties-county", "");
     }
 
     private void checkLevel(int i) {
+        currentLevelIndex = i;
         qxjbAdapter.setSeclection(i);
         qxjbAdapter.notifyDataSetChanged();
         String level = qxjbAdapter.getItem(i).getName().replace("U", "");
@@ -201,6 +216,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     }
 
     private void checkStatus(int i) {
+        currentStatusIndex = i;
         kcztAdapter.setSeclection(i);
         kcztAdapter.notifyDataSetChanged();
         Map m = MapBuilder.build().add("全部课程", 0 + "")

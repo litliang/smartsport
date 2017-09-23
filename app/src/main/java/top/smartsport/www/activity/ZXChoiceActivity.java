@@ -21,6 +21,7 @@ import top.smartsport.www.adapter.KCJBAdapter;
 import top.smartsport.www.adapter.KCLBAdapter;
 import top.smartsport.www.adapter.KCLYAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.KCJBInfo;
 import top.smartsport.www.bean.KCLBInfo;
 import top.smartsport.www.bean.KCLYInfo;
@@ -73,6 +74,7 @@ public class ZXChoiceActivity extends BaseActivity {
     private int indexOfProvince = 0;
     private int indexOfCity = 0;
     private boolean hasAll = true;
+    private int currentLevelIndex, currentLaiYuanIndex, currentLeiBieIndex;
 
     @Override
     protected void initView() {
@@ -133,16 +135,32 @@ public class ZXChoiceActivity extends BaseActivity {
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SPUtils.put(getApplicationContext(), "kc_currentLevelIndex", currentLevelIndex);
+                SPUtils.put(getApplicationContext(), "kc_currentLaiYuanIndex", currentLaiYuanIndex);
+                SPUtils.put(getApplicationContext(), "kc_currentLeiBieIndex", currentLeiBieIndex);
                 setResult(RESULT_OK, new Intent());
                 finish();
             }
         });
-        checkJB(0);
-        checkLY(0);
-        checkLB(0);
+        currentLevelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLevelIndex", 0);
+        currentLaiYuanIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLaiYuanIndex", 0);
+        currentLeiBieIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLeiBieIndex", 0);
+        if(currentLevelIndex >= kcjbAdapter.getCount()) {
+            currentLevelIndex = 0;
+        }
+        if(currentLaiYuanIndex >= kclyAdapter.getCount()) {
+            currentLaiYuanIndex = 0;
+        }
+        if(currentLeiBieIndex >= kclbAdapter.getCount()) {
+            currentLeiBieIndex = 0;
+        }
+        checkJB(currentLevelIndex);
+        checkLY(currentLaiYuanIndex);
+        checkLB(currentLeiBieIndex);
     }
 
     private void checkJB(int i) {
+        currentLevelIndex = i;
         kcjbAdapter.setSeclection(i);
         kcjbAdapter.notifyDataSetChanged();
         String level = kcjbAdapter.getItem(i).getName();
@@ -151,6 +169,7 @@ public class ZXChoiceActivity extends BaseActivity {
     }
 
     private void checkLY(int i) {
+        currentLaiYuanIndex = i;
         kclyAdapter.setSeclection(i);
         kclyAdapter.notifyDataSetChanged();
         String state = kclyAdapter.getItem(i).getName();
@@ -159,6 +178,7 @@ public class ZXChoiceActivity extends BaseActivity {
     }
 
     private void checkLB(int i) {
+        currentLeiBieIndex = i;
         kclbAdapter.setSeclection(i);
         kclbAdapter.notifyDataSetChanged();
         String type = kclbAdapter.getItem(i).getName();
