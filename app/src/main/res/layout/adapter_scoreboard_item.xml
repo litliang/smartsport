@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="13dp"
-    android:paddingBottom="13dp"
+    android:paddingTop="11dp"
+    android:paddingBottom="11dp"
     android:background="@color/white">
     <TextView
         android:id="@+id/item_number_tv"
