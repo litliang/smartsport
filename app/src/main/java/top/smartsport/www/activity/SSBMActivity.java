@@ -1,14 +1,19 @@
 package top.smartsport.www.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -21,8 +26,10 @@ import top.smartsport.www.bean.BMvideo;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.SSBMOrder;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -75,10 +82,15 @@ public class SSBMActivity extends BaseActivity {
     @ViewInject(R.id.ssbm_disclaimer_tv)
     private TextView disclaimer_tv;
 
+    private Context mContext;
+    private BMmatch bMmatch;
+    private BMvideo bMvideo;
+    private BMmyteam bMmyteam;
+    private String total, teamId;
 
     @Override
     protected void initView() {
-
+        mContext = SSBMActivity.this;
         id = (String) getObj(SSBMActivity.TAG);
 
         regInfo = RegInfo.newInstance();
@@ -98,10 +110,11 @@ public class SSBMActivity extends BaseActivity {
         Intent intent_temp;
         switch (view.getId()){
             case R.id.ssbm_rl_dui://修改球队
-                goActivity(ChangeQDActivity.class);
+                goActivity(SSBMActivity.class);
                 break;
             case R.id.ssbm_pay:
-                goActivity(OrderCMActivity.class);//去支付
+//                goActivity(OrderCMActivity.class);//去支付
+                judgeValue();
                 break;
             case R.id.ssbm_refund_tv:
                 //退款
@@ -141,23 +154,93 @@ public class SSBMActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 Data data = entity.toObj(Data.class);
-                BMmatch bMmatch=data.toMatch(BMmatch.class);
-                BMvideo bMvideo = data.toVideo(BMvideo.class);
-                BMmyteam bMmyteam = data.toMyteam(BMmyteam.class);
+                bMmatch=data.toMatch(BMmatch.class);
+                bMvideo = data.toVideo(BMvideo.class);
+                bMmyteam = data.toMyteam(BMmyteam.class);
                 ImageLoader.getInstance().displayImage(bMmatch.getCover(), ssbm_img_pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 ssbm_text_title.setText(bMmatch.getName());
                 ssbm_text_time.setText(bMmatch.getStart_time());
                 ssbm_text_adress.setText(bMmatch.getCounty());
-                ssbm_text_sell_price.setText(bMmatch.getSell_price());
-                ssbm_text_price.setText(bMmatch.getPrice());
-                ssbm_text_sell_prices.setText(bMmatch.getSell_price());
-                ssbm_text_prices.setText(bMmatch.getPrice());
+                ssbm_text_sell_price.setText("¥" + bMmatch.getSell_price());
+                ssbm_text_price.setText("¥" + bMmatch.getPrice());
+                ssbm_text_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG ); //中间横线
+                ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
+                // 总金额（两数相加）
+                float money1 = Float.parseFloat(bMmatch.getSell_price());
+                float money2 = Float.parseFloat(bMvideo.getSell_price());
+                float totalValue = money1 + money2;
+                total = StringUtil.strToDouble("" + totalValue);
+                ssbm_text_prices.setText("¥" + total);
                 ssbm_text_baoming_qiudui.setText(bMmyteam.getTeam_name());
                 ssbm_text_people_name.setText(bMmyteam.getCoath_name());
                 ssbm_text_people_num.setText(bMmyteam.getMembers());
                 ssbm_text_people_phone.setText(bMmyteam.getCoath_mobile());
                 ssbm_text_dingzhi_video.setText(bMvideo.getName());
+                teamId = bMmyteam.getId();
             }
         });
+    }
+
+    // 判断联系人、联系电话是否为空
+    private void judgeValue() {
+        String peoplePame = ssbm_text_people_name.getText().toString();
+        if(StringUtil.isEmpty(peoplePame)) {
+            Toast.makeText(mContext, "联系人不能为空哦！", Toast.LENGTH_LONG).show();
+            return;
+        }
+        String phone = ssbm_text_people_phone.getText().toString();
+        boolean isPhone = StringUtil.checkMobile(mContext, phone);
+        if(isPhone) {
+            // TODO 创建订单
+            getDetail(peoplePame, phone);
+        }
+    }
+
+    private void getDetail(String peoplePame, String phone) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "matchApplyPay");
+            json.put("total", total);
+            json.put("match_id", id);
+            json.put("team_id", teamId);
+            json.put("members", bMmyteam.getMembers());
+            json.put("coach_name", peoplePame);
+            json.put("coach_mobile", phone);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        X.Post(url, json, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+
+            }
+
+            @Override
+            public void onSuccess(NetEntity entity) {
+                SSBMOrder bmOrder = entity.toObj(SSBMOrder.class);
+                Bundle bundle = new Bundle();
+//                {"total":"200.00","type":2,"product_id":"4"}
+                bundle.putString("total", bmOrder.getTotal());
+                bundle.putString("type", bmOrder.getType());
+                bundle.putString("product_id", bmOrder.getProduct_id());
+                goActivity(OrderCMActivity.class, bundle);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+//                getData(true);
+                break;
+            default:
+                break;
+        }
     }
 }

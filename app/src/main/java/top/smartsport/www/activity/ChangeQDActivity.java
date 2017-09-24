@@ -1,6 +1,7 @@
 package top.smartsport.www.activity;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONException;
@@ -54,6 +55,13 @@ public class ChangeQDActivity extends BaseActivity {
         wd_qd_listView.setAdapter(wdqdAdapter);
 
         getData();
+
+        wd_qd_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     /**

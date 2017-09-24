@@ -1,5 +1,10 @@
 package top.smartsport.www.utils;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
+
 /**
  *  字符串 常用工具
  */
@@ -17,6 +22,29 @@ public class StringUtil {
             isEmpty = false;
         }
         return isEmpty;
+    }
+
+    //输入手机号码检查是否有误
+    public static boolean checkMobile(Context context, String mobile) {
+        if(mobile.equals(null)){
+            Toast.makeText(context, "手机号码不能为空！", Toast.LENGTH_LONG).show();
+            return false;
+                /*^匹配开始地方$匹配结束地方，[3|4|5|7|8]选择其中一个{4,8},\d从[0-9]选择
+                {4,8}匹配次数4~8    ，java中/表示转义，所以在正则表达式中//匹配/,/匹配""*/
+            //验证手机号码格式是否正确
+        }else if(!mobile.matches("^1[3|4|5|7|8][0-9]\\d{4,8}$")){
+            Toast.makeText(context, "手机号输入有误，请重新输入", Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    // 保留两位小数
+    public static String strToDouble(String value) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        double d = Double.valueOf(value);
+        return df.format(d);
     }
 
 }

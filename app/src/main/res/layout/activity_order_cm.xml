@@ -37,6 +37,7 @@
             android:textSize="45px" />
 
         <TextView
+            android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥299"
@@ -65,6 +66,7 @@
                 android:textSize="45px" />
 
             <TextView
+                android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30：00"
@@ -83,6 +85,7 @@
         android:orientation="vertical"
         android:background="@color/white">
         <RelativeLayout
+            android:id="@+id/rl_zhifubao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -119,6 +122,7 @@
 
             </LinearLayout>
             <ImageView
+                android:id="@+id/iv_sel_zhifubao"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="40px"
@@ -132,6 +136,7 @@
             android:layout_height="2px"
             android:background="@color/line_color"/>
         <RelativeLayout
+            android:id="@+id/rl_weixin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -168,6 +173,7 @@
 
             </LinearLayout>
             <ImageView
+                android:id="@+id/iv_sel_weixin"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="40px"
@@ -182,6 +188,7 @@
             android:background="@color/line_color"/>
 
         <RelativeLayout
+            android:id="@+id/rl_xianxia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -218,6 +225,7 @@
 
             </LinearLayout>
             <ImageView
+                android:id="@+id/iv_sel_xianxia"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="40px"

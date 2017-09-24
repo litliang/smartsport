@@ -69,7 +69,7 @@ public class AssistFragment extends BaseV4Fragment {
         mapadapter = new MapAdapter(getContext(), adaptinfo) {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
-                ((TextView) convertView.findViewById(R.id.scorer_item_number_tv)).setText(pos + "");
+                ((TextView) convertView.findViewById(R.id.scorer_item_number_tv)).setText((pos + 1) + "");
                 super.findAndBindView(convertView, pos, item, name, value);
                 return true;
             }
