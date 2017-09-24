@@ -29,11 +29,9 @@ import app.base.MapConf;
 import app.base.MapContent;
 import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
-import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.actions.Fav;
 import top.smartsport.www.adapter.PICAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSDetail;
@@ -199,32 +197,32 @@ public class BSDetailActivity extends BaseActivity {
                 startActivity(new Intent(getBaseContext(), ActivityDataAnalysis.class));
             }
         });
-        findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Map map = MapConf.with(getBaseContext())
-//                        .pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv")
-                        .toMap(BSDetailActivity.this);
-                callHttp(MapBuilder.withMap(map).add("action", "matchApplyPay").add("match_id", id).add("team_id", id).add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
-                    @Override
-                    public void onSuccess(Object result, List object) {
-                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
-
-                    }
-
-                    @Override
-                    public void onFailure(Object result, List object) {
-
-                    }
-
-                    @Override
-                    public void onCallback(Object result, List object) {
-
-                    }
-                });
-                startActivity(new Intent(getBaseContext(), BSSignUpActivity.class));
-            }
-        });
+//        findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Map map = MapConf.with(getBaseContext())
+////                        .pair("total->sign_up_total_price_tv").pair("player->sign_up_member_tv").pair("contact->sign_up_contact_tv").pair("contact_mobile->sign_up_phone_iv")
+//                        .toMap(BSDetailActivity.this);
+//                callHttp(MapBuilder.withMap(map).add("action", "matchApplyPay").add("match_id", id).add("team_id", id).add("members", "").add("coach_name", "").add("coach_mobile", "").get(), new FunCallback() {
+//                    @Override
+//                    public void onSuccess(Object result, List object) {
+//                        startActivity(new Intent(getBaseContext(), ActivityOrderConfirm.class));
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Object result, List object) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCallback(Object result, List object) {
+//
+//                    }
+//                });
+//                startActivity(new Intent(getBaseContext(), BSSignUpActivity.class));
+//            }
+//        });
 
     }
 

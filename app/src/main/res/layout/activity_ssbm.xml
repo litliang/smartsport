@@ -270,7 +270,7 @@
                 android:textColor="@color/text_black"
                 android:textSize="45px" />
 
-            <EditText
+            <TextView
                 android:id="@+id/ssbm_text_people_num"
                 android:layout_toLeftOf="@+id/ssbm_text_num_people"
                 android:layout_width="160px"
@@ -317,13 +317,16 @@
 
             <EditText
                 android:id="@+id/ssbm_text_people_name"
-                android:layout_width="300px"
+                android:layout_width="500px"
                 android:layout_height="match_parent"
                 android:hint="联系人姓名"
                 android:textSize="45px"
                 android:gravity="right|center_vertical"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20px"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:singleLine="true"
                 android:layout_toLeftOf="@+id/img3"
                 android:background="@null"
                 android:textColor="@color/text_gray"/>
@@ -363,15 +366,18 @@
 
             <EditText
                 android:id="@+id/ssbm_text_people_phone"
-                android:layout_width="300px"
+                android:layout_width="500px"
                 android:layout_height="match_parent"
-                android:hint="18018608989"
+                android:hint="请输入手机号"
                 android:textSize="45px"
                 android:gravity="right|center_vertical"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20px"
                 android:layout_toLeftOf="@+id/img4"
                 android:background="@null"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:singleLine="true"
                 android:textColor="@color/text_gray"/>
 
             <ImageView
