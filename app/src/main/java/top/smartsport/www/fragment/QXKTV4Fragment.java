@@ -177,16 +177,16 @@ public class QXKTV4Fragment extends BaseV4Fragment {
         } else {
             mCurrentPage++;
         }
-
+        String level = (String) SPUtils.get(getActivity(), "qx_currentLevelIndex", null);
+        String status  = (String) SPUtils.get(getActivity(), "qx_currentStatusIndex", null);
         // TODO 预留：刷新课程列表数据
-        String level = (String) SPUtils.get(BaseApplication.getApplication(), "kc_jb", null); // 级别
-        String laiYuan = (String) SPUtils.get(BaseApplication.getApplication(), "kc_ly", null); // 来源
-        String leiBie = (String) SPUtils.get(BaseApplication.getApplication(), "kc_lb", null); // 类别
 //        LogUtil.d("-------level------------>" + level);
 //        LogUtil.d("-------laiYuan------------>" + laiYuan);
 //        LogUtil.d("-------leiBie------------>" + leiBie);
+        String city = (String) SPUtils.get(getContext(), "qx-getCounties-city", null);
+        String county = (String) SPUtils.get(getContext(), "qx-getCounties-county", null);
 
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").add("page", mCurrentPage).get(), new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").add("page", mCurrentPage).add("level",level).add("status",status).add("city",city).add("county",county).get(), new FunCallback() {
 
             @Override
             public void onCallback(Object result, List object) {
@@ -241,7 +241,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
+            case 0:
                 reload(true);
                 break;
             default:

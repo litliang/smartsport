@@ -42,7 +42,7 @@ public class SPUtils {
         } else if (object instanceof Long) {
             editor.putLong(key, (Long) object);
         } else {
-            editor.putString(key, object.toString());
+            editor.putString(key, (String) object);
         }
 
         SharedPreferencesCompat.apply(editor);

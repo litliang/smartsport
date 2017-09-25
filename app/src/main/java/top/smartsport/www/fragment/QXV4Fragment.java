@@ -61,9 +61,9 @@ public class QXV4Fragment extends BaseV4Fragment {
             public void onClick(View view) {
                 int item = qx_viewpager.getCurrentItem();
                 if(item == 0) { // 青训课程
-                    toActivity(QXChoiceActivity.class);
+                    startActivityForResult(new Intent(getActivity(),QXChoiceActivity.class),0);
                 } else if(item == 1) { // 在线教案
-                    toActivity(ZXChoiceActivity.class);
+                    startActivityForResult(new Intent(getActivity(),ZXChoiceActivity.class),0);
                 }
 //                startActivityForResult(new Intent(getContext(),ZXChoiceActivity.class), Activity.RESULT_FIRST_USER);
             }

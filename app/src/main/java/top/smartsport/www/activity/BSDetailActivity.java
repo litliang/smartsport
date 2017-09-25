@@ -126,41 +126,7 @@ public class BSDetailActivity extends BaseActivity {
             if (o == null) {
                 return;
             }
-            states = o.toString();
-            if (states.equals("报名中")) {
-                bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
-                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
-                bs_detail_ll_video.setVisibility(View.GONE);//赛事视频隐藏
-                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button);
-                bs_detail_baoming.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString(SSBMActivity.TAG, id);
-                        goActivity(SSBMActivity.class, bundle);
-                    }
-                });
-            } else if (states.equals("进行中")) {
-                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
-                bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
-                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
-                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_blue);
-            } else if (states.equals("已结束")) {
-                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
-                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
-                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
-                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
-            } else if (states.equals("已报满")) {
-                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
-                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
-                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
-                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
-            } else if (states.equals("已报名")) {
-                bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
-                bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
-                bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
-                adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
-            }
+            setBaominStatus(o);
 
         }
 
@@ -224,6 +190,44 @@ public class BSDetailActivity extends BaseActivity {
 //            }
 //        });
 
+    }
+
+    private void setBaominStatus(Object o) {
+        states = o.toString();
+        if (states.equals("报名中")) {
+            bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
+            bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+            bs_detail_ll_video.setVisibility(View.GONE);//赛事视频隐藏
+            adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button);
+            bs_detail_baoming.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(SSBMActivity.TAG, id);
+                    goActivity(SSBMActivity.class, bundle);
+                }
+            });
+        } else if (states.equals("进行中")) {
+            bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+            bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
+            bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+            adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_blue);
+        } else if (states.equals("已结束")) {
+            bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+            bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+            bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+            adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
+        } else if (states.equals("已报满")) {
+            bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+            bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+            bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+            adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
+        } else if (states.equals("已报名")) {
+            bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
+            bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
+            bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+            adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
+        }
     }
 
     @Override
@@ -290,6 +294,7 @@ public class BSDetailActivity extends BaseActivity {
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 states = map.get(status).toString();
                 adapter_bsss_state.setText(states);
+                setBaominStatus(states);
                 ShareParams shareParams = new ShareParams();
                 shareParams.setShareType(Platform.SHARE_TEXT);
                 shareParams.setText(bsDetail.getName());//必须

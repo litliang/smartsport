@@ -15,6 +15,8 @@ import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityOrderConfirm;
 import top.smartsport.www.activity.ActivitySignUp;
 import top.smartsport.www.activity.BSSignUpActivity;
+import top.smartsport.www.activity.OrderCMActivity;
+import top.smartsport.www.activity.SSBMActivity;
 import top.smartsport.www.utils.ActivityStack;
 
 /**
@@ -55,6 +57,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         ActivityStack.getInstance().finishActivity(ActivityOrderConfirm.class);
         ActivityStack.getInstance().finishActivity(ActivitySignUp.class);
         ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
+        ActivityStack.getInstance().finishActivity(OrderCMActivity.class);
+        ActivityStack.getInstance().finishActivity(SSBMActivity.class);
         finish();
     }
 }

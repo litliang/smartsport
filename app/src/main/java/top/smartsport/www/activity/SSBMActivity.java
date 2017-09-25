@@ -87,6 +87,7 @@ public class SSBMActivity extends BaseActivity {
     private BMvideo bMvideo;
     private BMmyteam bMmyteam;
     private String total, teamId;
+    private String team_name;
 
     @Override
     protected void initView() {
@@ -102,15 +103,21 @@ public class SSBMActivity extends BaseActivity {
         access_token = tokenInfo.getAccess_token();
 
         getData();
-
+        findViewById(R.id.buycustomvideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goActivity(ActivityBuyCustomVedio.class);
+            }
+        });
     }
 
-    @Event(value = {R.id.ssbm_rl_dui,R.id.ssbm_pay, R.id.ssbm_refund_tv, R.id.ssbm_disclaimer_tv})
-    private void getEvent(View view){
+
+    @Event(value = {R.id.ssbm_rl_dui, R.id.ssbm_pay, R.id.ssbm_refund_tv, R.id.ssbm_disclaimer_tv})
+    private void getEvent(View view) {
         Intent intent_temp;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ssbm_rl_dui://修改球队
-                goActivity(SSBMActivity.class);
+                startActivityForResult(new Intent(getBaseContext(), ChangeQDActivity.class), CHANGE_QD);
                 break;
             case R.id.ssbm_pay:
 //                goActivity(OrderCMActivity.class);//去支付
@@ -133,15 +140,16 @@ public class SSBMActivity extends BaseActivity {
 
     /**
      * 赛事报名接口
-     * */
-    private void getData(){
+     */
+    private void getData() {
         JSONObject json = new JSONObject();
         try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","matchApply");
-            json.put("match_id",id);
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "matchApply");
+            json.put("match_id", id);
+            json.put("team_id", teamId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -154,7 +162,7 @@ public class SSBMActivity extends BaseActivity {
             @Override
             public void onSuccess(NetEntity entity) {
                 Data data = entity.toObj(Data.class);
-                bMmatch=data.toMatch(BMmatch.class);
+                bMmatch = data.toMatch(BMmatch.class);
                 bMvideo = data.toVideo(BMvideo.class);
                 bMmyteam = data.toMyteam(BMmyteam.class);
                 ImageLoader.getInstance().displayImage(bMmatch.getCover(), ssbm_img_pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
@@ -163,7 +171,7 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_adress.setText(bMmatch.getCounty());
                 ssbm_text_sell_price.setText("¥" + bMmatch.getSell_price());
                 ssbm_text_price.setText("¥" + bMmatch.getPrice());
-                ssbm_text_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG ); //中间横线
+                ssbm_text_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
                 ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
                 // 总金额（两数相加）
                 float money1 = Float.parseFloat(bMmatch.getSell_price());
@@ -184,13 +192,13 @@ public class SSBMActivity extends BaseActivity {
     // 判断联系人、联系电话是否为空
     private void judgeValue() {
         String peoplePame = ssbm_text_people_name.getText().toString();
-        if(StringUtil.isEmpty(peoplePame)) {
+        if (StringUtil.isEmpty(peoplePame)) {
             Toast.makeText(mContext, "联系人不能为空哦！", Toast.LENGTH_LONG).show();
             return;
         }
         String phone = ssbm_text_people_phone.getText().toString();
         boolean isPhone = StringUtil.checkMobile(mContext, phone);
-        if(isPhone) {
+        if (isPhone) {
             // TODO 创建订单
             getDetail(peoplePame, phone);
         }
@@ -232,12 +240,24 @@ public class SSBMActivity extends BaseActivity {
         });
     }
 
+    public static final int CHANGE_QD = 0;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
-//                getData(true);
+            case CHANGE_QD:
+                if (data.getStringExtra("team_id") == null || data.getStringExtra("team_id").equals("")) {
+
+                } else {
+                    teamId = data.getStringExtra("team_id");
+                }
+                if (data.getStringExtra("team_name") == null || data.getStringExtra("team_name").equals("")) {
+
+                } else {
+                    team_name = data.getStringExtra("team_name");
+                    ssbm_text_baoming_qiudui.setText(team_name);
+                }
                 break;
             default:
                 break;

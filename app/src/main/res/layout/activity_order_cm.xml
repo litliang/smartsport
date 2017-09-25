@@ -187,7 +187,7 @@
             android:layout_height="2px"
             android:background="@color/line_color"/>
 
-        <RelativeLayout
+        <RelativeLayout android:visibility="gone"
             android:id="@+id/rl_xianxia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

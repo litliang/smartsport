@@ -21,7 +21,11 @@ public class MapBuilder {
         return new MapBuilder();
     }
     public MapBuilder add(String k, Object v){
-        map.put(k,v+"");
+        if(v==null||v.toString().equals("null")){
+
+        }else {
+            map.put(k, v + "");
+        }
         return this;
     }
 

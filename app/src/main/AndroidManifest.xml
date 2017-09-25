@@ -252,7 +252,7 @@
         <!-- 订单确认 -->
         <activity
             android:name=".activity.OrderCMActivity"
-            android:label="@string/label_order_cm" />
+            android:label="@string/label_order_cm" />`
         <!-- 球队主页 -->
         <activity
             android:name=".activity.QDHomeActivity"

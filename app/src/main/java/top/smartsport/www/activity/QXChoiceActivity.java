@@ -79,7 +79,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private int indexOfProvince = 0;
     private int indexOfCity = 0;
     private boolean hasAll = true;
-    private int currentLevelIndex, currentStatusIndex;
+    private Integer currentLevelIndex, currentStatusIndex;
 
     @Override
     protected void initView() {
@@ -176,56 +176,73 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
             public void onClick(View view) {
                 checkLevel(0);
                 checkStatus(0);
-                SPUtils.put(getApplicationContext(), "qx-getCounties-city", "");
-                SPUtils.put(getApplicationContext(), "qx-getCounties-county", "");
+                SPUtils.put(getApplicationContext(), "qx-getCounties-city", null);
+                SPUtils.put(getApplicationContext(), "qx-getCounties-county", null);
             }
         });
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SPUtils.put(getApplicationContext(), "qx_currentLevelIndex", currentLevelIndex);
-                SPUtils.put(getApplicationContext(), "qx_currentStatusIndex", currentStatusIndex);
+                SPUtils.put(getApplicationContext(), "qx_currentLevelIndex", currentLevelIndex + "");
+                SPUtils.put(getApplicationContext(), "qx_currentStatusIndex", currentStatusIndex + "");
                 setResult(RESULT_OK);
                 finish();
             }
         });
-        currentLevelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "qx_currentLevelIndex", 0);
-        currentStatusIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "qx_currentStatusIndex", 0);
-        if(currentLevelIndex >= qxjbAdapter.getCount()) {
+        String level = (String) SPUtils.get(BaseApplication.getApplication(), "qx_currentLevelIndex", null);
+        ;
+        String status = (String) SPUtils.get(BaseApplication.getApplication(), "qx_currentStatusIndex", null);
+        if (level != null&&!level.equals("null")) {
+            currentLevelIndex = Integer.parseInt(level);
+        }else{
             currentLevelIndex = 0;
         }
-        if(currentStatusIndex >= kcztAdapter.getCount()) {
+        if (status != null&&!status.equals("null")) {
+            currentStatusIndex = Integer.parseInt(status);
+        }else {
+            currentStatusIndex = 0;
+        }
+        if (currentLevelIndex >= qxjbAdapter.getCount()) {
+            currentLevelIndex = 0;
+        }
+        if (currentStatusIndex >= kcztAdapter.getCount()) {
             currentStatusIndex = 0;
         }
 
         checkLevel(currentLevelIndex);
         checkStatus(currentStatusIndex);
-        SPUtils.put(getApplicationContext(), "qx-getCounties-city", "");
-        SPUtils.put(getApplicationContext(), "qx-getCounties-county", "");
+        SPUtils.put(getApplicationContext(), "qx-getCounties-city", null);
+        SPUtils.put(getApplicationContext(), "qx-getCounties-county", null);
     }
 
     private void checkLevel(int i) {
+        if(i==0){
+            currentLevelIndex = null;
+        }else
         currentLevelIndex = i;
         qxjbAdapter.setSeclection(i);
         qxjbAdapter.notifyDataSetChanged();
         String level = qxjbAdapter.getItem(i).getName().replace("U", "");
         if (level.startsWith("全部")) {
-            level = "0";
+            level = null;
         }
         SPUtils.put(getApplicationContext(), "qx-level", level);
     }
 
     private void checkStatus(int i) {
+        if(i==0){
+            currentStatusIndex = null;
+        }else
         currentStatusIndex = i;
         kcztAdapter.setSeclection(i);
         kcztAdapter.notifyDataSetChanged();
-        Map m = MapBuilder.build().add("全部课程", 0 + "")
+        Map m = MapBuilder.build().add("全部课程", null)
                 .add("报名中", 1 + "")
                 .add("已报满", 2 + "").get();
-        String state = m.get(kcztAdapter.getItem(i).getName()).toString();
+        String state = (String) m.get(kcztAdapter.getItem(i).getName());
 
-        if (state.equals("全部")) {
-            state = "0";
+        if (state!=null&&state.equals("全部")) {
+            state = null;
         }
         SPUtils.put(getApplicationContext(), "qx-status", state);
     }
@@ -280,7 +297,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         switch (parent.getId()) {
             case R.id.lv1:
                 Province p = adapter1.getItem(position);
-                SPUtils.put(getApplicationContext(), "qx-getCounties-city", p.getArea_id());
+                SPUtils.put(getApplicationContext(), "qx-getCounties-city", p.getArea_id() + "");
 
                 if (handler != null) {
                     Message msg = new Message();
@@ -296,7 +313,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
                 break;
             case R.id.lv2:
                 City c = adapter2.getItem(position);
-                SPUtils.put(getApplicationContext(), "qx-getCounties-county", c.getArea_id());
+                SPUtils.put(getApplicationContext(), "qx-getCounties-county", c.getArea_id() + "");
 
                 if (handler != null) {
                     Message msg = new Message();

@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -40,6 +41,8 @@ public class ChangeQDActivity extends BaseActivity {
     private ListView wd_qd_listView;
 
     private WDQDAdapter wdqdAdapter;
+    private String name;
+    private String team_id;
 
 
     @Override
@@ -59,23 +62,27 @@ public class ChangeQDActivity extends BaseActivity {
         wd_qd_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                name = ((WDQDInfo) parent.getItemAtPosition(position)).getName();
+                team_id = ((WDQDInfo) parent.getItemAtPosition(position)).getId();
+                setResult(0,new Intent().putExtra("name",name).putExtra("team_id",team_id));
+                finish();
             }
         });
     }
 
     /**
      * 获取我的球队列表
-     * */
+     */
     private List<WDQDInfo> wdqdInfoList;
-    private void getData(){
+
+    private void getData() {
         wdqdInfoList = new ArrayList<>();
         JSONObject json = new JSONObject();
         try {
-            json.put("client_id",client_id);
-            json.put("state",state);
-            json.put("access_token",access_token);
-            json.put("action","getMyTeamList");
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "getMyTeamList");
         } catch (JSONException e) {
             e.printStackTrace();
         }

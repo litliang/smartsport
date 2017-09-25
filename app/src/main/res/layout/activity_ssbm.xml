@@ -123,7 +123,7 @@
         android:layout_height="wrap_content">
 
 
-        <RelativeLayout
+        <RelativeLayout android:id="@+id/buycustomvideo"
             android:layout_width="match_parent"
             android:layout_height="120px">
 
@@ -146,7 +146,7 @@
                 android:layout_marginLeft="20px"
                 android:textColor="@color/red_baoming"
                 android:textSize="45px"
-                android:text="￥299"/>
+                android:text="￥0"/>
 
             <TextView
                 android:id="@+id/ssbm_text_dingzhi_video"

@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,13 +48,19 @@ public class OrderCMActivity extends BaseActivity {
         String type = bundel.getString("type");
         selPayType(Integer.valueOf(type).intValue());
         id = bundel.getString("product_id");
+        findViewById(R.id.ssbm_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PayUtil.pay((Activity) view.getContext(), action, "2", tv_money.getText().toString(), id);
+            }
+        });
     }
 
     String id;
+    String action = "";
 
     @Event(value = {R.id.rl_zhifubao, R.id.rl_weixin, R.id.rl_xianxia})
     private void getEvent(View view) {
-        String action = "";
         switch (view.getId()) {
             case R.id.rl_zhifubao://支付宝支付
                 type = 1;
@@ -70,7 +77,7 @@ public class OrderCMActivity extends BaseActivity {
                 selPayType(3);
                 break;
         }
-        PayUtil.pay(this, action, "2", tv_money.getText().toString(), id);
+
     }
 
     private void selPayType(int index) {
