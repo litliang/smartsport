@@ -14,19 +14,23 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
+import org.xutils.view.annotation.ContentView;
+
+import java.util.List;
+import java.util.Map;
+
 import app.base.DialogUtil;
 import app.base.JsonUtil;
 import app.base.MapAdapter;
 import app.base.MapContent;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xutils.view.annotation.ContentView;
-
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityOnLineVideo;
 import top.smartsport.www.activity.MyHYActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
@@ -35,9 +39,6 @@ import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Aaron on 2017/7/24.
@@ -92,9 +93,22 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             json.put("state", state);
             json.put("access_token", access_token);
             json.put("action", "getNewOnlineCourses");
+
+            int levelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLevelIndex", 0); // 课程级别
+            int statusIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLaiYuanIndex", 0); // 课程来源
+            int typeIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLeiBieIndex", 0); // 课程类别
+
+            LogUtil.d("----------levelIndex---------->" + (levelIndex + 0));
+            LogUtil.d("----------statusIndex---------->" + (statusIndex + 0));
+            LogUtil.d("----------typeIndex---------->" + (typeIndex));
+
+            json.put("level", "" + (levelIndex + 1));// 课程级别
+            json.put("status", "" + (statusIndex + 1));// 课程来源
+            json.put("type", "" + (typeIndex + 1));// 课程类别
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
@@ -199,4 +213,16 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
     }
 
     Map map = MapBuilder.build().add("1", "一").add("2", "二").add("3", "三").add("4", "四").add("5", "五").add("6", "六").add("7", "七").add("8", "八").add("9", "九").get();
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 0:
+                getData();
+                break;
+            default:
+                break;
+        }
+    }
 }
