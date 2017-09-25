@@ -25,10 +25,12 @@ import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
+import top.smartsport.www.activity.AllJLActivity;
 import top.smartsport.www.activity.AllKechengActivity;
 import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.activity.StarDetailActivity;
+import top.smartsport.www.activity.WQQXActivity;
 import top.smartsport.www.adapter.CoachesAdapter;
 import top.smartsport.www.adapter.CoursesAdapter;
 import top.smartsport.www.adapter.NewsAdapter;
@@ -144,13 +146,13 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         fm_text_.setOnClickListener(new OnClickThrottleListener() {
             @Override
             protected void onThrottleClick(View v) {
-//                startActivity(new Intent(getContext(), AllJLActivity.class));
+                startActivity(new Intent(getContext(), AllJLActivity.class));
             }
         });
         root.findViewById(R.id.wqqx).setOnClickListener(new OnClickThrottleListener() {
             @Override
             protected void onThrottleClick(View v) {
-//                startActivity(new Intent(getContext(), WQQXActivity.class));
+                startActivity(new Intent(getContext(), WQQXActivity.class));
             }
         });
 
