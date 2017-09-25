@@ -1,35 +1,30 @@
 package top.smartsport.www.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dl7.player.media.IjkPlayerView;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
-
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import app.base.MapConf;
 import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.ShareActivity;
 import top.smartsport.www.bean.BSzbInfo;
+import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 
@@ -37,7 +32,6 @@ import top.smartsport.www.bean.TokenInfo;
  * Created by Aaron on 2017/8/2.
  * 视频详情
  */
-
 public class BSVideoActivity extends AppCompatActivity {
     public static String TAG = BSVideoActivity.class.getName();
 
@@ -160,6 +154,7 @@ public class BSVideoActivity extends AppCompatActivity {
 
 
     private void initViews() {
+
         mPlayerView = (IjkPlayerView) findViewById(R.id.player_view);
         String url = getIntent().getStringExtra("fileurl").toString();
         mPlayerView.init()                // 初始化，必须先调用
@@ -180,13 +175,43 @@ public class BSVideoActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         ((TextView)findViewById(R.id.bszb_detail_bszb_title)).setText(name);
         ((TextView)findViewById(R.id.bszb_detail__bszb_dis)).setText(name);
-
+        getOtherVideo();
         ShareParams shareParams = new ShareParams();
         shareParams.setTitle(name);
         shareParams.setText(name);
         shareParams.setShareType(Platform.SHARE_VIDEO);
         shareParams.setUrl(url);
         share(shareParams, BaseActivity.Sharetype.URl);
+
+
+
+
+
+    }
+
+    /**
+     * 获取相关视频数据
+     */
+
+    private void getOtherVideo(){
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getVideoDetail").add("video_id", "1").get(), new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+                MapConf listconf = MapConf.with(getBaseContext()).pair("name->news_name").pair("fileurl->news_img").source(R.layout.adapter_bsdetail_shipin);
+                MapConf.with(getBaseContext()).pair("other->bs_detail_video", listconf)
+                        .source(((NetEntity) result).getData().toString(), getWindow().getDecorView()).toView();
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
+            }
+        });
     }
 
     public void share(ShareParams shareParams, final BaseActivity.Sharetype type) {
