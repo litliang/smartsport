@@ -57,7 +57,7 @@ public class PayUtil {
     public String wxappid;
 
 
-    public static void pay(final Activity ay, final String action, String type, String total) {
+    public static void pay(final Activity ay, final String action, String type, String total,String id) {
         final IWXAPI mWxApi = WXAPIFactory.createWXAPI(ay, "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
 
@@ -80,7 +80,9 @@ public class PayUtil {
             json.put("access_token", access_token);
             json.put("action", action);
             json.put("total", total);
-            json.put("type", type);//1 押金 2 充值
+            json.put("type", type);//1 青训 2 比赛 3 会员
+            json.put("product_id", id);//1 青训 2 比赛 3 会员
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
