@@ -28,6 +28,7 @@ import top.smartsport.www.adapter.BSSZAdapter;
 import top.smartsport.www.adapter.BSZTAdapter;
 import top.smartsport.www.adapter.SSJBAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.BSSZInfo;
 import top.smartsport.www.bean.BSZTInfo;
 import top.smartsport.www.bean.City;
@@ -88,6 +89,7 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private int indexOfProvince = 0;
     private int indexOfCity = 0;
     private boolean hasAll = true;
+    private int currentLevelIndex, currentStatusIndex, currentSaizhiIndex;
 
 
     @ViewInject(R.id.action_bar)
@@ -214,17 +216,34 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SPUtils.put(getApplicationContext(), "ss_currentLevelIndex", currentLevelIndex);
+                SPUtils.put(getApplicationContext(), "ss_currentStatusIndex", currentStatusIndex);
+                SPUtils.put(getApplicationContext(), "ss_currentSaizhiIndex", currentSaizhiIndex);
+                setResult(RESULT_OK);
                 finish();
             }
         });
-        checkLevel(0);
-        checkState(0);
-        checkType(0);
+        currentLevelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "ss_currentLevelIndex", 0);
+        currentStatusIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "ss_currentStatusIndex", 0);
+        currentSaizhiIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "ss_currentSaizhiIndex", 0);
+        if(currentLevelIndex >= ssjbAdapter.getCount()) {
+            currentLevelIndex = 0;
+        }
+        if(currentStatusIndex >= bsztAdapter.getCount()) {
+            currentStatusIndex = 0;
+        }
+        if(currentSaizhiIndex >= bsszAdapter.getCount()) {
+            currentSaizhiIndex = 0;
+        }
+        checkLevel(currentLevelIndex);
+        checkState(currentStatusIndex);
+        checkType(currentSaizhiIndex);
         SPUtils.put(getApplicationContext(), "getCounties-city", "");
         SPUtils.put(getApplicationContext(), "getCounties-county", "");
     }
 
     private void checkLevel(int i) {
+        currentLevelIndex = i;
         ssjbAdapter.setSeclection(i);
         ssjbAdapter.notifyDataSetChanged();
         String level = ssjbAdapter.getItem(i).getName().replace("U", "");
@@ -235,6 +254,7 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
     }
 
     private void checkState(int i) {
+        currentStatusIndex = i;
         bsztAdapter.setSeclection(i);
         bsztAdapter.notifyDataSetChanged();
         Map m = MapBuilder.build().add("全部比赛", 0 + "").add("报名中", 1 + "").add("进行中", 2 + "").add("已结束", 3 + "").get();
@@ -247,6 +267,7 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
     }
 
     private void checkType(int i) {
+        currentSaizhiIndex = i;
         bsszAdapter.setSeclection(i);
         bsszAdapter.notifyDataSetChanged();
         String type = bsszAdapter.getItem(i).getName().replace("人制", "");
@@ -261,15 +282,6 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
      */
     private void getSSJB() {
         ssjbInfoList = new ArrayList<>();
-//        for(int i=0;i<10;i++){
-//            SSJBInfo info = new SSJBInfo();
-//            if(i==0){
-//                info.setTitle("全部级别");
-//            }else {
-//                info.setTitle("U"+i);
-//            }
-//            ssjbInfoList.add(info);
-//        }
         ssjbInfoList = O.getSSJB();
         ssjbAdapter = new SSJBAdapter(this);
         ssjbAdapter.addAll(ssjbInfoList);
@@ -282,15 +294,6 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
      */
     private void getBSZT() {
         bsztInfoList = new ArrayList<>();
-//        for(int i=0;i<4;i++){
-//            BSZTInfo info = new BSZTInfo();
-//            if(i==0){
-//                info.setTitle("全部比赛");
-//            }else {
-//                info.setTitle("报名中"+i);
-//            }
-//            bsztInfoList.add(info);
-//        }
         bsztInfoList = O.getBSZT();
         bsztAdapter = new BSZTAdapter(this);
         bsztAdapter.addAll(bsztInfoList);
@@ -302,22 +305,11 @@ public class BSChoiceActivity extends BaseActivity implements AdapterView.OnItem
      */
     private void getBSSZ() {
         bsszInfoList = new ArrayList<>();
-//        for(int i=0;i<6;i++){
-//            BSSZInfo info = new BSSZInfo();
-//            if(i==0){
-//                info.setTitle("全部赛制");
-//            }else {
-//                info.setTitle(i+"人制");
-//            }
-//            bsszInfoList.add(info);
-//        }
         bsszInfoList = O.getBSSZ();
         bsszAdapter = new BSSZAdapter(this);
         bsszAdapter.addAll(bsszInfoList);
         bs_choice_gv_rule.setAdapter(bsszAdapter);
-
     }
-
 
     private void initListView() {
         List<Province> areas = new ArrayList<>();

@@ -30,17 +30,15 @@ import app.base.framework.CrashHandler;
 import top.smartsport.www.H;
 import top.smartsport.www.O;
 import top.smartsport.www.R;
+import top.smartsport.www.actions.DataInfo;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.AuthInfo;
-import top.smartsport.www.bean.BSSZInfo;
-import top.smartsport.www.bean.BSZTInfo;
 import top.smartsport.www.bean.ComCity;
 import top.smartsport.www.bean.HotCity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.Province;
 import top.smartsport.www.bean.RegInfo;
-import top.smartsport.www.bean.SSJBInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.fragment.BSV4Fragment;
 import top.smartsport.www.fragment.QXV4Fragment;
@@ -110,7 +108,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                    getIMEI();
                     loadCityList();
                     getCity();
-                    getChoice();
+                    DataInfo.getChoice(regInfo, client_id, state, access_token);
+                    DataInfo.getCourseChoice(regInfo, client_id, state, access_token);
+                    DataInfo.getTeachingPlanChoice(regInfo, client_id, state, access_token);
                 } else {
 
                 }
@@ -466,76 +466,4 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         });
     }
 
-    /**
-     * 获取筛选条件
-     */
-    private List<SSJBInfo> ssjbInfoList = new ArrayList<>();
-    private List<BSZTInfo> bsztInfoList = new ArrayList<>();
-    private List<BSSZInfo> bsszInfoList = new ArrayList<>();
-
-    private void getChoice() {
-        String url = regInfo.getSource_url();
-        JSONObject json = new JSONObject();
-        try {
-            json.put("client_id", client_id);
-            json.put("state", state);
-            json.put("access_token", access_token);
-            json.put("action", "getMatchFilter");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        X.Post(url, json, new MyCallBack<String>() {
-            @Override
-            protected void onFailure(String message) {
-
-            }
-
-            @Override
-            public void onSuccess(NetEntity entity) {
-                JsonElement jsonElement = entity.getData();
-                try {
-                    JSONObject json = new JSONObject(jsonElement.toString());
-                    JSONArray levelList = json.optJSONArray("level");
-                    JSONArray statusList = json.optJSONArray("status");
-                    JSONArray typeList = json.optJSONArray("type");
-                    for (int i = 0; i < levelList.length(); i++) {
-                        JSONObject obj = (JSONObject) levelList.get(i);
-                        String id = obj.optString("id");
-                        String name = obj.optString("name");
-                        SSJBInfo info = new SSJBInfo();
-                        info.setId(id);
-                        info.setName(name);
-                        ssjbInfoList.add(info);
-
-                    }
-                    for (int i = 0; i < statusList.length(); i++) {
-                        JSONObject obj = (JSONObject) statusList.get(i);
-                        String id = obj.optString("id");
-                        String name = obj.optString("name");
-                        BSZTInfo info = new BSZTInfo();
-                        info.setId(id);
-                        info.setName(name);
-                        bsztInfoList.add(info);
-
-                    }
-
-                    for (int i = 0; i < typeList.length(); i++) {
-                        JSONObject obj = (JSONObject) typeList.get(i);
-                        String id = obj.optString("id");
-                        String name = obj.optString("name");
-                        BSSZInfo info = new BSSZInfo();
-                        info.setId(id);
-                        info.setName(name);
-                        bsszInfoList.add(info);
-
-                    }
-                    O.setSSJB(ssjbInfoList);
-                    O.setBSZT(bsztInfoList);
-                    O.setBSSZ(bsszInfoList);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }

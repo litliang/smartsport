@@ -9,14 +9,14 @@ import org.xutils.view.annotation.ViewInject;
 
 import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
-import top.smartsport.www.bean.SSJBInfo;
+import top.smartsport.www.bean.KCJBInfo;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
- * Created by Aaron on 2017/7/26.
+ * Created by gst-pc on 2017/9/22.
  */
 
-public class SSJBAdapter extends EntityListAdapter<SSJBInfo,SSJBViewHolder>{
+public class KCJBAdapter extends EntityListAdapter<KCJBInfo,KCJBViewHolder> {
 
     private int clickTemp = -1;
     //标识选择的Item
@@ -24,7 +24,7 @@ public class SSJBAdapter extends EntityListAdapter<SSJBInfo,SSJBViewHolder>{
         clickTemp = position;
     }
 
-    public SSJBAdapter(Context context) {
+    public KCJBAdapter(Context context) {
         super(context);
     }
 
@@ -34,26 +34,26 @@ public class SSJBAdapter extends EntityListAdapter<SSJBInfo,SSJBViewHolder>{
     }
 
     @Override
-    protected SSJBViewHolder getViewHolder(View root) {
-        return new SSJBViewHolder(root);
+    protected KCJBViewHolder getViewHolder(View root) {
+        return new KCJBViewHolder(root);
     }
 
     @Override
-    protected void initViewHolder(SSJBViewHolder ssjbViewHolder, int position) {
+    protected void initViewHolder(KCJBViewHolder kcjbViewHolder, int position) {
 
-        ssjbViewHolder.init(getItem(position),position,clickTemp);
+        kcjbViewHolder.init(getItem(position),position,clickTemp);
     }
 }
 
-class SSJBViewHolder extends ViewHolder{
+class KCJBViewHolder extends ViewHolder {
     @ViewInject(R.id.tv_ssjb)
     private TextView tv_ssjb;
 
-    public SSJBViewHolder(View root) {
+    public KCJBViewHolder(View root) {
         super(root);
     }
 
-    public void init(SSJBInfo info,int position,int clickTemp){
+    public void init(KCJBInfo info,int position,int clickTemp){
         if(clickTemp==position){
             tv_ssjb.setBackgroundResource(R.drawable.shape_bg_hotcity_green);
             tv_ssjb.setTextColor(Color.parseColor("#3CB963"));

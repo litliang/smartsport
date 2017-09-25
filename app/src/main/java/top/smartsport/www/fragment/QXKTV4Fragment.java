@@ -15,6 +15,7 @@ import app.base.MapContent;
 
 import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.activity.CoachDetailActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.SSXWInfo;
@@ -27,6 +28,7 @@ import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 
 import org.xutils.view.annotation.ViewInject;
@@ -35,6 +37,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.utils.SPUtils;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -54,9 +57,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
-
     }
-
 
     MapAdapter mapadapter;
 
@@ -156,26 +157,35 @@ public class QXKTV4Fragment extends BaseV4Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 pullrefreshlistview.setMode(PullToRefreshBase.Mode.BOTH);
-                reload(mapadapter, true);
+                reload(true);
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                reload(mapadapter, false);
+                reload(false);
 
             }
         });
-        reload(mapadapter, true);
+        reload(true);
 
     }
 
-    private void reload(final MapAdapter mapadapter, final boolean isRefresh) {
+    private void reload(final boolean isRefresh) {
         if (isRefresh) {
             mCurrentPage = 1;
         } else {
             mCurrentPage++;
         }
+
+        // TODO 预留：刷新课程列表数据
+        String level = (String) SPUtils.get(BaseApplication.getApplication(), "kc_jb", null); // 级别
+        String laiYuan = (String) SPUtils.get(BaseApplication.getApplication(), "kc_ly", null); // 来源
+        String leiBie = (String) SPUtils.get(BaseApplication.getApplication(), "kc_lb", null); // 类别
+//        LogUtil.d("-------level------------>" + level);
+//        LogUtil.d("-------laiYuan------------>" + laiYuan);
+//        LogUtil.d("-------leiBie------------>" + leiBie);
+
         BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").add("page", mCurrentPage).get(), new FunCallback() {
 
             @Override
@@ -227,5 +237,16 @@ public class QXKTV4Fragment extends BaseV4Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                reload(true);
+                break;
+            default:
+                break;
+        }
+    }
 
 }

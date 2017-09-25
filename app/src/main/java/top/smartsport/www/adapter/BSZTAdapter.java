@@ -58,10 +58,10 @@ class BSZTViewHolder extends ViewHolder{
             tv_bszt.setBackgroundResource(R.drawable.shape_bg_hotcity);
             tv_bszt.setTextColor(Color.parseColor("#8C8C8C"));
         }
-        if(tv_bszt.getText().toString().startsWith("全部")){
-            tv_bszt.setText("全部");
-        }else {
+//        if(tv_bszt.getText().toString().startsWith("全部")){
+//            tv_bszt.setText("全部");
+//        }else {
             tv_bszt.setText(info.getName());
-        }
+//        }
     }
 }

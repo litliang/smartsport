@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/adapter_home_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160px"
+            android:layout_height="160px"
             android:layout_marginLeft="50px"
             android:src="@mipmap/head_default" />
 
@@ -26,8 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50px"
-            android:layout_marginTop="50px"
-            android:layout_toRightOf="@+id/adapter_home_header"
+            android:layout_toRightOf="@id/adapter_home_header"
+            android:layout_alignTop="@id/adapter_home_header"
+            android:layout_alignBottom="@id/adapter_home_header"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
@@ -44,7 +46,38 @@
                 android:layout_height="wrap_content"
                 android:text="球队简介"
                 android:textColor="@color/text_gray"
+                android:layout_marginTop="5dp"
                 android:textSize="38px" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qd_player_other_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/adapter_home_header"
+            android:layout_alignBottom="@id/adapter_home_header"
+            android:orientation="vertical"
+            android:layout_marginRight="50px"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="45px" />
+
+            <TextView
+                android:id="@+id/tv_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="5dp"
+                android:textSize="35px" />
 
 
         </LinearLayout>

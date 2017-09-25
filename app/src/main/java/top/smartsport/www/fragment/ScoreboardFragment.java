@@ -94,7 +94,7 @@ public class ScoreboardFragment extends BaseV4Fragment{
         mapadapter = new MapAdapter(getContext(), adaptinfo) {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
-                ((TextView) convertView.findViewById(R.id.item_number_tv)).setText(pos + "");
+                ((TextView) convertView.findViewById(R.id.item_number_tv)).setText((pos + 1) + "");
                 if (name.equals("card")) {
                     String temp = String.valueOf(value);
                     SpannableStringBuilder builder = new SpannableStringBuilder(temp);

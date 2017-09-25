@@ -16,7 +16,6 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +25,10 @@ import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
-import top.smartsport.www.activity.AllJLActivity;
 import top.smartsport.www.activity.AllKechengActivity;
 import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.activity.StarDetailActivity;
-import top.smartsport.www.activity.WQQXActivity;
 import top.smartsport.www.adapter.CoachesAdapter;
 import top.smartsport.www.adapter.CoursesAdapter;
 import top.smartsport.www.adapter.NewsAdapter;
@@ -50,7 +47,6 @@ import top.smartsport.www.bean.Players;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.listener.OnClickThrottleListener;
-import top.smartsport.www.utils.JsonUtil;
 import top.smartsport.www.widget.Banner;
 import top.smartsport.www.widget.HorizontalListView;
 import top.smartsport.www.widget.MyListView;
@@ -148,13 +144,13 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         fm_text_.setOnClickListener(new OnClickThrottleListener() {
             @Override
             protected void onThrottleClick(View v) {
-                startActivity(new Intent(getContext(), AllJLActivity.class));
+//                startActivity(new Intent(getContext(), AllJLActivity.class));
             }
         });
         root.findViewById(R.id.wqqx).setOnClickListener(new OnClickThrottleListener() {
             @Override
             protected void onThrottleClick(View v) {
-                startActivity(new Intent(getContext(), WQQXActivity.class));
+//                startActivity(new Intent(getContext(), WQQXActivity.class));
             }
         });
 

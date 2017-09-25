@@ -8,9 +8,12 @@ package top.smartsport.www.bean;
 public class JLInfo {
     private String id;
     private String name;
+    private String title;
     private String type;
     private String number;
     private String position;
+    private String header;
+    private String header_url;
 
     public String getId() {
         return id;
@@ -26,6 +29,14 @@ public class JLInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {
@@ -50,5 +61,21 @@ public class JLInfo {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getHeader_url() {
+        return header_url;
+    }
+
+    public void setHeader_url(String header_url) {
+        this.header_url = header_url;
     }
 }

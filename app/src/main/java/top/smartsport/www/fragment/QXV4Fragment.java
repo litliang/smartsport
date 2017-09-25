@@ -1,11 +1,12 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-
 import android.view.View;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 import top.smartsport.www.R;
 import top.smartsport.www.activity.QXChoiceActivity;
+import top.smartsport.www.activity.ZXChoiceActivity;
 import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.widget.PagerSlidingTabStrip;
@@ -57,8 +59,27 @@ public class QXV4Fragment extends BaseV4Fragment {
         root.findViewById(R.id.bs_ll_choice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toActivity(QXChoiceActivity.class);
+                int item = qx_viewpager.getCurrentItem();
+                if(item == 0) { // 青训课程
+                    toActivity(QXChoiceActivity.class);
+                } else if(item == 1) { // 在线教案
+                    toActivity(ZXChoiceActivity.class);
+                }
+//                startActivityForResult(new Intent(getContext(),ZXChoiceActivity.class), Activity.RESULT_FIRST_USER);
             }
         });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (listFM != null) {
+            for (Fragment fragment : listFM) {
+                if(fragment==null)
+                    continue;
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
 }

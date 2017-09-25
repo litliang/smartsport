@@ -234,6 +234,9 @@
         <activity
             android:name=".activity.QXChoiceActivity"
             android:label="@string/label_bs_choice" />
+        <activity
+            android:name=".activity.ZXChoiceActivity"
+            android:label="@string/label_bs_choice" />
         <!-- 赛事报名 -->
         <activity
             android:name=".activity.SSBMActivity"
