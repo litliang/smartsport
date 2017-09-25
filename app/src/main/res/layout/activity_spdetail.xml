@@ -49,7 +49,7 @@
     <LinearLayout
         android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/action_bar"
         android:orientation="vertical">
 
@@ -117,9 +117,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/bszb_detail_bszb_title"
@@ -199,27 +198,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/video"
-        android:layout_marginLeft="50px"
-        android:layout_marginTop="40px"
         android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_below="@id/rl_sc"
-            android:layout_marginLeft="152px"
-            android:layout_toRightOf="@+id/wd_sc"
-            android:background="@color/line_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="相关视频"
             android:textColor="@color/black"
-            android:textSize="48px" />
+            android:textSize="48px"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="40px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_below="@id/rl_sc"
+            android:layout_marginTop="8dp"
+            android:background="@color/line_color" />
 
         <top.smartsport.www.widget.MyListView
             android:id="@+id/bs_detail_video"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
