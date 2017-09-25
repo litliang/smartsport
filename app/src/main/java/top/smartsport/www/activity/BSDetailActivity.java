@@ -191,8 +191,7 @@ public class BSDetailActivity extends BaseActivity {
 //        });
 
     }
-
-    private void setBaominStatus(Object o) {
+    private void setBaominStatusInBaoming(Object o) {
         states = o.toString();
         if (states.equals("报名中")) {
             bs_detail_baoming.setVisibility(View.VISIBLE);//报名显示
@@ -207,7 +206,13 @@ public class BSDetailActivity extends BaseActivity {
                     goActivity(SSBMActivity.class, bundle);
                 }
             });
-        } else if (states.equals("进行中")) {
+        }
+    }
+
+
+    private void setBaominStatus(Object o) {
+        states = o.toString();
+       if (states.equals("进行中")) {
             bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
             bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
             bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
@@ -287,14 +292,15 @@ public class BSDetailActivity extends BaseActivity {
 
 
                 Map map = MapBuilder.build().add("1", "报名中").add("3", "已结束").add("2", "进行中").add("4", "已报满").add("5", "已报名").get();
-                MapConf.build().with(BSDetailActivity.this)
-                        .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(), BSDetailActivity.this).toView();
-                setFaved(!collect_status.equals("0"));
-
-                ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 states = map.get(status).toString();
                 adapter_bsss_state.setText(states);
+                setBaominStatusInBaoming(states);
+                MapConf.build().with(BSDetailActivity.this)
+                        .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done")
+                        .pair("order_status->bs_detail_baoming", "","visible()").source(entity.getData().toString(), BSDetailActivity.this).toView();
+                setFaved(!collect_status.equals("0"));
                 setBaominStatus(states);
+                ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 ShareParams shareParams = new ShareParams();
                 shareParams.setShareType(Platform.SHARE_TEXT);
                 shareParams.setText(bsDetail.getName());//必须
@@ -349,5 +355,11 @@ public class BSDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getDetail();
     }
 }

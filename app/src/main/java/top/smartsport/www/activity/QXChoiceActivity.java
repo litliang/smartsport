@@ -30,6 +30,7 @@ import top.smartsport.www.bean.KCZTInfo;
 import top.smartsport.www.bean.Province;
 import top.smartsport.www.bean.QXJBInfo;
 import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.SSJBInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.ListViewForScrollView;
@@ -79,7 +80,9 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
     private int indexOfProvince = 0;
     private int indexOfCity = 0;
     private boolean hasAll = true;
-    private Integer currentLevelIndex, currentStatusIndex;
+    private Integer currentLevelIndex = 0, currentStatusIndex = 0;
+    private String statusid;
+    private String levelid;
 
     @Override
     protected void initView() {
@@ -94,13 +97,13 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         bs_choice_gv_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                checkLevel(i);
+                checkLevel(((QXJBInfo) adapterView.getItemAtPosition(i)).getId().toString(), i);
             }
         });
         bs_choice_gv_state.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                checkStatus(i);
+                checkStatus(((KCZTInfo) adapterView.getItemAtPosition(i)).getId().toString(), i);
             }
         });
 
@@ -174,17 +177,19 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         findViewById(R.id.chongzhi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkLevel(0);
-                checkStatus(0);
+                checkLevel(null, 0);
+                checkStatus(null, 0);
                 SPUtils.put(getApplicationContext(), "qx-getCounties-city", null);
                 SPUtils.put(getApplicationContext(), "qx-getCounties-county", null);
+                setResult(RESULT_OK);
+                finish();
             }
         });
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SPUtils.put(getApplicationContext(), "qx_currentLevelIndex", currentLevelIndex + "");
-                SPUtils.put(getApplicationContext(), "qx_currentStatusIndex", currentStatusIndex + "");
+                SPUtils.put(getApplicationContext(), "qx_currentLevelIndex", levelid + "");
+                SPUtils.put(getApplicationContext(), "qx_currentStatusIndex", statusid + "");
                 setResult(RESULT_OK);
                 finish();
             }
@@ -192,14 +197,36 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         String level = (String) SPUtils.get(BaseApplication.getApplication(), "qx_currentLevelIndex", null);
         ;
         String status = (String) SPUtils.get(BaseApplication.getApplication(), "qx_currentStatusIndex", null);
-        if (level != null&&!level.equals("null")) {
-            currentLevelIndex = Integer.parseInt(level);
-        }else{
+        if (level != null && !level.equals("null")) {
+            levelid = level;
+            boolean met = false;
+            for (int i = 0; i < qxjbInfoList.size(); i++) {
+                QXJBInfo jb = qxjbInfoList.get(i);
+                if (jb.getId().equals(level)) {
+                    levelid = level;
+                    currentLevelIndex = i;
+                }
+            }
+        } else {
+            levelid = null;
             currentLevelIndex = 0;
         }
-        if (status != null&&!status.equals("null")) {
-            currentStatusIndex = Integer.parseInt(status);
-        }else {
+        if (status != null && !status.equals("null")) {
+            boolean met = false;
+            for (int i = 0; i < kcztInfoList.size(); i++) {
+                KCZTInfo jb = kcztInfoList.get(i);
+                if (jb.getId().equals(status)) {
+                    met = true;
+                    statusid = status;
+                    currentStatusIndex = i;
+                }
+            }
+            if(!met){
+                currentStatusIndex = 0;
+            }
+            statusid = status;
+        } else {
+            statusid = null;
             currentStatusIndex = 0;
         }
         if (currentLevelIndex >= qxjbAdapter.getCount()) {
@@ -209,17 +236,20 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
             currentStatusIndex = 0;
         }
 
-        checkLevel(currentLevelIndex);
-        checkStatus(currentStatusIndex);
+        checkLevel(levelid + "", currentLevelIndex);
+        checkStatus(statusid + "", currentStatusIndex);
         SPUtils.put(getApplicationContext(), "qx-getCounties-city", null);
         SPUtils.put(getApplicationContext(), "qx-getCounties-county", null);
     }
 
-    private void checkLevel(int i) {
-        if(i==0){
-            currentLevelIndex = null;
-        }else
-        currentLevelIndex = i;
+    private void checkLevel(String id, int i) {
+        if (i == 0 || id == null) {
+            currentLevelIndex = 0;
+            levelid = null;
+        } else {
+            currentLevelIndex = i;
+            levelid = id;
+        }
         qxjbAdapter.setSeclection(i);
         qxjbAdapter.notifyDataSetChanged();
         String level = qxjbAdapter.getItem(i).getName().replace("U", "");
@@ -229,11 +259,14 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
         SPUtils.put(getApplicationContext(), "qx-level", level);
     }
 
-    private void checkStatus(int i) {
-        if(i==0){
-            currentStatusIndex = null;
-        }else
-        currentStatusIndex = i;
+    private void checkStatus(String id, int i) {
+        if (i == 0 || id == null) {
+            currentStatusIndex = 0;
+            statusid = null;
+        } else {
+            currentStatusIndex = i;
+            statusid = id;
+        }
         kcztAdapter.setSeclection(i);
         kcztAdapter.notifyDataSetChanged();
         Map m = MapBuilder.build().add("全部课程", null)
@@ -241,7 +274,7 @@ public class QXChoiceActivity extends BaseActivity implements AdapterView.OnItem
                 .add("已报满", 2 + "").get();
         String state = (String) m.get(kcztAdapter.getItem(i).getName());
 
-        if (state!=null&&state.equals("全部")) {
+        if (state != null && state.equals("全部")) {
             state = null;
         }
         SPUtils.put(getApplicationContext(), "qx-status", state);

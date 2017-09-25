@@ -84,6 +84,7 @@ public class ActivityOnLineVideo extends BaseComptActivity {
                 MapConf.with(getBaseContext()).pair("detail-name->online_name_tv").pair("detail-fileurl->player_view", "", "setToPlayerView()").pair("other->online_list", listconf)
                         .source(((NetEntity) result).getData().toString(), getWindow().getDecorView()).toView();
                 ((ScrollView) findViewById(R.id.scrollview)).getChildAt(0).scrollTo(0, 0);
+
             }
 
             @Override
