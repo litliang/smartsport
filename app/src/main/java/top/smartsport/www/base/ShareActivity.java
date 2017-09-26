@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,6 @@ import cn.jiguang.share.wechat.WechatMoments;
 import cn.jiguang.share.weibo.SinaWeibo;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.wxapi.WXEntryActivity;
 
 /**
  * Created by admin on 2017/8/24.
@@ -53,6 +53,13 @@ public class ShareActivity extends BaseActivity {
                 add(MapBuilder.build().add("name", R.mipmap.friends_circle).add("type",WechatMoments.Name).get());
             }
         };
+
+        ((RelativeLayout) findViewById(R.id.rl_bg)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();;
+            }
+        });
 
         mapAdapter.setItemDataSrc(new MapContent(list));
         ((GridView) findViewById(R.id.grid)).setAdapter(mapAdapter);

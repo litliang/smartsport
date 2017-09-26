@@ -94,17 +94,17 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             json.put("access_token", access_token);
             json.put("action", "getNewOnlineCourses");
 
-            int levelIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLevelIndex", 0); // 课程级别
-            int statusIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLaiYuanIndex", 0); // 课程来源
-            int typeIndex = (Integer) SPUtils.get(BaseApplication.getApplication(), "kc_currentLeiBieIndex", 0); // 课程类别
+            String levelId = (String) SPUtils.get(BaseApplication.getApplication(), "kc_currentLevelId", "0"); // 课程级别
+            String statusId = (String) SPUtils.get(BaseApplication.getApplication(), "kc_currentLaiYuanId", "0"); // 课程来源
+            String typeId = (String) SPUtils.get(BaseApplication.getApplication(), "kc_currentLeiBieId", "0"); // 课程类别
 
-            LogUtil.d("----------levelIndex---------->" + (levelIndex + 0));
-            LogUtil.d("----------statusIndex---------->" + (statusIndex + 0));
-            LogUtil.d("----------typeIndex---------->" + (typeIndex));
+            LogUtil.d("----------levelIndex---------->" + levelId);
+            LogUtil.d("----------statusIndex---------->" + statusId);
+            LogUtil.d("----------typeIndex---------->" + typeId);
 
-            json.put("level", "" + (levelIndex + 1));// 课程级别
-            json.put("status", "" + (statusIndex + 1));// 课程来源
-            json.put("type", "" + (typeIndex + 1));// 课程类别
+            json.put("level", levelId);// 课程级别
+            json.put("status", statusId);// 课程来源
+            json.put("type", typeId);// 课程类别
         } catch (JSONException e) {
             e.printStackTrace();
         }

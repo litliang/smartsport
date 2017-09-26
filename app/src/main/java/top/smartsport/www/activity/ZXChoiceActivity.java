@@ -75,6 +75,7 @@ public class ZXChoiceActivity extends BaseActivity {
     private int indexOfCity = 0;
     private boolean hasAll = true;
     private int currentLevelIndex, currentLaiYuanIndex, currentLeiBieIndex;
+    private String levelId, lyId, lbId;
 
     @Override
     protected void initView() {
@@ -135,6 +136,10 @@ public class ZXChoiceActivity extends BaseActivity {
         findViewById(R.id.queding).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SPUtils.put(getApplicationContext(), "kc_currentLevelId", levelId);
+                SPUtils.put(getApplicationContext(), "kc_currentLaiYuanId", lyId);
+                SPUtils.put(getApplicationContext(), "kc_currentLeiBieId", lbId);
+
                 SPUtils.put(getApplicationContext(), "kc_currentLevelIndex", currentLevelIndex);
                 SPUtils.put(getApplicationContext(), "kc_currentLaiYuanIndex", currentLaiYuanIndex);
                 SPUtils.put(getApplicationContext(), "kc_currentLeiBieIndex", currentLeiBieIndex);
@@ -165,6 +170,7 @@ public class ZXChoiceActivity extends BaseActivity {
         kcjbAdapter.notifyDataSetChanged();
         String level = kcjbAdapter.getItem(i).getName();
         LogUtil.d("---------等级------" + level);
+        levelId = kcjbAdapter.getItem(i).getId();
         SPUtils.put(getApplicationContext(), "kc_jb", level);
     }
 
@@ -174,6 +180,7 @@ public class ZXChoiceActivity extends BaseActivity {
         kclyAdapter.notifyDataSetChanged();
         String state = kclyAdapter.getItem(i).getName();
         LogUtil.d("---------来源------" + state);
+        lyId = kclyAdapter.getItem(i).getId();
         SPUtils.put(getApplicationContext(), "kc_ly", state);
     }
 
@@ -183,6 +190,7 @@ public class ZXChoiceActivity extends BaseActivity {
         kclbAdapter.notifyDataSetChanged();
         String type = kclbAdapter.getItem(i).getName();
         LogUtil.d("---------类别------" + type);
+        lbId = kclbAdapter.getItem(i).getId();
         SPUtils.put(getApplicationContext(), "kc_lb", type);
     }
 

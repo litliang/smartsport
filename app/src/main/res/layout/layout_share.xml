@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00000000">
+    android:id="@+id/rl_bg"
+    android:background="#e0000000">
 
     <GridView
         android:gravity="center"
@@ -14,5 +15,5 @@
         android:horizontalSpacing="30px"
         android:numColumns="3"
         android:verticalSpacing="30px"
-        android:layout_marginBottom="30px"></GridView>
+        android:layout_marginBottom="0px"></GridView>
 </RelativeLayout>
