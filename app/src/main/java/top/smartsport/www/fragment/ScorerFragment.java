@@ -114,8 +114,8 @@ public class ScorerFragment extends BaseV4Fragment {
                 .add("state",state)
                 .add("access_token",access_token)
                 .add("action","viewMatchAnalysis")
-                .add("match_id","2")
-                .add("type","1")//1积分榜2射手榜3助攻榜
+                .add("match_id","1")
+                .add("type","2")//1积分榜2射手榜3助攻榜
                 .get(), new FunCallback() {
 
             @Override
