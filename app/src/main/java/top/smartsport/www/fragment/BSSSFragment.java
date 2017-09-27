@@ -1,11 +1,8 @@
 package top.smartsport.www.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,15 +10,12 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
 import top.smartsport.www.R;
-import top.smartsport.www.activity.BSChoiceActivity;
 import top.smartsport.www.activity.BSDetailActivity;
-import top.smartsport.www.activity.BSDetailBMActivity;
 import top.smartsport.www.adapter.BSssAdapter;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseFragment;
@@ -108,11 +102,7 @@ public class BSSSFragment extends BaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(BSDetailActivity.TAG, info.getId());
                 bundle.putString("states", info.getStatus());
-                if(info.getStatus().equals("报名中")){
-                    toActivity(BSDetailBMActivity.class, bundle);
-                }else {
-                    toActivity(BSDetailActivity.class, bundle);
-                }
+                toActivity(BSDetailActivity.class, bundle);
             }
         });
         getData(true);

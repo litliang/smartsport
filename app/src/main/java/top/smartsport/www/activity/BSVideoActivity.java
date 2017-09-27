@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.dl7.player.media.IjkPlayerView;
 
+import org.xutils.view.annotation.ViewInject;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class BSVideoActivity extends AppCompatActivity {
 
     private TextView timeText;
     private long beginTime;
+    private String videoid;
 
     public void back() {
         if (getTopBar() == null) {
@@ -103,16 +106,16 @@ public class BSVideoActivity extends AppCompatActivity {
             }
         });
         getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
+        videoid = getIntent().getStringExtra("videoid");
+
     }
 
-    public View actionbar;
 
+    private View actionbar;
 
     public View getTopBar() {
         return actionbar;
     }
-
-    ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,8 +128,7 @@ public class BSVideoActivity extends AppCompatActivity {
             back();
         }
         back();
-        fav();
-
+        share();
 //        ((TextView) action_bar.findViewById(R.id.tvTitle)).setText("比赛视频");
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
@@ -156,35 +158,36 @@ public class BSVideoActivity extends AppCompatActivity {
     private void initViews() {
 
         mPlayerView = (IjkPlayerView) findViewById(R.id.player_view);
-        String url = getIntent().getStringExtra("fileurl").toString();
-        mPlayerView.init()                // 初始化，必须先调用
+        Object url = getIntent().getStringExtra("fileurl");
+        String name = getIntent().getStringExtra("name");
+        url = url==null?"":url;
+        if (url != null) {
+            mPlayerView.init()                // 初始化，必须先调用
 //                .setTitle("这是个标题")    // 设置标题，全屏时显示
-                .setSkipTip(1000 * 60 * 1)    // 设置跳转提示
+                    .setSkipTip(1000 * 60 * 1)    // 设置跳转提示
 //                .enableOrientation()    // 使能重力翻转
-                .setVideoPath(url)    // 设置视频Url，单个视频源可用这个
+                    .setVideoPath(url.toString())    // 设置视频Url，单个视频源可用这个
 //                .setVideoSource(null, url, url, url, null)    // 设置视频Url，多个视频源用这个
-                .setMediaQuality(IjkPlayerView.MEDIA_QUALITY_HIGH)    // 指定初始视频源
-                .enableDanmaku()      // 使能弹幕功能
+                    .setMediaQuality(IjkPlayerView.MEDIA_QUALITY_HIGH)    // 指定初始视频源
+                    .enableDanmaku()      // 使能弹幕功能
 //                .setDanmakuSource(getResources().openRawResource(R.raw.comments))	// 添加弹幕资源，必须在enableDanmaku()后调用
-                .start();    // 启动播放
+                    .start();    // 启动播放
 
+
+            ShareParams shareParams = new ShareParams();
+            shareParams.setTitle(name);
+            shareParams.setText(name);
+            shareParams.setShareType(Platform.SHARE_VIDEO);
+            shareParams.setUrl(url.toString());
+            share(shareParams, BaseActivity.Sharetype.URl);
+        }
 
         timeText = (TextView) findViewById(R.id.time_text);
         beginTime = System.currentTimeMillis();
         findViewById(R.id.zb_detail_bq_start).performClick();
-        String name = getIntent().getStringExtra("name");
-        ((TextView)findViewById(R.id.bszb_detail_bszb_title)).setText(name);
-        ((TextView)findViewById(R.id.bszb_detail__bszb_dis)).setText(name);
+        ((TextView) findViewById(R.id.bszb_detail_bszb_title)).setText(name);
+        ((TextView) findViewById(R.id.bszb_detail__bszb_dis)).setText(name);
         getOtherVideo();
-        ShareParams shareParams = new ShareParams();
-        shareParams.setTitle(name);
-        shareParams.setText(name);
-        shareParams.setShareType(Platform.SHARE_VIDEO);
-        shareParams.setUrl(url);
-        share(shareParams, BaseActivity.Sharetype.URl);
-
-
-
 
 
     }
@@ -193,8 +196,8 @@ public class BSVideoActivity extends AppCompatActivity {
      * 获取相关视频数据
      */
 
-    private void getOtherVideo(){
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getVideoDetail").add("video_id", "1").get(), new FunCallback() {
+    private void getOtherVideo() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getVideoDetail").add("video_id", videoid).get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
                 MapConf listconf = MapConf.with(getBaseContext()).pair("name->news_name").pair("fileurl->news_img").source(R.layout.adapter_bsdetail_shipin);
@@ -231,19 +234,29 @@ public class BSVideoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mPlayerView == null) return;
         mPlayerView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mPlayerView.onPause();
+        if (mPlayerView == null) return;
+        try {
+            mPlayerView.onPause();
+        } catch (Exception e) {
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPlayerView.onDestroy();
+        if (mPlayerView == null) return;
+        try {
+//            mPlayerView.onDestroy();
+        } catch (Exception e) {
+        }
+
     }
 
     @Override
@@ -254,8 +267,10 @@ public class BSVideoActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mPlayerView.handleVolumeKey(keyCode)) {
-            return true;
+        if (mPlayerView != null) {
+            if (mPlayerView.handleVolumeKey(keyCode)) {
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

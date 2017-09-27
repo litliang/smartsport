@@ -18,7 +18,6 @@ import java.util.List;
 
 import top.smartsport.www.R;
 import top.smartsport.www.activity.BSDetailActivity;
-import top.smartsport.www.activity.BSDetailBMActivity;
 import top.smartsport.www.adapter.BSssAdapter;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.BSssInfo;
@@ -103,11 +102,7 @@ public class SCBSV4Fragment extends BaseV4Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(BSDetailActivity.TAG, info.getId());
                 bundle.putString("states", info.getStatus());
-                if(info.getStatus().equals("报名中")){
-                    toActivity(BSDetailBMActivity.class, bundle);
-                }else {
-                    toActivity(BSDetailActivity.class, bundle);
-                }
+                toActivity(BSDetailActivity.class, bundle);
             }
         });
         getData(true);
@@ -119,11 +114,7 @@ public class SCBSV4Fragment extends BaseV4Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(BSDetailActivity.TAG, info.getId());
                 bundle.putString("states", info.getStatus());
-                if(info.getStatus().equals("报名中")){
-                    toActivity(BSDetailBMActivity.class, bundle);
-                }else {
-                    toActivity(BSDetailActivity.class, bundle);
-                }
+                toActivity(BSDetailActivity.class, bundle);
             }
         });
 
@@ -177,12 +168,12 @@ public class SCBSV4Fragment extends BaseV4Fragment {
                     ptrlv.onPullUpRefreshComplete();
                 }
                 String data = entity.getData().toString();
-                bSssInfoList =  top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("matches",data).toString(), BSssInfo.class);
+                bSssInfoList = top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("matches", data).toString(), BSssInfo.class);
                 if (refresh) {
                     bSssAdapter.clear();
-                    if (bSssInfoList.size()>0){
+                    if (bSssInfoList.size() > 0) {
                         empty.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         empty.setVisibility(View.VISIBLE);
                     }
                 } else {

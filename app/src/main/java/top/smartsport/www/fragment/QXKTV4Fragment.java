@@ -177,14 +177,14 @@ public class QXKTV4Fragment extends BaseV4Fragment {
         } else {
             mCurrentPage++;
         }
-        String level = (String) SPUtils.get(getActivity(), "qx_currentLevelIndex", null);
-        String status  = (String) SPUtils.get(getActivity(), "qx_currentStatusIndex", null);
+        String level =  SPUtils.get(getActivity(), "qx_currentLevelIndex", null)+"";
+        String status  =  SPUtils.get(getActivity(), "qx_currentStatusIndex", null)+"";
         // TODO 预留：刷新课程列表数据
 //        LogUtil.d("-------level------------>" + level);
 //        LogUtil.d("-------laiYuan------------>" + laiYuan);
 //        LogUtil.d("-------leiBie------------>" + leiBie);
-        String city = (String) SPUtils.get(getContext(), "qx-getCounties-city", null);
-        String county = (String) SPUtils.get(getContext(), "qx-getCounties-county", null);
+        String city =  SPUtils.get(getContext(), "qx-getCounties-city", null)+"";
+        String county = SPUtils.get(getContext(), "qx-getCounties-county", null)+"";
 
         BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendCourses").add("page", mCurrentPage).add("level",level).add("status",status).add("city",city).add("county",county).get(), new FunCallback() {
 

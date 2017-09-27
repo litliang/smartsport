@@ -89,6 +89,9 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     public ImageView getImageView(int id) {
         return (ImageView) findViewById(id);
     }
+    public View getView(int id) {
+        return  findViewById(id);
+    }
 
     public void setClick(int id, View.OnClickListener onclicklitener) {
         findViewById(id).setOnClickListener(onclicklitener);
@@ -120,7 +123,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
 
     public View getTopBar() {
-        return actionbar;
+        return actionbar = findViewById(R.id.action_bar);
     }
 
     ;
@@ -144,21 +147,61 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     public enum Sharetype {
         TEXT, IMAGE, URl, VIDEO
     }
-    public void setShareUrl(String title,String txt,String url){
+
+        String sharetitle;
+        String sharetxt;
+        String shareurl;
+
+    public String getSharetitle() {
+        return sharetitle;
+    }
+
+    public BaseActivity setSharetitle(String sharetitle) {
+        this.sharetitle = sharetitle;
+        share();
+        return this;
+    }
+
+    public String getSharetxt() {
+        return sharetxt.length()>30?sharetxt.substring(0,30):sharetxt;
+
+    }
+
+    public BaseActivity setSharetxt(String sharetxt) {
+        this.sharetxt = sharetxt;
+        share();
+        return this;
+
+    }
+
+    public String getShareurl() {
+        return shareurl;
+    }
+
+    public BaseActivity setShareurl(String shareurl) {
+        this.shareurl = shareurl;
+        share();
+        return this;
+
+    }
+
+    public void share(){
+        if(sharetitle==null){
+            return;
+        }
+        if(sharetxt==null){
+            return;
+        }
+        if(shareurl==null){
+            return;
+        }
         ShareParams shareParams = new ShareParams();
-        shareParams.setTitle(title);
-        shareParams.setText(txt);
-        shareParams.setShareType(Platform.SHARE_VIDEO);
-        String uri = "https://ssapi.baibaobike.com/share.html?tiele="+title+"&content="+txt+"&url="+url;
+        shareParams.setTitle(getSharetitle());
+        shareParams.setText(getSharetxt());
+        shareParams.setShareType(Platform.SHARE_WEBPAGE);
+        String uri = "https://ssapi.baibaobike.com/share.html?title="+getSharetitle()+"&content="+getSharetxt()+"&url="+getShareurl();
         shareParams.setUrl(uri);
         setShareParams(shareParams, BaseActivity.Sharetype.URl);
-    }
-    public void setShareText(String txt){
-        ShareParams shareParams = new ShareParams();
-        shareParams.setShareType(Platform.SHARE_TEXT);
-        shareParams.setText(txt);//必须
-
-        setShareParams(shareParams, Sharetype.TEXT);
     }
     public void setShareParams(ShareParams shareParams, final Sharetype type) {
         if (getTopBar() == null) {
@@ -191,7 +234,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
 
         });
-//        getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
+        getTopBar().findViewById(R.id.ivRight_text).setBackground(getResources().getDrawable(R.mipmap.fav_undo, null));
     }
 
     public void setFaved(boolean faved) {

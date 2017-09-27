@@ -19,7 +19,6 @@ import java.util.List;
 
 import top.smartsport.www.R;
 import top.smartsport.www.activity.BSDetailActivity;
-import top.smartsport.www.activity.BSDetailBMActivity;
 import top.smartsport.www.adapter.BSssAdapter;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;

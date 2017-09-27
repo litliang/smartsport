@@ -276,6 +276,7 @@
         <!-- 比赛报名 -->
         <activity
             android:name=".activity.BSSignUpActivity"
+            android:windowSoftInputMode="adjustPan"
             android:label="赛事报名" />
 
         <!-- 推送消息设置 -->
@@ -286,7 +287,6 @@
         <activity
             android:name=".activity.HelpCenterActivity"
             android:label="帮助中心" />
-        <activity android:name=".activity.BSDetailBMActivity" />
         <activity android:name=".activity.BSPictureActivity" />
         <activity
             android:name="cn.jiguang.share.android.ui.JiguangShellActivity"
@@ -334,6 +334,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.ActivitySignUp"
+            android:windowSoftInputMode="adjustPan"
             android:label="青训报名" />
         <activity
             android:name=".activity.ActivityOrderConfirm"

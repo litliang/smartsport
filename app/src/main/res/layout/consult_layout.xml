@@ -85,7 +85,7 @@
                     android:layout_marginTop="@dimen/margin_left"
                     android:gravity="center_vertical"
                     >
-                    <ImageView
+                    <ImageView android:visibility="gone"
                         android:id="@+id/iv_head_icon1"
                         android:layout_width="@dimen/padding"
                         android:layout_height="@dimen/padding"

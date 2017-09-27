@@ -172,7 +172,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",data).toString();
 
                 MapConf.build().with(ConsultDetailActivity.this)
-                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").source(data,ConsultDetailActivity.this).toView();
+                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").pair("detail-author->tv_name").source(data,ConsultDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
                 ZXInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),ZXInfoDetail.class);
                 List<ZXInfoNews> news =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_news",data).toString(), ZXInfoNews.class);
@@ -185,7 +185,9 @@ public class ConsultDetailActivity extends BaseActivity {
                 tvContent.loadData(details.getBody(), "text/html;charset=UTF-8", null);
                 adapterNews.setData(news);
                 adapterComment.setData(coments);
-                setShareUrl(details.getCtime()+"|"+"资讯详情",details.getTitle(),details.getCover_url());
+                setSharetitle(details.getTitle());
+                setSharetxt(details.getBody());
+                setShareurl(details.getCover_url());
 
             }
         });

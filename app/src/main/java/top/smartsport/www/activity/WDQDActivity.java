@@ -29,7 +29,7 @@ public class WDQDActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        back();
 
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.wdqd_item);
@@ -50,7 +50,6 @@ public class WDQDActivity extends BaseActivity {
                 startActivity(new Intent(getApplication(), AddMemberActivity.class));
             }
         });
-        back();
     }
 
 
@@ -64,7 +63,6 @@ public class WDQDActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        refresh();
     }
 
     private void refresh() {

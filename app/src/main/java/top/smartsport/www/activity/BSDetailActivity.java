@@ -122,12 +122,15 @@ public class BSDetailActivity extends BaseActivity {
         if (null != s) {
             //1报名中2进行中 3已结束 4已报满5已报名
             Map map = MapBuilder.build().add("1", "报名中").add("3", "已结束").add("2", "进行中").add("4", "已报满").add("5", "已报名").get();
-            Object o = map.get(s);
-            if (o == null) {
-                return;
+            if(map.values().contains(s)){
+                setBaominStatus(s);
+            }else {
+                Object o = map.get(s);
+                if (o == null) {
+                    return;
+                }
+                setBaominStatus(o);
             }
-            setBaominStatus(o);
-
         }
 
         regInfo = RegInfo.newInstance();
@@ -160,7 +163,7 @@ public class BSDetailActivity extends BaseActivity {
         findViewById(R.id.rl_sc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), ActivityDataAnalysis.class));
+                startActivity(new Intent(getBaseContext(), ActivityDataAnalysis.class).putExtra("matchid", id));
             }
         });
 //        findViewById(R.id.bs_detail_baoming).setOnClickListener(new View.OnClickListener() {
@@ -306,6 +309,9 @@ public class BSDetailActivity extends BaseActivity {
                 shareParams.setText(bsDetail.getName());//必须
 
                 setShareParams(shareParams, Sharetype.TEXT);
+                setSharetitle(bsDetail.getName());
+                setSharetxt(bsDetail.getAddress());
+                setShareurl(bsDetail.getCover());
                 adapter_bsss_title.setText(bsDetail.getName());
                 adapter_bsss_date.setText(bsDetail.getStart_time() + "至" + bsDetail.getEnd_time());
                 adapter_bsss_address.setText(bsDetail.getAddress());
@@ -347,7 +353,7 @@ public class BSDetailActivity extends BaseActivity {
                         b.putString("fileurl", ((Map) adapterView.getItemAtPosition(i)).get("fileurl").toString());
                         b.putString("name", ((Map) adapterView.getItemAtPosition(i)).get("name").toString());
 
-                        goActivity(BSVideoActivity.class, b);
+                        startActivity(new Intent(getBaseContext(),BSVideoActivity.class).putExtra("videoid",((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
                     }
                 });
                 if (bs_detail_video.getCount() == 0) {

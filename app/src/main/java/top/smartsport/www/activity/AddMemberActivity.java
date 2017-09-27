@@ -45,7 +45,7 @@ public class AddMemberActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        back();
 
         if (getIntent().hasExtra("name")) {
             String name = getIntent().getStringExtra("name");
@@ -140,7 +140,6 @@ public class AddMemberActivity extends BaseActivity {
 
         }
 
-        back();
         mListView = (ListView) findViewById(R.id.lv_team);
         mAdapter = new TeamMemberAdapter();
         mListView.setAdapter(mAdapter);
@@ -166,7 +165,7 @@ public class AddMemberActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!id.equals("")) {
-
+                    finish();
                 } else {
                     delteam(new FunCallback() {
                         @Override

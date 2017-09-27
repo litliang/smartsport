@@ -302,7 +302,7 @@ public class MapConf {
     }
 
     public MapConf pairs(String... ps) {
-        for(String p:ps){
+        for (String p : ps) {
             pair(p);
         }
         return this;
@@ -410,7 +410,7 @@ public class MapConf {
     Tackle tackle;
 
     public boolean setView(Object item, Object value, String name,
-                              View convertView, final View theView) {
+                           View convertView, final View theView) {
 
         if (theView == null) {
             return false;
@@ -477,8 +477,8 @@ public class MapConf {
                 MapAdapter mapadapter;
                 ((AdapterView) theView).setAdapter(new MapAdapter(context));
                 if (((AdapterView) theView).getAdapter() instanceof HeaderViewListAdapter) {
-                    mapadapter = (MapAdapter) ((HeaderViewListAdapter)((AdapterView) theView).getAdapter()).getWrappedAdapter();
-                }else{
+                    mapadapter = (MapAdapter) ((HeaderViewListAdapter) ((AdapterView) theView).getAdapter()).getWrappedAdapter();
+                } else {
                     mapadapter = (MapAdapter) ((AdapterView) theView).getAdapter();
                 }
                 if (mapadapter instanceof MapAdapter) {
@@ -500,34 +500,37 @@ public class MapConf {
             } else if (value instanceof Drawable) {
                 ((ImageView) theView).setImageDrawable((Drawable) value);
             } else if (value instanceof String) {
-
+                if (theView instanceof app.base.widget.ImageView) {
+                    ((app.base.widget.ImageView) theView).setUrl(value.toString());
+                }
 //                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(value.toString(), (ImageView) theView, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
 
-                if(theView instanceof RoundImageView){
+                if (theView instanceof RoundImageView) {
                     Glide.with(context).load(value.toString()).asBitmap().centerCrop().error(defaultImg).placeholder(defaultImg).into(new BitmapImageViewTarget((ImageView) theView) {
                         @Override
                         protected void setResource(Bitmap resource) {
                             RoundedBitmapDrawable circularBitmapDrawable =
                                     RoundedBitmapDrawableFactory.create(context.getResources(), resource);
                             circularBitmapDrawable.setCircular(true);
-                            ((ImageView)theView).setImageDrawable(circularBitmapDrawable);
+                            ((ImageView) theView).setImageDrawable(circularBitmapDrawable);
                         }
                     });
-                }else{
-                DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
-                DrawableRequestBuilder drawableRequestBuilder;
-                if (defaultImg != 0) {
-                    drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg).error(defaultImg);
                 } else {
-                    drawableRequestBuilder = drawableTypeRequest.clone();
-                }
-                drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
-
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation);
+                    DrawableTypeRequest drawableTypeRequest = Glide.with(context).load(value.toString());
+                    DrawableRequestBuilder drawableRequestBuilder;
+                    if (defaultImg != 0) {
+                        drawableRequestBuilder = drawableTypeRequest.placeholder(defaultImg).error(defaultImg);
+                    } else {
+                        drawableRequestBuilder = drawableTypeRequest.clone();
                     }
-                });}
+                    drawableRequestBuilder.into(new GlideDrawableImageViewTarget((ImageView) theView) {
+
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                            super.onResourceReady(resource, animation);
+                        }
+                    });
+                }
             }
 
         } else if (theView instanceof CheckBox) {

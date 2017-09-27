@@ -128,7 +128,7 @@
                 android:background="@android:color/white"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <RelativeLayout android:id="@+id/coach"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginLeft="20dp"
@@ -162,14 +162,14 @@
                             android:text="上海国际青训学校主教练" />
                     </LinearLayout>
 
-                    <ImageView
+                    <!--<ImageView android:visibility="invisible"
                         android:id="@+id/details_collect_iv"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:src="@mipmap/collect_uncheck"
-                        android:tag="fav()" />
+                        android:tag="fav()" />-->
                 </RelativeLayout>
 
                 <View
@@ -331,7 +331,7 @@
                     android:textStyle="bold" />
 
                 <top.smartsport.www.widget.HorizontalListView
-                    android:tag="startactivity(ActivityTrainingDetails)"
+                    android:tag="startactivityfromList(ActivityTrainingDetails)"
                     android:id="@+id/details_class_listview"
                     android:layout_width="match_parent"
                     android:layout_height="460px"

@@ -54,6 +54,9 @@ public class ActivityTrainingDetails extends BaseActivity {
     }
 
     private void initUI() {
+        back();
+        fav();
+
         position = getIntent().getIntExtra("position", -1);
         mDetailsIv = (ImageView) findViewById(R.id.details_title_iv);
         mDetailsTitleTv = (TextView) findViewById(R.id.details_title_tv);
@@ -72,15 +75,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         mQuotaTv = (TextView) findViewById(R.id.details_quota_tv);
         mHorizontaList = (HorizontalListView) findViewById(R.id.details_class_listview);
         mSignUpBtn = (Button) findViewById(R.id.details_sign_up_btn);
-        mSignUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Map map = MapConf.with(getBaseContext()).toMap(ActivityTrainingDetails.this);
-                map.put("qx_course_id", id);
-                startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
-            }
-        });
 //        for (int i = 0; i < 5; i++) {
 //            classBean = new TrainingClassBean();
 //            classBean.setClassTitle("青训瑜伽" + i);
@@ -94,20 +89,26 @@ public class ActivityTrainingDetails extends BaseActivity {
         callHttp(MapBuilder.build().add("action", "getQxCourseDetail").add("id", id = getIntent().getSerializableExtra("id").toString()).get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-
-            }
-
-            @Override
-            public void onFailure(Object result, List object) {
-
-            }
-
-            @Override
-            public void onCallback(Object result, List object) {
                 data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
+                Object order_status =  JsonUtil.findJsonLink("detail-order_status", data);
+                if(order_status!=null&&!order_status.toString().equals("null")){
+                    mSignUpBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Map map = MapConf.with(getBaseContext()).toMap(ActivityTrainingDetails.this);
+                            map.put("qx_course_id", id);
+                            startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
+                        }
+                    });
+                    mSignUpBtn.setText("已报名");
+
+                }
+                final String coachid = JsonUtil.findJsonLink("detail-coach_id", data).toString();
+
                 MapConf.build().with(ActivityTrainingDetails.this)
-                        .pair("collect_status->details_collect_iv", "0:mipmap.collect_uncheck;1:mipmap.collect_checked")
+                        .pair("collect_status->ivRight_text", "0:mipmap.collect_uncheck;1:mipmap.collect_checked")
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
@@ -125,25 +126,39 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
                         .source(detail, getWindow().getDecorView()).toView();
                 MapConf.with(ActivityTrainingDetails.this).pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
+
+                setShareurl(((app.base.widget.ImageView)getImageView(R.id.details_title_iv)).getUrl());
+                setSharetitle(getTextView(R.id.details_title_tv).getText().toString());
+                setSharetxt(getTextView(R.id.details_introduction_tv).getText().toString());
             }
-        });
-
-        findViewById(R.id.details_collect_iv).setOnClickListener(new View.OnClickListener() {
-
-            Boolean unfavored = null;
 
             @Override
-            public void onClick(View view) {
-                if(unfavored ==null) {
-                    unfavored = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
-                }
+            public void onFailure(Object result, List object) {
 
-
-
-                favImpl(view, unfavored);
-                unfavored = !unfavored;
             }
+
+            @Override
+            public void onCallback(Object result, List object) {
+                }
         });
+
+//        findViewById(R.id.details_collect_iv).setOnClickListener(new View.OnClickListener() {
+//
+//            Boolean unfavored = null;
+//
+//            @Override
+//            public void onClick(View view) {
+//                if(unfavored ==null) {
+//                    unfavored = JsonUtil.findJsonLink("detail-collect_status", data).toString().equals("0");
+//                }
+//
+//
+//
+//                favImpl(view, unfavored);
+//                unfavored = !unfavored;
+//            }
+//        });
+
     }
 
     @Override

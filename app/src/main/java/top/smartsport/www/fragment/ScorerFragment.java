@@ -62,6 +62,7 @@ public class ScorerFragment extends BaseV4Fragment {
     private RegInfo regInfo;
     private TokenInfo tokenInfo;
     private String client_id, state, url, access_token;
+    private String matchid;
 
 
     @Override
@@ -70,7 +71,7 @@ public class ScorerFragment extends BaseV4Fragment {
         list= new ArrayList<>();
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
-
+        matchid = getActivity().getIntent().getStringExtra("matchid");
         client_id = regInfo.getApp_key();
         url = regInfo.getSource_url();
         state = regInfo.getSeed_secret();
@@ -114,8 +115,8 @@ public class ScorerFragment extends BaseV4Fragment {
                 .add("state",state)
                 .add("access_token",access_token)
                 .add("action","viewMatchAnalysis")
-                .add("match_id","2")
-                .add("type","1")//1积分榜2射手榜3助攻榜
+                .add("match_id",matchid)
+                .add("type","2")//1积分榜2射手榜3助攻榜
                 .get(), new FunCallback() {
 
             @Override

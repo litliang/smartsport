@@ -13,7 +13,7 @@ import app.base.framework.Init;
  * Created by admin on 2017/9/3.
  */
 
-public class Startactivity extends Task {
+public class Startactivityfromlist extends Task {
     /***
      *
      * @param eventview

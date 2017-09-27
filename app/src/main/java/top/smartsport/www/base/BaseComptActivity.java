@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.base.action.ViewInflater;
+import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
 import intf.FunCallback;
 import top.smartsport.www.R;
@@ -98,11 +99,78 @@ public abstract class BaseComptActivity extends AutoLayoutCompactActivity {
         });
     }
 
+    String sharetitle;
+    String sharetxt;
+    String shareurl;
+
     public enum Sharetype {
         TEXT, IMAGE, URl, VIDEO
     }
 
-    public void share(ShareParams shareParams, final Sharetype type) {
+    public String getSharetitle() {
+        return sharetitle;
+    }
+
+    public void setSharetitle(String sharetitle) {
+        this.sharetitle = sharetitle;
+        share();
+    }
+
+    public String getSharetxt() {
+        return sharetxt;
+
+    }
+
+    public void setSharetxt(String sharetxt) {
+        this.sharetxt = sharetxt;
+        share();
+    }
+
+    public String getShareurl() {
+        return shareurl;
+    }
+
+    public void setShareurl(String shareurl) {
+        this.shareurl = shareurl;
+        share();
+
+    }
+
+    public void share(){
+        if(sharetitle==null){
+            return;
+        }
+        if(sharetxt==null){
+            return;
+        }
+        if(shareurl==null){
+            return;
+        }
+        ShareParams shareParams = new ShareParams();
+        shareParams.setTitle(getSharetitle());
+        shareParams.setText(getSharetxt());
+        shareParams.setShareType(Platform.SHARE_VIDEO);
+        String uri = "https://ssapi.baibaobike.com/share.html?tiele="+getSharetitle()+"&content="+getSharetxt()+"&url="+getShareurl();
+        shareParams.setUrl(uri);
+        setShareParams(shareParams, BaseComptActivity.Sharetype.URl);
+    }
+    private void setShareUrl(String title,String txt,String url){
+        ShareParams shareParams = new ShareParams();
+        shareParams.setTitle(title);
+        shareParams.setText(txt);
+        shareParams.setShareType(Platform.SHARE_VIDEO);
+        String uri = "https://ssapi.baibaobike.com/share.html?tiele="+title+"&content="+txt+"&url="+url;
+        shareParams.setUrl(uri);
+        setShareParams(shareParams, BaseComptActivity.Sharetype.URl);
+    }
+    public void setShareText(String txt){
+        ShareParams shareParams = new ShareParams();
+        shareParams.setShareType(Platform.SHARE_TEXT);
+        shareParams.setText(txt);//必须
+
+        setShareParams(shareParams, Sharetype.TEXT);
+    }
+    public void setShareParams(ShareParams shareParams, final Sharetype type) {
         if (getTopBar() == null) {
             return;
         }

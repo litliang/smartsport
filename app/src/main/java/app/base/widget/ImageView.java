@@ -13,6 +13,13 @@ public class ImageView extends android.support.v7.widget.AppCompatImageView{
         super(context, attrs);
     }
 
-    public boolean scaleoption;
+    public String url;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

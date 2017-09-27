@@ -74,6 +74,7 @@ public class AddMemberDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        back();
         team_id = getIntent().getStringExtra("team_id");
         member =getIntent().getStringExtra("member");
         position = getIntent().getIntExtra("position",-1);

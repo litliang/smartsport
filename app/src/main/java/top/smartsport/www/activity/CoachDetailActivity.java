@@ -155,6 +155,9 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                 introduce.loadData(tmpIntro, "text/html;charset=UTF-8", null);
                 trainingAdapter.setData(course);
                 coachAdapter.setData(others);
+                setSharetitle(details.getName());
+                setSharetxt(tmpIntro);
+                setShareurl(details.getHeader_url());
             }
         });
     }
