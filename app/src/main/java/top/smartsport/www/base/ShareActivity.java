@@ -46,7 +46,7 @@ public class ShareActivity extends BaseActivity {
         listItem.add(new ShareItem("微信收藏", R.mipmap.collection, WechatFavorite.Name));
         listItem.add(new ShareItem("微信", R.mipmap.wechat, Wechat.Name));
         listItem.add(new ShareItem("QQ", R.mipmap.qq, QQ.Name));
-        listItem.add(new ShareItem("QQ控件", R.mipmap.qzone, QZone.Name));
+        listItem.add(new ShareItem("QQ空间", R.mipmap.qzone, QZone.Name));
         listItem.add(new ShareItem("微博", R.mipmap.weibo, SinaWeibo.Name));
         listItem.add(new ShareItem("微信朋友圈", R.mipmap.friends_circle, WechatMoments.Name));
         ShareAdapter adapter = new ShareAdapter(getApplicationContext(), listItem);

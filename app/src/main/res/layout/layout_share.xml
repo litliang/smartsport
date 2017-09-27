@@ -1,20 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rl_bg"
-    android:background="#e0000000">
+    android:background="#6a000000">
+
+    <TextView
+        android:id="@+id/quxiao"
+        android:layout_width="match_parent"
+        android:layout_height="110px"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:tag="finish()"
+        android:text="取消"
+        android:textSize="38px" />
+
+    <FrameLayout
+        android:id="@+id/hline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/quxiao">
+
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
 
     <GridView
-        android:gravity="center"
-        android:background="#ffffff"
+
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/hline"
+        android:background="#ffffff"
+        android:gravity="center"
         android:horizontalSpacing="30px"
-        android:numColumns="3"
         android:listSelector="@android:color/transparent"
-        android:verticalSpacing="30px"
-        android:layout_marginBottom="0px"></GridView>
+        android:numColumns="3"
+        android:padding="50px"
+        android:verticalSpacing="30px"></GridView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/grid">
+
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
+
 </RelativeLayout>
