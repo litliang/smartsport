@@ -108,7 +108,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                 final String coachid = JsonUtil.findJsonLink("detail-coach_id", data).toString();
 
                 MapConf.build().with(ActivityTrainingDetails.this)
-                        .pair("collect_status->ivRight_text", "0:mipmap.collect_uncheck;1:mipmap.collect_checked")
+                        .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done")
                         .pair("title->details_title_tv")
                         .pair("start_time->details_date_tv")
                         .pair("address->details_address_tv")
@@ -126,10 +126,10 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
                         .source(detail, getWindow().getDecorView()).toView();
                 MapConf.with(ActivityTrainingDetails.this).pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
-
                 setShareurl(((app.base.widget.ImageView)getImageView(R.id.details_title_iv)).getUrl());
                 setSharetitle(getTextView(R.id.details_title_tv).getText().toString());
-                setSharetxt(getTextView(R.id.details_introduction_tv).getText().toString());
+                setSharetxt(((WebView)getView(R.id.details_introduction_tv)).getTitle());
+
             }
 
             @Override
@@ -163,8 +163,7 @@ public class ActivityTrainingDetails extends BaseActivity {
 
     @Override
     public void favImpl(View view, boolean unfav) {
-
-        fav.run(view, unfav + "", 1, id, "mipmap.collect_checked", "mipmap.collect_uncheck");
+        fav.run(view, unfav + "", 1, id, "mipmap.fav_done", "mipmap.fav_undo");
 
     }
 }

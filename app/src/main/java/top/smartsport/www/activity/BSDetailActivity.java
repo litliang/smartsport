@@ -304,11 +304,7 @@ public class BSDetailActivity extends BaseActivity {
                 setFaved(!collect_status.equals("0"));
                 setBaominStatus(states);
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
-                ShareParams shareParams = new ShareParams();
-                shareParams.setShareType(Platform.SHARE_TEXT);
-                shareParams.setText(bsDetail.getName());//必须
 
-                setShareParams(shareParams, Sharetype.TEXT);
                 setSharetitle(bsDetail.getName());
                 setSharetxt(bsDetail.getAddress());
                 setShareurl(bsDetail.getCover());

@@ -202,6 +202,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         String uri = "https://ssapi.baibaobike.com/share.html?title="+getSharetitle()+"&content="+getSharetxt()+"&url="+getShareurl();
         shareParams.setUrl(uri);
         setShareParams(shareParams, BaseActivity.Sharetype.URl);
+
     }
     public void setShareParams(ShareParams shareParams, final Sharetype type) {
         if (getTopBar() == null) {
@@ -223,6 +224,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         if (getTopBar() == null) {
             return;
         }
+        getTopBar().findViewById(R.id.ivRight_text).setVisibility(View.VISIBLE);
         getTopBar().findViewById(R.id.ivRight_text).setOnClickListener(new View.OnClickListener() {
 
 

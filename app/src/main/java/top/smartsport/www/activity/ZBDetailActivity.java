@@ -172,12 +172,10 @@ public class ZBDetailActivity extends BaseActivity {
         bszb_detail__bszb_address.setText(bSzbInfo.getDescription());
 
         initViews();
-        ShareParams shareParams = new ShareParams();
-        shareParams.setText(bSzbInfo.getActivityName());
-//        shareParams.setText(bSzbInfo.getActivityName());
-        shareParams.setShareType(Platform.SHARE_TEXT);
-//        shareParams.setImageUrl(bSzbInfo.getCoverImgUrl());
-        setShareParams(shareParams, Sharetype.TEXT);
+        share();
+        setSharetitle(bSzbInfo.getActivityName());
+        setSharetxt(bSzbInfo.getDescription());
+        setShareurl(bSzbInfo.getCoverImgUrl());
 
         getData();
     }

@@ -15,7 +15,8 @@
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="145px"         android:background="@color/theme_color"
+        android:layout_height="145px"
+        android:background="@color/theme_color"
         android:orientation="horizontal"
         android:visibility="gone">
 
@@ -147,7 +148,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="80px"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <TextView
                     android:id="@+id/bszb_detail__bszb_date"
@@ -167,9 +169,10 @@
                     android:layout_marginTop="5px"
                     android:layout_toRightOf="@+id/bszb_detail__bszb_date"
                     android:text="|"
-                    android:textColor="@color/text_gray" />
+                    android:textColor="@color/text_gray"
+                    android:visibility="gone"/>
 
-                <TextView
+                <TextView android:visibility="gone"
                     android:id="@+id/bszb_detail__bszb_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -203,11 +206,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="40px"
             android:text="相关视频"
             android:textColor="@color/black"
-            android:textSize="48px"
-            android:layout_marginLeft="50px"
-            android:layout_marginTop="40px"/>
+            android:textSize="48px" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2px"
@@ -217,9 +221,9 @@
 
         <top.smartsport.www.widget.MyListView
             android:id="@+id/bs_detail_video"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
 
     </LinearLayout>
 

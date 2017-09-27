@@ -63,6 +63,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
 
     @Override
     protected void initView() {
+
         pullrefreshlistview = (PullToRefreshListView) root.findViewById(R.id.pullrefreshlistview);
         pullrefreshlistview.setMode(PullToRefreshBase.Mode.BOTH);
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();

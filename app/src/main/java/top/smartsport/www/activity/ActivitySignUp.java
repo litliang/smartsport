@@ -120,7 +120,7 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
                 .pair("details_training_ground_tv->sign_up_hint_location_tv")
                 .pair("details_amount_tv->sign_up_price_tv","","replace(/年)").pair("details_amount_tv->sign_up_total_price_tv","","replace(/年)")
                 .source(parammap,this).toView();
-
+        getTextView(R.id.sign_up_total_price_tv).setText(getTextString(R.id.sign_up_price_tv).replace("/年",""));
     }
 
     @Override

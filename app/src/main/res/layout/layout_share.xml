@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/quxiao"
         android:layout_width="match_parent"
-        android:layout_height="110px"
+        android:layout_height="130px"
         android:layout_alignParentBottom="true"
         android:background="#ffffff"
         android:gravity="center"
