@@ -240,7 +240,6 @@
         <!-- 赛事报名 -->
         <activity
             android:name=".activity.SSBMActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
             android:label="@string/label_ss_bm" />
         <!-- 我的球队 -->
         <activity

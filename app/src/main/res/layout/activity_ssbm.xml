@@ -16,10 +16,10 @@
             <include layout="@layout/layout_actionbar" /></FrameLayout>
 
 
-        <ScrollView
+        <top.smartsport.www.widget.FloatOnKeyboardLayout
+            android:id="@+id/float_on_keyboard_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -466,20 +466,19 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
+
+            <TextView
+                android:id="@+id/ssbm_pay"
+                android:layout_width="match_parent"
+                android:layout_height="140px"
+                android:textSize="45px"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:background="@color/red_baoming"
+                android:text="去支付"/>
+        </top.smartsport.www.widget.FloatOnKeyboardLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/ssbm_pay"
-        android:layout_width="match_parent"
-        android:layout_height="140px"
-        android:textSize="45px"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:background="@color/red_baoming"
-        android:text="去支付"/>
-
 
 </RelativeLayout>

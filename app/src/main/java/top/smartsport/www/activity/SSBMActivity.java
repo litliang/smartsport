@@ -30,6 +30,7 @@ import top.smartsport.www.bean.SSBMOrder;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.StringUtil;
+import top.smartsport.www.widget.FloatOnKeyboardLayout;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -101,7 +102,8 @@ public class SSBMActivity extends BaseActivity {
         state = regInfo.getSeed_secret();
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
-
+        FloatOnKeyboardLayout floatOnKeyboardLayout = (FloatOnKeyboardLayout) findViewById(R.id.float_on_keyboard_layout);
+        floatOnKeyboardLayout.setView(findViewById(R.id.ssbm_pay));
         getData();
         findViewById(R.id.buycustomvideo).setOnClickListener(new View.OnClickListener() {
             @Override

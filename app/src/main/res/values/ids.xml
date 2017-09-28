@@ -19,4 +19,5 @@
     <item type="id" name="message"/>
     <item type="id" name="loading_layout"/>
     <item type="id" name="navigation_separator"/>
+    <item name="id_autolayout" type="id"/>
 </resources>
