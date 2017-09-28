@@ -1,23 +1,33 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.ListView;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import app.base.MapConf;
+import intf.FunCallback;
+import intf.JsonUtil;
+import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.adapter.PackageAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.PackageEntity;
 
-/**
- * Created by bajieaichirou on 17/9/16.
- */
 @ContentView(R.layout.activity_buy_custom_vedio)
-public class ActivityBuyCustomVedio extends BaseActivity implements View.OnClickListener{
-    private LinearLayout mBuyAll, mBuyBll, mBuyCll, mBuyNoll;
-    private ImageView mBuyAIv, mBuyBIv, mBuyCIv, mBuyNoIv;
-    private TextView mPayTv;
+public class ActivityBuyCustomVedio extends BaseActivity{
+    @ViewInject(R.id.list_view)
+    private ListView mListView;
+    private PackageAdapter mAdapter;
+    private List mList = new ArrayList();
 
     @Override
     protected void initView() {
@@ -25,57 +35,61 @@ public class ActivityBuyCustomVedio extends BaseActivity implements View.OnClick
     }
 
     private void initUI() {
-        mBuyAll = (LinearLayout) findViewById(R.id.buy_a_ll);
-        mBuyBll = (LinearLayout) findViewById(R.id.buy_b_ll);
-        mBuyCll = (LinearLayout) findViewById(R.id.buy_c_ll);
-        mBuyNoll = (LinearLayout) findViewById(R.id.buy_no_ll);
-
-        mBuyAIv = (ImageView) findViewById(R.id.buy_a_iv);
-        mBuyBIv = (ImageView) findViewById(R.id.buy_b_iv);
-        mBuyCIv = (ImageView) findViewById(R.id.buy_c_iv);
-        mBuyNoIv = (ImageView) findViewById(R.id.buy_no_iv);
-
-        mPayTv = (TextView) findViewById(R.id.buy_pay);
-
-        mBuyAll.setOnClickListener(this);
-        mBuyBll.setOnClickListener(this);
-        mBuyCll.setOnClickListener(this);
-        mBuyNoll.setOnClickListener(this);
-        mPayTv.setOnClickListener(this);
+        mAdapter = new PackageAdapter();
+        mListView.setAdapter(mAdapter);
+        requestServer();
+        mAdapter.setCallBack(new PackageAdapter.CallBack() {
+            @Override
+            public void callback(int position) {
+                PackageEntity packageEntity = (PackageEntity) mList.get(position);
+                if (packageEntity != null) {
+                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("package_entity", packageEntity));
+                    finish();
+                }
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                View selectedView = parent.getSelectedView();
+//                if (selectedView != null){
+//                    CheckBox checkBox = (CheckBox) selectedView.findViewById(R.id.iv_check);
+//                    if (checkBox != null){
+//                        checkBox.setChecked(true);
+                        PackageEntity packageEntity = (PackageEntity) mList.get(position);
+                        if (packageEntity != null){
+                            setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO,new Intent().putExtra("package_entity",packageEntity));
+                            finish();
+//                        }
+//                    }
+                }
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.buy_a_ll:
-                mBuyAIv.setImageResource(R.mipmap.radio_checked);
-                mBuyBIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyCIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyNoIv.setImageResource(R.mipmap.radio_uncheck);
-                break;
-            case R.id.buy_b_ll:
-                mBuyAIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyBIv.setImageResource(R.mipmap.radio_checked);
-                mBuyCIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyNoIv.setImageResource(R.mipmap.radio_uncheck);
-                break;
-            case R.id.buy_c_ll:
-                mBuyAIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyBIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyCIv.setImageResource(R.mipmap.radio_checked);
-                mBuyNoIv.setImageResource(R.mipmap.radio_uncheck);
-                break;
-            case R.id.buy_no_ll:
-                mBuyAIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyBIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyCIv.setImageResource(R.mipmap.radio_uncheck);
-                mBuyNoIv.setImageResource(R.mipmap.radio_checked);
-                break;
-            case R.id.buy_pay:
-                //TODO 支付
-                break;
-
-        }
-
+    private void requestServer(){
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getPackage").get(), this, new FunCallback() {
+            @Override
+            public void onSuccess(Object result, List object) {
+                String data = ((NetEntity)result).getData().toString();
+                List<PackageEntity> list = (List<PackageEntity>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("package",data).toString());
+                mList.clear();
+                mList.addAll(list);
+                mAdapter.setData(mList);
+                MapConf mc = MapConf.with(ActivityBuyCustomVedio.this)
+                        .pair("title->title_tv")
+                        .pair("content->content_tv")
+                        .pair("sell_price->sell_price_tv")
+                        .source(R.layout.package_item);
+                MapConf.with(ActivityBuyCustomVedio.this).conf(mc).source(mList,mListView).toView();
+            }
+            @Override
+            public void onFailure(Object result, List object) {
+            }
+            @Override
+            public void onCallback(Object result, List object) {
+            }
+        });
     }
+
 }
