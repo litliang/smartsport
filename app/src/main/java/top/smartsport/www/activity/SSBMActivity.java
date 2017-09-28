@@ -25,6 +25,7 @@ import top.smartsport.www.bean.BMmyteam;
 import top.smartsport.www.bean.BMvideo;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.PackageEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.SSBMOrder;
 import top.smartsport.www.bean.TokenInfo;
@@ -108,7 +109,7 @@ public class SSBMActivity extends BaseActivity {
         findViewById(R.id.buycustomvideo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goActivity(ActivityBuyCustomVedio.class);
+                startActivityForResult(new Intent(getBaseContext(), ActivityBuyCustomVedio.class), CHANGE_CUSTOM_VEDIO);
             }
         });
     }
@@ -243,6 +244,7 @@ public class SSBMActivity extends BaseActivity {
     }
 
     public static final int CHANGE_QD = 0;
+    public static final int CHANGE_CUSTOM_VEDIO = 999;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -259,6 +261,12 @@ public class SSBMActivity extends BaseActivity {
                 } else {
                     team_name = data.getStringExtra("team_name");
                     ssbm_text_baoming_qiudui.setText(team_name);
+                }
+                break;
+            case CHANGE_CUSTOM_VEDIO:
+                PackageEntity packageEntity = (PackageEntity) data.getSerializableExtra("package_entity");
+                if (packageEntity != null){
+                    showToast(packageEntity.title);
                 }
                 break;
             default:
