@@ -42,6 +42,8 @@ import top.smartsport.www.utils.SPUtils;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import static android.R.id.list;
+
 /**
  * Created by Aaron on 2017/7/24.
  * 青训--青训课堂
@@ -223,6 +225,13 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                             pullrefreshlistview.onRefreshComplete();
                             pullrefreshlistview.setMode(PullToRefreshBase.Mode.PULL_DOWN_TO_REFRESH);
                             pullrefreshlistview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                        } else {
+                            if(mCurrentPage == 1) { // 返回数据为空
+                                List lt = new ArrayList();
+                                mapadapter.setItemDataSrc(new MapContent(lt));
+                                pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
+                                mapadapter.notifyDataSetChanged();
+                            }
                         }
                     }
                     if (isRefresh) {
