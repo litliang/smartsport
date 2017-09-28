@@ -23,6 +23,7 @@ import top.smartsport.www.adapter.AdapterTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.TrainingClassBean;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.HorizontalListView;
 
 /**
@@ -91,20 +92,7 @@ public class ActivityTrainingDetails extends BaseActivity {
             public void onSuccess(Object result, List object) {
                 data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
-                Object order_status =  JsonUtil.findJsonLink("detail-order_status", data);
-                if(order_status!=null&&!order_status.toString().equals("null")){
-                    mSignUpBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
 
-                            Map map = MapConf.with(getBaseContext()).toMap(ActivityTrainingDetails.this);
-                            map.put("qx_course_id", id);
-                            startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
-                        }
-                    });
-                    mSignUpBtn.setText("已报名");
-
-                }
                 final String coachid = JsonUtil.findJsonLink("detail-coach_id", data).toString();
 
                 MapConf.build().with(ActivityTrainingDetails.this)
@@ -125,6 +113,33 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn")
                         .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
                         .source(detail, getWindow().getDecorView()).toView();
+                String status =  JsonUtil.findJsonLink("detail-status", data).toString();
+                if(!StringUtil.isEmpty(status)){
+                    // 1报名中2进行中 3已结束 4已报满5已报名
+                    if(status.equals("1")) { // 报名中
+                        final String sellPrice = JsonUtil.findJsonLink("detail-sell_price", data).toString();
+                        mSignUpBtn.setText("我要报名(￥"+sellPrice+"/年)");
+                        mSignUpBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Map map = MapConf.with(getBaseContext()).toMap(ActivityTrainingDetails.this);
+                                map.put("qx_course_id", id);
+                                startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
+                            }
+                        });
+                    } else if(status.equals("2")) { // 进行中
+                        mSignUpBtn.setText("进行中");
+                    } else if(status.equals("3")) { // 已结束
+                        mSignUpBtn.setText("已结束");
+                    } else if(status.equals("4")) { // 已报满
+                        mSignUpBtn.setText("已报满");
+                    } else if(status.equals("5")) { // 已报名
+                        mSignUpBtn.setText("已报名");
+                    }
+                } else {
+                    mSignUpBtn.setVisibility(View.GONE);
+                }
                 MapConf.with(ActivityTrainingDetails.this).pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
                 setShareurl(((app.base.widget.ImageView)getImageView(R.id.details_title_iv)).getUrl());
                 setSharetitle(getTextView(R.id.details_title_tv).getText().toString());
