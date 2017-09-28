@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.util.LogUtil;
@@ -87,7 +88,7 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
 
 
     private void getData() {
-        JSONObject json = new JSONObject();
+        final JSONObject json = new JSONObject();
         try {
             json.put("client_id", client_id);
             json.put("state", state);
@@ -103,12 +104,12 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             LogUtil.d("----------typeIndex---------->" + typeId);
 
             json.put("level", levelId);// 课程级别
-            json.put("status", statusId);// 课程来源
-            json.put("type", typeId);// 课程类别
+            json.put("source", statusId);// 课程来源
+            json.put("category", typeId);// 课程类别
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        final String jsonValue = json.toString();
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
@@ -117,12 +118,37 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
 
             @Override
             public void onSuccess(NetEntity entity) {
-                String name = "begin";
-                int gridid = R.id.rumenjigrid;
-                setGrid(entity, name, gridid,R.id.titlerumenji);
-                setGrid(entity, "primary", R.id.chujigrid,R.id.titlechuji);
-                setGrid(entity, "middle", R.id.zhongjigrid,R.id.titlezhongji);
-                setGrid(entity, "senior", R.id.gaojigrid,R.id.titlegaoji);
+                String result = entity.getData().toString();
+                try {
+                    JSONObject data = new JSONObject(result);
+                    JSONArray begin = data.optJSONArray("begin");
+                    JSONArray primary = data.optJSONArray("primary");
+                    JSONArray middle = data.optJSONArray("middle");
+                    JSONArray senior = data.optJSONArray("senior");
+                    if(begin != null && begin.length() > 0) {
+                        setGrid(entity, "begin", R.id.rumenjigrid,R.id.titlerumenji);
+                    } else {
+                        setGrid(null, "begin", R.id.rumenjigrid,R.id.titlerumenji);
+                    }
+                    if(primary != null && primary.length() > 0) {
+                        setGrid(entity, "primary", R.id.chujigrid,R.id.titlechuji);
+                    } else {
+                        setGrid(null, "primary", R.id.chujigrid,R.id.titlechuji);
+                    }
+                    if(middle != null && middle.length() > 0) {
+                        setGrid(entity, "middle", R.id.zhongjigrid,R.id.titlezhongji);
+                    } else {
+                        setGrid(null, "middle", R.id.zhongjigrid,R.id.titlezhongji);
+                    }
+                    if(senior != null && senior.length() > 0) {
+                        setGrid(entity, "senior", R.id.gaojigrid,R.id.titlegaoji);
+                    } else {
+                        setGrid(null, "senior", R.id.gaojigrid,R.id.titlegaoji);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 pullToRefreshScrollView.onRefreshComplete();
             }
 
@@ -159,30 +185,38 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
                 ((TextView) convertView.findViewById(R.id.xueqi_hours)).setText(time);
             }
         };
-        String type = JsonUtil.findJsonLink(name, entity.getData().toString()).toString();
-        if (type.equals("")) {
+        if(entity == null) {
             ((MyGridView) root.findViewById(gridid)).setVisibility(View.GONE);
             root.findViewById(titleji).setVisibility(View.GONE  );
-            return;
-        }
-        List list = (List) JsonUtil.extractJsonRightValue(type);
+//            return;
+        } else {
+            ((MyGridView) root.findViewById(gridid)).setVisibility(View.VISIBLE);
+            root.findViewById(titleji).setVisibility(View.VISIBLE);
+            String type = JsonUtil.findJsonLink(name, entity.getData().toString()).toString();
+            List list = (List) JsonUtil.extractJsonRightValue(type);
+            mapadapter.setItemDataSrc(new MapContent(list));
+            ((MyGridView) root.findViewById(gridid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String isvip = (String) SPUtils.get(view.getContext(), "is_vip", "");
 
-        mapadapter.setItemDataSrc(new MapContent(list));
-        ((MyGridView) root.findViewById(gridid)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String isvip = (String) SPUtils.get(view.getContext(), "is_vip", "");
-
-                if (!isvip.equals("1")) {
-                    showDialog((Activity) view.getContext());
-                } else {
-                    startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
-                }
+                    if (!isvip.equals("1")) {
+                        showDialog((Activity) view.getContext());
+                    } else {
+                        startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
+                    }
 //                startActivity(new Intent(getActivity(), ActivityOnLineVideo.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
-                ;
-            }
-        });
-        ((MyGridView) root.findViewById(gridid)).setAdapter(mapadapter);
+                    ;
+                }
+            });
+            ((MyGridView) root.findViewById(gridid)).setAdapter(mapadapter);
+        }
+//        if (type.equals("")) {
+//            ((MyGridView) root.findViewById(gridid)).setVisibility(View.GONE);
+//            root.findViewById(titleji).setVisibility(View.GONE  );
+//            return;
+//        }
+//        List list = (List) JsonUtil.extractJsonRightValue(type);
     }
 
     public Dialog dialog;
