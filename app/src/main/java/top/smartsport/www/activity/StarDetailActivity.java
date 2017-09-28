@@ -28,15 +28,11 @@ public class StarDetailActivity extends BaseActivity {
                 setSharetxt(getTextString(R.id.tv_introduce_star));
                 setShareurl(((ImageView)getView(R.id.iv_top_pic)).getUrl());
             }
-
             @Override
             public void onFailure(Object result, List object) {
-
             }
-
             @Override
             public void onCallback(Object result, List object) {
-
             }
         });
 
