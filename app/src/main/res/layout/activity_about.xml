@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/action_bar"
@@ -47,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@android:color/white"
             android:padding="10dp">
             <TextView
                 android:layout_width="0dp"
@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@android:color/white"
             android:padding="10dp">
             <TextView
                 android:layout_width="0dp"
@@ -103,6 +104,7 @@
             android:id="@+id/about_agreement_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:padding="10dp">
             <TextView
                 android:layout_width="wrap_content"
