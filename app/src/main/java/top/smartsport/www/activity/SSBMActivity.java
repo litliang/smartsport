@@ -177,8 +177,8 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
                 ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
                 // 总金额（两数相加）
-                float money1 = Float.parseFloat(bMmatch.getSell_price());
-                float money2 = Float.parseFloat(bMvideo.getSell_price());
+                float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥",""));
+                float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥",""));
                 float totalValue = money1 + money2;
                 total = StringUtil.strToDouble("" + totalValue);
                 ssbm_text_prices.setText("¥" + total);
@@ -265,10 +265,13 @@ public class SSBMActivity extends BaseActivity {
                 break;
             case CHANGE_CUSTOM_VEDIO:
                 if (data != null && data.getSerializableExtra("package_entity") != null){
-                    PackageEntity packageEntity = (PackageEntity) data.getSerializableExtra("package_entity");
-                    if (packageEntity != null){
-                        showToast(packageEntity.title);
-                    }
+                    String sell_price = (String) data.getStringExtra("sell_price");
+                    getTextView(R.id.ssbm_text_sell_prices).setText(sell_price);
+                    float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥",""));
+                    float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥",""));
+                    float totalValue = money1 + money2;
+                    total = StringUtil.strToDouble("" + totalValue);
+                    ssbm_text_prices.setText("¥" + total);
                 }
                 break;
             default:

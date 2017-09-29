@@ -36,6 +36,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import app.base.MapAdapter.AdaptInfo.Style;
+import app.base.action.ViewInflater;
 import app.base.task.Compt;
 import app.base.ui.ExpandableView;
 
@@ -598,7 +599,7 @@ public class MapAdapter extends BaseAdapter {
 
 	public View createItemView() {
 		// TODO Auto-generated method stub
-		View itemView = LayoutInflater.from(context).inflate(itemLayout, null);
+		View itemView = new ViewInflater(context).inflate(itemLayout, null);
 
 		return itemView;
 	}

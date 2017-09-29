@@ -11,6 +11,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.base.MapConf;
 import intf.FunCallback;
@@ -47,9 +48,9 @@ public class ActivityBuyCustomVedio extends BaseActivity{
 //                    CheckBox checkBox = (CheckBox) selectedView.findViewById(R.id.iv_check);
 //                    if (checkBox != null){
 //                        checkBox.setChecked(true);
-                PackageEntity packageEntity = (PackageEntity) mList.get(position);
+                Map packageEntity = (Map) mList.get(position);
                 if (packageEntity != null) {
-                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("package_entity", packageEntity));
+                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("sell_price",packageEntity.get("sell_price").toString()).putExtra("package_id",packageEntity.get("id").toString()));
                     finish();
 //                        }
                 }

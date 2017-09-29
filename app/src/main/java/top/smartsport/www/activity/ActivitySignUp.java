@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhy.autolayout.AutoLinearLayout;
 
@@ -34,6 +35,7 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
             mContactTv, mPhoneTv, mRefundTv, mDisclaimerTv;
     AutoLinearLayout mMemberLayout, mContactLayout, mPhoneLayout;
     Button mPayBtn;
+    private String enbale = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
 
     private void initUI() {
         final Map parammap = (Map) getIntent().getSerializableExtra("data");
+        enbale = (String) parammap.get("enable");
+        enbale = enbale == null?"":enbale;
         mIv = (ImageView) findViewById(R.id.sign_up_iv);
         mTitleTv = (TextView) findViewById(R.id.sign_up_title_tv);
         mPriceTv = (TextView) findViewById(R.id.sign_up_price_tv);
@@ -104,11 +108,11 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onFailure(Object result, List object) {
+                        Toast.makeText(ActivitySignUp.this,result.toString(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCallback(Object result, List object) {
-                        showToast(result.toString());
                         mPayBtn.setEnabled(true);
                     }
                 });
@@ -121,6 +125,19 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
                 .pair("details_amount_tv->sign_up_price_tv","","replace(/年)").pair("details_amount_tv->sign_up_total_price_tv","","replace(/年)")
                 .source(parammap,this).toView();
         getTextView(R.id.sign_up_total_price_tv).setText(getTextString(R.id.sign_up_price_tv).replace("/年",""));
+        if(enbale.equals("true")){
+            getView(R.id.sign_up_phone_tv).setEnabled(false);
+            getView(R.id.sign_up_contact_tv).setEnabled(false);
+
+            getView(R.id.sign_up_phone_iv).setEnabled(false);
+            getView(R.id.sign_up_contact_iv).setEnabled(false);
+            getView(R.id.sign_up_phone_iv).setVisibility(View.GONE);
+            getView(R.id.sign_up_contact_iv).setVisibility(View.GONE);
+
+            getView(R.id.sign_up_member_iv).setEnabled(false);
+            getView(R.id.sign_up_member_iv).setVisibility(View.GONE);
+
+        }
     }
 
     @Override

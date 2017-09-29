@@ -30,6 +30,7 @@ import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityOrderConfirm;
 import top.smartsport.www.activity.ActivitySignUp;
+import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.activity.BSDetailActivity;
 import top.smartsport.www.activity.BSSignUpActivity;
 import top.smartsport.www.activity.BuyVipActivity;
@@ -38,9 +39,12 @@ import top.smartsport.www.activity.OrderDetailsActivity;
 import top.smartsport.www.activity.SSBMActivity;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.bean.BSDetail;
+import top.smartsport.www.bean.BSssInfo;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -158,9 +162,9 @@ public class OrderFragment extends BaseV4Fragment {
                 mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Map m = (Map) parent.getItemAtPosition(position);
+                        Map m = (Map) parent.getItemAtPosition(position);
                         //1青训报名2赛事报名3会员购买
-                        String pid =m.get("id").toString();
+                        String pid = m.get("id").toString();
 //0 = {HashMap$HashMapEntry@5710} "address" -> "上海市闵行区虹桥足球场"
 //                        1 = {HashMap$HashMapEntry@5711} "title" -> "如何当好守门员"
 //                        2 = {HashMap$HashMapEntry@5712} "status" -> "1"
@@ -171,23 +175,38 @@ public class OrderFragment extends BaseV4Fragment {
 //                        7 = {HashMap$HashMapEntry@5717} "pay_total" -> "0.01"
 //                        8 = {HashMap$HashMapEntry@5718} "level" -> "12"
 //                        9 = {HashMap$HashMapEntry@5719} "product_type" -> "1"
-                        if(((TextView)view.findViewById(R.id.pay_status)).getText().toString().equals("未支付")){
-                            Map p = MapBuilder.build().add("type",m.get("product_type")).add("product_id",pid).add("total",m.get("pay_total").toString()).get();
+                        if (((TextView) view.findViewById(R.id.pay_status)).getText().toString().equals("未支付")) {
+                            Map p = MapBuilder.build().add("type", m.get("product_type")).add("product_id", pid).add("total", m.get("pay_total").toString()).get();
                             startActivity(new Intent(getContext(), ActivityOrderConfirm.class).putExtra("data", (Serializable) p));
 
-                        }else if(m.get("product_type").toString().equals("1")){
-
-                            Map map = MapBuilder.build().add("qx_course_id", pid).add("details_title_tv",m.get("title")).add("details_time_tv",m.get("start_time")).add("details_training_ground_tv","").add("details_amount_tv",m.get("pay_total")).get();
+                        } else if (m.get("product_type").toString().equals("1")) {
+// 1报名中2进行中 3已结束 4已报满5已报名
+                            if(m.get("status").toString().equals("1")){
+                            Map map = MapBuilder.build().add("qx_course_id", pid).add("details_title_tv", m.get("title")).add("details_time_tv", m.get("start_time")).add("details_training_ground_tv", "").add("details_amount_tv", m.get("pay_total")).get();
 
                             startActivity(new Intent(getContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
 
+                            }else{
+                                startActivity(new Intent(view.getContext(),ActivityTrainingDetails.class).putExtra("id", m.get("id").toString()));
 
-                        }else if(m.get("product_type").toString().equals("2")){
-                            Bundle bundle = new Bundle();
+                            }
+
+
+                        } else if (m.get("product_type").toString().equals("2")) {
+                            if(m.get("status").toString().equals("1")) {
+                                Bundle bundle = new Bundle();
                             bundle.putString(SSBMActivity.TAG, pid);
-                            ((MyOrderActivity)getActivity()).goActivity(SSBMActivity.class, bundle);
+                            ((MyOrderActivity) getActivity()).goActivity(SSBMActivity.class, bundle);
 
-                        }else if(m.get("product_type").toString().equals("3")){
+                            }else{
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString(BSDetailActivity.TAG, m.get("id").toString());
+                                bundle.putString("states", m.get("status").toString());
+                                toActivity(BSDetailActivity.class, bundle);
+                            }
+
+                        } else if (m.get("product_type").toString().equals("3")) {
                             startActivity(new Intent(getContext(), BuyVipActivity.class));
 
                         }

@@ -339,7 +339,7 @@ public class BSDetailActivity extends BaseActivity {
                 adaptinfo.addListviewItemLayoutId(R.layout.adapter_bsdetail_shipin);
                 adaptinfo.addViewIds(new Integer[]{R.id.news_name});
                 adaptinfo.addObjectFields(new String[]{"name"});
-                MapAdapter mapAdapter = new MapAdapter(getBaseContext(), adaptinfo);
+                MapAdapter mapAdapter = new MapAdapter(BSDetailActivity.this, adaptinfo);
                 mapAdapter.setItemDataSrc(new MapContent(JsonUtil.extractJsonRightValue(bsDetail.getMatch_video().toString())));
                 bs_detail_video.setAdapter(mapAdapter);
                 bs_detail_video.setOnItemClickListener(new AdapterView.OnItemClickListener() {
