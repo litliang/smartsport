@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f0efef"
     android:orientation="vertical">
-
+<!--android:background="#F5F5Ff"-->
     <FrameLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
@@ -21,8 +22,8 @@
         android:gravity="center">
         <ImageView
             android:id="@+id/about_icon_iv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@mipmap/ic_launcher"/>
         <TextView
             android:id="@+id/about_app_version"
