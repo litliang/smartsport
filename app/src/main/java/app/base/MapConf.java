@@ -180,6 +180,7 @@ public class MapConf {
             Object value = null;
             if (item instanceof Map) {
                 Map<String, Object> items = (Map<String, Object>) item;
+                Map<String, Object> perItem = (Map<String, Object>) item;
                 for (int i = 0; i < this.fieldnames.size(); i++) {
                     name = this.fieldnames.get(i);
                     String n;
@@ -188,11 +189,31 @@ public class MapConf {
                     } else {
                         n = name;
                     }
-                    if (items.containsKey(n)) {
-                        value = items.get(n);
-                        if (value != null) {
-                            findAndBindView(convertView, item, name, value, i);
+                    String[] names = n.split("-");
+                    for (int ix = 0; ix < names.length; ix++) {
+                        String nnode = names[ix];
+                        if (perItem.containsKey(nnode)) {
+                            value = items.get(nnode);
+                            if(value==null){
+                                value = "";
+                            }
+                            if (ix == names.length - 1) {
+                                if (value != null) {
+                                    findAndBindView(convertView, perItem, nnode, value, i);
+                                    break;
+                                }
+
+                            } else {
+                                if (value instanceof Map) {
+                                    perItem = (Map<String, Object>) value;
+                                    continue;
+                                } else {
+                                    continue;
+                                }
+                            }
+
                         }
+
                     }
 
 

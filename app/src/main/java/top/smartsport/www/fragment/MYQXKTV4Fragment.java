@@ -86,12 +86,10 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                     }
                     value = "还剩" + value + "个名额";
                 }else if(name.equals("status")){
-                    if (pos ==0) {
-                        convertView.findViewById(R.id.tv_head).setVisibility(View.VISIBLE);
-                    }
                     if (value.toString().equals("1")){
                         convertView.findViewById(R.id.ll_tome).setVisibility(View.GONE);
                         ((TextView) convertView.findViewById(R.id.tv_head)).setText("进行中的青训");
+                        ((TextView) convertView.findViewById(R.id.tv_head)).setVisibility(View.VISIBLE);
                     }else {
                         value = "已结束的青训";
                         convertView.findViewById(R.id.ll_tome).setVisibility(View.VISIBLE);

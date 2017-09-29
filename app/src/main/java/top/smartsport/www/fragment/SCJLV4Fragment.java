@@ -84,6 +84,8 @@ public class SCJLV4Fragment extends BaseV4Fragment {
         });
     }
 
+
+
     private void reload(final boolean refresh) {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getMyCollection").add("page", page).add("type", 5).get(), new FunCallback() {
             @Override

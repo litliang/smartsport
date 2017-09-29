@@ -220,4 +220,9 @@ public class OrderFragment extends BaseV4Fragment {
             }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getData(true);
+    }
 }

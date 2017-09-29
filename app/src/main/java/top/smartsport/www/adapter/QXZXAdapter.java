@@ -43,4 +43,6 @@ public class QXZXAdapter extends FragmentPagerAdapter {
         return title[position];
     }
 
+
+
 }

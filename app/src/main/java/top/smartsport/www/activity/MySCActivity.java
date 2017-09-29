@@ -1,5 +1,6 @@
 package top.smartsport.www.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,11 +12,10 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
-import intf.FunCallback;
-import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.QXZXAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.fragment.QXV4Fragment;
 import top.smartsport.www.fragment.SCBSV4Fragment;
 import top.smartsport.www.fragment.SCJLV4Fragment;
@@ -64,7 +64,29 @@ public class MySCActivity extends BaseActivity {
         qxzxAdapter = new QXZXAdapter(this,fragmentManager,tabTitle,listFM);
         qx_viewpager.setAdapter(qxzxAdapter);
         qx_tab.setViewPager(qx_viewpager);
+        qx_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+                mPos = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    int mPos = 0;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ((BaseV4Fragment)listFM.get(mPos)).refresh();
     }
 }

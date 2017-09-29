@@ -77,10 +77,10 @@ public class ActivityTrainingDetails extends BaseActivity {
         mHorizontaList = (HorizontalListView) findViewById(R.id.details_class_listview);
         mSignUpBtn = (Button) findViewById(R.id.details_sign_up_btn);
 
-//        for (int i = 0; i < 5; i++) {
+//        for (int mPos = 0; mPos < 5; mPos++) {
 //            classBean = new TrainingClassBean();
-//            classBean.setClassTitle("青训瑜伽" + i);
-//            classBean.setClassPrice("￥" + i + 1000 + i * 3);
+//            classBean.setClassTitle("青训瑜伽" + mPos);
+//            classBean.setClassPrice("￥" + mPos + 1000 + mPos * 3);
 //            classList.add(classBean);
 //        }
         mClassAdapter = new AdapterTrainingDetails(this, classList);
