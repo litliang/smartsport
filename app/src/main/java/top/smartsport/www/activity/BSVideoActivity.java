@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.base.MapConf;
+import app.base.action.ViewInflater;
 import app.base.ui.AdaptView;
 import cn.jiguang.share.android.api.Platform;
 import cn.jiguang.share.android.api.ShareParams;
@@ -127,7 +128,7 @@ public class BSVideoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_spdetail);
+        setContentView(new ViewInflater(this).inflate(R.layout.activity_spdetail,null));
         actionbar = findViewById(R.id.action_bar);
         if (actionbar != null && ((TextView) actionbar.findViewById(R.id.tvTitle)) != null) {
             ((TextView) actionbar.findViewById(R.id.tvTitle)).setText(getTitle());

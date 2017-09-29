@@ -41,7 +41,7 @@ public class ViewInflater extends LayoutInflater {
 
     @Override
     protected View onCreateView(View parent, String name, AttributeSet attrs) throws ClassNotFoundException {
-        if (parent.getTag() != null) {
+        if (parent!=null&&parent.getTag() != null) {
             if (!layoutlog.contains(parent.toString())) {
                 layoutlog.add(parent.toString());
                 parent.setOnClickListener(new ClickAction());

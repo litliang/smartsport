@@ -178,6 +178,7 @@ public class MapConf {
             }
             String name;
             Object value = null;
+            String textepr = "";
             if (item instanceof Map) {
                 Map<String, Object> items = (Map<String, Object>) item;
                 Map<String, Object> perItem = (Map<String, Object>) item;
@@ -186,20 +187,22 @@ public class MapConf {
                     String n;
                     if (name.contains(":")) {
                         n = name.split(":")[0];
+                        textepr = ":"+name.split(":")[1];
                     } else {
                         n = name;
+                        textepr = "";
                     }
                     String[] names = n.split("-");
                     for (int ix = 0; ix < names.length; ix++) {
                         String nnode = names[ix];
                         if (perItem.containsKey(nnode)) {
-                            value = items.get(nnode);
+                            value = perItem.get(nnode);
                             if(value==null){
                                 value = "";
                             }
                             if (ix == names.length - 1) {
                                 if (value != null) {
-                                    findAndBindView(convertView, perItem, nnode, value, i);
+                                    findAndBindView(convertView, perItem, nnode+textepr, value, i);
                                     break;
                                 }
 

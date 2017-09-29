@@ -104,7 +104,7 @@ public class SSBMActivity extends BaseActivity {
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
         FloatOnKeyboardLayout floatOnKeyboardLayout = (FloatOnKeyboardLayout) findViewById(R.id.float_on_keyboard_layout);
-        floatOnKeyboardLayout.setView(findViewById(R.id.ssbm_pay));
+        floatOnKeyboardLayout.setView(findViewById(R.id.inputphone));
         getData();
         findViewById(R.id.buycustomvideo).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,8 +177,8 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
                 ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
                 // 总金额（两数相加）
-                float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥",""));
-                float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥",""));
+                float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥", ""));
+                float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥", ""));
                 float totalValue = money1 + money2;
                 total = StringUtil.strToDouble("" + totalValue);
                 ssbm_text_prices.setText("¥" + total);
@@ -251,27 +251,25 @@ public class SSBMActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case CHANGE_QD:
-                if (data.getStringExtra("team_id") == null || data.getStringExtra("team_id").equals("")) {
+                if (data != null) {
+                    if (data.getStringExtra("team_id") == null || data.getStringExtra("team_id").equals("")) {
 
-                } else {
-                    teamId = data.getStringExtra("team_id");
-                }
-                if (data.getStringExtra("team_name") == null || data.getStringExtra("team_name").equals("")) {
+                    } else {
+                        teamId = data.getStringExtra("team_id");
+                    }
+                    if (data.getStringExtra("team_name") == null || data.getStringExtra("team_name").equals("")) {
 
-                } else {
-                    team_name = data.getStringExtra("team_name");
-                    ssbm_text_baoming_qiudui.setText(team_name);
+                    } else {
+                        team_name = data.getStringExtra("team_name");
+                        ssbm_text_baoming_qiudui.setText(team_name);
+                    }
                 }
                 break;
             case CHANGE_CUSTOM_VEDIO:
-                if (data != null && data.getSerializableExtra("package_entity") != null){
+                if (data != null && data.getSerializableExtra("package_entity") != null) {
                     String sell_price = (String) data.getStringExtra("sell_price");
                     getTextView(R.id.ssbm_text_sell_prices).setText(sell_price);
-                    float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥",""));
-                    float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥",""));
-                    float totalValue = money1 + money2;
-                    total = StringUtil.strToDouble("" + totalValue);
-                    ssbm_text_prices.setText("¥" + total);
+
                 }
                 break;
             default:

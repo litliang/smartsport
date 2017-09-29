@@ -136,12 +136,12 @@ public class MySPActivity extends BaseActivity {
     private void loadConfig(List list) {
 
         MapConf m = MapConf.with(getBaseContext()).pair("match-level->level").pair("match-address->address").pair("match-start_time->date").pair("match-name->title").pair("match-cover_url->image").pair("video-pay_status->pay_status", "1:已支付;0:未支付", "Showpaystatus()").pair("video-sell_price->adapter_price").pair("video-title->video_name").source(R.layout.adapter_myvideo);
-        MapConf.build().with(MySPActivity.this).conf(m).source(list, pullrefreshlistview.getRefreshableView()).toView();
+        MapConf.with(MySPActivity.this).conf(m).source(list, pullrefreshlistview.getRefreshableView()).toView();
         pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /*parent.getItemAtPosition(position).toString()*/
-                startActivity(new Intent(getBaseContext(), BSVideoActivity.class).putExtra("id", "1"));
+                startActivity(new Intent(getBaseContext(), BSVideoActivity.class).putExtra("videoid", "1"));
             }
         });
 
