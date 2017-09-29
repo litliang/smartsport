@@ -21,6 +21,7 @@ import top.smartsport.www.adapter.PackageAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.PackageEntity;
+import top.smartsport.www.bean.WDQDInfo;
 
 @ContentView(R.layout.activity_buy_custom_vedio)
 public class ActivityBuyCustomVedio extends BaseActivity{
@@ -38,33 +39,23 @@ public class ActivityBuyCustomVedio extends BaseActivity{
         mAdapter = new PackageAdapter();
         mListView.setAdapter(mAdapter);
         requestServer();
-        mAdapter.setCallBack(new PackageAdapter.CallBack() {
-            @Override
-            public void callback(int position) {
-                PackageEntity packageEntity = (PackageEntity) mList.get(position);
-                if (packageEntity != null) {
-                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("package_entity", packageEntity));
-                    finish();
-                }
-            }
-        });
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                View selectedView = parent.getSelectedView();
+                //                View selectedView = parent.getSelectedView();
 //                if (selectedView != null){
 //                    CheckBox checkBox = (CheckBox) selectedView.findViewById(R.id.iv_check);
 //                    if (checkBox != null){
 //                        checkBox.setChecked(true);
-                        PackageEntity packageEntity = (PackageEntity) mList.get(position);
-                        if (packageEntity != null){
-                            setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO,new Intent().putExtra("package_entity",packageEntity));
-                            finish();
+                PackageEntity packageEntity = (PackageEntity) mList.get(position);
+                if (packageEntity != null) {
+                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("package_entity", packageEntity));
+                    finish();
 //                        }
-//                    }
                 }
             }
         });
+
     }
 
     private void requestServer(){
@@ -75,6 +66,7 @@ public class ActivityBuyCustomVedio extends BaseActivity{
                 List<PackageEntity> list = (List<PackageEntity>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("package",data).toString());
                 mList.clear();
                 mList.addAll(list);
+                mListView.setAdapter(mAdapter);
                 mAdapter.setData(mList);
                 MapConf mc = MapConf.with(ActivityBuyCustomVedio.this)
                         .pair("title->title_tv")
