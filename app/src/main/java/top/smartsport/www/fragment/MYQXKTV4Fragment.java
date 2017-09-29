@@ -13,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -24,15 +27,17 @@ import java.util.Map;
 import app.base.MapAdapter;
 import app.base.MapContent;
 import intf.FunCallback;
-import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
+import top.smartsport.www.bean.KCBean;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
+
+import static android.R.id.list;
 
 /**
  * Created by Aaron on 2017/7/24.
@@ -45,6 +50,7 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.mykcempty)
     ViewGroup empty;
     private int page =1;
+    private List<Boolean> showStatus = new ArrayList<>();
 
     public static MYQXKTV4Fragment newInstance() {
         MYQXKTV4Fragment fragment = new MYQXKTV4Fragment();
@@ -85,16 +91,19 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                         ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.theme_color,null));
                     }
                     value = "还剩" + value + "个名额";
-                }else if(name.equals("status")){
-                    if (pos ==0) {
-                        convertView.findViewById(R.id.tv_head).setVisibility(View.VISIBLE);
-                    }
-                    if (value.toString().equals("1")){
+                } else if(name.equals("status")){
+                    if (value.toString().equals("1") || value.toString().equals("2")){
                         convertView.findViewById(R.id.ll_tome).setVisibility(View.GONE);
-                        ((TextView) convertView.findViewById(R.id.tv_head)).setText("进行中的青训");
+                        value = "进行中的青训";
                     }else {
                         value = "已结束的青训";
                         convertView.findViewById(R.id.ll_tome).setVisibility(View.VISIBLE);
+                    }
+                    boolean blStatus = showStatus.get(pos);
+                    if(blStatus) {
+                        convertView.findViewById(R.id.ll_head).setVisibility(View.VISIBLE);
+                    } else {
+                        convertView.findViewById(R.id.ll_head).setVisibility(View.GONE);
                     }
                 }
                 ViewGroup nl = (ViewGroup) convertView.findViewById(R.id.ll_nl);
@@ -147,6 +156,7 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                     iv.setLayoutParams(params);
                     sd.addView(iv);
                 }
+
                 super.findAndBindView(convertView, pos, item, name, value);
 
                 return true;
@@ -198,17 +208,43 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
             public void onSuccess(Object result, List object) {
                 String data = ((NetEntity)result).getData().toString();
 //                List list = (List) JsonUtil.extractJsonRightValue(data);
+                LogUtil.d("----------data----------->" + data);
+                if(page == 1) {
+                    showStatus.clear();
+                }
                 List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("playing", data)); //进行中
                 List listWatting = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("watting", data)); //报名中
                 List listOver = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("over", data)); // 已结束
                 if(list == null) {
                     list = new ArrayList();
+                } else {
+                    for(int i=0; i<list.size(); i++) {
+                        if(page == 1 && i == 0) {
+                            showStatus.add(true);
+                        } else {
+                            showStatus.add(false);
+                        }
+                    }
                 }
                 if(listWatting != null && listWatting.size() > 0) {
+                    for(int i=0; i<listWatting.size(); i++) {
+                        if(list.size() == 0 && i == 0) {
+                            showStatus.add(true);
+                        } else {
+                            showStatus.add(false);
+                        }
+                    }
                     list.addAll(listWatting);
                 }
                 if(listOver != null && listOver.size() > 0) {
                     list.addAll(listOver);
+                    for(int i=0; i<listOver.size(); i++) {
+                        if(page == 1 && i == 0) {
+                            showStatus.add(true);
+                        } else {
+                            showStatus.add(false);
+                        }
+                    }
                 }
                 if (page == 1){
                     pullrefreshlistview.onPullDownRefreshComplete();
@@ -233,6 +269,5 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
 
         });
     }
-
 
 }
