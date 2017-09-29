@@ -264,9 +264,11 @@ public class SSBMActivity extends BaseActivity {
                 }
                 break;
             case CHANGE_CUSTOM_VEDIO:
-                PackageEntity packageEntity = (PackageEntity) data.getSerializableExtra("package_entity");
-                if (packageEntity != null){
-                    showToast(packageEntity.title);
+                if (data != null && data.getSerializableExtra("package_entity") != null){
+                    PackageEntity packageEntity = (PackageEntity) data.getSerializableExtra("package_entity");
+                    if (packageEntity != null){
+                        showToast(packageEntity.title);
+                    }
                 }
                 break;
             default:
