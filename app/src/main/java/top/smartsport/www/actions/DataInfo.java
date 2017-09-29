@@ -131,7 +131,11 @@ public class DataInfo {
                         info.setName(name);
                         kclyInfoList.add(info);
                     }
-//
+
+                    KCLBInfo infoAll = new KCLBInfo();
+                    infoAll.setId("0");
+                    infoAll.setName("全部类别");
+                    kclbInfoList.add(infoAll);
                     for (int i = 0; i < categoryList.length(); i++) {
                         JSONObject obj = (JSONObject) categoryList.get(i);
                         String id = obj.optString("id");

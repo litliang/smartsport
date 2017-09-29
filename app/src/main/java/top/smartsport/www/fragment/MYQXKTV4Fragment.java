@@ -17,6 +17,7 @@ import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -200,11 +201,14 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                 List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("playing", data)); //进行中
                 List listWatting = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("watting", data)); //报名中
                 List listOver = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("over", data)); // 已结束
+                if(list == null) {
+                    list = new ArrayList();
+                }
                 if(listWatting != null && listWatting.size() > 0) {
-                    list.add(listWatting);
+                    list.addAll(listWatting);
                 }
                 if(listOver != null && listOver.size() > 0) {
-                    list.add(listOver);
+                    list.addAll(listOver);
                 }
                 if (page == 1){
                     pullrefreshlistview.onPullDownRefreshComplete();

@@ -86,6 +86,24 @@
                 android:numColumns="2"
 
                 android:scrollbars="none" />
+            <TextView android:id="@+id/titleguhuiji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="40px"
+
+                android:layout_marginBottom="20px"
+                android:text="专家级"
+                android:textColor="@color/black"
+                android:textSize="48px" />
+
+            <top.smartsport.www.widget.MyGridView
+                android:id="@+id/guhuijigrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="2"
+
+                android:scrollbars="none" />
 
 
         </LinearLayout>
