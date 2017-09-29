@@ -6,7 +6,7 @@ def int getVer() {
     int date2017 = 247;
     int year = Calendar.getInstance().get(Calendar.YEAR) - 2017;
     int vercode = Calendar.getInstance().get(Calendar.DAY_OF_YEAR) + 365 * year - date2017;
-    return vercode;
+    return date2017;
 }
 
 android {

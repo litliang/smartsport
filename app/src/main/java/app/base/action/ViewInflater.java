@@ -9,6 +9,7 @@ import java.util.TreeSet;
 import app.base.framework.Init;
 import app.base.ui.AdaptView;
 import dalvik.system.DexFile;
+import top.smartsport.www.widget.utils.RoundImageView;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -30,6 +31,8 @@ public class ViewInflater extends LayoutInflater {
         uiNames.put("WebView", "android.webkit.");
         uiNames.put("CircleImageView", "android.support.v4.widget.");
         uiNames.put("ImageView", app.base.widget.ImageView.class.getPackage().getName()+".");
+        uiNames.put("RoundImageView", RoundImageView.class.getPackage().getName()+".");
+
 
 //        uiNames.put("IjkPlayerView", "com.dl7.player.media.");
     }

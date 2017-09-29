@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,19 +19,32 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.base.JsonUtil;
 import app.base.MapConf;
+import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ActivityOrderConfirm;
+import top.smartsport.www.activity.ActivitySignUp;
+import top.smartsport.www.activity.BSDetailActivity;
+import top.smartsport.www.activity.BSSignUpActivity;
+import top.smartsport.www.activity.BuyVipActivity;
+import top.smartsport.www.activity.MyOrderActivity;
 import top.smartsport.www.activity.OrderDetailsActivity;
+import top.smartsport.www.activity.SSBMActivity;
+import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import top.smartsport.www.utils.pay.PayUtil;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -141,6 +155,44 @@ public class OrderFragment extends BaseV4Fragment {
                         .pair("pay_status->pay_status", "0:未支付;1:已支付", "showPayStatus()")
                         .source(R.layout.list_item);
                 MapConf.with(getContext()).conf(mc).source(data, mlistview.getRefreshableView()).toView();
+                mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Map m = (Map) parent.getItemAtPosition(position);
+                        //1青训报名2赛事报名3会员购买
+                        String pid =m.get("id").toString();
+//0 = {HashMap$HashMapEntry@5710} "address" -> "上海市闵行区虹桥足球场"
+//                        1 = {HashMap$HashMapEntry@5711} "title" -> "如何当好守门员"
+//                        2 = {HashMap$HashMapEntry@5712} "status" -> "1"
+//                        3 = {HashMap$HashMapEntry@5713} "id" -> "1"
+//                        4 = {HashMap$HashMapEntry@5714} "cover_url" -> "http://admin.smartsport.top/data/upload/2017/0915/13/59bb5e6b0405a.jpg"
+//                        5 = {HashMap$HashMapEntry@5715} "start_time" -> "2017-10-15"
+//                        6 = {HashMap$HashMapEntry@5716} "pay_status" -> "1"
+//                        7 = {HashMap$HashMapEntry@5717} "pay_total" -> "0.01"
+//                        8 = {HashMap$HashMapEntry@5718} "level" -> "12"
+//                        9 = {HashMap$HashMapEntry@5719} "product_type" -> "1"
+                        if(((TextView)view.findViewById(R.id.pay_status)).getText().toString().equals("未支付")){
+                            Map p = MapBuilder.build().add("type",m.get("product_type")).add("product_id",pid).add("total",m.get("pay_total").toString()).get();
+                            startActivity(new Intent(getContext(), ActivityOrderConfirm.class).putExtra("data", (Serializable) p));
+
+                        }else if(m.get("product_type").toString().equals("1")){
+
+                            Map map = MapBuilder.build().add("qx_course_id", pid).add("details_title_tv",m.get("title")).add("details_time_tv",m.get("start_time")).add("details_training_ground_tv","").add("details_amount_tv",m.get("pay_total")).get();
+
+                            startActivity(new Intent(getContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
+
+
+                        }else if(m.get("product_type").toString().equals("2")){
+                            Bundle bundle = new Bundle();
+                            bundle.putString(SSBMActivity.TAG, pid);
+                            ((MyOrderActivity)getActivity()).goActivity(SSBMActivity.class, bundle);
+
+                        }else if(m.get("product_type").toString().equals("3")){
+                            startActivity(new Intent(getContext(), BuyVipActivity.class));
+
+                        }
+                    }
+                });
             }
 
             @Override

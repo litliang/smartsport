@@ -35,16 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-<FrameLayout android:layout_marginTop="20px"
-    android:layout_marginBottom="20px"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
             <include
                 layout="@layout/comm_bsss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
-</FrameLayout>
             <LinearLayout
                 android:id="@+id/bs_detail_ll__listView"
                 android:layout_width="match_parent"

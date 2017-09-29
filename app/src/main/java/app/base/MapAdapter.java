@@ -684,7 +684,7 @@ public class MapAdapter extends BaseAdapter {
 		}
 		int theViewId = this.fieldnames.indexOf(name);
 		View theView = convertView.findViewById(this.viewsid.get(theViewId));
-		return setView(pos, item, value, convertView, theView);
+		return MapConf.with(convertView.getContext()).setView(item, value,name, convertView, theView);
 
 	}
 
