@@ -37,6 +37,7 @@ import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
@@ -102,10 +103,15 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
             LogUtil.d("----------levelIndex---------->" + levelId);
             LogUtil.d("----------statusIndex---------->" + statusId);
             LogUtil.d("----------typeIndex---------->" + typeId);
-
-            json.put("level", levelId);// 课程级别
-            json.put("source", statusId);// 课程来源
-            json.put("category", typeId);// 课程类别
+            if(!StringUtil.isEmpty(levelId) && !levelId.equals("0")) {
+                json.put("level", levelId);// 课程级别
+            }
+            if(!StringUtil.isEmpty(statusId) && !statusId.equals("0")) {
+                json.put("source", statusId);// 课程来源
+            }
+            if(!StringUtil.isEmpty(typeId) && !typeId.equals("0")) {
+                json.put("category", typeId);// 课程类别
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -125,6 +131,7 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
                     JSONArray primary = data.optJSONArray("primary");
                     JSONArray middle = data.optJSONArray("middle");
                     JSONArray senior = data.optJSONArray("senior");
+                    JSONArray doctor = data.optJSONArray("doctor");
                     if(begin != null && begin.length() > 0) {
                         setGrid(entity, "begin", R.id.rumenjigrid,R.id.titlerumenji);
                     } else {
@@ -144,6 +151,11 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
                         setGrid(entity, "senior", R.id.gaojigrid,R.id.titlegaoji);
                     } else {
                         setGrid(null, "senior", R.id.gaojigrid,R.id.titlegaoji);
+                    }
+                    if(doctor != null && doctor.length() > 0) {
+                        setGrid(entity, "doctor", R.id.guhuijigrid,R.id.titleguhuiji);
+                    } else {
+                        setGrid(null, "doctor", R.id.guhuijigrid,R.id.titleguhuiji);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

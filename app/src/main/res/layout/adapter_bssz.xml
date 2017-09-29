@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/tv_bssz"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="30dp"
         android:background="@drawable/shape_bg_hotcity"
         android:gravity="center"
