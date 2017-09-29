@@ -57,12 +57,6 @@ public class PackageAdapter extends BaseAdapter {
         }else {
             holder = (PackageAdapter.ViewHolder) convertView.getTag();
         }
-        holder.iv_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mCallBack.callback(position);
-            }
-        });
         return convertView;
     }
 
@@ -73,14 +67,5 @@ public class PackageAdapter extends BaseAdapter {
         CheckBox iv_check;
     }
 
-
-    public void setCallBack(CallBack mCallBack) {
-        this.mCallBack = mCallBack;
-    }
-
-    private CallBack mCallBack;
-    public interface CallBack{
-        void callback(int position);
-    }
 
 }
