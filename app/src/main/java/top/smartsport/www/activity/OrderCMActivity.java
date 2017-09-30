@@ -56,6 +56,7 @@ public class OrderCMActivity extends BaseActivity {
 
             }
         });
+        findViewById(R.id.rl_zhifubao).performClick();
     }
 
     String id;

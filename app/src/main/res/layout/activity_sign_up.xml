@@ -1,381 +1,393 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
-
-        <include layout="@layout/layout_actionbar" />
-    </FrameLayout>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/action_bar"
-        android:layout_marginBottom="50dp"
-        android:fillViewport="true"
-        android:scrollbars="vertical">
+        android:orientation="vertical">
 
-        <com.zhy.autolayout.AutoLinearLayout
+        <FrameLayout
+            android:id="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentTop="true">
 
-            <com.zhy.autolayout.AutoRelativeLayout
+            <include layout="@layout/layout_actionbar" />
+        </FrameLayout>
+
+    <top.smartsport.www.widget.FloatOnKeyboardLayout
+        android:id="@+id/float_on_keyboard_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/action_bar"
+            android:layout_marginBottom="50dp"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
+
+            <com.zhy.autolayout.AutoLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/sign_up_iv"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@mipmap/ic_launcher" />
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/sign_up_iv"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/sign_up_iv"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sign_up_title_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lines="2"
+                            android:text="比赛标题1比赛标题2,比赛标题3,比赛标题4,比赛标题5,比赛标题abckdendadlfjdljf"
+                            android:textColor="@android:color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/sign_up_hint_date_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:ellipsize="end"
+                                android:lines="1"
+                                android:text="2017-08-28"
+                                android:textColor="@android:color/darker_gray" />
+
+                            <TextView
+                                android:id="@+id/sign_up_hint_sep_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:ellipsize="end"
+                                android:lines="1"
+                                android:text=" | "
+                                android:textColor="@android:color/darker_gray" />
+
+                            <TextView
+                                android:id="@+id/sign_up_hint_location_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:ellipsize="end"
+                                android:lines="1"
+                                android:text="上海市虹口体育馆"
+                                android:textColor="@android:color/darker_gray" />
+                        </LinearLayout>
+                    </com.zhy.autolayout.AutoLinearLayout>
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
 
                 <com.zhy.autolayout.AutoLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/sign_up_iv"
-                    android:orientation="vertical">
+                    android:background="@android:color/white"
+                    android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/sign_up_title_tv"
-                        android:layout_width="match_parent"
+                        android:id="@+id/sign_up_price_tv"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:lines="2"
-                        android:text="比赛标题1比赛标题2,比赛标题3,比赛标题4,比赛标题5,比赛标题abckdendadlfjdljf"
-                        android:textColor="@android:color/black" />
+                        android:layout_marginLeft="10dp"
+                        android:text="￥1999/年"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="17sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/sign_up_old_price_tv"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/sign_up_hint_date_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:lines="1"
-                            android:text="2017-08-28"
-                            android:textColor="@android:color/darker_gray" />
-
-                        <TextView
-                            android:id="@+id/sign_up_hint_sep_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:lines="1"
-                            android:text=" | "
-                            android:textColor="@android:color/darker_gray" />
-
-                        <TextView
-                            android:id="@+id/sign_up_hint_location_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:lines="1"
-                            android:text="上海市虹口体育馆"
-                            android:textColor="@android:color/darker_gray" />
-                    </LinearLayout>
+                        android:text="￥2000/年"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp"
+                        android:visibility="gone" />
                 </com.zhy.autolayout.AutoLinearLayout>
-            </com.zhy.autolayout.AutoRelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/sign_up_price_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="￥1999/年"
-                    android:textColor="@android:color/holo_red_light"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/sign_up_old_price_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="￥2000/年"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp"
-                    android:visibility="gone"/>
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up_total_amount"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/sign_up_total_price_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:gravity="right"
-                    android:lines="1"
-                    android:text="￥199999"
-                    android:textColor="@android:color/holo_red_light" />
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:id="@+id/sign_up_member_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up_member"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <com.zhy.autolayout.AutoRelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3">
-
-                    <ImageView
-                        android:id="@+id/sign_up_member_iv"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@mipmap/edit"
-                        android:tag="enableEditText(sign_up_member_tv)" />
-
-                    <EditText android:gravity="right"
-                        android:id="@+id/sign_up_member_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10px"
-                        android:layout_toLeftOf="@id/sign_up_member_iv"
-                        android:background="@color/color_transparent"
-                        android:enabled="false"
-                        android:hint="@string/sign_up_member_name"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="15dip" />
-                </com.zhy.autolayout.AutoRelativeLayout>
-
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:id="@+id/sign_up_contact_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up_contact"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dip" />
-
-                <com.zhy.autolayout.AutoRelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3">
-
-                    <ImageView
-                        android:id="@+id/sign_up_contact_iv"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@mipmap/edit"
-                        android:tag="enableEditText(sign_up_contact_tv)" />
-
-                    <EditText
-                        android:id="@+id/sign_up_contact_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10px"
-
-                        android:layout_toLeftOf="@id/sign_up_contact_iv"
-                        android:background="@color/color_transparent"
-                        android:enabled="false"
-                        android:hint="@string/sign_up_contact_name"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="15dip" />
-                </com.zhy.autolayout.AutoRelativeLayout>
-
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:id="@+id/sign_up_phone_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up_phone"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp" />
-
-                <com.zhy.autolayout.AutoRelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3">
-
-                    <ImageView
-                        android:id="@+id/sign_up_phone_iv"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@mipmap/edit"
-                        android:tag="enableEditText(sign_up_phone_tv)" />
-
-                    <EditText
-                        android:gravity="right"
-                        android:id="@+id/sign_up_phone_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10px"
-                        android:layout_toLeftOf="@id/sign_up_phone_iv"
-                        android:background="@color/color_transparent"
-                        android:enabled="false"
-                        android:hint="12345678901"
-                        android:inputType="number"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="15dip" />
-                </com.zhy.autolayout.AutoRelativeLayout>
-
-            </com.zhy.autolayout.AutoLinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorGray" />
-
-            <com.zhy.autolayout.AutoLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@android:color/white"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sign_up_refund_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/sign_up_refund"
-                    android:textColor="@android:color/holo_blue_dark" />
 
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
                     android:background="@color/colorGray" />
 
-                <TextView
-                    android:id="@+id/sign_up_disclaimer_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/sign_up_disclaimer"
-                    android:textColor="@android:color/holo_blue_dark" />
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_up_total_amount"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/sign_up_total_price_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:lines="1"
+                        android:text="￥199999"
+                        android:textColor="@android:color/holo_red_light" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGray" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/sign_up_member_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_up_member"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <ImageView
+                            android:id="@+id/sign_up_member_iv"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/edit"
+                            android:tag="enableEditText(sign_up_member_tv)" />
+
+                        <EditText
+                            android:id="@+id/sign_up_member_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10px"
+                            android:layout_toLeftOf="@id/sign_up_member_iv"
+                            android:background="@color/color_transparent"
+                            android:enabled="false"
+                            android:gravity="right"
+                            android:hint="@string/sign_up_member_name"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15dip" />
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/sign_up_contact_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_up_contact"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dip" />
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <ImageView
+                            android:id="@+id/sign_up_contact_iv"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/edit"
+                            android:tag="enableEditText(sign_up_contact_tv)" />
+
+                        <EditText
+                            android:id="@+id/sign_up_contact_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10px"
+
+                            android:layout_toLeftOf="@id/sign_up_contact_iv"
+                            android:background="@color/color_transparent"
+                            android:enabled="false"
+                            android:gravity="right"
+                            android:hint="@string/sign_up_contact_name"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15dip" />
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:id="@+id/sign_up_phone_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/sign_up_phone"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <com.zhy.autolayout.AutoRelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3">
+
+                        <ImageView
+                            android:id="@+id/sign_up_phone_iv"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/edit"
+                            android:tag="enableEditText(sign_up_phone_tv)" />
+
+                        <EditText
+                            android:id="@+id/sign_up_phone_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10px"
+                            android:layout_toLeftOf="@id/sign_up_phone_iv"
+                            android:background="@color/color_transparent"
+                            android:enabled="false"
+                            android:gravity="right"
+                            android:hint="12345678901"
+                            android:inputType="number"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15dip" />
+                    </com.zhy.autolayout.AutoRelativeLayout>
+
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorGray" />
+
+                <com.zhy.autolayout.AutoLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/sign_up_refund_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/sign_up_refund"
+                        android:textColor="@android:color/holo_blue_dark" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorGray" />
+
+                    <TextView
+                        android:id="@+id/sign_up_disclaimer_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/sign_up_disclaimer"
+                        android:textColor="@android:color/holo_blue_dark" />
+                </com.zhy.autolayout.AutoLinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGray" />
             </com.zhy.autolayout.AutoLinearLayout>
+        </ScrollView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorGray" />
-        </com.zhy.autolayout.AutoLinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/sign_up_pay_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:text="@string/sign_up_pay"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
 
-    <Button
-        android:id="@+id/sign_up_pay_btn"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
-        android:gravity="center"
-        android:text="@string/sign_up_pay"
-        android:textColor="@android:color/white"
-        android:textSize="17sp" />
-
+    </top.smartsport.www.widget.FloatOnKeyboardLayout>
+    </LinearLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

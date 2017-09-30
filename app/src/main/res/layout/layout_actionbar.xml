@@ -63,6 +63,7 @@
             android:visibility="visible"
             android:textSize="48px"
             android:layout_marginRight="50px"
+            android:background="@color/color_transparent"
             />
         <ImageView
             android:id="@+id/ivRight"
