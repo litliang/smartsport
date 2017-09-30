@@ -16,6 +16,7 @@
             android:src="@mipmap/aa_tim"
             android:layout_marginLeft="20px"
             android:layout_marginRight="20px"
+            android:layout_marginTop="20px"
             android:scaleType="fitXY" />
         <TextView
             android:id="@+id/adapter_bsss_state"

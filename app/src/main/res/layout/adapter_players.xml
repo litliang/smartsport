@@ -37,6 +37,20 @@
                     android:scaleType="fitXY"
                     android:src="@mipmap/login_logo" />
 
+                <TextView
+                    android:id="@+id/players_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/today_players_num"
+                    android:gravity="center"
+                    android:text="99\n期"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="-3dp"
+                    android:layout_alignTop="@id/players_img"
+                    android:layout_alignRight="@+id/players_img"
+                    android:textSize="45px" />
+
 
             </RelativeLayout>
 
@@ -61,17 +75,5 @@
                 android:textSize="38px" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/players_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="80px"
-            android:layout_marginTop="30px"
-            android:background="@mipmap/today_players_num"
-            android:gravity="center"
-            android:text="99\n期"
-            android:textColor="@color/white"
-            android:textSize="45px" />
     </RelativeLayout>
 </LinearLayout>

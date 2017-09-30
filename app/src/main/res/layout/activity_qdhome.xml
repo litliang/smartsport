@@ -91,9 +91,9 @@
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
-                        android:layout_width="1px"
+                        android:layout_width="2px"
                         android:layout_height="42px"
-                        android:background="#ffffff"
+                        android:background="#003300"
                         />
 
                     <TextView
@@ -106,9 +106,9 @@
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
-                        android:layout_width="1px"
+                        android:layout_width="2px"
                         android:layout_height="42px"
-                        android:background="#ffffff"
+                        android:background="#003300"
                         />
                     <TextView
                         android:id="@+id/tv_win"
@@ -120,9 +120,9 @@
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
-                        android:layout_width="1px"
+                        android:layout_width="2px"
                         android:layout_height="42px"
-                        android:background="#ffffff"
+                        android:background="#003300"
                         />
                     <TextView
                         android:id="@+id/tv_draw"
@@ -134,9 +134,9 @@
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
-                        android:layout_width="1px"
+                        android:layout_width="2px"
                         android:layout_height="42px"
-                        android:background="#ffffff"
+                        android:background="#003300"
                         />
                     <TextView
                         android:id="@+id/tv_loss"
