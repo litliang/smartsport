@@ -142,6 +142,12 @@ public abstract class BaseActivity extends AutoLayoutActivity {
                 finish();
             }
         });
+        getTopBar().findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public enum Sharetype {

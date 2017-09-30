@@ -27,7 +27,6 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +38,6 @@ import java.util.TreeSet;
 
 import app.base.action.Action;
 import intf.MapBuilder;
-import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.widget.utils.RoundImageView;
 
 /**
@@ -165,9 +163,9 @@ public class MapConf {
 
     public void toView() {
         try {
-//            if (item instanceof String) {
-//                item = JsonUtil.extractJsonRightValue(((String) item));
-//            }
+            if (item instanceof String) {
+                item = JsonUtil.extractJsonRightValue(((String) item));
+            }
 //            if (fieldnames.size() == 0 && viewsid.size() == 0) {
 //                link();
 //                return;
@@ -202,7 +200,7 @@ public class MapConf {
                             }
                             if (ix == names.length - 1) {
                                 if (value != null) {
-                                    findAndBindView(convertView, perItem, nnode + textepr, value, i);
+                                    findAndBindView(convertView, perItem, nnode + textepr,nnode + textepr, value, i);
                                     perItem = (Map<String, Object>) item;
                                     break;
                                 }
@@ -242,7 +240,7 @@ public class MapConf {
                             values.put(n, value);
                         }
                         if (values != null) {
-                            findAndBindView(convertView, item, name, values, i);
+                            findAndBindView(convertView, item, name,name, values, i);
                         }
 
                     } else {
@@ -255,7 +253,7 @@ public class MapConf {
                         value = JsonUtil.findJsonLink(n, item);
                         value = JsonUtil.extractJsonRightValue(value.toString());
                         if (value != null) {
-                            findAndBindView(convertView, item, name, value, i);
+                            findAndBindView(convertView, item, name, name,value, i);
                         }
                     }
 
@@ -271,11 +269,11 @@ public class MapConf {
         if (item instanceof String) {
             item = app.base.JsonUtil.extractJsonRightValue((String) item);
         }
-        setView(item, item, "", convertView, convertView);
+        setView(item, item, "", "", convertView, convertView);
     }
 
     protected boolean findAndBindView(View convertView, Object item,
-                                      String name, Object value, int fieldpos) {
+                                      String name,String splitname, Object value, int fieldpos) {
         if (value == null) {
             throw new IllegalArgumentException(
                     "check the 'value' data:ensure it is not null.thanq");
@@ -286,7 +284,7 @@ public class MapConf {
             return false;
         } else {
             View theView = convertView.findViewById(viewid);
-            return setView(item, value, name, convertView, theView);
+            return setView(item, value, name, splitname, convertView, theView);
         }
 
     }
@@ -443,7 +441,7 @@ public class MapConf {
     Tackle tackle;
 
     public boolean setView(Object item, Object value, String name,
-                           View convertView, final View theView) {
+                           String splitname, View convertView, final View theView) {
 
         if (theView == null) {
             return false;
