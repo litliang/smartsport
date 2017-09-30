@@ -38,6 +38,7 @@ public class OrderCMActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        action = "aliPay";
         type = 1;
         Bundle bundel = getIntent().getExtras();
         tv_money.setText("¥" + bundel.getString("total"));
@@ -45,19 +46,20 @@ public class OrderCMActivity extends BaseActivity {
         ivPay[0] = iv_sel_zhifubao;
         ivPay[1] = iv_sel_weixin;
         ivPay[2] = iv_sel_xianxia;
-        String type = bundel.getString("type");
+        final String type = bundel.getString("type");
         selPayType(Integer.valueOf(type).intValue());
         id = bundel.getString("product_id");
         findViewById(R.id.ssbm_pay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PayUtil.pay((Activity) view.getContext(), action, "2", tv_money.getText().toString(), id);
+                PayUtil.pay(OrderCMActivity.this,action,type+"",getIntent().getStringExtra("total"),id+"");
+
             }
         });
     }
 
     String id;
-    String action = "";
+    String action = "aliPay";
 
     @Event(value = {R.id.rl_zhifubao, R.id.rl_weixin, R.id.rl_xianxia})
     private void getEvent(View view) {
@@ -77,7 +79,6 @@ public class OrderCMActivity extends BaseActivity {
                 selPayType(3);
                 break;
         }
-
     }
 
     private void selPayType(int index) {

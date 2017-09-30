@@ -63,8 +63,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                 ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
                 ActivityStack.getInstance().finishActivity(OrderCMActivity.class);
                 ActivityStack.getInstance().finishActivity(SSBMActivity.class);
-                finish();
             }
+            finish();
         }
     }
 }
