@@ -182,30 +182,30 @@ public class OrderFragment extends BaseV4Fragment {
 
                         } else if (m.get("product_type").toString().equals("1")) {
 // 1报名中2进行中 3已结束 4已报满5已报名
-                            if(m.get("status").toString().equals("1")){
-                            Map map = MapBuilder.build().add("qx_course_id", pid).add("details_title_tv", m.get("title")).add("details_time_tv", m.get("start_time")).add("details_training_ground_tv", "").add("details_amount_tv", m.get("pay_total")).get();
-
-                            startActivity(new Intent(getContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
-
-                            }else{
+//                            if(m.get("status").toString().equals("1")){
+//                            Map map = MapBuilder.build().add("qx_course_id", pid).add("details_title_tv", m.get("title")).add("details_time_tv", m.get("start_time")).add("details_training_ground_tv", "").add("details_amount_tv", m.get("pay_total")).get();
+//
+//                            startActivity(new Intent(getContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
+//
+//                            }else{
                                 startActivity(new Intent(view.getContext(),ActivityTrainingDetails.class).putExtra("id", m.get("id").toString()));
-
-                            }
+//
+//                            }
 
 
                         } else if (m.get("product_type").toString().equals("2")) {
-                            if(m.get("status").toString().equals("1")) {
-                                Bundle bundle = new Bundle();
-                            bundle.putString(SSBMActivity.TAG, pid);
-                            ((MyOrderActivity) getActivity()).goActivity(SSBMActivity.class, bundle);
-
-                            }else{
+//                            if(m.get("status").toString().equals("1")) {
+//                                Bundle bundle = new Bundle();
+//                            bundle.putString(SSBMActivity.TAG, pid);
+//                            ((MyOrderActivity) getActivity()).goActivity(SSBMActivity.class, bundle);
+//
+//                            }else{
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString(BSDetailActivity.TAG, m.get("id").toString());
                                 bundle.putString("states", m.get("status").toString());
                                 toActivity(BSDetailActivity.class, bundle);
-                            }
+//                            }
 
                         } else if (m.get("product_type").toString().equals("3")) {
                             startActivity(new Intent(getContext(), MyHYActivity.class));

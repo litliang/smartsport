@@ -101,6 +101,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
 
                 final String coachid = JsonUtil.findJsonLink("detail-coach_id", data).toString();
+                final String order_status = JsonUtil.findJsonLink("detail-order_status", data).toString();
 
                 MapConf.build().with(ActivityTrainingDetails.this)
                         .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done")
@@ -144,6 +145,13 @@ public class ActivityTrainingDetails extends BaseActivity {
                     } else if (status.equals("5")) { // 已报名
                         mSignUpBtn.setText("已报名");
                     }
+//                    if(order_status==null||order_status.equals("")){
+//
+//                    }else if(order_status.equals("1")){
+//                        mSignUpBtn.setText("已报名");
+//                    }else if(order_status.equals("0")){
+//                        mSignUpBtn.setText("已报名");
+//                    }
                 } else {
                     mSignUpBtn.setVisibility(View.GONE);
                 }

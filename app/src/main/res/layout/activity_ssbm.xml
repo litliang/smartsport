@@ -2,18 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <FrameLayout
+            android:id="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/action_bar"
             android:layout_alignParentTop="true">
-            <include layout="@layout/layout_actionbar" /></FrameLayout>
+
+            <include layout="@layout/layout_actionbar" />
+        </FrameLayout>
 
 
         <top.smartsport.www.widget.FloatOnKeyboardLayout
@@ -175,7 +179,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginRight="20px"
                             android:layout_toLeftOf="@+id/img1"
-                            android:text="定制视频A"
+                            android:text="暂未购置定制视频"
                             android:textColor="@color/text_gray"
                             android:textSize="45px" />
 
@@ -372,7 +376,8 @@
                         android:background="@color/line_color" />
 
 
-                    <RelativeLayout android:id="@+id/inputphone"
+                    <RelativeLayout
+                        android:id="@+id/inputphone"
                         android:layout_width="match_parent"
                         android:layout_height="120px">
 
@@ -471,12 +476,12 @@
                 android:id="@+id/ssbm_pay"
                 android:layout_width="match_parent"
                 android:layout_height="140px"
-                android:textSize="45px"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
-                android:textColor="@color/white"
                 android:background="@color/red_baoming"
-                android:text="去支付"/>
+                android:gravity="center"
+                android:text="去支付"
+                android:textColor="@color/white"
+                android:textSize="45px" />
         </top.smartsport.www.widget.FloatOnKeyboardLayout>
 
     </LinearLayout>

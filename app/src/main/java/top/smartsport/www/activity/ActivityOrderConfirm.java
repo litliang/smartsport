@@ -101,8 +101,8 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
                 String type = (String) map.get("type");
                 String prd_id = (String) map.get("product_id");
 
-                PayUtil.pay(this,payway,type,total,prd_id);
-//                callPay(this, total, payway, prd_id, type);
+//                PayUtil.pay(this,payway,type,total,prd_id);
+                callPay(this, total, payway, prd_id, type);
                 break;
         }
     }

@@ -18,9 +18,9 @@
             android:src="@mipmap/default_img" />
 
         <LinearLayout
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="120dip"
-            android:layout_marginTop="5dip"
+            android:layout_height="140dip"
             android:orientation="vertical">
 
             <LinearLayout
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <ImageView android:padding="30px"
                 android:id="@+id/adapter_bszb_img"
                 android:layout_width="match_parent"
                 android:layout_height="491px"
@@ -154,44 +154,47 @@
                 android:scaleType="centerInside"
                 android:src="@mipmap/bq_start"/>
         </FrameLayout>
-        <RelativeLayout
+        <RelativeLayout android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 
             <TextView
+                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/adapter_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
-                android:textSize="38px"
+                android:textSize="16dip"
                 android:layout_marginLeft="40px"
                 android:layout_marginTop="20px"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="\?"/>
 
-            <TextView
+            <TextView android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:id="@+id/pay_status"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:textSize="38px"
+                android:textSize="16dip"
                 android:layout_marginLeft="40px"
-                android:layout_marginTop="20px"
+                android:layout_marginRight="40px"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="   "/>
-            <TextView
+            <TextView android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/pay_status"
                 android:layout_toRightOf="@+id/adapter_price"
                 android:gravity="right"
                 android:id="@+id/video_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="38px"
+                android:textSize="16dip"
                 android:layout_marginLeft="40px"
                 android:layout_marginTop="20px"
                 android:ellipsize="end"

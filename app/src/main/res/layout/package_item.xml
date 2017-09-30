@@ -52,6 +52,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="#00000000"
+                android:visibility="invisible"
                 android:button="@drawable/pay_checkbox" />
 
             <TextView

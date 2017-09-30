@@ -113,6 +113,8 @@ public class SSBMActivity extends BaseActivity {
                 startActivityForResult(new Intent(getBaseContext(), ActivityBuyCustomVedio.class), CHANGE_CUSTOM_VEDIO);
             }
         });
+        getTextView(R.id.ssbm_text_sell_prices).setText("¥0.00");
+
     }
 
 
@@ -186,7 +188,7 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_people_name.setText(bMmyteam.getCoath_name());
                 ssbm_text_people_num.setText(bMmyteam.getMembers());
                 ssbm_text_people_phone.setText(bMmyteam.getCoath_mobile());
-                ssbm_text_dingzhi_video.setText(bMvideo.getName());
+//                ssbm_text_dingzhi_video.setText(bMvideo.getName());
                 teamId = bMmyteam.getId();
             }
         });

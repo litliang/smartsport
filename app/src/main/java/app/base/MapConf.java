@@ -187,7 +187,7 @@ public class MapConf {
                     String n;
                     if (name.contains(":")) {
                         n = name.split(":")[0];
-                        textepr = ":"+name.split(":")[1];
+                        textepr = ":" + name.split(":")[1];
                     } else {
                         n = name;
                         textepr = "";
@@ -197,12 +197,13 @@ public class MapConf {
                         String nnode = names[ix];
                         if (perItem.containsKey(nnode)) {
                             value = perItem.get(nnode);
-                            if(value==null){
+                            if (value == null) {
                                 value = "";
                             }
                             if (ix == names.length - 1) {
                                 if (value != null) {
-                                    findAndBindView(convertView, perItem, nnode+textepr, value, i);
+                                    findAndBindView(convertView, perItem, nnode + textepr, value, i);
+                                    perItem = (Map<String, Object>) item;
                                     break;
                                 }
 
@@ -343,7 +344,15 @@ public class MapConf {
                 String[] cays = c.split(":");
                 mapBuilder.add(cays[0], cays[1]);
             }
-            mSwitchcase.put(p.split("->")[0].split(":")[0], mapBuilder.get());
+            String longname = p.split("->")[0].split(":")[0];
+            String finalname = "";
+            if(longname.contains("-")){
+                String[] longnames = longname.split("-");
+                finalname = longnames[longnames.length-1];
+            }else{
+                finalname = longname;
+            }
+            mSwitchcase.put(finalname, mapBuilder.get());
 
         }
 
