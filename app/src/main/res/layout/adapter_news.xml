@@ -48,7 +48,7 @@
                 android:ellipsize="end"
                 android:lines="2"
                 android:text="息资讯信息资讯信息"
-                android:textColor="@color/text"
+                android:textColor="@color/text_gray"
                 android:textSize="38px" />
 
             <RelativeLayout
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2017-12-12"
-                    android:textColor="@color/text"
+                    android:textColor="@color/text_gray"
                     android:textSize="38px" />
 
                 <TextView
@@ -72,7 +72,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="40px"
                     android:text="阅读 121"
-                    android:textColor="@color/text"
+                    android:textColor="@color/text_gray"
                     android:textSize="38px" />
 
 

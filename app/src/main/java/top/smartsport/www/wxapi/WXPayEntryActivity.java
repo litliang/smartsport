@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -54,11 +55,16 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
      */
     @Override
     public void onResp(BaseResp resp) {
-        ActivityStack.getInstance().finishActivity(ActivityOrderConfirm.class);
-        ActivityStack.getInstance().finishActivity(ActivitySignUp.class);
-        ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
-        ActivityStack.getInstance().finishActivity(OrderCMActivity.class);
-        ActivityStack.getInstance().finishActivity(SSBMActivity.class);
-        finish();
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {//微信支付回调
+            if (resp.errCode == BaseResp.ErrCode.ERR_OK) {//微信支付成功
+
+                ActivityStack.getInstance().finishActivity(ActivityOrderConfirm.class);
+                ActivityStack.getInstance().finishActivity(ActivitySignUp.class);
+                ActivityStack.getInstance().finishActivity(BSSignUpActivity.class);
+                ActivityStack.getInstance().finishActivity(OrderCMActivity.class);
+                ActivityStack.getInstance().finishActivity(SSBMActivity.class);
+                finish();
+            }
+        }
     }
 }
