@@ -114,7 +114,7 @@ public class ConsultDetailActivity extends BaseActivity {
                     @Override
                     public void onCallback(Object result, List object) {
 
-                        BaseActivity.callHttp(MapBuilder.build().add("action", "comment").add("type","1").add("content",result.toString()).add("obj_id",id).get(), new FunCallback() {
+                        BaseActivity.callHttp(MapBuilder.build().add("action", "comment").add("type", "1").add("content", result.toString()).add("obj_id", id).get(), new FunCallback() {
                             @Override
                             public void onSuccess(Object result, List object) {
                                 getData();
@@ -135,7 +135,7 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
         getData();
-        ((ListView)lvConsult).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ((ListView) lvConsult).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(getBaseContext(), ConsultDetailActivity.class).putExtra("id", ((ZXInfoNews) adapterView.getItemAtPosition(i)).getId() + ""));
@@ -143,11 +143,13 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
     }
-    @Override
-    public void favImpl(View view,boolean unfav) {
 
-        fav.run(view,unfav+"",4,id);
+    @Override
+    public void favImpl(View view, boolean unfav) {
+
+        fav.run(view, unfav + "", 4, id);
     }
+
     private void getData() {
         JSONObject json = new JSONObject();
         try {
@@ -167,27 +169,32 @@ public class ConsultDetailActivity extends BaseActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
-                 data = entity.getData().toString();
+                data = entity.getData().toString();
 
-                String collect_status =app.base.JsonUtil.findJsonLink("detail-collect_status",data).toString();
+                String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", data).toString();
+
 
                 MapConf.build().with(ConsultDetailActivity.this)
-                        .pair("detail-collect_status->ivRight_text","0:mipmap.fav_undo;1:mipmap.fav_done").pair("detail-author->tv_name").source(data,ConsultDetailActivity.this).toView();
+                        .pair("detail-collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done").pair("detail-author->tv_name").source(data, ConsultDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
-                ZXInfoDetail details =  JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail",data).toString(),ZXInfoDetail.class);
-                List<ZXInfoNews> news =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_news",data).toString(), ZXInfoNews.class);
-                List<ZXInfoComment> coments =  JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments",data).toString(), ZXInfoComment.class);
+                ZXInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), ZXInfoDetail.class);
+                setSharetitle(details.getTitle());
+                setSharetxt(details.getBody());
+                setShareurl(details.getCover_url());
+                List<ZXInfoNews> news = JsonUtil.jsonToEntityList(intf.JsonUtil.findJsonLink("other_news", data).toString(), ZXInfoNews.class);
+                List<ZXInfoComment> coments = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments", data).toString(), ZXInfoComment.class);
                 ImageLoader.getInstance().displayImage(details.getCover_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 tvTitle.setText(details.getTitle());
                 tvTime.setText(details.getCtime());
                 tvAction.setText(details.getCate_name());
-                readCount.setText("阅读 "+details.getHits());
+                readCount.setText("阅读 " + details.getHits());
                 tvContent.loadData(details.getBody(), "text/html;charset=UTF-8", null);
-                adapterNews.setData(news);
-                adapterComment.setData(coments);
-                setSharetitle(details.getTitle());
-                setSharetxt(details.getBody());
-                setShareurl(details.getCover_url());
+                if (news != null) {
+                    adapterNews.setData(news);
+                }
+                if (coments != null) {
+                    adapterComment.setData(coments);
+                }
 
             }
         });

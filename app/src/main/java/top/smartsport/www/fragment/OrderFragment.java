@@ -34,6 +34,7 @@ import top.smartsport.www.activity.ActivityTrainingDetails;
 import top.smartsport.www.activity.BSDetailActivity;
 import top.smartsport.www.activity.BSSignUpActivity;
 import top.smartsport.www.activity.BuyVipActivity;
+import top.smartsport.www.activity.MyHYActivity;
 import top.smartsport.www.activity.MyOrderActivity;
 import top.smartsport.www.activity.OrderDetailsActivity;
 import top.smartsport.www.activity.SSBMActivity;
@@ -207,7 +208,7 @@ public class OrderFragment extends BaseV4Fragment {
                             }
 
                         } else if (m.get("product_type").toString().equals("3")) {
-                            startActivity(new Intent(getContext(), BuyVipActivity.class));
+                            startActivity(new Intent(getContext(), MyHYActivity.class));
 
                         }
                     }

@@ -3,6 +3,7 @@ package top.smartsport.www.activity;
 import android.content.Intent;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -83,9 +84,15 @@ public class ActivityTrainingDetails extends BaseActivity {
 //            classBean.setClassPrice("￥" + mPos + 1000 + mPos * 3);
 //            classList.add(classBean);
 //        }
+
         mClassAdapter = new AdapterTrainingDetails(this, classList);
         mHorizontaList.setAdapter(mClassAdapter);
-
+        mHorizontaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(getBaseContext(), ActivityTrainingDetails.class).putExtra("id", ((Map) parent.getItemAtPosition(position)).get("id").toString()));
+            }
+        });
 
         callHttp(MapBuilder.build().add("action", "getQxCourseDetail").add("id", id = getIntent().getSerializableExtra("id").toString()).get(), new FunCallback() {
             @Override
@@ -104,21 +111,21 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("surplus:还剩%s个名额->details_quota_tv")
                         .pair("sell_price:￥%s/年->details_amount_tv")
                         .pair("coach_name->details_name_tv")
-                        .pair("cover_url->details_title_iv","","scaleToWidth()")
+                        .pair("cover_url->details_title_iv", "", "scaleToWidth()")
                         .pair("coach_header->details_icon_iv")
-                        .pair("coach_team->details_school_name_tv")
+                        .pair("school->details_school_name_tv")
                         .pair("schedules->details_time_tv")
                         .pair("recruit_students->details_student_tv")
                         .pair("content->details_introduction_tv")
                         .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn")
                         .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
                         .source(detail, getWindow().getDecorView()).toView();
-                String status =  JsonUtil.findJsonLink("detail-status", data).toString();
-                if(!StringUtil.isEmpty(status)){
+                String status = JsonUtil.findJsonLink("detail-status", data).toString();
+                if (!StringUtil.isEmpty(status)) {
                     // 1报名中2进行中 3已结束 4已报满5已报名
-                    if(status.equals("1")) { // 报名中
+                    if (status.equals("1")) { // 报名中
                         final String sellPrice = JsonUtil.findJsonLink("detail-sell_price", data).toString();
-                        mSignUpBtn.setText("我要报名(￥"+sellPrice+"/年)");
+                        mSignUpBtn.setText("我要报名(￥" + sellPrice + "/年)");
                         mSignUpBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -128,23 +135,28 @@ public class ActivityTrainingDetails extends BaseActivity {
                                 startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
                             }
                         });
-                    } else if(status.equals("2")) { // 进行中
+                    } else if (status.equals("2")) { // 进行中
                         mSignUpBtn.setText("进行中");
-                    } else if(status.equals("3")) { // 已结束
+                    } else if (status.equals("3")) { // 已结束
                         mSignUpBtn.setText("已结束");
-                    } else if(status.equals("4")) { // 已报满
+                    } else if (status.equals("4")) { // 已报满
                         mSignUpBtn.setText("已报满");
-                    } else if(status.equals("5")) { // 已报名
+                    } else if (status.equals("5")) { // 已报名
                         mSignUpBtn.setText("已报名");
                     }
                 } else {
                     mSignUpBtn.setVisibility(View.GONE);
                 }
                 MapConf.with(ActivityTrainingDetails.this).pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv").source(R.layout.adapter_class_item)).source(data, getWindow().getDecorView()).toView();
-                setShareurl(((app.base.widget.ImageView)getImageView(R.id.details_title_iv)).getUrl());
+                setShareurl(((app.base.widget.ImageView) getImageView(R.id.details_title_iv)).getUrl());
                 setSharetitle(getTextView(R.id.details_title_tv).getText().toString());
-                setSharetxt(((WebView)getView(R.id.details_introduction_tv)).getTitle());
-
+                setSharetxt(((WebView) getView(R.id.details_introduction_tv)).getTitle());
+                getView(R.id.details_icon_iv).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getBaseContext(), CoachDetailActivity.class).putExtra("id", coachid));
+                    }
+                });
             }
 
             @Override
@@ -154,7 +166,7 @@ public class ActivityTrainingDetails extends BaseActivity {
 
             @Override
             public void onCallback(Object result, List object) {
-                }
+            }
         });
 
 //        findViewById(R.id.details_collect_iv).setOnClickListener(new View.OnClickListener() {

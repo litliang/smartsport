@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
+import java.util.Map;
 
 import app.base.MapConf;
 import top.smartsport.www.R;
@@ -96,7 +98,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             @Override
             public void onClick(View view) {
                 if (tmpIntro.equals(allIntro)) {
-                    introduce.loadData(allIntro.substring(0,300), "text/html;charset=UTF-8", null);
+                    introduce.loadData(allIntro.substring(0, 300), "text/html;charset=UTF-8", null);
                 } else {
                     introduce.loadData(allIntro, "text/html;charset=UTF-8", null);
                     seeMore.setVisibility(View.GONE);
@@ -109,7 +111,12 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                 isAll = !isAll;
             }
         });
-
+        lvTraining.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(getBaseContext(), ActivityTrainingDetails.class).putExtra("id", ((CoachInfoCourse) parent.getItemAtPosition(position)).getId()));
+            }
+        });
         getData();
     }
 
@@ -138,26 +145,29 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                 MapConf.build().with(CoachDetailActivity.this)
                         .pair("detail-collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done").source(entity.getData().toString(), CoachDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
-
-                CoachInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), CoachInfoDetail.class);
-                List<CoachInfoCourse> course = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course", data).toString(), CoachInfoCourse.class);
-                List<Coaches> others = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach", data).toString(), Coaches.class);
-                ImageLoader.getInstance().displayImage(details.getHeader_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
-                tvName.setText(details.getName());
-                tvTeam.setText(details.getTeam_name());
-                allIntro = details.getIntroduce();
-                if (details.getIntroduce().length() > 57) {
-                    tmpIntro = details.getIntroduce().substring(0, 57)+"...";
-                } else {
-                    tmpIntro = details.getIntroduce();
-                    seeMore.setVisibility(View.GONE);
+                try {
+                    CoachInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), CoachInfoDetail.class);
+                    List<CoachInfoCourse> course = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("course", data).toString(), CoachInfoCourse.class);
+                    List<Coaches> others = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("other_coach", data).toString(), Coaches.class);
+                    ImageLoader.getInstance().displayImage(details.getHeader_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
+                    tvName.setText(details.getName());
+                    tvTeam.setText(details.getTeam_name());
+                    allIntro = details.getIntroduce();
+                    if (details.getIntroduce().length() > 57) {
+                        tmpIntro = details.getIntroduce().substring(0, 57) + "...";
+                    } else {
+                        tmpIntro = details.getIntroduce();
+                        seeMore.setVisibility(View.GONE);
+                    }
+                    introduce.loadData(tmpIntro, "text/html;charset=UTF-8", null);
+                    trainingAdapter.setData(course);
+                    coachAdapter.setData(others);
+                    setSharetitle(details.getName());
+                    setSharetxt(tmpIntro);
+                    setShareurl(details.getHeader_url());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                introduce.loadData(tmpIntro, "text/html;charset=UTF-8", null);
-                trainingAdapter.setData(course);
-                coachAdapter.setData(others);
-                setSharetitle(details.getName());
-                setSharetxt(tmpIntro);
-                setShareurl(details.getHeader_url());
             }
         });
     }

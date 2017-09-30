@@ -13,6 +13,33 @@ public class ZXInfoNews {
     private String hits;
     private String cover_url;
     private String cate_name;
+    private String author;
+    private String body;
+    private String collect_status;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getCollect_status() {
+        return collect_status;
+    }
+
+    public void setCollect_status(String collect_status) {
+        this.collect_status = collect_status;
+    }
 
     public String getId() {
         return id;
