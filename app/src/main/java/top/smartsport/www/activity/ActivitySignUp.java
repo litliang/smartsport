@@ -22,6 +22,7 @@ import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.widget.FloatOnKeyboardLayout;
 
 /**
  * Created by bajieaichirou on 17/8/17.
@@ -48,6 +49,8 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
     }
 
     private void initUI() {
+        back();
+
         final Map parammap = (Map) getIntent().getSerializableExtra("data");
         enbale = (String) parammap.get("enable");
         enbale = enbale == null?"":enbale;
@@ -71,6 +74,8 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
         mPhoneLayout.setOnClickListener(this);
         mRefundTv.setOnClickListener(this);
         mDisclaimerTv.setOnClickListener(this);
+        FloatOnKeyboardLayout floatOnKeyboardLayout = (FloatOnKeyboardLayout) findViewById(R.id.float_on_keyboard_layout);
+        floatOnKeyboardLayout.setView(findViewById(R.id.sign_up_phone_layout));
         mPayBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override

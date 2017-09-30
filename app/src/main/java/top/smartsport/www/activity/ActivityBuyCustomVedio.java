@@ -50,7 +50,7 @@ public class ActivityBuyCustomVedio extends BaseActivity{
 //                        checkBox.setChecked(true);
                 Map packageEntity = (Map) mList.get(position);
                 if (packageEntity != null) {
-                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("sell_price",packageEntity.get("sell_price").toString()).putExtra("package_id",packageEntity.get("id").toString()));
+                    setResult(SSBMActivity.CHANGE_CUSTOM_VEDIO, new Intent().putExtra("sell_price",packageEntity.get("sell_price").toString()).putExtra("id",packageEntity.get("id").toString()).putExtra("title",packageEntity.get("title").toString()));
                     finish();
 //                        }
                 }

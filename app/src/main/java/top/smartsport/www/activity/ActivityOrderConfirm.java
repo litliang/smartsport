@@ -32,6 +32,7 @@ import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.utils.ActivityStack;
+import top.smartsport.www.utils.pay.PayUtil;
 
 /**
  * Created by bajieaichirou on 17/8/17.
@@ -100,7 +101,8 @@ public class ActivityOrderConfirm extends BaseActivity implements View.OnClickLi
                 String type = (String) map.get("type");
                 String prd_id = (String) map.get("product_id");
 
-                callPay(this, total, payway, prd_id, type);
+                PayUtil.pay(this,payway,type,total,prd_id);
+//                callPay(this, total, payway, prd_id, type);
                 break;
         }
     }

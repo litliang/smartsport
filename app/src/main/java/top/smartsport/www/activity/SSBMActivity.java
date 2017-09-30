@@ -52,6 +52,7 @@ public class SSBMActivity extends BaseActivity {
     private String access_token;
 
     private String id;
+    private String packageid;
 
     @ViewInject(R.id.ssbm_img_pic)
     private ImageView ssbm_img_pic;
@@ -153,6 +154,9 @@ public class SSBMActivity extends BaseActivity {
             json.put("action", "matchApply");
             json.put("match_id", id);
             json.put("team_id", teamId);
+            if (packageid != null) {
+                json.put("package_id", packageid);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -177,11 +181,7 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
                 ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
                 // 总金额（两数相加）
-                float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥", ""));
-                float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥", ""));
-                float totalValue = money1 + money2;
-                total = StringUtil.strToDouble("" + totalValue);
-                ssbm_text_prices.setText("¥" + total);
+                setprice();
                 ssbm_text_baoming_qiudui.setText(bMmyteam.getTeam_name());
                 ssbm_text_people_name.setText(bMmyteam.getCoath_name());
                 ssbm_text_people_num.setText(bMmyteam.getMembers());
@@ -190,6 +190,14 @@ public class SSBMActivity extends BaseActivity {
                 teamId = bMmyteam.getId();
             }
         });
+    }
+
+    private void setprice() {
+        float money1 = Float.parseFloat(ssbm_text_sell_price.getText().toString().replace("¥", ""));
+        float money2 = Float.parseFloat(ssbm_text_sell_prices.getText().toString().replace("¥", ""));
+        float totalValue = money1 + money2;
+        total = StringUtil.strToDouble("" + totalValue);
+        ssbm_text_prices.setText("¥" + total);
     }
 
     // 判断联系人、联系电话是否为空
@@ -220,6 +228,7 @@ public class SSBMActivity extends BaseActivity {
             json.put("members", bMmyteam.getMembers());
             json.put("coach_name", peoplePame);
             json.put("coach_mobile", phone);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -266,10 +275,12 @@ public class SSBMActivity extends BaseActivity {
                 }
                 break;
             case CHANGE_CUSTOM_VEDIO:
-                if (data != null && data.getSerializableExtra("package_entity") != null) {
+                if (data != null && data.getStringExtra("sell_price") != null) {
                     String sell_price = (String) data.getStringExtra("sell_price");
                     getTextView(R.id.ssbm_text_sell_prices).setText(sell_price);
-
+                    setprice();
+                    getTextView(R.id.ssbm_text_dingzhi_video).setText((String) data.getStringExtra("title"));
+                    packageid = (String) data.getStringExtra("id");
                 }
                 break;
             default:

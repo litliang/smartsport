@@ -64,7 +64,7 @@ public class ChangeQDActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 name = ((WDQDInfo) parent.getItemAtPosition(position)).getName();
                 team_id = ((WDQDInfo) parent.getItemAtPosition(position)).getId();
-                setResult(0,new Intent().putExtra("name",name).putExtra("team_id",team_id));
+                setResult(0,new Intent().putExtra("team_name",name).putExtra("team_id",team_id));
                 finish();
             }
         });
