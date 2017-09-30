@@ -27,7 +27,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
 
     private IWXAPI api;
-    private static final String APP_ID = "your app id";
+    private static final String APP_ID = "wx5939ba19b940fea1";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
