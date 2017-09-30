@@ -160,7 +160,7 @@
             android:paddingLeft="8dip"
             android:paddingRight="8dip"
             android:paddingTop="2dip"
-            android:text="我要报名"
+            android:text="已报名"
             android:textColor="@color/theme_color" />
 
         <TextView
