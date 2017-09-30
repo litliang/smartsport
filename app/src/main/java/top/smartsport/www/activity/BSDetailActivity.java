@@ -27,8 +27,6 @@ import java.util.Map;
 import app.base.MapAdapter;
 import app.base.MapConf;
 import app.base.MapContent;
-import cn.jiguang.share.android.api.Platform;
-import cn.jiguang.share.android.api.ShareParams;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
@@ -215,7 +213,7 @@ public class BSDetailActivity extends BaseActivity {
 
     private void setBaominStatus(Object o) {
         states = o.toString();
-       if (states.equals("进行中")) {
+        if (states.equals("进行中")) {
             bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
             bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
             bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
@@ -317,6 +315,11 @@ public class BSDetailActivity extends BaseActivity {
                 adapter_bsss_pay.setText(bsDetail.getSell_price().replace(".00", ""));
                 if (bsDetail.getDescription().trim().equals("")) {
                     findViewById(R.id.saishijianjie).setVisibility(View.GONE);
+                }
+                if(states.toString().equals("报名中")) {
+                    bs_detail_baoming.setVisibility(View.VISIBLE);
+                } else {
+                    bs_detail_baoming.setVisibility(View.INVISIBLE);
                 }
                 bs_detail_content.loadData(bsDetail.getDescription(), "text/html;charset=UTF-8", null);
                 bs_detail_baoming.setText("我要报名(￥" + bsDetail.getSell_price().replace(".00", "") + ")");

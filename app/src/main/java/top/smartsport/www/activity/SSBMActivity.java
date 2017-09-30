@@ -13,7 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -25,7 +24,6 @@ import top.smartsport.www.bean.BMmyteam;
 import top.smartsport.www.bean.BMvideo;
 import top.smartsport.www.bean.Data;
 import top.smartsport.www.bean.NetEntity;
-import top.smartsport.www.bean.PackageEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.SSBMOrder;
 import top.smartsport.www.bean.TokenInfo;
@@ -225,7 +223,7 @@ public class SSBMActivity extends BaseActivity {
             json.put("total", total);
             json.put("match_id", id);
             json.put("team_id", teamId);
-            json.put("members", bMmyteam.getMembers());
+            json.put("members", bMmyteam != null ? bMmyteam.getMembers() : "11");
             json.put("coach_name", peoplePame);
             json.put("coach_mobile", phone);
 
@@ -236,7 +234,7 @@ public class SSBMActivity extends BaseActivity {
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
-
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
             }
 
             @Override

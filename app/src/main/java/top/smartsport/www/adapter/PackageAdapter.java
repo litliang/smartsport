@@ -5,8 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhy.autolayout.utils.AutoUtils;
@@ -15,16 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
-import top.smartsport.www.listener.OnClickThrottleListener;
 
 
 public class PackageAdapter extends BaseAdapter {
     private List<Object> list;
 
     public void setData(List<Object> l){
-            list = new ArrayList<>();
-            list.addAll(l);
-            notifyDataSetChanged();
+        list = new ArrayList<>();
+        list.addAll(l);
+        notifyDataSetChanged();
     }
     @Override
     public int getCount() {
@@ -47,6 +44,8 @@ public class PackageAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new PackageAdapter.ViewHolder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.package_item, parent, false);
+            holder.viewEmpity = (View) convertView.findViewById(R.id.view_empity);
+            holder.viewLine = (View) convertView.findViewById(R.id.view_line);
             holder.title = (TextView) convertView.findViewById(R.id.title_tv);
             holder.content = (TextView) convertView.findViewById(R.id.content_tv);
             holder.sell_price = (TextView) convertView.findViewById(R.id.sell_price_tv);
@@ -57,10 +56,18 @@ public class PackageAdapter extends BaseAdapter {
         }else {
             holder = (PackageAdapter.ViewHolder) convertView.getTag();
         }
+        if(position == (list.size()-1)) {
+            holder.viewEmpity.setVisibility(View.VISIBLE);
+            holder.viewLine.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewEmpity.setVisibility(View.GONE);
+            holder.viewLine.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
     class ViewHolder {
+        View viewEmpity, viewLine;
         TextView title;
         TextView content;
         TextView sell_price;
