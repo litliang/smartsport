@@ -179,6 +179,7 @@
             android:layout_marginLeft="60px"
             android:background="@color/line_color" />
         <RelativeLayout
+            android:id="@+id/rl_qctphc"
             android:layout_width="match_parent"
             android:layout_height="120px">
 

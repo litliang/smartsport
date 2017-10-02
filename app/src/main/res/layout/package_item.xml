@@ -3,6 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    
+    <View
+        android:id="@+id/view_empity"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue"
+        android:visibility="gone"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +37,6 @@
                 android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="购买定制视频套餐A"
                 android:textColor="@color/font_main"
                 android:textSize="@dimen/text_size" />
 
@@ -32,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="购买定制视频说明"
                 android:textColor="@color/font_gray"
                 android:textSize="@dimen/text_size_notice" />
         </LinearLayout>
@@ -61,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_check"
-                android:text="￥199"
                 android:textColor="@color/red"
                 android:textSize="@dimen/text_size_notice" />
         </RelativeLayout>

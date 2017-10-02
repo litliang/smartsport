@@ -261,7 +261,6 @@
                             android:layout_centerVertical="true"
                             android:layout_marginRight="20px"
                             android:layout_toLeftOf="@+id/img2"
-                            android:text="青少年球队"
                             android:textColor="@color/text_gray"
                             android:textSize="45px" />
 
