@@ -71,7 +71,7 @@ public class SetActivity extends BaseActivity {
         showMemorySize();
     }
 
-    @Event(value = {R.id.set_rl_tsxx_set, R.id.set_rl_about, R.id.hc, R.id.set_qctphc})
+    @Event(value = {R.id.set_rl_tsxx_set, R.id.set_rl_about, R.id.hc, R.id.rl_qctphc})
     private void getEvent(View v) {
         switch (v.getId()) {
             case R.id.rate:
@@ -85,7 +85,7 @@ public class SetActivity extends BaseActivity {
             case R.id.hc://推送消息设置
                 goActivity(HelpCenterActivity.class);
                 break;
-            case R.id.set_qctphc://推送消息设置
+            case R.id.rl_qctphc://推送消息设置
                 GlideCatchUtil.getInstance().cleanCatchDisk();
                 GlideCatchUtil.getInstance().clearCacheDiskSelf();
                 GlideCatchUtil.getInstance().clearCacheMemory();
