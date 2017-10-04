@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.xutils.view.annotation.ContentView;
 
 import java.io.Serializable;
@@ -24,7 +26,9 @@ import top.smartsport.www.adapter.AdapterTrainingDetails;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.TrainingClassBean;
+import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.StringUtil;
+import top.smartsport.www.widget.DefineRoundImageView;
 import top.smartsport.www.widget.HorizontalListView;
 
 /**
@@ -34,10 +38,11 @@ import top.smartsport.www.widget.HorizontalListView;
 @ContentView(R.layout.activity_qingxun_details)
 public class ActivityTrainingDetails extends BaseActivity {
     TextView mImg;
-    ImageView mDetailsIv, mIconImg;
+    ImageView mDetailsIv;
     TextView mDetailsTitleTv, mDateTv, mAddressTv, mAmountTv,
             mNameTv, mLevelTv, mSchoolNameTv, mStudentTv, mTimeTv,
             mGroundTv, mQuotaTv;
+    DefineRoundImageView mIconImg;
     HorizontalListView mHorizontaList;
     Button mSignUpBtn;
     WebView mIntroductionTv;
@@ -66,7 +71,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         mAddressTv = (TextView) findViewById(R.id.details_address_tv);
         mImg = (TextView) findViewById(R.id.details_img);
         mAmountTv = (TextView) findViewById(R.id.details_amount_tv);
-        mIconImg = (ImageView) findViewById(R.id.details_icon_iv);
+        mIconImg = (DefineRoundImageView) findViewById(R.id.details_icon_iv);
         mNameTv = (TextView) findViewById(R.id.details_name_tv);
         mLevelTv = (TextView) findViewById(R.id.details_level_tv);
         mSchoolNameTv = (TextView) findViewById(R.id.details_school_name_tv);
@@ -113,7 +118,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("sell_price:￥%s/年->details_amount_tv")
                         .pair("coach_name->details_name_tv")
                         .pair("cover_url->details_title_iv", "", "scaleToWidth()")
-                        .pair("coach_header->details_icon_iv")
+                       // .pair("coach_header->details_icon_iv")
                         .pair("school->details_school_name_tv")
                         .pair("schedules->details_time_tv")
                         .pair("recruit_students->details_student_tv")
@@ -121,6 +126,9 @@ public class ActivityTrainingDetails extends BaseActivity {
                         .pair("sell_price:我要报名(￥%s/年)->details_sign_up_btn")
                         .pair("other_course->details_class_listview", MapConf.with(ActivityTrainingDetails.this).pair("cover_url->class_iv").pair("title->class_title_tv").pair("sell_price:￥%s/年->class_price_tv"))
                         .source(detail, getWindow().getDecorView()).toView();
+                String coachHeader = JsonUtil.findJsonLink("detail-coach_header", data).toString();
+                ImageLoader.getInstance().displayImage(coachHeader, mIconImg, ImageUtil.getOptions());
+
                 String status = JsonUtil.findJsonLink("detail-status", data).toString();
                 if (!StringUtil.isEmpty(status)) {
                     // 1报名中2进行中 3已结束 4已报满5已报名

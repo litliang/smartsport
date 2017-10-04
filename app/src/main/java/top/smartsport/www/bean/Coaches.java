@@ -12,6 +12,7 @@ public class Coaches implements Serializable{
     private String introduce;
     private String name;
     private String team_name;
+    private String collect_status;
 
     public String getHeader_url() {
         return header_url;
@@ -51,5 +52,13 @@ public class Coaches implements Serializable{
 
     public void setTeam_name(String team_name) {
         this.team_name = team_name;
+    }
+
+    public String getCollect_status() {
+        return collect_status;
+    }
+
+    public void setCollect_status(String collect_status) {
+        this.collect_status = collect_status;
     }
 }

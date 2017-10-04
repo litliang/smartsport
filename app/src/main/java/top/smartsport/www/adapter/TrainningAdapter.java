@@ -66,7 +66,7 @@ public class TrainningAdapter extends BaseAdapter {
         holder.time.setText(course.getStart_time());
         holder.address.setText(course.getAddress());
         holder.tag.setText("U"+course.getLevel());
-        holder.price.setText("¥"+course.getSell_price());
+        holder.price.setText("¥"+course.getSell_price() + "/年");
         ImageLoader.getInstance().displayImage(course.getCover_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         return view;
     }
