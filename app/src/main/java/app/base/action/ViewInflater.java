@@ -1,11 +1,14 @@
 package app.base.action;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import app.base.MapConf;
 import app.base.framework.Init;
 import app.base.ui.AdaptView;
 import dalvik.system.DexFile;
@@ -30,8 +33,8 @@ public class ViewInflater extends LayoutInflater {
     static {
         uiNames.put("WebView", "android.webkit.");
         uiNames.put("CircleImageView", "android.support.v4.widget.");
-        uiNames.put("ImageView", app.base.widget.ImageView.class.getPackage().getName()+".");
-        uiNames.put("RoundImageView", RoundImageView.class.getPackage().getName()+".");
+        uiNames.put("ImageView", app.base.widget.ImageView.class.getPackage().getName() + ".");
+        uiNames.put("RoundImageView", RoundImageView.class.getPackage().getName() + ".");
 
 
 //        uiNames.put("IjkPlayerView", "com.dl7.player.media.");
@@ -41,7 +44,7 @@ public class ViewInflater extends LayoutInflater {
 
     @Override
     protected View onCreateView(View parent, String name, AttributeSet attrs) throws ClassNotFoundException {
-        if (parent!=null&&parent.getTag() != null) {
+        if (parent != null && parent.getTag() != null) {
             if (!layoutlog.contains(parent.toString())) {
                 layoutlog.add(parent.toString());
                 parent.setOnClickListener(new ClickAction());
@@ -141,6 +144,43 @@ public class ViewInflater extends LayoutInflater {
                 }
             }
             AutoUtils.autoSize(view);
+            if (view instanceof AdapterView) {
+                String tag = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "tag");
+                if (tag != null) {
+                    tag = tag.replaceAll(" ", "");
+                    if (tag.contains("fake:")) {
+                        int fake = tag.indexOf("fake:");
+                        fake+=5;
+                        int fakeend = -1;
+                        if(tag.contains(";")){
+                        fakeend = tag.indexOf(";",fake);
+
+                        }else{
+                            fakeend = tag.length();
+                        }
+                        String content = tag.substring(fake,fakeend);
+                        content = content.replaceAll(" ","");
+                        content = content.replaceAll("\\[\\[","[").replaceAll("\\]\\]","]");
+                        String[] contentAry = content.replaceAll(",","").split("\\]");
+                        List list = new ArrayList();
+                        List alist = new ArrayList();
+                        for(String s:contentAry){
+                            if(s.equals("")){
+                                continue;
+                            }
+
+                            s = s.replaceAll("\\[","");
+                            String[] dataary = s.split(",");
+                            for(String d:dataary){
+                                alist.add(d);
+                            }
+                            list.add(alist);
+                        }
+                        MapConf.with(newContext).source(list,view).toView();
+                    }
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

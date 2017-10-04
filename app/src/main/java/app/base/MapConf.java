@@ -166,6 +166,15 @@ public class MapConf {
             if (item instanceof String) {
                 item = JsonUtil.extractJsonRightValue(((String) item));
             }
+            if(item instanceof List){
+                if(((List)item).size()>0){
+                    if(((List)item).get(0) instanceof List){
+                        fake();
+                        return;
+                    }
+                }
+            }
+
 //            if (fieldnames.size() == 0 && viewsid.size() == 0) {
 //                link();
 //                return;
@@ -263,6 +272,10 @@ public class MapConf {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void fake() {
+        setView(item, item, "", "", convertView, convertView);
     }
 
     private void link() {
