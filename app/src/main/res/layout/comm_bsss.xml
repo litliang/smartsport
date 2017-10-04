@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/red"
-                    android:textSize="45px"
+                    android:textSize="35px"
                     android:layout_marginTop="10px"
                     android:text="￥199"
                     android:layout_marginRight="40px"
@@ -141,7 +141,7 @@
                     android:layout_marginTop="10px"
                     android:layout_marginRight="10px"
                     android:textColor="@color/text_gray"
-                    android:textSize="45px" />
+                    android:textSize="30px" />
 
             </RelativeLayout>
 

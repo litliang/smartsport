@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -76,6 +77,8 @@ public class BSDetailActivity extends BaseActivity {
     private TextView adapter_bsss_level;//比赛等级
     @ViewInject(R.id.adapter_bsss_people)
     private TextView adapter_bsss_people;//多少人
+    @ViewInject(R.id.adapter_bsss_rl_pay)
+    private RelativeLayout adapter_bsss_rl_pay;
 
     private String id;
     private String states;
@@ -111,7 +114,6 @@ public class BSDetailActivity extends BaseActivity {
     protected void initView() {
         back();
         fav();
-
 //        ((TextView) actionbar.findViewById(R.id.tvTitle)).setText("比赛");
         id = (String) getObj(BSDetailActivity.TAG);
         String s = (String) getObj("states");
@@ -213,6 +215,7 @@ public class BSDetailActivity extends BaseActivity {
 
     private void setBaominStatus(Object o) {
         states = o.toString();
+        adapter_bsss_rl_pay.setVisibility(View.VISIBLE);
         if (states.equals("进行中")) {
             bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
             bs_detail_ll__listView.setVisibility(View.VISIBLE); //正在比赛列表显示
@@ -222,6 +225,7 @@ public class BSDetailActivity extends BaseActivity {
             bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
             bs_detail_ll__listView.setVisibility(View.GONE); //正在比赛列表隐藏
             bs_detail_ll_video.setVisibility(View.VISIBLE);//赛事视频隐藏
+            adapter_bsss_rl_pay.setVisibility(View.GONE);
             adapter_bsss_state.setBackgroundResource(R.drawable.shape_bg_button_gray);
         } else if (states.equals("已报满")) {
             bs_detail_baoming.setVisibility(View.INVISIBLE);//报名隐藏
@@ -312,7 +316,7 @@ public class BSDetailActivity extends BaseActivity {
                 adapter_bsss_level.setText(bsDetail.getLevel());
                 adapter_bsss_people.setText(bsDetail.getType());
                 adapter_bsss_syu.setText("还剩" + bsDetail.getSurplus() + "个名额");
-                adapter_bsss_pay.setText(bsDetail.getSell_price().replace(".00", ""));
+                adapter_bsss_pay.setText("¥" + bsDetail.getSell_price().replace(".00", ""));
                 if (bsDetail.getDescription().trim().equals("")) {
                     findViewById(R.id.saishijianjie).setVisibility(View.GONE);
                 }

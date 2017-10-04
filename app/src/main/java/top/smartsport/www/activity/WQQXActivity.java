@@ -96,7 +96,11 @@ public class WQQXActivity extends BaseActivity {
 
             @Override
             public void onFailure(Object result, List object) {
-
+                if (refresh) {
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                } else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
             }
 
             @Override

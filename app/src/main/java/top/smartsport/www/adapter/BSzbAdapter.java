@@ -1,16 +1,11 @@
 package top.smartsport.www.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -18,6 +13,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.BSzbInfo;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
@@ -65,9 +61,14 @@ class BSzbViewHolder extends ViewHolder {
         ImageLoader.getInstance().displayImage(info.getCoverImgUrl(), adapter_bszb_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         adapter_bszb_state.setText(info.getActivityStatus());
         adapter_bszb_title.setText(info.getActivityName());
-        adapter_bszb_date.setText(info.getStartTime());
-        adapter_bszb_address.setText(info.getDescription());
-
+        String startTime = info.getStartTime();
+        if(!StringUtil.isEmpty(startTime) && startTime.length() == 14) {
+            String value = startTime.substring(0, 4) + "-" + startTime.substring(4,6) + "-" + startTime.substring(6, 8);
+            adapter_bszb_date.setText(value);
+        } else {
+            adapter_bszb_date.setText(startTime);
+        }
+        adapter_bszb_address.setText(info.getActivityName());
     }
 
 

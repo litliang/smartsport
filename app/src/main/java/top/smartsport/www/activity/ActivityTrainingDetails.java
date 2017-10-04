@@ -148,6 +148,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                         mSignUpBtn.setText("进行中");
                     } else if (status.equals("3")) { // 已结束
                         mSignUpBtn.setText("已结束");
+                        mQuotaTv.setVisibility(View.INVISIBLE);
                     } else if (status.equals("4")) { // 已报满
                         mSignUpBtn.setText("已报满");
                     } else if (status.equals("5")) { // 已报名

@@ -1,12 +1,10 @@
 package top.smartsport.www.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -15,15 +13,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lecloud.sdk.constant.PlayerEvent;
 import com.lecloud.sdk.constant.PlayerParams;
 import com.lecloud.sdk.constant.StatusCode;
 import com.lecloud.sdk.videoview.IMediaDataVideoView;
 import com.lecloud.sdk.videoview.VideoViewListener;
-import com.lecloud.sdk.videoview.base.BaseMediaDataVideoView;
-import com.lecloud.sdk.videoview.live.ActionLiveVideoView;
 import com.lecloud.skin.ui.utils.ScreenUtils;
 import com.lecloud.skin.videoview.live.UIActionLiveVideoView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,23 +29,20 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import cn.jiguang.share.android.api.Platform;
-import cn.jiguang.share.android.api.ShareParams;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSzbInfo;
 import top.smartsport.www.bean.Data;
-import top.smartsport.www.bean.Members;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.Schedule;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.leUtil.VideoLayoutParams;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -168,8 +160,15 @@ public class ZBDetailActivity extends BaseActivity {
 
         ImageLoader.getInstance().displayImage(bSzbInfo.getCoverImgUrl(), bszb_detail_bszb_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
         bszb_detail_bszb_title.setText(bSzbInfo.getActivityName());
-        bszb_detail__bszb_date.setText(bSzbInfo.getStartTime());
-        bszb_detail__bszb_address.setText(bSzbInfo.getDescription());
+        bszb_detail__bszb_dis.setText(bSzbInfo.getDescription());
+        String startTime = bSzbInfo.getStartTime();
+        if(!StringUtil.isEmpty(startTime) && startTime.length() == 14) {
+            String value = startTime.substring(0, 4) + "-" + startTime.substring(4,6) + "-" + startTime.substring(6, 8);
+            bszb_detail__bszb_date.setText(value);
+        } else {
+            bszb_detail__bszb_date.setText(startTime);
+        }
+        bszb_detail__bszb_address.setText(bSzbInfo.getActivityName());
 
         initViews();
         share();
@@ -337,7 +336,8 @@ public class ZBDetailActivity extends BaseActivity {
                     Log.i("__________onclick","______");
                     break;
                 case 102:
-                    ll_title.setVisibility(View.GONE);
+                    if(ll_title != null)
+                        ll_title.setVisibility(View.GONE);
                     Log.i("__________________","no______");
                     break;
                 case 103:
