@@ -7,8 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -25,6 +23,7 @@ import top.smartsport.www.adapter.SCCoatchAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.Coaches;
 import top.smartsport.www.bean.NetEntity;
+import top.smartsport.www.bean.StarDetail;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
 
@@ -41,9 +40,7 @@ public class WQQXActivity extends BaseActivity {
     private int page =1;
     private SCCoatchAdapter mAdapter;
     private List mList;
-    private List<Coaches> list;
-
-
+    private List<StarDetail> list;
 
     @Override
     protected void initView() {
@@ -75,12 +72,26 @@ public class WQQXActivity extends BaseActivity {
     }
 
     private void reload(final boolean refresh) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").get(), WQQXActivity.this, new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("page", page).get(), WQQXActivity.this, new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
+                if (refresh){
+                    pullrefreshlistview.onPullDownRefreshComplete();
+                    mList = new ArrayList();
+                }else {
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                }
                 findViewById(R.id.mykcempty).setVisibility(View.GONE);
-                MapConf mc = MapConf.with(getBaseContext()).pairs("name->players_name","team_name->players_dis","cover_url->players_img","stage->players_num").source(R.layout.adapter_players);
-                MapConf.with(getBaseContext()).conf(mc).source(intf.JsonUtil.findJsonLink("players",((NetEntity)result).getData().toString()).toString(),pullrefreshlistview.getRefreshableView()).toView();
+                String data = ((NetEntity)result).getData().toString();
+                list = (List<StarDetail>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("players",data).toString());
+                if (list.size() > 0){
+                    empty.setVisibility(View.GONE);
+                }
+                mList.addAll(list);
+                mAdapter.setData(mList);
+                MapConf mc = MapConf.with(getBaseContext()).pairs("name->players_name","team_name->players_dis","cover_url->players_img","stage:%s\n期->players_num").source(R.layout.wqqx_adapter);
+//                MapConf.with(getBaseContext()).conf(mc).source(intf.JsonUtil.findJsonLink("players",((NetEntity)result).getData().toString()).toString(),pullrefreshlistview.getRefreshableView()).toView();
+                MapConf.with(getBaseContext()).conf(mc).source(mList,pullrefreshlistview.getRefreshableView()).toView();
             }
 
             @Override

@@ -99,12 +99,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="80px"
+                android:layout_width="110px"
                 android:layout_height="160px"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/margin_left"
                 android:layout_marginTop="450px"
-                android:background="#ff0000"
+                android:background="@mipmap/today_players_num"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
