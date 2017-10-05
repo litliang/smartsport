@@ -11,6 +11,10 @@
         android:layout_height="match_parent"
         android:dividerHeight="20px"
         android:divider="@color/bg_gray"
+        android:fadingEdge="none"
+        android:overScrollFooter="@android:color/transparent"
+        android:overScrollHeader="@android:color/transparent"
+        android:overScrollMode="never"
         android:scrollbars="none" />
 
     <TextView

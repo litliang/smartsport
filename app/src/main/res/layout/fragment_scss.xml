@@ -9,6 +9,8 @@
         android:layout_height="match_parent"
         android:dividerHeight="20px"
         android:divider="@color/bg_gray"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
         android:scrollbars="none" />
     <!--</top.smartsport.www.listview_pulltorefresh.PullToRefreshScrollView>-->
     <RelativeLayout

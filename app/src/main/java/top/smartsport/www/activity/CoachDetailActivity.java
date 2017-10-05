@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
-import java.util.Map;
 
 import app.base.MapConf;
 import top.smartsport.www.R;
@@ -65,6 +65,8 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     private TextView tvTeam;
     @ViewInject(R.id.tv_introduce)
     private TextView tvIntroduce;
+    @ViewInject(R.id.fl_loading)
+    private FrameLayout fl_loading;
     private TrainningAdapter trainingAdapter;
     private CoachAdapter coachAdapter;
     private String tmpIntro = "";
@@ -135,10 +137,12 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             @Override
             protected void onFailure(String message) {
                 showToast(message);
+                fl_loading.setVisibility(View.GONE);
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
+                fl_loading.setVisibility(View.GONE);
                 String data = entity.getData().toString();
                 String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", entity.getData().toString()).toString();
 

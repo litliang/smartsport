@@ -100,10 +100,12 @@
                 android:layout_marginLeft="40px"
                 android:layout_marginTop="10px"
                 android:background="@drawable/guide_background"
-                android:paddingLeft="5px"
-                android:paddingRight="5px"
                 android:text="U16"
                 android:textColor="@color/theme_color"
+                android:paddingLeft="@dimen/u_pading_left_right"
+                android:paddingRight="@dimen/u_pading_left_right"
+                android:paddingTop="@dimen/u_pading_top_bottom"
+                android:paddingBottom="@dimen/u_pading_top_bottom"
                 android:textSize="35px" />
 
             <TextView
@@ -113,8 +115,10 @@
                 android:layout_marginLeft="40px"
                 android:layout_marginTop="10px"
                 android:background="@drawable/guide_background"
-                android:paddingLeft="5px"
-                android:paddingRight="5px"
+                android:paddingLeft="@dimen/u_pading_left_right"
+                android:paddingRight="@dimen/u_pading_left_right"
+                android:paddingTop="@dimen/u_pading_top_bottom"
+                android:paddingBottom="@dimen/u_pading_top_bottom"
                 android:text="11人"
                 android:textColor="@color/theme_color"
                 android:textSize="35px" />

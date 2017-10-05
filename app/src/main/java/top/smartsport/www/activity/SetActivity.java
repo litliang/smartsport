@@ -86,8 +86,8 @@ public class SetActivity extends BaseActivity {
                 goActivity(HelpCenterActivity.class);
                 break;
             case R.id.rl_qctphc://推送消息设置
-                GlideCatchUtil.getInstance().cleanCatchDisk();
-                GlideCatchUtil.getInstance().clearCacheDiskSelf();
+//                GlideCatchUtil.getInstance().cleanCatchDisk();
+//                GlideCatchUtil.getInstance().clearCacheDiskSelf();
                 GlideCatchUtil.getInstance().clearCacheMemory();
                 getCachDir();
                 ((TextView) findViewById(R.id.set_qctphc)).setText("0M");

@@ -38,6 +38,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
     private NewsAdapter newsAdapter;
     private int page =1;
     private List newses;
+    private int selPos = -1;
 
     public static SCZXV4Fragment newInstance() {
         SCZXV4Fragment fragment = new SCZXV4Fragment();
@@ -70,6 +71,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
         pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selPos = i;
                 startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
             }
         });
@@ -97,6 +99,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
                 String data = result.getData().toString();
                 newses = top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("news",data).toString(), News.class);
                 if (refresh){
+                    newsAdapter.clear();
                     pullrefreshlistview.onPullDownRefreshComplete();
                     if(newses !=null && newses.size()> 0){
                         empty.setVisibility(View.GONE);
@@ -112,5 +115,14 @@ public class SCZXV4Fragment extends BaseV4Fragment {
         });
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(selPos >= 0) {
+            String value = newsAdapter.getItem(selPos).getHits();
+            newsAdapter.getItem(selPos).setHits("" + (Integer.valueOf(value).intValue() + 1));
+            selPos = -1;
+            newsAdapter.notifyDataSetChanged();
+        }
+    }
 }

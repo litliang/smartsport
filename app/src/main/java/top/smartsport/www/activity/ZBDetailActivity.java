@@ -97,6 +97,8 @@ public class ZBDetailActivity extends BaseActivity {
 
     @ViewInject(R.id.ll_title)
     private RelativeLayout ll_title;
+    @ViewInject(R.id.fl_loading)
+    private FrameLayout fl_loading;
 
     public final static String DATA = "data";
 
@@ -375,11 +377,12 @@ public class ZBDetailActivity extends BaseActivity {
             @Override
             protected void onFailure(String message) {
                 showToast(message);
+                fl_loading.setVisibility(View.GONE);
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
-
+                fl_loading.setVisibility(View.GONE);
                 Data data = entity.toObj(Data.class);
                 Schedule info = data.toSchedule(Schedule.class);
                 ImageLoader.getInstance().displayImage(info.getHome_logo(), bszb_detail_a_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());

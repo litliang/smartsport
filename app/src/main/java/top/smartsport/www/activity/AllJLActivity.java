@@ -14,7 +14,6 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.base.MapConf;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
@@ -47,7 +46,7 @@ public class AllJLActivity extends BaseActivity {
     @Override
     protected void initView() {
         back();
-        mAdapter = new SCCoatchAdapter();
+        mAdapter = new SCCoatchAdapter(true);
         pullrefreshlistview.getRefreshableView().setAdapter(mAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
@@ -107,13 +106,13 @@ public class AllJLActivity extends BaseActivity {
                 }
                 mList.addAll(list);
                 mAdapter.setData(mList);
-                MapConf mc = MapConf.with(getBaseContext())
-                        .pair("header_url->iv_head_icon")
-                        .pair("name->tv_coach_name")
-                        .pair("team_name->tv_team")
-                        .pair("collect_status->iv_collect", "0:mipmap.icon_collect;1:mipmap.collect_checked")
-                        .source(R.layout.coach_list);
-                MapConf.with(getBaseContext()).conf(mc).source(mList, pullrefreshlistview.getRefreshableView()).toView();
+//                MapConf mc = MapConf.with(getBaseContext())
+//                        .pair("header_url->iv_head_icon")
+//                        .pair("name->tv_coach_name")
+//                        .pair("team_name->tv_team")
+//                        .pair("collect_status->iv_collect", "0:mipmap.icon_collect;1:mipmap.collect_checked")
+//                        .source(R.layout.coach_list);
+//                MapConf.with(getBaseContext()).conf(mc).source(mList, pullrefreshlistview.getRefreshableView()).toView();
 
             }
 

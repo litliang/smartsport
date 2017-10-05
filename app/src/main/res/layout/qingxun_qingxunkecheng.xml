@@ -43,7 +43,11 @@
                               android:text="U16"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content" android:gravity="center_vertical"
-                              android:textColor="@color/theme_color" android:padding="2dip"
+                              android:textColor="@color/theme_color"
+                        android:paddingLeft="@dimen/u_pading_left_right"
+                        android:paddingRight="@dimen/u_pading_left_right"
+                        android:paddingTop="@dimen/u_pading_top_bottom"
+                        android:paddingBottom="@dimen/u_pading_top_bottom"
                               android:layout_centerVertical="true"/>
                     <TextView android:layout_alignParentRight="true" android:text="￥1999/年"
                               android:layout_width="wrap_content"

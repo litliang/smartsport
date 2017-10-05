@@ -87,7 +87,7 @@ public class Banner extends LinearLayout {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(widthDp, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        params.setMargins(0,0,ScreenUtils.dip2px(getContext(),12), ScreenUtils.dip2px(getContext(),7));
+        params.setMargins(0,0,ScreenUtils.dip2px(getContext(),12), ScreenUtils.dip2px(getContext(),19));
 		mPagerIndicator.setLayoutParams(params);
         if (height != -1) {
             int heightDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, mIndicatorTitle.getContext().getResources()
