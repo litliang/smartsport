@@ -666,22 +666,41 @@ public class MapAdapter extends BaseAdapter {
             if (list.get(i) instanceof String) {
                 astring = (String) list.get(i);
                 fakeStringViewIterate(convertView, astring, i);
-
-
             }
         }
     }
 
-    private void fakeStringViewIterate(View convertView, String astring, int i) {
+    private boolean fakeStringViewIterate(View convertView, String astring, int i) {
         if (convertView instanceof ViewGroup) {
             for (int j = 0; j < ((ViewGroup) convertView).getChildCount(); j++) {
                 View view = ((ViewGroup) convertView).getChildAt(j);
-                fakeStringViewIterate(view, astring, j);
+                boolean stop = fakeStringViewIterate(view, astring, j);
+                if (stop) {
+                    return true;
+                }
             }
 
+
+
+
+
+
+
+
+
+
+
+
         } else {
-            setView(i, astring, astring, convertView, convertView);
+            if (convertView instanceof TextView || convertView instanceof ImageView) {
+
+                MapConf.with(context).setView(astring, astring, astring, astring, convertView, convertView);
+                return true;
+            } else {
+                return false;
+            }
         }
+        return true;
     }
 
     private void treatFake(Object item, View convertView, int position) {

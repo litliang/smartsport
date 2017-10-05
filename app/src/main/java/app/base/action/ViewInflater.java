@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import app.base.MapConf;
+import app.base.RRes;
 import app.base.framework.Init;
 import app.base.ui.AdaptView;
 import dalvik.system.DexFile;
@@ -158,7 +159,9 @@ public class ViewInflater extends LayoutInflater {
     private void fakeDataAdapterView(AttributeSet attrs, View view) {
         if (view instanceof AdapterView) {
             String tag = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "tag");
+
             if (tag != null) {
+                List list = new ArrayList();
                 tag = tag.replaceAll(" ", "");
                 if (tag.contains("fake:")) {
                     int fake = tag.indexOf("fake:");
@@ -173,8 +176,7 @@ public class ViewInflater extends LayoutInflater {
                     String content = tag.substring(fake, fakeend);
                     content = content.replaceAll(" ", "");
                     content = content.replaceAll("\\[\\[", "[").replaceAll("\\]\\]", "]");
-                    String[] contentAry = content.replaceAll(",", "").split("\\]");
-                    List list = new ArrayList();
+                    String[] contentAry = content.replaceAll("\\],", "]").split("\\]");
                     for (String s : contentAry) {
                         if (s.equals("")) {
                             continue;
@@ -187,8 +189,27 @@ public class ViewInflater extends LayoutInflater {
                         }
                         list.add(alist);
                     }
-                    MapConf.with(newContext).conf(MapConf.with(newContext).source(R.layout.auto_string_item)).source(list, view).toView();
+
                 }
+                int layoutid;
+                if (tag.contains("layout:")) {
+                    int layout = tag.indexOf("layout:");
+                    layout += 7;
+                    int layoutend = -1;
+                    if (tag.substring(layout).contains(";")) {
+                        layoutend = tag.indexOf(";", layout);
+
+                    } else {
+                        layoutend = tag.length();
+                    }
+                    String content = tag.substring(layout, layoutend);
+                    content = content.replaceAll(" ", "");
+                    layoutid = RRes.get("R.layout." + content).getAndroidValue();
+                } else {
+                    layoutid = R.layout.auto_string_item;
+                }
+                MapConf.with(newContext).conf(MapConf.with(newContext).source(layoutid)).source(list, view).toView();
+
             }
         }
     }

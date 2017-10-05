@@ -493,7 +493,10 @@ public class MapConf {
                 }
             }
         }
-
+        if (value.toString().contains(".") && resMaps.contains(value.toString().split("\\.")[0]) && value.toString().split("\\.")[0].length() != value.toString().length()) {
+            value = "R." + value.toString();
+            value = new Integer(RRes.get(value.toString()).getAndroidValue());
+        }
         if (name.toString().contains(":")) {
             String[] ns = name.toString().split(":");
             if (!(ns[1].contains("(") && ns[1].contains(")") && ns[1].contains("#"))) {
@@ -596,6 +599,13 @@ public class MapConf {
                         .setText(value instanceof SpannableStringBuilder ? (SpannableStringBuilder) value
                                 : value.toString());
             }
+
+        }
+        else if (theView instanceof View) {
+            if (value instanceof Integer) {
+                theView.setBackgroundResource((Integer) value);
+            }
+
 
         }
         if (tackle != null) {
