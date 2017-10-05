@@ -169,7 +169,11 @@ public class MapConf {
             if(item instanceof List){
                 if(((List)item).size()>0){
                     if(((List)item).get(0) instanceof List){
-                        fake();
+                        fakeList();
+                        return;
+                    }else
+                    if(((List)item).get(0) instanceof String){
+                        fakeList();
                         return;
                     }
                 }
@@ -274,7 +278,8 @@ public class MapConf {
         }
     }
 
-    private void fake() {
+    private void fakeList() {
+
         setView(item, item, "", "", convertView, convertView);
     }
 

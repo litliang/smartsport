@@ -40,7 +40,6 @@ import app.base.MapAdapter.AdaptInfo.Style;
 import app.base.action.ViewInflater;
 import app.base.task.Compt;
 import app.base.ui.ExpandableView;
-import top.smartsport.www.bean.Obj;
 
 /***
  * abslistview适配器
@@ -637,15 +636,52 @@ public class MapAdapter extends BaseAdapter {
             treatJSONArray(item, convertView, position);
         } else if (item instanceof List) {
             if (((List) item).size() > 0) {
-                if (((List) item).get(0) instanceof List) {
-                    treatFake(item, convertView, position);
+                if (((List) item).get(0) instanceof String) {
+                    treatFakeList(item, convertView, position);
                 }
             }
+        } else if (item instanceof String) {
+            treatFakeString(item, convertView, position);
         } else {
             treatObject(item, convertView, position);
 
         }
 
+    }
+
+    private void treatFakeString(Object item, View convertView, int position) {
+        String astring = null;
+        if (item instanceof String) {
+            astring = (String) item;
+            fakeStringViewIterate(convertView, astring, position);
+        }
+    }
+
+    private void treatFakeList(Object item, View convertView, int position) {
+        String name;
+        Object value;
+        List list = (List) item;
+        String astring = null;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof String) {
+                astring = (String) list.get(i);
+                fakeStringViewIterate(convertView, astring, i);
+
+
+            }
+        }
+    }
+
+    private void fakeStringViewIterate(View convertView, String astring, int i) {
+        if (convertView instanceof ViewGroup) {
+            for (int j = 0; j < ((ViewGroup) convertView).getChildCount(); j++) {
+                View view = ((ViewGroup) convertView).getChildAt(j);
+                fakeStringViewIterate(view, astring, j);
+            }
+
+        } else {
+            setView(i, astring, astring, convertView, convertView);
+        }
     }
 
     private void treatFake(Object item, View convertView, int position) {

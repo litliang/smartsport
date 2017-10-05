@@ -15,6 +15,7 @@ import android.content.Context;
  * @author chenliang
  */
 public class RRes {
+
     public static final String[] initType = new String[]{"layout", "id", "string", "drawable", "color", "mipmap"};
     public static Class r;
     public static Map<String, TypeAttrs> resType = new TreeMap<String, TypeAttrs>(
@@ -142,6 +143,7 @@ public class RRes {
         }
     }
 
+
     private static Class getR() {
         return r;
     }
@@ -181,6 +183,10 @@ public class RRes {
         int commaIdx = str_R_Type_Attr.lastIndexOf(".");
         return (ResObject) getAttr(str_R_Type_Attr.substring(2, commaIdx),
                 str_R_Type_Attr.substring(commaIdx + 1));
+    }
+
+    public static Map<String, TypeAttrs> getResType() {
+        return resType;
     }
 
     public static ResObject getAttr(String type, String attr) {

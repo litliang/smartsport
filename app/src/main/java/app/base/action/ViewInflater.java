@@ -12,6 +12,7 @@ import app.base.MapConf;
 import app.base.framework.Init;
 import app.base.ui.AdaptView;
 import dalvik.system.DexFile;
+import top.smartsport.www.R;
 import top.smartsport.www.widget.utils.RoundImageView;
 
 import android.content.Context;
@@ -48,6 +49,7 @@ public class ViewInflater extends LayoutInflater {
             if (!layoutlog.contains(parent.toString())) {
                 layoutlog.add(parent.toString());
                 parent.setOnClickListener(new ClickAction());
+                fakeDataAdapterView(attrs, parent);
             }
 
         }
@@ -144,47 +146,50 @@ public class ViewInflater extends LayoutInflater {
                 }
             }
             AutoUtils.autoSize(view);
-            if (view instanceof AdapterView) {
-                String tag = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "tag");
-                if (tag != null) {
-                    tag = tag.replaceAll(" ", "");
-                    if (tag.contains("fake:")) {
-                        int fake = tag.indexOf("fake:");
-                        fake+=5;
-                        int fakeend = -1;
-                        if(tag.contains(";")){
-                        fakeend = tag.indexOf(";",fake);
-
-                        }else{
-                            fakeend = tag.length();
-                        }
-                        String content = tag.substring(fake,fakeend);
-                        content = content.replaceAll(" ","");
-                        content = content.replaceAll("\\[\\[","[").replaceAll("\\]\\]","]");
-                        String[] contentAry = content.replaceAll(",","").split("\\]");
-                        List list = new ArrayList();
-                        List alist = new ArrayList();
-                        for(String s:contentAry){
-                            if(s.equals("")){
-                                continue;
-                            }
-
-                            s = s.replaceAll("\\[","");
-                            String[] dataary = s.split(",");
-                            for(String d:dataary){
-                                alist.add(d);
-                            }
-                            list.add(alist);
-                        }
-                        MapConf.with(newContext).source(list,view).toView();
-                    }
-                }
-            }
+            fakeDataAdapterView(attrs, view);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return view;
 
+    }
+
+    private void fakeDataAdapterView(AttributeSet attrs, View view) {
+        if (view instanceof AdapterView) {
+            String tag = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "tag");
+            if (tag != null) {
+                tag = tag.replaceAll(" ", "");
+                if (tag.contains("fake:")) {
+                    int fake = tag.indexOf("fake:");
+                    fake += 5;
+                    int fakeend = -1;
+                    if (tag.contains(";")) {
+                        fakeend = tag.indexOf(";", fake);
+
+                    } else {
+                        fakeend = tag.length();
+                    }
+                    String content = tag.substring(fake, fakeend);
+                    content = content.replaceAll(" ", "");
+                    content = content.replaceAll("\\[\\[", "[").replaceAll("\\]\\]", "]");
+                    String[] contentAry = content.replaceAll(",", "").split("\\]");
+                    List list = new ArrayList();
+                    for (String s : contentAry) {
+                        if (s.equals("")) {
+                            continue;
+                        }
+                        List alist = new ArrayList();
+                        s = s.replaceAll("\\[", "");
+                        String[] dataary = s.split(",");
+                        for (String d : dataary) {
+                            alist.add(d);
+                        }
+                        list.add(alist);
+                    }
+                    MapConf.with(newContext).conf(MapConf.with(newContext).source(R.layout.auto_string_item)).source(list, view).toView();
+                }
+            }
+        }
     }
 }
