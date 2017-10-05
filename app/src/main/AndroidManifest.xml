@@ -87,7 +87,7 @@
             android:theme="@android:style/Theme.NoTitleBar" />
 
         <!-- 欢迎页 ActionUIActivity -->
-        <activity android:name="app.auto.ActionUIActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

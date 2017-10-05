@@ -24,11 +24,10 @@ import top.smartsport.www.utils.SPUtils;
  * 欢迎页
  */
 @ContentView(R.layout.activity_welcome)
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             finish();
             return;
@@ -59,10 +58,7 @@ public class WelcomeActivity extends Activity {
                 startActivity(new Intent(getBaseContext(),loginActivityClass));
             }
         }).sendEmptyMessageDelayed(0, 2000);
-
-
     }
-
 
 
 }
