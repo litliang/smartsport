@@ -6,13 +6,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import org.xutils.common.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import intf.FunCallback;
+import intf.MapBuilder;
 import top.smartsport.www.R;
+import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.DefineRoundImageView;
 
 /**
@@ -25,6 +35,7 @@ public class SCCoatchAdapter extends BaseAdapter {
     public void setData(List<Object> l){
             list = new ArrayList<>();
             list.addAll(l);
+//        LogUtil.d("------setData----value--------->" + value);
             notifyDataSetChanged();
     }
     @Override
@@ -43,7 +54,7 @@ public class SCCoatchAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         SCCoatchAdapter.ViewHolder holder;
         if (convertView == null){
             holder = new SCCoatchAdapter.ViewHolder();
@@ -58,6 +69,34 @@ public class SCCoatchAdapter extends BaseAdapter {
         }else {
             holder = (SCCoatchAdapter.ViewHolder) convertView.getTag();
         }
+        Object obj = list.get(position);
+        Map<String, Object> map = (Map<String, Object>) obj;
+        String headerUrl = (String) map.get("header_url");
+        String name = (String) map.get("name");
+        holder.name.setText(name);
+        String teamName = (String) map.get("team_name");
+        holder.team.setText(teamName);
+        String collectStatus = (String) map.get("collect_status");
+        if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("0")) {
+            holder.collect.setImageResource(R.mipmap.icon_collect);
+        } else {
+            holder.collect.setImageResource(R.mipmap.collect_checked);
+        }
+        ImageLoader.getInstance().displayImage(headerUrl, holder.pic, ImageUtil.getOptions());
+        final String id = (String) map.get("id");
+        holder.collect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Object obj = list.get(position);
+                Map<String, Object> map = (Map<String, Object>) obj;
+                String collectStatus = (String) map.get("collect_status");
+                boolean unFav = true;
+                if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("1")) {
+                    unFav = false;
+                }
+                favImpl(v, unFav, "5", id, position);
+            }
+        });
         return convertView;
     }
 
@@ -67,4 +106,54 @@ public class SCCoatchAdapter extends BaseAdapter {
         DefineRoundImageView pic;
         ImageView collect;
     }
+
+    public void favImpl(final View view, final boolean unfav, String type, String id, final int pos) {
+        if (unfav) {
+            BaseActivity.callHttp(MapBuilder.build().add("action", "collect").add("type", type + "").add("source_id", id).get(), new FunCallback() {
+                @Override
+                public void onSuccess(Object result, List object) {
+                    ((ImageView) view).setImageResource(R.mipmap.collect_checked);
+                    Toast.makeText(view.getContext(), "已收藏", Toast.LENGTH_SHORT).show();
+                    refreshData(pos, "1");
+                }
+
+                @Override
+                public void onFailure(Object result, List object) {
+LogUtil.d("-----------result----------->" + result);
+                }
+
+                @Override
+                public void onCallback(Object result, List object) {
+                    LogUtil.d("-----------result----------->" + result);
+                }
+            });
+        } else {
+            BaseActivity.callHttp(MapBuilder.build().add("action", "cancelCollect").add("type", type + "").add("id", id).get(), new FunCallback() {
+                @Override
+                public void onSuccess(Object result, List object) {
+                    ((ImageView) view).setImageResource(R.mipmap.icon_collect);
+                    Toast.makeText(view.getContext(), "已为您取消", Toast.LENGTH_SHORT).show();
+                    refreshData(pos, "0");
+                }
+
+                @Override
+                public void onFailure(Object result, List object) {
+                    LogUtil.d("-----------result----------->" + result);
+                }
+
+                @Override
+                public void onCallback(Object result, List object) {
+                    LogUtil.d("-----------result----------->" + result);
+                }
+            });
+
+        }
+    }
+
+    private void refreshData(int pos, String value) {
+        Object obj = list.get(pos);
+        Map<String, Object> map = (Map<String, Object>) obj;
+        map.put("collect_status", value);
+    }
+
 }
