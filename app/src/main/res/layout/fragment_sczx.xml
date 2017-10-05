@@ -6,7 +6,10 @@
     <top.smartsport.www.listview_pulltorefresh.PullToRefreshListView
         android:id="@+id/pullrefreshlistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        >
 
     </top.smartsport.www.listview_pulltorefresh.PullToRefreshListView>
     <RelativeLayout

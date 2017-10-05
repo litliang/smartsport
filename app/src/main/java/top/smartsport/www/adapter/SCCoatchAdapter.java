@@ -31,6 +31,11 @@ import top.smartsport.www.widget.DefineRoundImageView;
 
 public class SCCoatchAdapter extends BaseAdapter {
     private List<Object> list;
+    private boolean mIsShowCollect;
+
+    public SCCoatchAdapter(boolean isShowCollect) {
+        mIsShowCollect = isShowCollect;
+    }
 
     public void setData(List<Object> l){
             list = new ArrayList<>();
@@ -76,27 +81,32 @@ public class SCCoatchAdapter extends BaseAdapter {
         holder.name.setText(name);
         String teamName = (String) map.get("team_name");
         holder.team.setText(teamName);
-        String collectStatus = (String) map.get("collect_status");
-        if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("0")) {
-            holder.collect.setImageResource(R.mipmap.icon_collect);
-        } else {
-            holder.collect.setImageResource(R.mipmap.collect_checked);
-        }
-        ImageLoader.getInstance().displayImage(headerUrl, holder.pic, ImageUtil.getOptions());
-        final String id = (String) map.get("id");
-        holder.collect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Object obj = list.get(position);
-                Map<String, Object> map = (Map<String, Object>) obj;
-                String collectStatus = (String) map.get("collect_status");
-                boolean unFav = true;
-                if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("1")) {
-                    unFav = false;
-                }
-                favImpl(v, unFav, "5", id, position);
+        if(mIsShowCollect) {
+            holder.collect.setVisibility(View.VISIBLE);
+            String collectStatus = (String) map.get("collect_status");
+            if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("0")) {
+                holder.collect.setImageResource(R.mipmap.icon_collect);
+            } else {
+                holder.collect.setImageResource(R.mipmap.collect_checked);
             }
-        });
+            ImageLoader.getInstance().displayImage(headerUrl, holder.pic, ImageUtil.getOptions());
+            final String id = (String) map.get("id");
+            holder.collect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Object obj = list.get(position);
+                    Map<String, Object> map = (Map<String, Object>) obj;
+                    String collectStatus = (String) map.get("collect_status");
+                    boolean unFav = true;
+                    if(!StringUtil.isEmpty(collectStatus) && collectStatus.equals("1")) {
+                        unFav = false;
+                    }
+                    favImpl(v, unFav, "5", id, position);
+                }
+            });
+        } else {
+            holder.collect.setVisibility(View.GONE);
+        }
         return convertView;
     }
 

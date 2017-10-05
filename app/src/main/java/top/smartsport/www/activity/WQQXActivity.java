@@ -46,7 +46,7 @@ public class WQQXActivity extends BaseActivity {
     protected void initView() {
         back();
         ((TextView)findViewById(R.id.empty)).setText("还没有任何往期球星");
-        mAdapter = new SCCoatchAdapter();
+        mAdapter = new SCCoatchAdapter(false);
         pullrefreshlistview.getRefreshableView().setAdapter(mAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override

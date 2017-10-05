@@ -56,7 +56,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
 
     @Override
     protected void initView() {
-        mAdapter = new SCCoatchAdapter();
+        mAdapter = new SCCoatchAdapter(false);
         pullrefreshlistview.getRefreshableView().setAdapter(mAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override

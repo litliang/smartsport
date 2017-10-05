@@ -46,7 +46,7 @@ public class AllJLActivity extends BaseActivity {
     @Override
     protected void initView() {
         back();
-        mAdapter = new SCCoatchAdapter();
+        mAdapter = new SCCoatchAdapter(true);
         pullrefreshlistview.getRefreshableView().setAdapter(mAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override

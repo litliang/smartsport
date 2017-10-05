@@ -10,5 +10,7 @@
     android:horizontalSpacing="1dp"
     android:scrollbars="none"
     android:verticalSpacing="1dp"
+    android:fadingEdge="none"
+    android:overScrollMode="never"
     ptr:ptrListViewExtrasEnabled="false"
     ptr:ptrMode="both"/>
