@@ -1,7 +1,6 @@
 package top.smartsport.www.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,10 +19,8 @@ import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.adapter.SCCoatchAdapter;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Coaches;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
@@ -114,6 +111,7 @@ public class AllJLActivity extends BaseActivity {
                         .pair("header_url->iv_head_icon")
                         .pair("name->tv_coach_name")
                         .pair("team_name->tv_team")
+                        .pair("collect_status->iv_collect", "0:mipmap.icon_collect;1:mipmap.collect_checked")
                         .source(R.layout.coach_list);
                 MapConf.with(getBaseContext()).conf(mc).source(mList, pullrefreshlistview.getRefreshableView()).toView();
 

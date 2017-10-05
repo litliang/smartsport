@@ -8,10 +8,10 @@
     android:paddingRight="@dimen/margin_leftx1.5"
     >
 
-    <ImageView
+    <top.smartsport.www.widget.DefineRoundImageView
         android:id="@+id/iv_head_icon"
-        android:layout_width="255px"
-        android:layout_height="255px"
+        android:layout_width="160px"
+        android:layout_height="160px"
         app:layout_auto_baseheight="width"
         android:layout_centerVertical="true"
         android:src="@mipmap/tuijian_touxiang6" />
@@ -43,7 +43,7 @@
             />
     </LinearLayout>
 
-    <ImageView android:visibility="gone"
+    <ImageView
         android:id="@+id/iv_collect"
         android:layout_width="72px"
         android:layout_height="75px"

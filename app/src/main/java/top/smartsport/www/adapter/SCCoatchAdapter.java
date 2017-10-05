@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
+import top.smartsport.www.widget.DefineRoundImageView;
 
 /**
  * Created by ZL on 2017/9/9.
@@ -47,7 +48,7 @@ public class SCCoatchAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new SCCoatchAdapter.ViewHolder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.coach_list, parent, false);
-            holder.pic = (ImageView) convertView.findViewById(R.id.iv_head_icon);
+            holder.pic = (DefineRoundImageView) convertView.findViewById(R.id.iv_head_icon);
             holder.name = (TextView) convertView.findViewById(R.id.tv_coach_name);
             holder.team = (TextView) convertView.findViewById(R.id.tv_team);
             holder.collect = (ImageView) convertView.findViewById(R.id.iv_collect);
@@ -63,7 +64,7 @@ public class SCCoatchAdapter extends BaseAdapter {
     class ViewHolder {
         TextView name;
         TextView team;
-        ImageView pic;
+        DefineRoundImageView pic;
         ImageView collect;
     }
 }

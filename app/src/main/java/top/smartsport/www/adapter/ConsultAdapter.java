@@ -68,7 +68,7 @@ public class ConsultAdapter extends BaseAdapter {
         holder.describe.setText(news.getDescription());
         holder.time.setText(news.getCtime());
         holder.action.setText(news.getCate_name());
-        holder.read.setText(news.getHits());
+        holder.read.setText("阅读 " + news.getHits());
         return view;
     }
 
