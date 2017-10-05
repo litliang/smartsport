@@ -9,8 +9,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.xutils.view.annotation.ContentView;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import app.base.JsonUtil;
@@ -22,6 +29,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.actions.Showinputbox;
 import top.smartsport.www.adapter.TeamMemberAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.bean.Coach;
 import top.smartsport.www.bean.NetEntity;
 
 /**
@@ -30,6 +38,15 @@ import top.smartsport.www.bean.NetEntity;
 @ContentView(R.layout.activity_add_member)
 public class AddMemberActivity extends BaseActivity {
     public static final int ADD_MEMBER = 1;
+
+    @ViewInject(R.id.et_team_name)
+    private TextView et_team_name;
+    @ViewInject(R.id.et_main_coach_name)
+    private TextView et_main_coach_name;
+    @ViewInject(R.id.et_coach1_name)
+    private TextView et_coach1_name;
+    @ViewInject(R.id.et_coach2_name)
+    private TextView et_coach2_name;
 
     private MapAdapter mapadapter;
 
@@ -42,6 +59,9 @@ public class AddMemberActivity extends BaseActivity {
     private TeamMemberAdapter mAdapter;
     private List list;
     private String data;
+    private List<Coach> listCoach;
+    private List<Coach> listAssists;
+    private List<Coach> listPlayer;
 
     @Override
     protected void initView() {
@@ -66,9 +86,9 @@ public class AddMemberActivity extends BaseActivity {
 //                }
 //                m.add("type", "0");
 //                m.add("team_name", ((TextView) findViewById(R.id.et_team_name)).getText().toString());
-////                m.add("team_name", ((TextView) findViewById(R.id.et_main_coach_name)).getText().toString());
-////                m.add("team_name", ((TextView) findViewById(R.id.et_coach1_name)).getText().toString());
-////                m.add("team_name", ((TextView) findViewById(R.id.et_coach2_name)).getText().toString());
+//                m.add("team_name", ((TextView) findViewById(R.id.et_main_coach_name)).getText().toString());
+//                m.add("team_name", ((TextView) findViewById(R.id.et_coach1_name)).getText().toString());
+//                m.add("team_name", ((TextView) findViewById(R.id.et_coach2_name)).getText().toString());
 //                callHttp(m.get(), new FunCallback() {
 //                    @Override
 //                    public void onSuccess(Object result, List object) {
@@ -214,12 +234,10 @@ public class AddMemberActivity extends BaseActivity {
                         callHttp(builder.get(), new FunCallback() {
                             @Override
                             public void onSuccess(Object result, List object) {
-
                             }
 
                             @Override
                             public void onFailure(Object result, List object) {
-
                             }
 
                             @Override
@@ -237,36 +255,31 @@ public class AddMemberActivity extends BaseActivity {
                 new Showinputbox().showDialog((Activity) view.getContext(), getTextString(R.id.et_main_coach_name), "设置您的主教练", new FunCallback() {
                     @Override
                     public void onSuccess(Object result, List object) {
-
                     }
 
                     @Override
                     public void onFailure(Object result, List object) {
-
                     }
 
                     @Override
                     public void onCallback(Object result, List object) {
                         getTextView(R.id.et_main_coach_name).setText(result.toString());
                         MapBuilder builder = MapBuilder.build().add("action", "editMyTeam").add("team_id", id).add("type", "2").add("name", getTextString(R.id.et_main_coach_name));
-                        if (!getField("coach[0]-id").equals("null")) {
-                            builder.add("member_id", getField("coach[0]-id"));
+                        if (getIntent().hasExtra("id") && listCoach != null && listCoach.size() > 0) {
+                            builder.add("member_id", listCoach.get(0).getId());
                         }
-
                         callHttp(builder.get(), new FunCallback() {
                             @Override
                             public void onSuccess(Object result, List object) {
-                                editcoach();
+                                editcoach(listCoach != null ? listCoach.get(0) : null);
                             }
 
                             @Override
                             public void onFailure(Object result, List object) {
-
                             }
 
                             @Override
                             public void onCallback(Object result, List object) {
-
                             }
                         });
 
@@ -292,24 +305,22 @@ public class AddMemberActivity extends BaseActivity {
                     public void onCallback(Object result, List object) {
                         getTextView(R.id.et_coach1_name).setText(result.toString());
                             MapBuilder builder = MapBuilder.build().add("action", "editMyTeam").add("team_id", id).add("type", "1").add("name", getTextString(R.id.et_coach1_name));
-                            if (!getField("assists[0]-id").equals("null")) {
-                                builder.add("member_id", getField("assists[0]-id"));
+                            if (getIntent().hasExtra("id") && listAssists != null && listAssists.size() > 0) {
+                                builder.add("member_id", listAssists.get(0).getId());
                             }
                             callHttp(builder.get(), new FunCallback() {
 
                                 @Override
                                 public void onSuccess(Object result, List object) {
-                                    editcoach();
+                                    editcoach(listAssists != null ? listAssists.get(0) : null);
                                 }
 
                                 @Override
                                 public void onFailure(Object result, List object) {
-
                                 }
 
                                 @Override
                                 public void onCallback(Object result, List object) {
-
                                 }
                             });
                         }
@@ -337,23 +348,21 @@ public class AddMemberActivity extends BaseActivity {
                         getTextView(R.id.et_coach2_name).setText(result.toString());
 
                             MapBuilder builder = MapBuilder.build().add("action", "editMyTeam").add("team_id", id).add("type", "1").add("name", getTextString(R.id.et_coach2_name));
-                            if (!getField("assists[1]-id").equals("null")) {
-                                builder.add("member_id", getField("assists[1]-id"));
+                            if (getIntent().hasExtra("id") && listAssists != null && listAssists.size() > 1) {
+                                builder.add("member_id", listAssists.get(1).getId());
                             }
                             callHttp(builder.get(), new FunCallback() {
                                 @Override
                                 public void onSuccess(Object result, List object) {
-                                    editcoach();
+                                    editcoach(listAssists != null ? listAssists.get(1) : null);
                                 }
 
                                 @Override
                                 public void onFailure(Object result, List object) {
-
                                 }
 
                                 @Override
                                 public void onCallback(Object result, List object) {
-
                                 }
                             });
                         }
@@ -365,23 +374,35 @@ public class AddMemberActivity extends BaseActivity {
 
     }
 
-    private void editcoach() {
-        MapBuilder builder = MapBuilder.build().add("action", "editMyTeam").add("team_id", id).add("team_name", getTextString(R.id.et_team_name)).add("member_id", getField("coach[0]-id")).add("name", getField("coach[0]-name")).add("type", getField("coach[0]-type")).add("number", getField("coach[0]-number")).add("position", getField("coach[0]-position"));
+    private void editcoach(Coach coach) {
+        MapBuilder builder = MapBuilder.build()
+                .add("action", "editMyTeam")
+                .add("team_id", id)
+                .add("team_name", getTextString(R.id.et_team_name));
+//                .add("member_id", getField("coach[0]-id"))
+//                .add("name", getField("coach[0]-name"))
+//                .add("type", getField("coach[0]-type"))
+//                .add("number", getField("coach[0]-number"))
+//                .add("position", getField("coach[0]-position"));
+        if(getIntent().hasExtra("id") && coach != null) {
+            builder.add("member_id", coach.getId())
+                    .add("name", coach.getName())
+                    .add("type", coach.getType())
+                    .add("number", coach.getNumber())
+                    .add("position", coach.getPosition());
+        }
 
         callHttp(builder.get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-
             }
 
             @Override
             public void onFailure(Object result, List object) {
-
             }
 
             @Override
             public void onCallback(Object result, List object) {
-
             }
         });
     }
@@ -404,6 +425,39 @@ public class AddMemberActivity extends BaseActivity {
                 data = ((NetEntity) result).getData().toString();
                 setInitData(data);
                 list = (List) intf.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("player", data));
+                try {
+                    JSONObject jsonData = new JSONObject(data);
+                    JSONArray coach = jsonData.optJSONArray("coach");
+                    Gson gson = new Gson();
+                    if(coach != null && coach.length() > 0) {
+                        listCoach = new ArrayList<Coach>();
+                        JSONObject coachItem = coach.optJSONObject(0);
+                        et_main_coach_name.setText(coachItem.optString("name"));
+                        if (coachItem != null) {
+                            Coach coachValue = gson.fromJson(coachItem.toString(), Coach.class);
+                            listCoach.add(coachValue);
+                        }
+                    }
+
+                    JSONArray assists = jsonData.optJSONArray("assists");
+                    if(assists != null && assists.length() > 0) {
+                        listAssists = new ArrayList<Coach>();
+                        for(int i=0; i<assists.length(); i++) {
+                            JSONObject assistsItem = assists.optJSONObject(i);
+                            if(i == 0) {
+                                et_coach1_name.setText(assistsItem.optString("name"));
+                            } else if(i == 1) {
+                                et_coach2_name.setText(assistsItem.optString("name"));
+                            }
+                            Coach coachValue = gson.fromJson(assistsItem.toString(), Coach.class);
+                            listAssists.add(coachValue);
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 MapConf.with(AddMemberActivity.this)
                         .pair("team_name->et_team_name")
                         .pair("coach[0]-name->et_main_coach_name")
