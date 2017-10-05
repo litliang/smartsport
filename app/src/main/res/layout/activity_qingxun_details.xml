@@ -99,8 +99,10 @@
                     android:layout_marginRight="8dp"
                     android:text="U16"
                     android:textColor="@color/theme_color"
-                    android:paddingLeft="10px"
-                    android:paddingRight="10px"
+                    android:paddingLeft="@dimen/u_pading_left_right"
+                    android:paddingRight="@dimen/u_pading_left_right"
+                    android:paddingTop="@dimen/u_pading_top_bottom"
+                    android:paddingBottom="@dimen/u_pading_top_bottom"
                     android:background="@drawable/shape_bg_round_corner_green"
                     />
 

@@ -34,4 +34,7 @@
 
     <dimen name="round_corner">20px</dimen>
     <dimen name="text_consult">36px</dimen>
+
+    <dimen name="u_pading_left_right">20px</dimen>
+    <dimen name="u_pading_top_bottom">5px</dimen>
 </resources>
