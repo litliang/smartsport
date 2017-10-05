@@ -2,10 +2,10 @@ package top.smartsport.www.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.text.Html;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,12 +23,10 @@ import app.base.MapConf;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.actions.Fav;
 import top.smartsport.www.actions.Showinputbox;
 import top.smartsport.www.adapter.CommentAdapter;
 import top.smartsport.www.adapter.ConsultAdapter;
 import top.smartsport.www.base.BaseActivity;
-import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
@@ -74,6 +72,8 @@ public class ConsultDetailActivity extends BaseActivity {
     private MyListView lvConsult;
     @ViewInject(R.id.lv_comment)
     private MyListView lvComment;
+    @ViewInject(R.id.fl_loading)
+    private FrameLayout fl_loading;
     private ConsultAdapter adapterNews;
     private CommentAdapter adapterComment;
     private String data;
@@ -165,12 +165,13 @@ public class ConsultDetailActivity extends BaseActivity {
             @Override
             protected void onFailure(String message) {
                 showToast(message);
+                fl_loading.setVisibility(View.GONE);
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
+                fl_loading.setVisibility(View.GONE);
                 data = entity.getData().toString();
-
                 String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", data).toString();
 
 

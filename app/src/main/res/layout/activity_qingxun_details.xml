@@ -11,6 +11,7 @@
         android:background="@android:color/holo_red_light"
         android:gravity="center"
         android:text="我要报名（￥1999/年）"
+        android:visibility="gone"
         android:textColor="@android:color/white" />
 
     <FrameLayout
@@ -342,4 +343,17 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/fl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar"
+        android:background="#FEFEFE">
+
+        <include
+            android:id="@+id/rl_define_progress"
+            layout="@layout/layout_loading" />
+    </FrameLayout>
+
 </RelativeLayout>

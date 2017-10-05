@@ -1,6 +1,8 @@
 package top.smartsport.www.activity;
 
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -36,6 +38,8 @@ public class StarDetailActivity extends BaseActivity {
     private TextView tv_introduce_star;
     @ViewInject(R.id.tv_week)
     private TextView tv_week;
+    @ViewInject(R.id.fl_loading)
+    private FrameLayout fl_loading;
 
     @Override
     protected void initView() {
@@ -44,7 +48,7 @@ public class StarDetailActivity extends BaseActivity {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("id",getIntent().getStringExtra("id")).get(), this, new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-
+                fl_loading.setVisibility(View.GONE);
                 Gson gson = new Gson();
                 String data = ((NetEntity)result).getData().toString();
                 try {
@@ -75,6 +79,7 @@ public class StarDetailActivity extends BaseActivity {
             }
             @Override
             public void onFailure(Object result, List object) {
+                fl_loading.setVisibility(View.GONE);
             }
             @Override
             public void onCallback(Object result, List object) {

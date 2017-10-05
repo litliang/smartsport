@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -79,6 +80,8 @@ public class BSDetailActivity extends BaseActivity {
     private TextView adapter_bsss_people;//多少人
     @ViewInject(R.id.adapter_bsss_rl_pay)
     private RelativeLayout adapter_bsss_rl_pay;
+    @ViewInject(R.id.fl_loading)
+    private FrameLayout fl_loading;
 
     private String id;
     private String states;
@@ -286,11 +289,12 @@ public class BSDetailActivity extends BaseActivity {
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
-
+                fl_loading.setVisibility(View.GONE);
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
+                fl_loading.setVisibility(View.GONE);
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
                 String collect_status = app.base.JsonUtil.findJsonLink("collect_status", entity.getData().toString()).toString();
                 String status = app.base.JsonUtil.findJsonLink("status", entity.getData().toString()).toString();

@@ -5,6 +5,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ public class ActivityTrainingDetails extends BaseActivity {
     WebView mIntroductionTv;
     TrainingClassBean classBean;
     AdapterTrainingDetails mClassAdapter;
+    FrameLayout flLoading;
 
     List<TrainingClassBean> classList = new ArrayList<>();
 
@@ -82,7 +84,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         mQuotaTv = (TextView) findViewById(R.id.details_quota_tv);
         mHorizontaList = (HorizontalListView) findViewById(R.id.details_class_listview);
         mSignUpBtn = (Button) findViewById(R.id.details_sign_up_btn);
-
+        flLoading = (FrameLayout) findViewById(R.id.fl_loading);
 //        for (int mPos = 0; mPos < 5; mPos++) {
 //            classBean = new TrainingClassBean();
 //            classBean.setClassTitle("青训瑜伽" + mPos);
@@ -102,6 +104,7 @@ public class ActivityTrainingDetails extends BaseActivity {
         callHttp(MapBuilder.build().add("action", "getQxCourseDetail").add("id", id = getIntent().getSerializableExtra("id").toString()).get(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
+                flLoading.setVisibility(View.GONE);
                 data = ((NetEntity) result).getData().toString();
                 String detail = JsonUtil.findJsonLink("detail", data).toString();
 
@@ -131,6 +134,7 @@ public class ActivityTrainingDetails extends BaseActivity {
 
                 String status = JsonUtil.findJsonLink("detail-status", data).toString();
                 if (!StringUtil.isEmpty(status)) {
+                    mSignUpBtn.setVisibility(View.VISIBLE);
                     // 1报名中2进行中 3已结束 4已报满5已报名
                     if (status.equals("1")) { // 报名中
                         final String sellPrice = JsonUtil.findJsonLink("detail-sell_price", data).toString();
@@ -178,7 +182,7 @@ public class ActivityTrainingDetails extends BaseActivity {
 
             @Override
             public void onFailure(Object result, List object) {
-
+                flLoading.setVisibility(View.GONE);
             }
 
             @Override
