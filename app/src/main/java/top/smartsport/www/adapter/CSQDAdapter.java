@@ -13,6 +13,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.CSQDInfo;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
@@ -57,8 +58,19 @@ class CSQDViewHolder extends ViewHolder{
 
     public void init(CSQDInfo info){
         ImageLoader.getInstance().displayImage(info.getLogo(), ivAvatar, ImageUtil.getOptions_avater());
-        adapter_csqd_name.setText(info.getTeam_name());
-        adapter_csqd_dc.setText(info.getDescription()+"");
+
+        String name = info.getTeam_name();
+        if(!StringUtil.isEmpty(name)) {
+            adapter_csqd_name.setText(name);
+        } else {
+            adapter_csqd_name.setText("");
+        }
+        String des = info.getDescription();
+        if(!StringUtil.isEmpty(des)) {
+            adapter_csqd_dc.setText(des);
+        } else {
+            adapter_csqd_dc.setText("");
+        }
         adapter_csqd_pm.setText("第"+info.getTeam_id()+"名");
         adapter_csqd_score.setText(info.getIntegral()+"积分");
     }

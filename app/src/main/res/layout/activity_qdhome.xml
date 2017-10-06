@@ -56,7 +56,7 @@
                             android:id="@+id/tv_qd_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="球队名字"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="45px" />
 
@@ -64,7 +64,7 @@
                             android:id="@+id/tv_qd_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="球队简介"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="38px" />
 
@@ -87,7 +87,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="排名："
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
@@ -102,7 +101,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="积分：10"
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
@@ -116,7 +114,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="胜：2"
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
@@ -130,7 +127,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="平：1"
                         android:textColor="@color/white"
                         android:textSize="42px" />
                     <View
@@ -144,7 +140,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="负：5"
                         android:textColor="@color/white"
                         android:textSize="42px" />
 

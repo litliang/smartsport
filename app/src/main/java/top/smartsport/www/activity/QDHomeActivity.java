@@ -119,7 +119,6 @@ public class QDHomeActivity extends BaseActivity{
             @Override
             public void onSuccess(Object result, List object) {
                 String data = ((NetEntity)result).getData().toString();
-
                 try {
                     JSONObject dataObject = new JSONObject(data);
                     JSONObject base = dataObject.optJSONObject("base");
@@ -129,8 +128,18 @@ public class QDHomeActivity extends BaseActivity{
                             ImageLoader.getInstance().displayImage(logUrl,
                                     wd_logo, ImageUtil.getOptions_avater());
                         }
-                        tv_qd_name.setText(base.optString("name"));
-                        tv_qd_description.setText(base.optString("description"));
+                        String name = base.optString("name");
+                        if(!StringUtil.isEmpty(name)) {
+                            tv_qd_name.setText(name);
+                        } else {
+                            tv_qd_name.setText("");
+                        }
+                        String des = base.optString("description");
+                        if(!StringUtil.isEmpty(des)) {
+                            tv_qd_description.setText(des);
+                        } else {
+                            tv_qd_description.setText("");
+                        }
                     }
                     JSONObject param = dataObject.optJSONObject("param");
                     if(param != null) {
