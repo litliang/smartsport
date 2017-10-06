@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.base.MapConf;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
@@ -62,13 +61,14 @@ public class ActivityBuyCustomVedio extends BaseActivity{
                 mList.addAll(list);
                 mList.addAll((List<PackageEntity>)getNoBuyInfo());
                 mListView.setAdapter(mAdapter);
+                mAdapter.setSelIndex(0);
                 mAdapter.setData(mList);
-                MapConf mc = MapConf.with(ActivityBuyCustomVedio.this)
-                        .pair("title->title_tv")
-                        .pair("content->content_tv")
-                        .pair("sell_price:¥%s->sell_price_tv")
-                        .source(R.layout.package_item);
-                MapConf.with(ActivityBuyCustomVedio.this).conf(mc).source(mList,mListView).toView();
+//                MapConf mc = MapConf.with(ActivityBuyCustomVedio.this)
+//                        .pair("title->title_tv")
+//                        .pair("content->content_tv")
+//                        .pair("sell_price:¥%s->sell_price_tv")
+//                        .source(R.layout.package_item);
+//                MapConf.with(ActivityBuyCustomVedio.this).conf(mc).source(mList,mListView).toView();
             }
             @Override
             public void onFailure(Object result, List object) {

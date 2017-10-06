@@ -15,11 +15,12 @@
         android:id="@+id/view_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/blue"
+        android:background="@color/huise"
         android:visibility="gone"
         />
 
     <LinearLayout
+        android:id="@+id/ll_bg"
         android:layout_width="match_parent"
         android:layout_height="210px"
         android:background="@color/white"
@@ -46,8 +47,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/font_gray"
-                android:textSize="@dimen/text_size_notice" />
+                android:textSize="@dimen/text_35" />
         </LinearLayout>
 
         <RelativeLayout
@@ -63,9 +65,9 @@
                 android:layout_centerVertical="true"
                 android:focusable="false"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:background="#00000000"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:button="@drawable/pay_checkbox" />
 
             <TextView
@@ -75,7 +77,16 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_check"
                 android:textColor="@color/red"
-                android:textSize="@dimen/text_size_notice" />
+                android:layout_marginRight="10dp"
+                android:textSize="@dimen/text_35" />
         </RelativeLayout>
     </LinearLayout>
+    <View
+        android:id="@+id/view_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/huise"
+        android:labelFor="@id/ll_bg"
+        android:visibility="gone"
+        />
 </LinearLayout>
