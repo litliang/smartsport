@@ -11,8 +11,33 @@
         android:layout_alignParentTop="true">
         <include layout="@layout/layout_actionbar" />
     </FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="136px"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-    <top.smartsport.www.widget.PagerSlidingTabStrip
+        <top.smartsport.www.widget.PagerSlidingTabStrip
+            android:id="@+id/qx_tab"
+            android:layout_width="match_parent"
+            android:layout_height="136px"
+            android:layout_marginLeft="130px"
+            android:layout_marginRight="130px"
+            android:background="@color/white"
+            android:fillViewport="false"
+            app:contentSelectedTextColor="@color/theme_color"
+            app:contentTextColor="@color/theme_color"
+            app:contentTextSize="58px"
+            app:contentUnselectedTextColor="@color/black"
+            app:pstsIndicatorColor="@color/theme_color"
+            app:pstsIndicatorHeight="5px"
+            app:pstsShouldExpand="true"
+            app:pstsTabPaddingLeftRight="10px"
+
+            app:pstsUnderlineColor="@color/text_gray"
+            app:pstsUnderlineHeight="0px" />
+    </RelativeLayout>
+    <!--<top.smartsport.www.widget.PagerSlidingTabStrip
         android:id="@+id/qx_tab"
         android:layout_width="match_parent"
         android:layout_height="136px"
@@ -28,7 +53,7 @@
         app:pstsUnderlineHeight="0px"
         app:pstsTabPaddingLeftRight="4px"
         android:fillViewport="false"
-        />
+        />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/qx_viewpager"

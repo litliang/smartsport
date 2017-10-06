@@ -65,7 +65,7 @@
             app:contentTextSize="58px"
             app:contentUnselectedTextColor="@color/black"
             app:pstsIndicatorColor="@color/theme_color"
-            app:pstsIndicatorHeight="3px"
+            app:pstsIndicatorHeight="5px"
             app:pstsShouldExpand="true"
             app:pstsTabPaddingLeftRight="10px"
 
