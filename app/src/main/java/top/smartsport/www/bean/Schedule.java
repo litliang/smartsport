@@ -1,5 +1,8 @@
 package top.smartsport.www.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Aaron on 2017/8/4.
  */
@@ -24,6 +27,7 @@ public class Schedule {
     private String away_logo;
     private String cate_name;
     private String group_name;
+    private String live_url;
     private String start_time;
 
     public String getId() {
@@ -97,4 +101,60 @@ public class Schedule {
     public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
+
+    public String getLive_url() {
+        return live_url;
+    }
+
+    public void setLive_url(String live_url) {
+        this.live_url = live_url;
+    }
+
+    public List<Schedule> getData() {
+        List<Schedule> listSchedule = new ArrayList<>();
+        String[] idArray = new String[] {
+          "1", "2", "3"
+        };
+        String[] homeTeamArray = new String[] {
+          "上海田林第一小学", "上海田林第二小学", "上海田林第三小学"
+        };
+        String[] awayTeamArray = new String[] {
+          "人大附小一队", "人大附小二队", "人大附小三队"
+        };
+        String[] logoArray = new String[] {
+          "http://soccer.baibaobike.com/data/upload/2017/0720/17/59707b814cbb0.png",
+          "http://soccer.baibaobike.com/data/upload/2017/0720/17/59707b814cbb0.png",
+          "http://soccer.baibaobike.com/data/upload/2017/0720/17/59707b814cbb0.png"
+        };
+        String[] cateNameArray = new String[] {
+                "小组赛", "小组赛", "小组赛"
+        };
+        String[] groupNameArray = new String[] {
+                "A组", "B组", "C组"
+        };
+        String[] liveUrlArray = new String[] {
+                "http://www.aiqiyi.com/live/250.html",
+                "http://www.aiqiyi.com/live/250.html",
+                "http://www.aiqiyi.com/live/250.html",
+        };
+        String[] startTimeArray = new String[] {
+                "2017-10-18", "2017-10-18", "2017-10-18"
+        };
+        for(int i=0; i<3; i++) {
+            Schedule schedule = new Schedule();
+            schedule.setId(idArray[i]);
+            schedule.setHome_logo(logoArray[i]);
+            schedule.setAway_logo(logoArray[i]);
+            schedule.setHome_team(homeTeamArray[i]);
+            schedule.setAway_team(awayTeamArray[i]);
+            schedule.setCate_name(cateNameArray[i]);
+            schedule.setGroup_name(groupNameArray[i]);
+            schedule.setLive_url(liveUrlArray[i]);
+            schedule.setStart_time(startTimeArray[i]);
+            listSchedule.add(schedule);
+        }
+
+        return listSchedule;
+    }
+
 }
