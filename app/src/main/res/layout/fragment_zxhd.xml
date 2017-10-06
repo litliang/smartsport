@@ -13,4 +13,5 @@
     android:fadingEdge="none"
     android:overScrollMode="never"
     ptr:ptrListViewExtrasEnabled="false"
+    ptr:ptrShowIndicator="false"
     ptr:ptrMode="both"/>

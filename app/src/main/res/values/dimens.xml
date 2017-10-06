@@ -4,6 +4,7 @@
     <dimen name="text_45">45px</dimen>
     <dimen name="text_40">40px</dimen>
     <dimen name="text_38">38px</dimen>
+    <dimen name="text_35">35px</dimen>
 
     <dimen name="layout_height_100">100px</dimen>
     <dimen name="layout_height_120">120px</dimen>

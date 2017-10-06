@@ -112,7 +112,7 @@
                     android:background="@color/white"
                     android:horizontalSpacing="40px"
                     android:listSelector="@android:color/transparent"
-                    android:numColumns="4"
+                    android:numColumns="3"
                     android:paddingBottom="34px"
                     android:paddingLeft="50px"
                     android:paddingTop="34px"
