@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dip"
+    android:background="@color/white">
+
+    <FrameLayout android:layout_alignParentBottom="true"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px">
+
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/line"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="70px">
+
+            <top.smartsport.www.widget.utils.RoundImageView
+                android:layout_width="90px"
+                android:layout_height="90px"
+                android:src="@mipmap/default_head_image" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:paddingLeft="10px">
+
+            <TextView
+
+                android:id="@+id/tiitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="90px"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:paddingLeft="6dip"
+                android:text="系统消息"
+                android:textColor="@color/black"
+                android:textSize="18dip" />
+
+            <TextView
+
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40px"
+                android:gravity="left|top"
+                android:paddingLeft="6dip"
+                android:text="系统消息内容, 系统消息内容, 系统消息内容\n系统消息内容, 系统消息内容, 系统消息内容\系统消息内容"
+                android:textColor="@color/text_gray"
+                android:textSize="13.5dip" />
+            <TextView
+
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:gravity="left|top"
+                android:paddingLeft="6dip"
+                android:text="2小时前"
+                android:textColor="@color/text_gray"
+                android:textSize="14.5dip" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

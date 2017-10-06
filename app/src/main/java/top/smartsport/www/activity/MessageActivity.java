@@ -17,5 +17,6 @@ public class MessageActivity extends BaseActivity{
     @Override
     protected void initView() {
         back();
+        findViewById(R.id.empty).setVisibility(View.GONE);
     }
 }

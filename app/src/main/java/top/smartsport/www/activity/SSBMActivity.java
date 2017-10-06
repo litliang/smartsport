@@ -179,7 +179,7 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_sell_price.setText("¥" + bMmatch.getSell_price());
                 ssbm_text_price.setText("¥" + bMmatch.getPrice());
                 ssbm_text_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中间横线
-                ssbm_text_sell_prices.setText("¥" + bMvideo.getSell_price());
+                ssbm_text_sell_prices.setText("¥0.00" );
                 // 总金额（两数相加）
                 setprice();
                 ssbm_text_baoming_qiudui.setText(bMmyteam.getTeam_name());

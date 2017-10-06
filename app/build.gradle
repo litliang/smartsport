@@ -43,7 +43,7 @@ android {
     }
     defaultConfig {
         applicationId "top.smartsport.www"
-        minSdkVersion 14
+        minSdkVersion 23
         targetSdkVersion 25
         compileSdkVersion 25
         versionCode getVer()
@@ -111,6 +111,9 @@ repositories {
 
 
 dependencies {
+
+
+
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.github.Rukey7:IjkPlayerView:1+'
@@ -150,7 +153,7 @@ dependencies {
     compile files('libs/pinyin4j-2.5.0.jar')
     //    compile files('libs/libammsdk.jar')
 
-    //    compile 'net.sf.json-lib:json-lib:2.1'
+//    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
     compile files('libs/alipaySdk-20160223.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
     compile files('libs/json-lib-2.4-jdk15.jar')
@@ -168,4 +171,5 @@ configurations {
     all*.exclude group: 'commons-logging', module: 'commons-logging'
     all*.exclude group: 'commons-collections', module: 'commons-collections'
 }
+
 build.mustRunAfter ':LePlayerSkin:build'

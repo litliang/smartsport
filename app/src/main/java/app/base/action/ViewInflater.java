@@ -1,14 +1,19 @@
 package app.base.action;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import app.base.MapConf;
+import app.base.RRes;
 import app.base.framework.Init;
 import app.base.ui.AdaptView;
 import dalvik.system.DexFile;
+import top.smartsport.www.R;
 import top.smartsport.www.widget.utils.RoundImageView;
 
 import android.content.Context;
@@ -30,8 +35,8 @@ public class ViewInflater extends LayoutInflater {
     static {
         uiNames.put("WebView", "android.webkit.");
         uiNames.put("CircleImageView", "android.support.v4.widget.");
-        uiNames.put("ImageView", app.base.widget.ImageView.class.getPackage().getName()+".");
-        uiNames.put("RoundImageView", RoundImageView.class.getPackage().getName()+".");
+        uiNames.put("ImageView", app.base.widget.ImageView.class.getPackage().getName() + ".");
+        uiNames.put("RoundImageView", RoundImageView.class.getPackage().getName() + ".");
 
 
 //        uiNames.put("IjkPlayerView", "com.dl7.player.media.");
@@ -41,10 +46,11 @@ public class ViewInflater extends LayoutInflater {
 
     @Override
     protected View onCreateView(View parent, String name, AttributeSet attrs) throws ClassNotFoundException {
-        if (parent!=null&&parent.getTag() != null) {
+        if (parent != null && parent.getTag() != null) {
             if (!layoutlog.contains(parent.toString())) {
                 layoutlog.add(parent.toString());
                 parent.setOnClickListener(new ClickAction());
+                fakeDataAdapterView(attrs, parent);
             }
 
         }
@@ -141,10 +147,70 @@ public class ViewInflater extends LayoutInflater {
                 }
             }
             AutoUtils.autoSize(view);
+            fakeDataAdapterView(attrs, view);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return view;
 
+    }
+
+    private void fakeDataAdapterView(AttributeSet attrs, View view) {
+        if (view instanceof AdapterView) {
+            String tag = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "tag");
+
+            if (tag != null) {
+                List list = new ArrayList();
+                tag = tag.replaceAll(" ", "");
+                if (tag.contains("fake:")) {
+                    int fake = tag.indexOf("fake:");
+                    fake += 5;
+                    int fakeend = -1;
+                    if (tag.contains(";")) {
+                        fakeend = tag.indexOf(";", fake);
+
+                    } else {
+                        fakeend = tag.length();
+                    }
+                    String content = tag.substring(fake, fakeend);
+                    content = content.replaceAll(" ", "");
+                    content = content.replaceAll("\\[\\[", "[").replaceAll("\\]\\]", "]");
+                    String[] contentAry = content.replaceAll("\\],", "]").split("\\]");
+                    for (String s : contentAry) {
+                        if (s.equals("")) {
+                            continue;
+                        }
+                        List alist = new ArrayList();
+                        s = s.replaceAll("\\[", "");
+                        String[] dataary = s.split(",");
+                        for (String d : dataary) {
+                            alist.add(d);
+                        }
+                        list.add(alist);
+                    }
+
+                }
+                int layoutid;
+                if (tag.contains("layout:")) {
+                    int layout = tag.indexOf("layout:");
+                    layout += 7;
+                    int layoutend = -1;
+                    if (tag.substring(layout).contains(";")) {
+                        layoutend = tag.indexOf(";", layout);
+
+                    } else {
+                        layoutend = tag.length();
+                    }
+                    String content = tag.substring(layout, layoutend);
+                    content = content.replaceAll(" ", "");
+                    layoutid = RRes.get("R.layout." + content).getAndroidValue();
+                } else {
+                    layoutid = R.layout.auto_string_item;
+                }
+                MapConf.with(newContext).conf(MapConf.with(newContext).source(layoutid)).source(list, view).toView();
+
+            }
+        }
     }
 }

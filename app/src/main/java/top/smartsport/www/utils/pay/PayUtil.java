@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.util.Map;
 import java.util.TreeMap;
 
+import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
@@ -57,7 +58,7 @@ public class PayUtil {
     public String wxappid;
 
 
-    public static void pay(final Activity ay, final String action, String type, String total,String id) {
+    public static void pay(final BaseActivity ay, final String action, String type, String total, String id) {
         final IWXAPI mWxApi = WXAPIFactory.createWXAPI(ay, "wx5939ba19b940fea1", true);
         mWxApi.registerApp("wx5939ba19b940fea1");
 
@@ -90,7 +91,7 @@ public class PayUtil {
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
-
+                ay.showToast(message);
             }
 
             @Override

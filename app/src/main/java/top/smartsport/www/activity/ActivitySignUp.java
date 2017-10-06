@@ -124,22 +124,24 @@ public class ActivitySignUp extends BaseActivity implements View.OnClickListener
             }
         });
 
-        MapConf.with(getBaseContext()).pair("details_title_tv->sign_up_title_tv")
+        MapConf.with(getBaseContext()).pair("details_title_iv->sign_up_iv").pair("details_title_tv->sign_up_title_tv")
                 .pair("details_time_tv->sign_up_hint_date_tv")
                 .pair("details_training_ground_tv->sign_up_hint_location_tv")
                 .pair("details_amount_tv->sign_up_price_tv","","replace(/年)").pair("details_amount_tv->sign_up_total_price_tv","","replace(/年)")
                 .source(parammap,this).toView();
         getTextView(R.id.sign_up_total_price_tv).setText(getTextString(R.id.sign_up_price_tv).replace("/年",""));
         if(enbale.equals("true")){
-            getView(R.id.sign_up_phone_tv).setEnabled(false);
-            getView(R.id.sign_up_contact_tv).setEnabled(false);
+//            getView(R.id.sign_up_phone_tv).setEnabled(false);
+//            getView(R.id.sign_up_contact_tv).setEnabled(false);
 
-            getView(R.id.sign_up_phone_iv).setEnabled(false);
-            getView(R.id.sign_up_contact_iv).setEnabled(false);
+
+//
+//            getView(R.id.sign_up_phone_iv).setEnabled(false);
+//            getView(R.id.sign_up_contact_iv).setEnabled(false);
             getView(R.id.sign_up_phone_iv).setVisibility(View.GONE);
             getView(R.id.sign_up_contact_iv).setVisibility(View.GONE);
 
-            getView(R.id.sign_up_member_iv).setEnabled(false);
+//            getView(R.id.sign_up_member_iv).setEnabled(false);
             getView(R.id.sign_up_member_iv).setVisibility(View.GONE);
 
         }

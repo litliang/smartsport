@@ -29,8 +29,10 @@ import java.util.Map;
 import app.base.MapAdapter;
 import app.base.MapConf;
 import app.base.MapContent;
+import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
+import intf.json.JsonToMapUtils;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.PICAdapter;
 import top.smartsport.www.base.BaseActivity;
@@ -125,9 +127,9 @@ public class BSDetailActivity extends BaseActivity {
         if (null != s) {
             //1报名中2进行中 3已结束 4已报满5已报名
             Map map = MapBuilder.build().add("1", "报名中").add("3", "已结束").add("2", "进行中").add("4", "已报满").add("5", "已报名").get();
-            if(map.values().contains(s)){
+            if (map.values().contains(s)) {
                 setBaominStatus(s);
-            }else {
+            } else {
                 Object o = map.get(s);
                 if (o == null) {
                     return;
@@ -197,6 +199,7 @@ public class BSDetailActivity extends BaseActivity {
 //        });
 
     }
+
     private void setBaominStatusInBaoming(Object o) {
         states = o.toString();
         if (states.equals("报名中")) {
@@ -270,30 +273,22 @@ public class BSDetailActivity extends BaseActivity {
     private List<PicInfo> picInfoList = new ArrayList<>();
 
     private void getDetail() {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("client_id", client_id);
-            json.put("state", state);
-            json.put("access_token", access_token);
-            json.put("action", "getMatchDetail");
-            json.put("id", id);
+        MapBuilder json = MapBuilder.build();
+            json.add("client_id", client_id);
+            json.add("state", state);
+            json.add("access_token", access_token);
+            json.add("action", "getMatchDetail");
+            json.add("id", id);
 
             //‘view_img’ : 1,  //选填 为1时显示全部赛事图片，不填默认显示4张
             //‘view_video’ : 1,  //选填 为1时显示全部赛事视频，不填默认显示6部
-            json.put("view_img", "1");
-            json.put("view_video", "1");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            json.add("view_img", "1");
+            json.add("view_video", "1");
 
-        X.Post(url, json, new MyCallBack<String>() {
+        BaseActivity.callHttp(json.get(), getView(R.id.content), new FunCallback() {
             @Override
-            protected void onFailure(String message) {
-                fl_loading.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onSuccess(NetEntity entity) {
+            public void onSuccess(Object result, List object) {
+                NetEntity entity = ((NetEntity)result);
                 fl_loading.setVisibility(View.GONE);
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
                 String collect_status = app.base.JsonUtil.findJsonLink("collect_status", entity.getData().toString()).toString();
@@ -306,7 +301,7 @@ public class BSDetailActivity extends BaseActivity {
                 setBaominStatusInBaoming(states);
                 MapConf.build().with(BSDetailActivity.this)
                         .pair("collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done")
-                        .pair("order_status->bs_detail_baoming", "","visible()").source(entity.getData().toString(), BSDetailActivity.this).toView();
+                        .pair("order_status->bs_detail_baoming", "", "visible()").source(entity.getData().toString(), BSDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
                 setBaominStatus(states);
                 ImageLoader.getInstance().displayImage(bsDetail.getCover(), adapter_bsss_img, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
@@ -324,7 +319,7 @@ public class BSDetailActivity extends BaseActivity {
                 if (bsDetail.getDescription().trim().equals("")) {
                     findViewById(R.id.saishijianjie).setVisibility(View.GONE);
                 }
-                if(states.toString().equals("报名中")) {
+                if (states.toString().equals("报名中")) {
                     bs_detail_baoming.setVisibility(View.VISIBLE);
                 } else {
                     bs_detail_baoming.setVisibility(View.INVISIBLE);
@@ -342,7 +337,9 @@ public class BSDetailActivity extends BaseActivity {
 //                        }
 //                    });
 //                }
-                picAdapter.addAll(picInfoList.subList(0, 3));
+                if(picInfoList!=null){
+                    picAdapter.addAll(picInfoList.subList(0, 3));
+                }
                 if (picAdapter.getCount() == 0) {
                     findViewById(R.id.pictitle).setVisibility(View.GONE);
                 }
@@ -360,12 +357,22 @@ public class BSDetailActivity extends BaseActivity {
                         b.putString("fileurl", ((Map) adapterView.getItemAtPosition(i)).get("fileurl").toString());
                         b.putString("name", ((Map) adapterView.getItemAtPosition(i)).get("name").toString());
 
-                        startActivity(new Intent(getBaseContext(),BSVideoActivity.class).putExtra("videoid",((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
+                        startActivity(new Intent(getBaseContext(), BSVideoActivity.class).putExtra("videoid", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
                     }
                 });
                 if (bs_detail_video.getCount() == 0) {
                     bs_detail_ll_video.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
+
             }
         });
     }

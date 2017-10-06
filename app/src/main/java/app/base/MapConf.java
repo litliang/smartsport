@@ -166,6 +166,18 @@ public class MapConf {
             if (item instanceof String) {
                 item = JsonUtil.extractJsonRightValue(((String) item));
             }
+            if (item instanceof List) {
+                if (((List) item).size() > 0) {
+                    if (((List) item).get(0) instanceof List) {
+                        fakeList();
+                        return;
+                    } else if (((List) item).get(0) instanceof String) {
+                        fakeList();
+                        return;
+                    }
+                }
+            }
+
 //            if (fieldnames.size() == 0 && viewsid.size() == 0) {
 //                link();
 //                return;
@@ -200,7 +212,7 @@ public class MapConf {
                             }
                             if (ix == names.length - 1) {
                                 if (value != null) {
-                                    findAndBindView(convertView, perItem, nnode + textepr,nnode + textepr, value, i);
+                                    findAndBindView(convertView, perItem, nnode + textepr, nnode + textepr, value, i);
                                     perItem = (Map<String, Object>) item;
                                     break;
                                 }
@@ -240,7 +252,7 @@ public class MapConf {
                             values.put(n, value);
                         }
                         if (values != null) {
-                            findAndBindView(convertView, item, name,name, values, i);
+                            findAndBindView(convertView, item, name, name, values, i);
                         }
 
                     } else {
@@ -253,7 +265,7 @@ public class MapConf {
                         value = JsonUtil.findJsonLink(n, item);
                         value = JsonUtil.extractJsonRightValue(value.toString());
                         if (value != null) {
-                            findAndBindView(convertView, item, name, name,value, i);
+                            findAndBindView(convertView, item, name, name, value, i);
                         }
                     }
 
@@ -265,6 +277,11 @@ public class MapConf {
         }
     }
 
+    private void fakeList() {
+
+        setView(item, item, "", "", convertView, convertView);
+    }
+
     private void link() {
         if (item instanceof String) {
             item = app.base.JsonUtil.extractJsonRightValue((String) item);
@@ -273,7 +290,7 @@ public class MapConf {
     }
 
     protected boolean findAndBindView(View convertView, Object item,
-                                      String name,String splitname, Object value, int fieldpos) {
+                                      String name, String splitname, Object value, int fieldpos) {
         if (value == null) {
             throw new IllegalArgumentException(
                     "check the 'value' data:ensure it is not null.thanq");
@@ -344,10 +361,10 @@ public class MapConf {
             }
             String longname = p.split("->")[0].split(":")[0];
             String finalname = "";
-            if(longname.contains("-")){
+            if (longname.contains("-")) {
                 String[] longnames = longname.split("-");
-                finalname = longnames[longnames.length-1];
-            }else{
+                finalname = longnames[longnames.length - 1];
+            } else {
                 finalname = longname;
             }
             mSwitchcase.put(finalname, mapBuilder.get());
@@ -381,22 +398,36 @@ public class MapConf {
             if (view instanceof ViewGroup) {
                 toMap(map, (ViewGroup) view);
             } else {
-                if (view instanceof TextView) {
-                    String text = ((TextView) view).getText().toString();
-                    Object o = RRes.getAttrValue_itsname().get(((TextView) view).getId());
-                    if (o != null && text != null) {
-                        if (viewsid.size() > 0) {
-                            if (viewsid.contains(view.getId())) {
-                                String name = fieldnames.get(viewsid.indexOf(view.getId()));
-                                map.put(name, text);
-                            }
-                        } else {
-                            if (!text.toString().trim().equals("")) {
-                                map.put(o.toString().substring(3), text);
+                Object o = RRes.getAttrValue_itsname().get(view.getId());
+                if (o != null) {
+                    o = o.toString().replace("id/","");
+                    if(viewsid.size()!=0){
+                        if(viewsid.contains(view.getId())){
+                            String name = fieldnames.get(viewsid.indexOf(view.getId()));
+                            if(name!=null){
+                            toMapInner(map, view, name);
+
                             }
                         }
                     }
+                    else {
+                        toMapInner(map, view, o);
+                    }
                 }
+            }
+        }
+    }
+
+    private void toMapInner(Map map, View view, Object o) {
+        if (view instanceof TextView) {
+            String text = ((TextView) view).getText().toString();
+            if (text != null) {
+                map.put(o.toString(), text);
+            }
+        } else if (view instanceof app.base.widget.ImageView) {
+            String url = ((app.base.widget.ImageView) view).getUrl();
+            if (url != null) {
+                map.put(o.toString(), url.toString());
             }
         }
     }
@@ -475,7 +506,10 @@ public class MapConf {
                 }
             }
         }
-
+        if (value.toString().contains(".") && resMaps.contains(value.toString().split("\\.")[0]) && value.toString().split("\\.")[0].length() != value.toString().length()) {
+            value = "R." + value.toString();
+            value = new Integer(RRes.get(value.toString()).getAndroidValue());
+        }
         if (name.toString().contains(":")) {
             String[] ns = name.toString().split(":");
             if (!(ns[1].contains("(") && ns[1].contains(")") && ns[1].contains("#"))) {
@@ -578,6 +612,12 @@ public class MapConf {
                         .setText(value instanceof SpannableStringBuilder ? (SpannableStringBuilder) value
                                 : value.toString());
             }
+
+        } else if (theView instanceof View) {
+            if (value instanceof Integer) {
+                theView.setBackgroundResource((Integer) value);
+            }
+
 
         }
         if (tackle != null) {

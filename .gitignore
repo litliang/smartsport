@@ -7,3 +7,5 @@
 /build
 /captures
 .externalNativeBuild
+app/src/main/java/app/auto
+app/src/main/res/layout/*auto_*.xml

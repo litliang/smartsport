@@ -204,7 +204,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
                             android:src="@mipmap/edit"
-                            android:tag="enableEditText(sign_up_member_tv)" />
+                             />
 
                         <EditText
                             android:id="@+id/sign_up_member_tv"
@@ -214,7 +214,7 @@
                             android:layout_marginRight="10px"
                             android:layout_toLeftOf="@id/sign_up_member_iv"
                             android:background="@color/color_transparent"
-                            android:enabled="false"
+                            
                             android:gravity="right"
                             android:hint="@string/sign_up_member_name"
                             android:textColor="@android:color/darker_gray"
@@ -255,8 +255,7 @@
                             android:layout_height="20dp"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
-                            android:src="@mipmap/edit"
-                            android:tag="enableEditText(sign_up_contact_tv)" />
+                            android:src="@mipmap/edit" />
 
                         <EditText
                             android:id="@+id/sign_up_contact_tv"
@@ -267,7 +266,7 @@
 
                             android:layout_toLeftOf="@id/sign_up_contact_iv"
                             android:background="@color/color_transparent"
-                            android:enabled="false"
+                            
                             android:gravity="right"
                             android:hint="@string/sign_up_contact_name"
                             android:textColor="@android:color/darker_gray"
@@ -308,8 +307,7 @@
                             android:layout_height="20dp"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
-                            android:src="@mipmap/edit"
-                            android:tag="enableEditText(sign_up_phone_tv)" />
+                            android:src="@mipmap/edit" />
 
                         <EditText
                             android:id="@+id/sign_up_phone_tv"
@@ -319,7 +317,7 @@
                             android:layout_marginRight="10px"
                             android:layout_toLeftOf="@id/sign_up_phone_iv"
                             android:background="@color/color_transparent"
-                            android:enabled="false"
+
                             android:gravity="right"
                             android:hint="12345678901"
                             android:inputType="number"

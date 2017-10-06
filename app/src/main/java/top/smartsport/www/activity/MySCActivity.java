@@ -35,7 +35,7 @@ public class MySCActivity extends BaseActivity {
     private PagerSlidingTabStrip qx_tab;
     @ViewInject(R.id.qx_viewpager)
     private ViewPager qx_viewpager;
-    private String[] tabTitle = {"青训课程","在线教案","比赛","资讯","教练"};
+    private String[] tabTitle = {"  青训课程  ","  在线教案  ","比赛","资讯","教练"};
     private QXZXAdapter qxzxAdapter;//比赛,直播adapter
     private FragmentManager fragmentManager;
 

@@ -12,18 +12,24 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import app.base.ActivityPool;
 import app.base.SPrefUtil;
 import app.base.framework.CrashHandler;
+import app.base.widget.HttpFrameLayout;
 import cn.jiguang.share.android.api.Platform;
 import intf.JsonUtil;
 
@@ -73,7 +79,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     public String getField(String s) {
         Object o = JsonUtil.findJsonLink(s, getInitData());
-        return o==null?"null":o.toString();
+        return o == null ? "null" : o.toString();
     }
 
     public CustomProgressDialog pd;
@@ -89,13 +95,15 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     public ImageView getImageView(int id) {
         return (ImageView) findViewById(id);
     }
+
     public View getView(int id) {
-        return  findViewById(id);
+        return findViewById(id);
     }
 
     public void setClick(int id, View.OnClickListener onclicklitener) {
         findViewById(id).setOnClickListener(onclicklitener);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +111,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+
 
         ActivityPool.getInstance().addActivity(this);
         ActivityStack.getInstance().addActivity(this);
@@ -118,6 +127,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         }
         initView();
     }
+
 
     public View actionbar;
 
@@ -154,9 +164,9 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         TEXT, IMAGE, URl, VIDEO
     }
 
-        String sharetitle;
-        String sharetxt;
-        String shareurl;
+    String sharetitle;
+    String sharetxt;
+    String shareurl;
 
     public String getSharetitle() {
         return sharetitle;
@@ -169,7 +179,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     }
 
     public String getSharetxt() {
-        return sharetxt.length()>30?sharetxt.substring(0,30):sharetxt;
+        return sharetxt.length() > 30 ? sharetxt.substring(0, 30) : sharetxt;
 
     }
 
@@ -191,25 +201,26 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     }
 
-    public void share(){
-        if(sharetitle==null){
+    public void share() {
+        if (sharetitle == null) {
             return;
         }
-        if(sharetxt==null){
+        if (sharetxt == null) {
             return;
         }
-        if(shareurl==null){
+        if (shareurl == null) {
             return;
         }
         ShareParams shareParams = new ShareParams();
         shareParams.setTitle(getSharetitle());
         shareParams.setText(getSharetxt());
         shareParams.setShareType(Platform.SHARE_WEBPAGE);
-        String uri = "https://ssapi.baibaobike.com/share.html?title="+getSharetitle()+"&content="+getSharetxt()+"&url="+getShareurl();
+        String uri = "https://ssapi.baibaobike.com/share.html?title=" + getSharetitle() + "&content=" + getSharetxt() + "&url=" + getShareurl();
         shareParams.setUrl(uri);
         setShareParams(shareParams, BaseActivity.Sharetype.URl);
 
     }
+
     public void setShareParams(ShareParams shareParams, final Sharetype type) {
         if (getTopBar() == null) {
             return;
@@ -281,7 +292,51 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         callHttp(map, null, funcall);
     }
 
-    public static void callHttp(final Map map, final BaseActivity aty, final FunCallback funcall) {
+    public static void callHttp(final Map map, final View view, final FunCallback funcall) {
+        BaseActivity baty;
+        if (view == null) {
+            baty = null;
+        } else {
+            baty = (BaseActivity) view.getContext();
+        }
+        final BaseActivity aty = baty;
+        HttpFrameLayout httpframeLayout = null;
+        View httploading = null;
+        if (view != null&&view.getParent()!=null&&!!view.getParent().getClass().getName().contains("ViewRootImpl")) {
+
+            ViewGroup parent = ((ViewGroup) view.getParent());
+            httpframeLayout = new HttpFrameLayout(baty);
+
+            RelativeLayout.LayoutParams rl = null;
+            if (view.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+                rl = getrRelativeLayoutParams(view);
+
+
+            }
+
+            if (!view.getClass().getName().contains("com.android.internal.policy.PhoneWindow$DecorView") && parent != null) {
+
+                if (parent instanceof HttpFrameLayout) {
+
+                } else {
+                    int idx = parent.indexOfChild(view);
+                    if (rl != null) {
+                        parent.addView(httpframeLayout, rl);
+
+                    } else {
+                        parent.addView(httpframeLayout, new FrameLayout.LayoutParams(-1, -1));
+                    }
+                    parent.removeView(view);
+                    httpframeLayout.addView(view);
+                    parent = httpframeLayout;
+                }
+                httploading = new ViewInflater(aty).inflate(R.layout.activity_base_loading, null);
+
+                parent.addView(httploading, new FrameLayout.LayoutParams(-1, -1));
+
+            }
+        }
+
         RegInfo regInfo = RegInfo.newInstance();
         TokenInfo tokenInfo = TokenInfo.newInstance();
 
@@ -301,6 +356,8 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        final HttpFrameLayout frameLayout = httpframeLayout;
+        final View loading = httploading;
         X.Post(url, json, new MyCallBack<String>() {
             @Override
             protected void onFailure(String message) {
@@ -309,23 +366,49 @@ public abstract class BaseActivity extends AutoLayoutActivity {
                 if (aty != null) {
                     aty.showToast(message);
                 }
+
+
             }
 
             @Override
             public void onSuccess(NetEntity entity) {
                 funcall.<NetEntity>onSuccessConnected(entity);
                 funcall.<NetEntity>onCallbackConnected(entity);
+                if (frameLayout != null && loading != null) {
+                    frameLayout.removeView(loading);
+
+                }
             }
 
             @Override
             public void onError(Throwable throwable, boolean b) {
                 super.onError(throwable, b);
-                funcall.onCallbackConnected("发生点小问题："+throwable.getMessage());
+                funcall.onCallbackConnected("发生点小问题：" + throwable.getMessage());
 //                funcall.onCallbackConnected(throwable);
+                if (aty != null) {
+                    aty.showToast(throwable.getMessage());
+                }
             }
 
 
         });
+    }
+
+    @NonNull
+    private static RelativeLayout.LayoutParams getrRelativeLayoutParams(View view) {
+        RelativeLayout.LayoutParams rl;
+        int below = ((RelativeLayout.LayoutParams) view.getLayoutParams()).getRule(RelativeLayout.BELOW);
+        int above = ((RelativeLayout.LayoutParams) view.getLayoutParams()).getRule(RelativeLayout.ABOVE);
+        int rightof = ((RelativeLayout.LayoutParams) view.getLayoutParams()).getRule(RelativeLayout.RIGHT_OF);
+        int leftof = ((RelativeLayout.LayoutParams) view.getLayoutParams()).getRule(RelativeLayout.LEFT_OF);
+        int w = ((RelativeLayout.LayoutParams) view.getLayoutParams()).width;
+        int h = ((RelativeLayout.LayoutParams) view.getLayoutParams()).height;
+        rl = new RelativeLayout.LayoutParams(w, h);
+        rl.addRule(RelativeLayout.BELOW, below);
+        rl.addRule(RelativeLayout.ABOVE, above);
+        rl.addRule(RelativeLayout.RIGHT_OF, rightof);
+        rl.addRule(RelativeLayout.LEFT_OF, leftof);
+        return rl;
     }
 
     public String getClient_id() {

@@ -86,7 +86,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
 
-        <!-- 欢迎页 -->
+        <!-- 欢迎页 ActionUIActivity -->
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -148,13 +148,16 @@
         <!-- 账户设置 -->
         <activity
             android:name=".activity.AccountSetActivity"
-            android:label="@string/label_account_set" /> <!-- 账户设置 -->
+            android:label="@string/label_account_set" />
+        <!-- 账户设置 -->
         <activity
             android:name=".activity.MyOrderActivity"
-            android:label="我的订单" /> <!-- 我的订单 -->
+            android:label="我的订单" />
+        <!-- 我的订单 -->
         <activity
             android:name=".activity.OrderDetailsActivity"
-            android:label="我的订单" /> <!-- 我的订单 -->
+            android:label="我的订单" />
+        <!-- 我的订单 -->
 
         <activity
             android:name=".activity.AddMemberActivity"
@@ -252,7 +255,8 @@
         <!-- 订单确认 -->
         <activity
             android:name=".activity.OrderCMActivity"
-            android:label="@string/label_order_cm" />`
+            android:label="@string/label_order_cm" />
+        `
         <!-- 球队主页 -->
         <activity
             android:name=".activity.QDHomeActivity"
@@ -276,8 +280,8 @@
         <!-- 比赛报名 -->
         <activity
             android:name=".activity.BSSignUpActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:label="赛事报名" />
+            android:label="赛事报名"
+            android:windowSoftInputMode="adjustPan" />
 
         <!-- 推送消息设置 -->
         <activity
@@ -334,8 +338,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.ActivitySignUp"
-            android:windowSoftInputMode="adjustPan"
-            android:label="青训报名" />
+            android:label="青训报名"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.ActivityOrderConfirm"
             android:label="@string/confirm_title" />
@@ -514,19 +518,19 @@
             android:label="在线教案" />
         <activity
             android:name=".activity.AllJiaolianActivity"
-            android:label="全部教练"></activity>
+            android:label="全部教练" />
         <activity
             android:name=".activity.AllKechengActivity"
-            android:label="全部课程"></activity>
+            android:label="全部课程" />
         <activity
             android:name=".activity.ActivityDataAnalysis"
-            android:label="数据分析"></activity>
-        <!-- 服务协议-->
-        <activity
-            android:name=".activity.AboutServiceActivity" />
+            android:label="数据分析" />
+        <!-- 服务协议 -->
+        <activity android:name=".activity.AboutServiceActivity" />
 
         <!-- 选择头像 -->
         <activity
+
             android:name=".activity.ActivityChooseIcon"
             android:theme="@style/my_dialog" />
 
@@ -534,6 +538,7 @@
         <activity
             android:name=".activity.ActivityBuyCustomVedio"
             android:label="购买定制视频" />
+        <!--<activity android:name="app.auto.ActionUIActivity" android:label="" ></activity>-->
     </application>
 
 </manifest>

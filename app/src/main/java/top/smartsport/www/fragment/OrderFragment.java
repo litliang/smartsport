@@ -96,6 +96,7 @@ public class OrderFragment extends BaseV4Fragment {
         state = regInfo.getSeed_secret();
         url = regInfo.getSource_url();
         access_token = tokenInfo.getAccess_token();
+        mlistview.setMode(PullToRefreshListView.Mode.BOTH);
         mlistview.setOnRefreshListener(new com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2<ListView>() {
 
             @Override
@@ -114,15 +115,22 @@ public class OrderFragment extends BaseV4Fragment {
         getData(true);
     }
 //
-
+    List list = new ArrayList();
 
     private void getData(final boolean refresh) {
+        if (refresh) {
+            page = 1;
+        } else {
+            page++;
+        }
+
         JSONObject json = new JSONObject();
         try {
             json.put("client_id", client_id);
             json.put("state", state);
             json.put("access_token", access_token);
             json.put("action", "getMyOrders");
+
             json.put("page", page);
             if (status != 2) {
                 json.put("pay_status", status);
@@ -137,20 +145,40 @@ public class OrderFragment extends BaseV4Fragment {
                 mlistview.onRefreshComplete();
             }
 
+
+
             @Override
             public void onSuccess(NetEntity entity) {
+
                 String data = entity.getData().toString();
-                mList = (List) JsonUtil.extractJsonRightValue(entity.getData().toString());
-                if (refresh) {
-                    if (mList != null && mList.size() > 0) {
+                try {
+                    mList = (List) JsonUtil.extractJsonRightValue(entity.getData().toString());
+                }catch(Exception e){
+                    mList = null;
+                }
+
+                if (mList != null && mList.size() > 0) {
+                    if (refresh) {
+
                         empty.setVisibility(View.GONE);
-                    } else {
+                        list.clear();
+
+                    }
+
+                    list.addAll(mList);
+                } else {
+                    if (list.size() == 0) {
                         empty.setVisibility(View.VISIBLE);
+                    } else {
+                        mlistview.onRefreshComplete();
+                        showToast("已经到底了");
+                        mlistview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                        return;
                     }
                 }
-                mlistview.onRefreshComplete();
 
-//                adapter.setData(mList);
+
+
                 MapConf mc = MapConf.with(getContext())
                         .pair("cover_url->iv_pic")
                         .pair("title->tv_title")
@@ -159,7 +187,7 @@ public class OrderFragment extends BaseV4Fragment {
                         .pair("pay_total:￥%s->tv_price")
                         .pair("pay_status->pay_status", "0:未支付;1:已支付", "showPayStatus()")
                         .source(R.layout.list_item);
-                MapConf.with(getContext()).conf(mc).source(data, mlistview.getRefreshableView()).toView();
+                MapConf.with(getContext()).conf(mc).source(list, mlistview.getRefreshableView()).toView();
                 mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -188,7 +216,7 @@ public class OrderFragment extends BaseV4Fragment {
 //                            startActivity(new Intent(getContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
 //
 //                            }else{
-                                startActivity(new Intent(view.getContext(),ActivityTrainingDetails.class).putExtra("id", m.get("id").toString()));
+                            startActivity(new Intent(view.getContext(), ActivityTrainingDetails.class).putExtra("id", m.get("id").toString()));
 //
 //                            }
 
@@ -201,10 +229,10 @@ public class OrderFragment extends BaseV4Fragment {
 //
 //                            }else{
 
-                                Bundle bundle = new Bundle();
-                                bundle.putString(BSDetailActivity.TAG, m.get("id").toString());
-                                bundle.putString("states", m.get("status").toString());
-                                toActivity(BSDetailActivity.class, bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(BSDetailActivity.TAG, m.get("id").toString());
+                            bundle.putString("states", m.get("status").toString());
+                            toActivity(BSDetailActivity.class, bundle);
 //                            }
 
                         } else if (m.get("product_type").toString().equals("3")) {
@@ -219,8 +247,15 @@ public class OrderFragment extends BaseV4Fragment {
             public void onError(Throwable throwable, boolean b) {
                 super.onError(throwable, b);
             }
+
+            @Override
+            public void onFinished() {
+                super.onFinished();
+                mlistview.onRefreshComplete();
+            }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
