@@ -149,11 +149,11 @@ public class QDHomeActivity extends BaseActivity{
                         tv_draw.setText("平: " + param.optString("draw"));
                         tv_loss.setText("负: " + param.optString("loss"));
                     } else {
-                        tv_ranking.setText("排名: ");
-                        tv_integral.setText("积分: ");
-                        tv_win.setText("胜: ");
-                        tv_draw.setText("平: ");
-                        tv_loss.setText("负: ");
+                        tv_ranking.setText("排名: 0");
+                        tv_integral.setText("积分: 0");
+                        tv_win.setText("胜: 0");
+                        tv_draw.setText("平: 0");
+                        tv_loss.setText("负: 0");
                     }
                     JSONObject members = dataObject.optJSONObject("members");
                     JSONArray coach = members.optJSONArray("coach"); // 教练
