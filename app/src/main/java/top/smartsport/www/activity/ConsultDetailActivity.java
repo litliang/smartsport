@@ -176,7 +176,8 @@ public class ConsultDetailActivity extends BaseActivity {
 
 
                 MapConf.build().with(ConsultDetailActivity.this)
-                        .pair("detail-", "0:mipmap.fav_undo;1:mipmap.fav_done").pair("detail-author->tv_name").source(data, ConsultDetailActivity.this).toView();
+                        .pair("detail-collect_status->ivRight_text", "0:mipmap.fav_undo;1:mipmap.fav_done")
+                        .pair("detail-author->tv_name").source(data, ConsultDetailActivity.this).toView();
                 setFaved(!collect_status.equals("0"));
                 ZXInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), ZXInfoDetail.class);
                 setSharetitle(details.getTitle());

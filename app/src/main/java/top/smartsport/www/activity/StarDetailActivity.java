@@ -3,6 +3,7 @@ package top.smartsport.www.activity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -45,10 +46,10 @@ public class StarDetailActivity extends BaseActivity {
     protected void initView() {
         share();
         final String data = getIntent().getStringExtra("id");
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("id",getIntent().getStringExtra("id")).get(), this, new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("id",getIntent().getStringExtra("id")).get(), getView(R.id.content), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-                fl_loading.setVisibility(View.GONE);
+//                fl_loading.setVisibility(View.GONE);
                 Gson gson = new Gson();
                 String data = ((NetEntity)result).getData().toString();
                 try {
@@ -69,6 +70,9 @@ public class StarDetailActivity extends BaseActivity {
                 }
 
 
+//                RelativeLayout l = new RelativeLayout(getBaseContext());
+
+
 //                MapConf.with(getBaseContext()).pair("players[0]-name->tv_name").pair("players[0]-team_name->tv_team").pair("players[0]-cover_url->iv_top_pic").pair("players[0]-introduce->tv_introduce_star").pair("players[0]-stage->tv_week").source(((NetEntity)result).getData().toString(),StarDetailActivity.this).toView();
                 String title = !TextUtils.isEmpty(getTextString(R.id.tv_name)) ? getTextString(R.id.tv_name) : "球星名称";
                 String shareText = !TextUtils.isEmpty(getTextString(R.id.tv_introduce_star)) ? getTextString(R.id.tv_introduce_star) : "球星介绍。图文介绍。";
@@ -79,7 +83,7 @@ public class StarDetailActivity extends BaseActivity {
             }
             @Override
             public void onFailure(Object result, List object) {
-                fl_loading.setVisibility(View.GONE);
+//                fl_loading.setVisibility(View.GONE);
             }
             @Override
             public void onCallback(Object result, List object) {

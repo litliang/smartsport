@@ -13,7 +13,7 @@
         <include layout="@layout/layout_actionbar" />
     </FrameLayout>
 
-    <ScrollView
+    <ScrollView android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/action_bar"
@@ -132,7 +132,7 @@
         </RelativeLayout>
     </ScrollView>
 
-    <FrameLayout
+    <FrameLayout android:visibility="gone"
         android:id="@+id/fl_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -72,7 +72,7 @@ public class WQQXActivity extends BaseActivity {
     }
 
     private void reload(final boolean refresh) {
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("page", page).get(), WQQXActivity.this, new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("page", page).get(), WQQXActivity.this.findViewById(R.id.content), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
                 if (refresh){

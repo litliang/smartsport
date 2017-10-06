@@ -31,9 +31,9 @@ public class BSSignUpActivity extends BaseActivity implements View.OnClickListen
 
     ImageView mIv;
     TextView mTitleTv, mTitleHintTv, mPriceTv,
-            mOldPriceTv, mTotalPriceTv,  mRefundTv,
+            mOldPriceTv, mTotalPriceTv, mRefundTv,
             mDisclaimerTv, mBuyVideoPriceTv, mBuyVideoContentTv,
-             mTeamNameEdt, mMemberNameTv, mContactTv, mPhoneTv;
+            mTeamNameEdt, mMemberNameTv, mContactTv, mPhoneTv;
     AutoLinearLayout mTeamLayout, mMemberLayout, mContactLayout, mPhoneLayout;
     Button mPayBtn;
 
@@ -100,12 +100,12 @@ public class BSSignUpActivity extends BaseActivity implements View.OnClickListen
 //                });
             }
         });
-findViewById(R.id.buyvideo).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(getBaseContext(),BuyVipActivity.class).putExtra("total","111"));
-    }
-});
+        findViewById(R.id.buyvideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), BuyVipActivity.class).putExtra("total", "111"));
+            }
+        });
     }
 
     @Override

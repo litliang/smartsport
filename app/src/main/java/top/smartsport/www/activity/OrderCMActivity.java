@@ -47,7 +47,6 @@ public class OrderCMActivity extends BaseActivity {
         ivPay[1] = iv_sel_weixin;
         ivPay[2] = iv_sel_xianxia;
         final String type = bundel.getString("type");
-        selPayType(Integer.valueOf(type).intValue());
         id = bundel.getString("product_id");
         findViewById(R.id.ssbm_pay).setOnClickListener(new View.OnClickListener() {
             @Override

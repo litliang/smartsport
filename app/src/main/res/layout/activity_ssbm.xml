@@ -470,7 +470,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
             <TextView
                 android:id="@+id/ssbm_pay"
                 android:layout_width="match_parent"

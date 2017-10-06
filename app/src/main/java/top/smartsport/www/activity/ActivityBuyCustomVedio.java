@@ -53,7 +53,7 @@ public class ActivityBuyCustomVedio extends BaseActivity{
     }
 
     private void requestServer(){
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getPackage").get(), this, new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getPackage").get(), getWindow().getDecorView(), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
                 String data = ((NetEntity)result).getData().toString();

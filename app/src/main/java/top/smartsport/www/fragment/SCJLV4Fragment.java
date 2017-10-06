@@ -14,6 +14,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import app.base.MapConf;
 import intf.FunCallback;
@@ -76,10 +77,8 @@ public class SCJLV4Fragment extends BaseV4Fragment {
         pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Gson gson = new Gson();
-                    String json = gson.toJson(mList.get(i));
-                Coaches coache = top.smartsport.www.utils.JsonUtil.jsonToEntity(json,Coaches.class);
-                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("data", coache));
+
+                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("id").toString()));
             }
         });
     }
@@ -113,8 +112,10 @@ public class SCJLV4Fragment extends BaseV4Fragment {
                 }
                 String data = ((NetEntity)result).getData().toString();
                 list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
-                if (list.size() > 0){
+                if (list.size() > 0&&list.get(0)!=null&&!list.get(0).toString().equals("null")){
                     empty.setVisibility(View.GONE);
+                }else{
+                    return;
                 }
                 mList.addAll(list);
                 mAdapter.setData(mList);

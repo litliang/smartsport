@@ -59,8 +59,8 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
         pullrefreshlistview = (PullToRefreshListView) root.findViewById(R.id.pullrefreshlistview);
         MapAdapter.AdaptInfo adaptinfo = new MapAdapter.AdaptInfo();
         adaptinfo.addListviewItemLayoutId(R.layout.qingxun_qingxunkecheng);
-        adaptinfo.addViewIds(new Integer[]{R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge});
-        adaptinfo.addObjectFields(new String[]{"cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus"});
+                adaptinfo.addViewIds(new Integer[]{R.id.woyaobaoming,R.id.image, R.id.title, R.id.date, R.id.address, R.id.u16, R.id.price, R.id.coach_head, R.id.coach_name, R.id.haishengjigeminge});
+        adaptinfo.addObjectFields(new String[]{"status","cover_url", "title", "start_time", "address", "level", "sell_price", "coach_header", "coach_name", "surplus"});
         mapadapter = new MapAdapter(getContext(), adaptinfo) {
             @Override
             protected boolean findAndBindView(View convertView, int pos, Object item, String name, Object value) {
@@ -83,7 +83,12 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
                         ((TextView) convertView.findViewById(R.id.woyaobaoming)).setTextColor(getResources().getColor(R.color.theme_color,null));
                     }
                     value = "还剩" + value + "个名额";
+                } else if (name.equals("status")) {
+                    ////1报名中2已报满3已结束
+                    Map m = MapBuilder.build().add("1","报名中").add("2","已报满").add("3","已结束").get();
+                    value = m.get(value.toString());
                 }
+
                 super.findAndBindView(convertView, pos, item, name, value);
 
                 return true;

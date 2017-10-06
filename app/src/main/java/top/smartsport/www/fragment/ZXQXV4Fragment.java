@@ -214,7 +214,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
             }
         });
         getData();
-        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").get(), (BaseActivity) getActivity(), new FunCallback() {
+        BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").get(), root, new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
                 MapConf mc = MapConf.with(getContext()).pairs("name->players_name","team_name->players_dis","cover_url->players_img","stage:%s\n期->players_num").source(R.layout.adapter_players);
