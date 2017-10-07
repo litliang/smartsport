@@ -327,7 +327,7 @@ public class BSDetailActivity extends BaseActivity {
                 setSharetxt(bsDetail.getAddress());
                 setShareurl(bsDetail.getCover());
                 adapter_bsss_title.setText(bsDetail.getName());
-                adapter_bsss_date.setText(bsDetail.getStart_time() + "至" + bsDetail.getEnd_time());
+                adapter_bsss_date.setText(bsDetail.getStart_time() + " 至 " + bsDetail.getEnd_time());
                 adapter_bsss_address.setText(bsDetail.getAddress());
                 adapter_bsss_level.setText(bsDetail.getLevel());
                 adapter_bsss_people.setText(bsDetail.getType());

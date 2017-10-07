@@ -41,6 +41,7 @@
             android:layout_marginTop="@dimen/margin_left"
             android:layout_marginLeft="@dimen/margin_left"
             android:layout_marginRight="@dimen/margin_left"
+
             />
         <TextView
             android:id="@+id/tv_team"
@@ -49,7 +50,7 @@
             android:text="上海市国际青训学校主教练"
             android:textColor="@color/font_gray"
             android:textSize="@dimen/text_size_notice"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="25px"
             android:layout_marginLeft="@dimen/margin_left"
             android:layout_marginRight="@dimen/margin_left"
             />

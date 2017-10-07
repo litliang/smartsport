@@ -2,6 +2,7 @@ package top.smartsport.www.activity;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class StarDetailActivity extends BaseActivity {
     @ViewInject(R.id.tv_team)
     private TextView tv_team;
     @ViewInject(R.id.tv_introduce_star)
-    private TextView tv_introduce_star;
+    private WebView tv_introduce_star;
     @ViewInject(R.id.tv_week)
     private TextView tv_week;
     @ViewInject(R.id.fl_loading)
@@ -60,7 +61,7 @@ public class StarDetailActivity extends BaseActivity {
                         StarDetail starDetail = top.smartsport.www.utils.JsonUtil.jsonToEntity(playersItem.toString(), StarDetail.class);
                         tv_name.setText(starDetail.getName());
                         tv_team.setText(starDetail.getTeam_name());
-                        tv_introduce_star.setText(starDetail.getIntroduce());
+                        tv_introduce_star.loadData(starDetail.getIntroduce(), "text/html;charset=UTF-8", null);
                         tv_week.setText(starDetail.getStage());
                         String coverUrl = starDetail.getCover_url();
                         ImageLoader.getInstance().displayImage(coverUrl, iv_top_pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
@@ -75,7 +76,7 @@ public class StarDetailActivity extends BaseActivity {
 
 //                MapConf.with(getBaseContext()).pair("players[0]-name->tv_name").pair("players[0]-team_name->tv_team").pair("players[0]-cover_url->iv_top_pic").pair("players[0]-introduce->tv_introduce_star").pair("players[0]-stage->tv_week").source(((NetEntity)result).getData().toString(),StarDetailActivity.this).toView();
                 String title = !TextUtils.isEmpty(getTextString(R.id.tv_name)) ? getTextString(R.id.tv_name) : "球星名称";
-                String shareText = !TextUtils.isEmpty(getTextString(R.id.tv_introduce_star)) ? getTextString(R.id.tv_introduce_star) : "球星介绍。图文介绍。";
+                String shareText = !TextUtils.isEmpty(((WebView)getView(R.id.tv_introduce_star)).getTitle()) ? ((WebView)getView(R.id.tv_introduce_star)).getTitle() : "球星介绍。图文介绍。";
                 String shareUrl = !TextUtils.isEmpty(((ImageView)getView(R.id.iv_top_pic)).getUrl()) ? ((ImageView)getView(R.id.iv_top_pic)).getUrl() : "--";
                 setSharetitle(title);
                 setSharetxt(shareText);

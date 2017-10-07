@@ -37,7 +37,7 @@ public class WQQXActivity extends BaseActivity {
     PullToRefreshListView pullrefreshlistview;
     @ViewInject(R.id.mykcempty)
     ViewGroup empty;
-    private int page =1;
+    private int page = 1;
     private SCCoatchAdapter mAdapter;
     private List mList;
     private List<StarDetail> list;
@@ -45,20 +45,20 @@ public class WQQXActivity extends BaseActivity {
     @Override
     protected void initView() {
         back();
-        ((TextView)findViewById(R.id.empty)).setText("还没有任何往期球星");
+        ((TextView) findViewById(R.id.gojoinlesson)).setText("还没有任何往期球星");
         mAdapter = new SCCoatchAdapter(false);
         pullrefreshlistview.getRefreshableView().setAdapter(mAdapter);
         pullrefreshlistview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                page =1;
+                page = 1;
                 reload(true);
 
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                page ++;
+                page++;
                 reload(false);
             }
         });
@@ -66,7 +66,7 @@ public class WQQXActivity extends BaseActivity {
         pullrefreshlistview.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getBaseContext(), StarDetailActivity.class).putExtra("id", ((Map)adapterView.getItemAtPosition(i)).get("id").toString()));
+                startActivity(new Intent(getBaseContext(), StarDetailActivity.class).putExtra("id", ((Map) adapterView.getItemAtPosition(i)).get("id").toString()));
             }
         });
     }
@@ -75,36 +75,48 @@ public class WQQXActivity extends BaseActivity {
         BaseActivity.callHttp(MapBuilder.build().add("action", "getRecommendPlayers").add("page", page).get(), WQQXActivity.this.findViewById(R.id.content), new FunCallback() {
             @Override
             public void onSuccess(Object result, List object) {
-                if (refresh){
+                if (refresh) {
                     pullrefreshlistview.onPullDownRefreshComplete();
+                    pullrefreshlistview.setHasMoreData(true);
                     mList = new ArrayList();
-                }else {
+                } else {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
                 findViewById(R.id.mykcempty).setVisibility(View.GONE);
-                String data = ((NetEntity)result).getData().toString();
-                list = (List<StarDetail>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("players",data).toString());
-                if (list.size() > 0){
+                String data = ((NetEntity) result).getData().toString();
+                if (JsonUtil.findJsonLink("players", data).toString().equals("null")) {
+                    list = new ArrayList<StarDetail>();
+                } else {
+                    list = (List<StarDetail>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("players", data).toString());
+                }
+                if (list.size() > 0) {
                     empty.setVisibility(View.GONE);
                 }
+                if (list.size() == 0) {
+                    showToast("已经到底了");
+                    pullrefreshlistview.onPullUpRefreshComplete();
+                    return;
+                }
                 mList.addAll(list);
+
                 mAdapter.setData(mList);
-                MapConf mc = MapConf.with(getBaseContext()).pairs("name->players_name","team_name->players_dis","cover_url->players_img","stage:%s\n期->players_num").source(R.layout.wqqx_adapter);
+                MapConf mc = MapConf.with(getBaseContext()).pairs("name->players_name", "team_name->players_dis", "cover_url->players_img", "stage:%s\n期->players_num").source(R.layout.wqqx_adapter);
 //                MapConf.with(getBaseContext()).conf(mc).source(intf.JsonUtil.findJsonLink("players",((NetEntity)result).getData().toString()).toString(),pullrefreshlistview.getRefreshableView()).toView();
-                MapConf.with(getBaseContext()).conf(mc).source(mList,pullrefreshlistview.getRefreshableView()).toView();
+                MapConf.with(getBaseContext()).conf(mc).source(mList, pullrefreshlistview.getRefreshableView()).toView();
             }
 
             @Override
             public void onFailure(Object result, List object) {
+
+            }
+
+            @Override
+            public void onCallback(Object result, List object) {
                 if (refresh) {
                     pullrefreshlistview.onPullDownRefreshComplete();
                 } else {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
-            }
-
-            @Override
-            public void onCallback(Object result, List object) {
 
             }
         });

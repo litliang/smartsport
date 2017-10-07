@@ -98,10 +98,10 @@ public class AccountSetActivity extends BaseActivity {
 
                     SPUtils.put(getBaseContext(), "getUserInfo", data);
                     SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
-                    MapConf.with(getBaseContext()).pair("username->username").pair("truename->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
+                    MapConf.with(getBaseContext()).pair("username->username").pair("truename->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height:%s cm->account_height").pair("weight:%s kg->account_weight")
                             .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
                             .pair("header_url->account_header")
-                            .pair("soccer_age->account_ql")
+                            .pair("soccer_age:%s 年->account_ql")
                             .pair("address->account_jz")
                             .source(data, getWindow().getDecorView()).toView();
                 }
@@ -307,9 +307,9 @@ public class AccountSetActivity extends BaseActivity {
                 Log.e("smile", " onSuccess   entity.getImg_id() =   " + icon_imgId);
                 MapConf.with(getBaseContext()).pair("header", icon_imgId);
                 data_map = MapConf.with(getBaseContext()).pair("username->username").pair("username->truename").pair("age->account_age").pair("sex->account_sex","0:女;1:男").pair("height->account_height").pair("weight->account_weight")
-                        .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
+                        .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚;0:未知")
                         .pair("header_url->account_header")
-                        .pair("soccer_age->account_ql")
+                        .pair("soccer_age:%s 年->account_ql")
                         .pair("address->account_jz")
                         .pair("header", icon_imgId)
                         .toMap(AccountSetActivity.this);
