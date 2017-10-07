@@ -203,6 +203,7 @@ public class QDHomeActivity extends BaseActivity{
                             qyInfo.setPosition(playerItem.optString("position"));
                             qyInfo.setHeader(playerItem.optString("header"));
                             qyInfo.setHeader_url(playerItem.optString("header_url"));
+                            qyInfo.setTeam_name(playerItem.optString("team_name"));
                             qyInfoList.add(qyInfo);
                         }
                     }
