@@ -13,10 +13,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -32,19 +35,19 @@ import app.base.MapContent;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
-import intf.json.JsonToMapUtils;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.PICAdapter;
+import top.smartsport.www.adapter.ScheduleAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.BSDetail;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.PicInfo;
 import top.smartsport.www.bean.RegInfo;
+import top.smartsport.www.bean.Schedule;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.widget.MyGridView;
-import top.smartsport.www.xutils3.MyCallBack;
-import top.smartsport.www.xutils3.X;
+import top.smartsport.www.widget.MyListView;
 
 /**
  * Created by Aaron on 2017/7/25.
@@ -84,6 +87,9 @@ public class BSDetailActivity extends BaseActivity {
     private RelativeLayout adapter_bsss_rl_pay;
     @ViewInject(R.id.fl_loading)
     private FrameLayout fl_loading;
+    @ViewInject(R.id.bs_detail_listView)
+    private MyListView bs_detail_listView;
+    private ScheduleAdapter adapter;
 
     private String id;
     private String states;
@@ -110,6 +116,8 @@ public class BSDetailActivity extends BaseActivity {
     @ViewInject(R.id.action_bar)
     private View actionbar;
 
+    private List<Schedule> mListSchedule;
+
     @Override
     public View getTopBar() {
         return actionbar;
@@ -119,6 +127,7 @@ public class BSDetailActivity extends BaseActivity {
     protected void initView() {
         back();
         fav();
+        mListSchedule = new ArrayList<>();
 //        ((TextView) actionbar.findViewById(R.id.tvTitle)).setText("比赛");
         id = (String) getObj(BSDetailActivity.TAG);
         String s = (String) getObj("states");
@@ -197,7 +206,13 @@ public class BSDetailActivity extends BaseActivity {
 //                startActivity(new Intent(getBaseContext(), BSSignUpActivity.class));
 //            }
 //        });
+        bs_detail_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO 对决列表的item点击
 
+            }
+        });
     }
 
     private void setBaominStatusInBaoming(Object o) {
@@ -273,7 +288,7 @@ public class BSDetailActivity extends BaseActivity {
     private List<PicInfo> picInfoList = new ArrayList<>();
 
     private void getDetail() {
-        MapBuilder json = MapBuilder.build();
+        final MapBuilder json = MapBuilder.build();
             json.add("client_id", client_id);
             json.add("state", state);
             json.add("access_token", access_token);
@@ -289,6 +304,8 @@ public class BSDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(Object result, List object) {
                 NetEntity entity = ((NetEntity)result);
+                String data = ((NetEntity)result).getData().toString();
+                LogUtil.d("---------data------->" + data);
                 fl_loading.setVisibility(View.GONE);
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
                 String collect_status = app.base.JsonUtil.findJsonLink("collect_status", entity.getData().toString()).toString();
@@ -363,6 +380,33 @@ public class BSDetailActivity extends BaseActivity {
                 if (bs_detail_video.getCount() == 0) {
                     bs_detail_ll_video.setVisibility(View.GONE);
                 }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    JSONArray schedule = jsonObject.optJSONArray("schedule");
+                    if(schedule != null && schedule.length() > 0) {
+                        Gson gson = new Gson();
+                        for (int i = 0; i < schedule.length(); i++) {
+                            JSONObject scheduleItem = schedule.optJSONObject(i);
+                            Schedule scheduleBase = gson.fromJson(scheduleItem.toString(), Schedule.class);
+                            mListSchedule.add(scheduleBase);
+                        }
+                    }
+                    bs_detail_ll__listView.setVisibility(View.VISIBLE);
+                    if(mListSchedule != null && mListSchedule.size() > 0) {
+                        // 显示对决列表
+                        adapter = new ScheduleAdapter(getBaseContext(), mListSchedule);
+                        bs_detail_listView.setAdapter(adapter);
+                    } else {
+                        // TODO 显示假数据：
+//                        mListSchedule = new Schedule().getData();
+//                        adapter = new ScheduleAdapter(getBaseContext(), mListSchedule);
+//                        bs_detail_listView.setAdapter(adapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

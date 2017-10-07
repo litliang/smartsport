@@ -13,6 +13,7 @@ import top.smartsport.www.R;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.ZJInfo;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.utils.ViewHolder;
 
 /**
@@ -55,8 +56,20 @@ class ZJViewHolder extends ViewHolder{
 
     public void init(ZJInfo info){
         ImageLoader.getInstance().displayImage(info.getHeader_url(), adapter_home_header, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
-        adapter_home_name.setText(info.getName());
-        adapter_home_content.setText(info.getTitle());
+        String name = info.getName();
+        if(!StringUtil.isEmpty(name)) {
+            adapter_home_name.setText(name);
+        } else {
+            adapter_home_name.setText("");
+        }
+        String title = info.getTitle();
+        if(!StringUtil.isEmpty(title)) {
+            adapter_home_content.setText(title);
+        } else {
+            adapter_home_content.setText("");
+        }
+//        adapter_home_name.setText(info.getName());
+//        adapter_home_content.setText(info.getTitle());
     }
 
 }

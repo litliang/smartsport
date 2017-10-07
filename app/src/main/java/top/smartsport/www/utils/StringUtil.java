@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *  字符串 常用工具
@@ -45,6 +47,34 @@ public class StringUtil {
         DecimalFormat df = new DecimalFormat("0.00");
         double d = Double.valueOf(value);
         return df.format(d);
+    }
+
+    /**
+     * 判断字符串是否是数字(0.0)
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str) {
+        if (str == null || str.equals("")) {
+            return false;
+        }
+        char[] p = str.toCharArray();
+        for (int i = 0; i < p.length; i++) {
+            if (!isNum("" + p[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isNum(String str) {
+        Pattern pattern = Pattern.compile("[0-9.]*");
+        Matcher isNum = pattern.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
     }
 
 }

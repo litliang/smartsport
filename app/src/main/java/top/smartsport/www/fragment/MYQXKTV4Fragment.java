@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -32,6 +31,7 @@ import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshBase;
 import top.smartsport.www.listview_pulltorefresh.PullToRefreshListView;
+import top.smartsport.www.utils.StringUtil;
 
 /**
  * Created by Aaron on 2017/7/24.
@@ -45,6 +45,7 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
     ViewGroup empty;
     private int page =1;
     private List<Boolean> showStatus = new ArrayList<>();
+    private List list;
 
     public static MYQXKTV4Fragment newInstance() {
         MYQXKTV4Fragment fragment = new MYQXKTV4Fragment();
@@ -100,57 +101,142 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                         convertView.findViewById(R.id.ll_head).setVisibility(View.GONE);
                     }
                 }
-                ViewGroup nl = (ViewGroup) convertView.findViewById(R.id.ll_nl);
-                nl.removeAllViews();
-                for (int i =0;i<5;i++){
-                    ImageView iv = new ImageView(convertView.getContext());
-                    iv.setImageResource(R.mipmap.pj_yes);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,0,30,0);
-                    iv.setLayoutParams(params);
-                    nl.addView(iv);
-                }
-                ViewGroup bfl = (ViewGroup) convertView.findViewById(R.id.ll_bfl);
-                bfl.removeAllViews();
-                for (int i =0;i<5;i++){
-                    ImageView iv = new ImageView(convertView.getContext());
-                    iv.setImageResource(R.mipmap.pj_yes);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,0,30,0);
-                    iv.setLayoutParams(params);
-                    bfl.addView(iv);
-                }
-                ViewGroup js = (ViewGroup) convertView.findViewById(R.id.ll_js);
-                js.removeAllViews();
-                for (int i =0;i<5;i++){
-                    ImageView iv = new ImageView(convertView.getContext());
-                    iv.setImageResource(R.mipmap.pj_yes);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,0,30,0);
-                    iv.setLayoutParams(params);
-                    js.addView(iv);
-                }
-                ViewGroup hz = (ViewGroup) convertView.findViewById(R.id.ll_hz);
-                hz.removeAllViews();
-                for (int i =0;i<5;i++){
-                    ImageView iv = new ImageView(convertView.getContext());
-                    iv.setImageResource(R.mipmap.pj_yes);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,0,30,0);
-                    iv.setLayoutParams(params);
-                    hz.addView(iv);
-                }
-                ViewGroup sd = (ViewGroup) convertView.findViewById(R.id.ll_sd);
-                sd.removeAllViews();
-                for (int i =0;i<5;i++){
-                    ImageView iv = new ImageView(convertView.getContext());
-                    iv.setImageResource(R.mipmap.pj_yes);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,0,30,0);
-                    iv.setLayoutParams(params);
-                    sd.addView(iv);
-                }
+                int status = convertView.findViewById(R.id.ll_tome).getVisibility();
+                if(status == 0) {
+                    ViewGroup nl = (ViewGroup) convertView.findViewById(R.id.ll_nl);
+                    nl.removeAllViews();
+                    Object obj = list.get(pos);
+                    Map<String, Object> map = (Map<String, Object>) obj;
+                    Object evaluates = (Object) map.get("evaluates");
 
+                    Map<String, Object> enduranceMap = (Map<String, Object>) evaluates;
+                    String enduranceValue = (String) enduranceMap.get("endurance");
+                    String explosiveness = (String) enduranceMap.get("explosiveness");
+                    String technology = (String) enduranceMap.get("technology");
+                    String cooperation = (String) enduranceMap.get("cooperation");
+                    String speed = (String) enduranceMap.get("speed");
+                    String content = (String) enduranceMap.get("content");
+
+                    if(!StringUtil.isEmpty(content)) {
+                        ((TextView) convertView.findViewById(R.id.content)).setText(content);
+                    } else {
+                        ((TextView) convertView.findViewById(R.id.content)).setText("");
+                    }
+                    int nlScore = 0;
+                    if(!StringUtil.isEmpty(enduranceValue) && StringUtil.isNumeric(enduranceValue)) {
+                        nlScore = Integer.valueOf(enduranceValue).intValue();
+                    }
+                    int bflScore = 0;
+                    if(!StringUtil.isEmpty(explosiveness) && StringUtil.isNumeric(explosiveness)) {
+                        bflScore = Integer.valueOf(explosiveness).intValue();
+                    }
+                    int jsScore = 0;
+                    if(!StringUtil.isEmpty(technology) && StringUtil.isNumeric(technology)) {
+                        jsScore = Integer.valueOf(technology).intValue();
+                    }
+                    int hzScore = 0;
+                    if(!StringUtil.isEmpty(cooperation) && StringUtil.isNumeric(cooperation)) {
+                        hzScore = Integer.valueOf(cooperation).intValue();
+                    }
+                    int sdScore = 0;
+                    if(!StringUtil.isEmpty(speed) && StringUtil.isNumeric(speed)) {
+                        sdScore = Integer.valueOf(speed).intValue();
+                    }
+
+                    for (int i =0;i<5;i++){ // 耐力
+                        ImageView iv = new ImageView(convertView.getContext());
+                        if(nlScore > 0) {
+                            if(i <= (nlScore - 1)) {
+                                iv.setImageResource(R.mipmap.pj_yes);
+                            } else {
+                                iv.setImageResource(R.mipmap.pj_no);
+                            }
+                        } else {
+                            iv.setImageResource(R.mipmap.pj_yes);
+                        }
+//                        iv.setImageResource(R.mipmap.pj_yes);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,0,30,0);
+                        iv.setLayoutParams(params);
+                        nl.addView(iv);
+                    }
+                    ViewGroup bfl = (ViewGroup) convertView.findViewById(R.id.ll_bfl);
+                    bfl.removeAllViews();
+                    for (int i =0;i<5;i++){ // 爆发力
+                        ImageView iv = new ImageView(convertView.getContext());
+                        if(bflScore > 0) {
+                            if(i <= (bflScore - 1)) {
+                                iv.setImageResource(R.mipmap.pj_yes);
+                            } else {
+                                iv.setImageResource(R.mipmap.pj_no);
+                            }
+                        } else {
+                            iv.setImageResource(R.mipmap.pj_yes);
+                        }
+//                        iv.setImageResource(R.mipmap.pj_yes);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,0,30,0);
+                        iv.setLayoutParams(params);
+                        bfl.addView(iv);
+                    }
+                    ViewGroup js = (ViewGroup) convertView.findViewById(R.id.ll_js);
+                    js.removeAllViews();
+                    for (int i =0;i<5;i++){ // 技术
+                        ImageView iv = new ImageView(convertView.getContext());
+                        if(jsScore > 0) {
+                            if(i <= (jsScore - 1)) {
+                                iv.setImageResource(R.mipmap.pj_yes);
+                            } else {
+                                iv.setImageResource(R.mipmap.pj_no);
+                            }
+                        } else {
+                            iv.setImageResource(R.mipmap.pj_yes);
+                        }
+//                        iv.setImageResource(R.mipmap.pj_yes);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,0,30,0);
+                        iv.setLayoutParams(params);
+                        js.addView(iv);
+                    }
+                    ViewGroup hz = (ViewGroup) convertView.findViewById(R.id.ll_hz);
+                    hz.removeAllViews();
+                    for (int i =0;i<5;i++){ // 合作
+                        ImageView iv = new ImageView(convertView.getContext());
+                        if(hzScore > 0) {
+                            if(i <= (hzScore - 1)) {
+                                iv.setImageResource(R.mipmap.pj_yes);
+                            } else {
+                                iv.setImageResource(R.mipmap.pj_no);
+                            }
+                        } else {
+                            iv.setImageResource(R.mipmap.pj_yes);
+                        }
+//                        iv.setImageResource(R.mipmap.pj_yes);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,0,30,0);
+                        iv.setLayoutParams(params);
+                        hz.addView(iv);
+                    }
+                    ViewGroup sd = (ViewGroup) convertView.findViewById(R.id.ll_sd);
+                    sd.removeAllViews();
+                    for (int i =0;i<5;i++){ // 速度
+                        ImageView iv = new ImageView(convertView.getContext());
+                        if(sdScore > 0) {
+                            if(i <= (sdScore - 1)) {
+                                iv.setImageResource(R.mipmap.pj_yes);
+                            } else {
+                                iv.setImageResource(R.mipmap.pj_no);
+                            }
+                        } else {
+                            iv.setImageResource(R.mipmap.pj_yes);
+                        }
+//                        iv.setImageResource(R.mipmap.pj_yes);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(0,0,30,0);
+                        iv.setLayoutParams(params);
+                        sd.addView(iv);
+                    }
+                }
                 super.findAndBindView(convertView, pos, item, name, value);
 
                 return true;
@@ -202,11 +288,10 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
             public void onSuccess(Object result, List object) {
                 String data = ((NetEntity)result).getData().toString();
 //                List list = (List) JsonUtil.extractJsonRightValue(data);
-                LogUtil.d("----------data----------->" + data);
                 if(page == 1) {
                     showStatus.clear();
                 }
-                List list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("playing", data)); //进行中
+                list = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("playing", data)); //进行中
                 List listWatting = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("watting", data)); //报名中
                 List listOver = (List) intf.JsonUtil.extractJsonRightValue(intf.JsonUtil.findJsonLink("over", data)); // 已结束
                 if(list == null) {
