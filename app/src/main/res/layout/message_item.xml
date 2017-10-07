@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dip"
+    android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <FrameLayout android:layout_alignParentBottom="true"
-        android:id="@+id/line"
+    <LinearLayout
+        android:id="@+id/ll_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20px">
-
-        <include layout="@layout/horizontal_line" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/line"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -25,9 +15,10 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingTop="70px">
+            android:paddingTop="30px">
 
             <top.smartsport.www.widget.utils.RoundImageView
+                android:id="@+id/iv_head_icon"
                 android:layout_width="90px"
                 android:layout_height="90px"
                 android:src="@mipmap/default_head_image" />
@@ -42,10 +33,10 @@
 
             <TextView
 
-                android:id="@+id/tiitle"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="90px"
+                android:layout_marginTop="50px"
                 android:ellipsize="end"
                 android:gravity="left"
                 android:paddingLeft="6dip"
@@ -77,6 +68,16 @@
                 android:textSize="14.5dip" />
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout android:layout_alignParentBottom="true"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_layout"
+        android:layout_marginTop="30px">
+
+        <include layout="@layout/horizontal_line" />
+    </FrameLayout>
 
 
 </RelativeLayout>
