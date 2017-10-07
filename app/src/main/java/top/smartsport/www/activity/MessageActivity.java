@@ -8,11 +8,11 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
+import app.base.MapConf;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
-import top.smartsport.www.adapter.MessageAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
@@ -32,7 +32,6 @@ public class MessageActivity extends BaseActivity{
     private String access_token;
     @ViewInject(R.id.lv)
     ListView listView;
-    private MessageAdapter mAdapter;
 
     @Override
     protected void initView() {
@@ -45,8 +44,6 @@ public class MessageActivity extends BaseActivity{
         client_id = regInfo.getApp_key();
         state = regInfo.getSeed_secret();
         access_token = tokenInfo.getAccess_token();
-        mAdapter = new MessageAdapter();
-        listView.setAdapter(mAdapter);
         getData();
     }
 
@@ -62,14 +59,13 @@ public class MessageActivity extends BaseActivity{
             public void onSuccess(Object result, List object) {
                 String data = ((NetEntity)result).getData().toString();
                 List list = (List) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("message",data).toString());
-                mAdapter.setData(list);
-//                MapConf mc = MapConf.with(getBaseContext())
-//                        .pair("header_url->iv_head_icon")
-//                        .pair("title->title")
-//                        .pair("content->content")
-//                        .pair("ctime->time")
-//                        .source(R.layout.message_item);
-//                MapConf.with(getBaseContext()).conf(mc).source(list, listView).toView();
+                MapConf mc = MapConf.with(getBaseContext())
+                        .pair("message-header_url->iv_head_icon")
+                        .pair("message-title->title")
+                        .pair("message-content->content")
+                        .pair("message-ctime->time")
+                        .source(R.layout.message_item);
+                MapConf.with(getBaseContext()).conf(mc).source(list, listView).toView();
             }
 
             @Override
