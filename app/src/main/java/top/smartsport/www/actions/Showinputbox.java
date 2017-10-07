@@ -76,15 +76,15 @@ public class Showinputbox extends Task {
                         } else if (findId.equals("account_weight")) {
                             postfix = "kg";
                         }
-//                        else if (findId.equals("account_age")) {
-//                            type = "age";
-//                        }
+                        else if (findId.equals("account_ql")) {
+                            postfix = "年";
+                        }
                         if (!StringUtil.isEmpty(type)) {
                             saveAccount((BaseActivity) view.getContext(), type, value);
                         }
                     }
                 }
-                ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString() + postfix);
+                ((TextView) ((Activity) view.getContext()).findViewById(changeid)).setText(result.toString() + " "+postfix);
             }
         });
     }

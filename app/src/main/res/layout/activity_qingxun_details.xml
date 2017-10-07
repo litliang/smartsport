@@ -134,7 +134,7 @@
                 <RelativeLayout android:id="@+id/coach"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="20dp">
 
                     <top.smartsport.www.widget.DefineRoundImageView
@@ -160,7 +160,7 @@
                             android:textColor="@android:color/black"
                             android:textStyle="bold" />
 
-                        <TextView
+                        <TextView android:layout_marginTop="15px"
                             android:id="@+id/details_level_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

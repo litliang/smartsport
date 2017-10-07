@@ -471,7 +471,12 @@ public class MapConf {
 
     Tackle tackle;
 
-    public boolean setView(Object item, Object value, String name,
+    public boolean setView( Object value, final View theView) {
+        return setView("", value, "",
+                "", theView, theView);
+    }
+
+        public boolean setView(Object item, Object value, String name,
                            String splitname, View convertView, final View theView) {
 
         if (theView == null) {

@@ -302,7 +302,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         final BaseActivity aty = baty;
         HttpFrameLayout httpframeLayout = null;
         View httploading = null;
-        if (view != null&&view.getParent()!=null&&!!view.getParent().getClass().getName().contains("ViewRootImpl")) {
+        if (view != null&&view.getParent()!=null&&!view.getParent().getClass().getName().contains("ViewRootImpl")) {
 
             ViewGroup parent = ((ViewGroup) view.getParent());
             httpframeLayout = new HttpFrameLayout(baty);
@@ -375,8 +375,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
                 funcall.<NetEntity>onSuccessConnected(entity);
                 funcall.<NetEntity>onCallbackConnected(entity);
                 if (frameLayout != null && loading != null) {
-                    frameLayout.removeView(loading);
-
+                    loading.setVisibility(View.GONE);
                 }
             }
 

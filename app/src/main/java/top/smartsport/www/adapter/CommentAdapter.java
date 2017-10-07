@@ -13,6 +13,8 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.base.MapConf;
+import app.base.action.ViewInflater;
 import top.smartsport.www.R;
 import top.smartsport.www.bean.ZXInfoComment;
 import top.smartsport.www.utils.ImageUtil;
@@ -50,7 +52,7 @@ public class CommentAdapter extends BaseAdapter {
         ZXInfoComment comment = list.get(i);
         if (view == null){
             holder = new ViewHolder();
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_comment, viewGroup, false);
+            view = new ViewInflater(viewGroup.getContext()).inflate(R.layout.item_comment, null);
             holder.pic = (ImageView) view.findViewById(R.id.iv_head_icon);
             holder.time = (TextView) view.findViewById(R.id.tv_comment_time);
             holder.describe = (TextView) view.findViewById(R.id.tv_comment);
@@ -61,7 +63,8 @@ public class CommentAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        ImageLoader.getInstance().displayImage(comment.getHeader_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
+        MapConf.with(view.getContext()).setView(comment.getHeader_url(),holder.pic);
+//        ImageLoader.getInstance().displayImage(comment.getHeader_url(), holder.pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener());
         holder.name.setText(comment.getUsername());
         holder.describe.setText(comment.getContent());
         holder.time.setText(comment.getComment_time());
