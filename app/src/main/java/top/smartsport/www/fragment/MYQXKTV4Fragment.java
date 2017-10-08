@@ -109,13 +109,21 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                     Map<String, Object> map = (Map<String, Object>) obj;
                     Object evaluates = (Object) map.get("evaluates");
 
-                    Map<String, Object> enduranceMap = (Map<String, Object>) evaluates;
-                    String enduranceValue = (String) enduranceMap.get("endurance");
-                    String explosiveness = (String) enduranceMap.get("explosiveness");
-                    String technology = (String) enduranceMap.get("technology");
-                    String cooperation = (String) enduranceMap.get("cooperation");
-                    String speed = (String) enduranceMap.get("speed");
-                    String content = (String) enduranceMap.get("content");
+                    String enduranceValue = "0";
+                    String explosiveness = "0";
+                    String technology = "0";
+                    String cooperation = "0";
+                    String speed = "0";
+                    String content = "";
+                    if(evaluates != null && !StringUtil.isEmpty(evaluates.toString()))  {
+                        Map<String, Object> enduranceMap = (Map<String, Object>) evaluates;
+                        enduranceValue = (String) enduranceMap.get("endurance");
+                        explosiveness = (String) enduranceMap.get("explosiveness");
+                        technology = (String) enduranceMap.get("technology");
+                        cooperation = (String) enduranceMap.get("cooperation");
+                        speed = (String) enduranceMap.get("speed");
+                        content = (String) enduranceMap.get("content");
+                    }
 
                     if(!StringUtil.isEmpty(content)) {
                         ((TextView) convertView.findViewById(R.id.content)).setText(content);
@@ -152,9 +160,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                                 iv.setImageResource(R.mipmap.pj_no);
                             }
                         } else {
-                            iv.setImageResource(R.mipmap.pj_yes);
+                            iv.setImageResource(R.mipmap.pj_no);
                         }
-//                        iv.setImageResource(R.mipmap.pj_yes);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,0,30,0);
                         iv.setLayoutParams(params);
@@ -171,9 +178,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                                 iv.setImageResource(R.mipmap.pj_no);
                             }
                         } else {
-                            iv.setImageResource(R.mipmap.pj_yes);
+                            iv.setImageResource(R.mipmap.pj_no);
                         }
-//                        iv.setImageResource(R.mipmap.pj_yes);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,0,30,0);
                         iv.setLayoutParams(params);
@@ -190,9 +196,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                                 iv.setImageResource(R.mipmap.pj_no);
                             }
                         } else {
-                            iv.setImageResource(R.mipmap.pj_yes);
+                            iv.setImageResource(R.mipmap.pj_no);
                         }
-//                        iv.setImageResource(R.mipmap.pj_yes);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,0,30,0);
                         iv.setLayoutParams(params);
@@ -209,9 +214,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                                 iv.setImageResource(R.mipmap.pj_no);
                             }
                         } else {
-                            iv.setImageResource(R.mipmap.pj_yes);
+                            iv.setImageResource(R.mipmap.pj_no);
                         }
-//                        iv.setImageResource(R.mipmap.pj_yes);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,0,30,0);
                         iv.setLayoutParams(params);
@@ -228,9 +232,8 @@ public class MYQXKTV4Fragment extends BaseV4Fragment {
                                 iv.setImageResource(R.mipmap.pj_no);
                             }
                         } else {
-                            iv.setImageResource(R.mipmap.pj_yes);
+                            iv.setImageResource(R.mipmap.pj_no);
                         }
-//                        iv.setImageResource(R.mipmap.pj_yes);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0,0,30,0);
                         iv.setLayoutParams(params);

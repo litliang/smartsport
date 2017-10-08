@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -44,7 +42,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
     private int page =1;
     private SCCoatchAdapter mAdapter;
     private List mList;
-    private List<Coaches> list;
+//    private List<Coaches> list;
 
     public static SCJLV4Fragment newInstance() {
         SCJLV4Fragment fragment = new SCJLV4Fragment();
@@ -78,7 +76,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("id").toString()));
+                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("coach_id").toString()));
             }
         });
     }
@@ -111,13 +109,18 @@ public class SCJLV4Fragment extends BaseV4Fragment {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
                 String data = ((NetEntity)result).getData().toString();
-                list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
-                if (list.size() > 0&&list.get(0)!=null&&!list.get(0).toString().equals("null")){
+                List list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
+                for(int i=0; i<list.size(); i++) {
+                    if(list.get(i) != null && !list.get(i).equals("null")) {
+                        mList.add(list.get(i));
+                    }
+                }
+                if (mList != null && mList.size() > 0){
                     empty.setVisibility(View.GONE);
                 }else{
                     return;
                 }
-                mList.addAll(list);
+//                mList.addAll(list);
                 mAdapter.setData(mList);
                 MapConf mc = MapConf.with(getActivity())
                         .pair("header_url->iv_head_icon")

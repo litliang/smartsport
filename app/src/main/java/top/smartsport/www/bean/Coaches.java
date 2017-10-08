@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class Coaches implements Serializable{
     private String header_url;
     private String id;
+    private String coach_id;
     private String introduce;
     private String name;
     private String team_name;
@@ -28,6 +29,14 @@ public class Coaches implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCoach_id() {
+        return coach_id;
+    }
+
+    public void setCoach_id(String coach_id) {
+        this.coach_id = coach_id;
     }
 
     public String getIntroduce() {

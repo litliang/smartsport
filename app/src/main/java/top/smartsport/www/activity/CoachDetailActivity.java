@@ -78,7 +78,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
         if (coach == null) {
             id = getIntent().getStringExtra("id");
         } else
-            id = coach.getId();
+            id = coach.getCoach_id();
 
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
