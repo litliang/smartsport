@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -78,7 +79,8 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
         if (coach == null) {
             id = getIntent().getStringExtra("id");
         } else
-            id = coach.getCoach_id();
+            id = coach.getId();
+//            id = coach.getCoach_id();
 
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
@@ -130,6 +132,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             json.put("access_token", access_token);
             json.put("action", "getCoachDetail");
             json.put("id", id);
+            LogUtil.d("---------------json.toString()-----------》" + json.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -144,6 +147,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             public void onSuccess(NetEntity entity) {
                 fl_loading.setVisibility(View.GONE);
                 String data = entity.getData().toString();
+                LogUtil.d("---------------data-----------》" + data);
                 String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", entity.getData().toString()).toString();
 
                 MapConf.build().with(CoachDetailActivity.this)

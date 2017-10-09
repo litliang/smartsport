@@ -76,7 +76,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("coach_id").toString()));
+                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("id").toString()));
             }
         });
     }
@@ -118,9 +118,8 @@ public class SCJLV4Fragment extends BaseV4Fragment {
                 if (mList != null && mList.size() > 0){
                     empty.setVisibility(View.GONE);
                 }else{
-                    return;
+                    empty.setVisibility(View.VISIBLE);
                 }
-//                mList.addAll(list);
                 mAdapter.setData(mList);
                 MapConf mc = MapConf.with(getActivity())
                         .pair("header_url->iv_head_icon")
