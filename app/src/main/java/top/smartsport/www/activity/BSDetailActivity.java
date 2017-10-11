@@ -117,6 +117,7 @@ public class BSDetailActivity extends BaseActivity {
     private View actionbar;
 
     private List<Schedule> mListSchedule;
+    private boolean isCurrentScStatus = true;
 
     @Override
     public View getTopBar() {
@@ -403,6 +404,7 @@ public class BSDetailActivity extends BaseActivity {
 //                        adapter = new ScheduleAdapter(getBaseContext(), mListSchedule);
 //                        bs_detail_listView.setAdapter(adapter);
                     }
+                    isCurrentScStatus = getFaved();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -426,4 +428,15 @@ public class BSDetailActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         getDetail();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtil.d("------onDestroy--tofav---------->" + getFaved());
+        LogUtil.d("------onDestroy--isCurrentScStatus---------->" + isCurrentScStatus);
+        boolean scStatus = getFaved();
+        if(isCurrentScStatus != scStatus)
+            setResult(RESULT_OK);
+    }
+
 }

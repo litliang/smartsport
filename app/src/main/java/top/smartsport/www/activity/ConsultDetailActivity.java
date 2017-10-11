@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -77,6 +78,7 @@ public class ConsultDetailActivity extends BaseActivity {
     private ConsultAdapter adapterNews;
     private CommentAdapter adapterComment;
     private String data;
+    private boolean isCurrentScStatus = true;
 
     @Override
     protected void initView() {
@@ -92,7 +94,6 @@ public class ConsultDetailActivity extends BaseActivity {
         access_token = tokenInfo.getAccess_token();
         back();
         fav();
-
         adapterNews = new ConsultAdapter();
         lvConsult.setAdapter(adapterNews);
         adapterComment = new CommentAdapter();
@@ -194,6 +195,8 @@ public class ConsultDetailActivity extends BaseActivity {
                 if (news != null) {
                     adapterNews.setData(news);
                 }
+                LogUtil.d("--------getData---------->" + getFaved());
+                isCurrentScStatus = getFaved();
                 if (coments != null) {
                     adapterComment.setData(coments);
                 }
@@ -201,5 +204,15 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtil.d("------onDestroy--tofav---------->" + getFaved());
+        LogUtil.d("------onDestroy--isCurrentScStatus---------->" + isCurrentScStatus);
+        boolean scStatus = getFaved();
+        if(isCurrentScStatus != scStatus)
+            setResult(RESULT_OK);
     }
 }

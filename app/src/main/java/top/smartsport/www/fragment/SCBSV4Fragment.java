@@ -1,5 +1,6 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import top.smartsport.www.R;
@@ -95,26 +97,15 @@ public class SCBSV4Fragment extends BaseV4Fragment {
         });
         ptrlv.getRefreshableView().setDivider(new ColorDrawable(Color.parseColor("#F2F2F2")));
         ptrlv.getRefreshableView().setDividerHeight(20);
-        ptrlv.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                BSssInfo info = bSssAdapter.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(BSDetailActivity.TAG, info.getId());
-                bundle.putString("states", info.getStatus());
-                toActivity(BSDetailActivity.class, bundle);
-            }
-        });
         getData(true);
 
         ptrlv.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 BSssInfo info = bSssAdapter.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(BSDetailActivity.TAG, info.getId());
-                bundle.putString("states", info.getStatus());
-                toActivity(BSDetailActivity.class, bundle);
+                startActivityForResult(new Intent(getActivity(), BSDetailActivity.class)
+                        .putExtra(BSDetailActivity.TAG, info.getId())
+                        .putExtra("states", info.getStatus()), 101);
             }
         });
 
@@ -163,7 +154,7 @@ public class SCBSV4Fragment extends BaseV4Fragment {
             public void onSuccess(NetEntity entity) {
                 if (refresh) {
                     ptrlv.onPullDownRefreshComplete();
-
+                    bSssInfoList = new ArrayList();
                 } else {
                     ptrlv.onPullUpRefreshComplete();
                 }
@@ -171,7 +162,7 @@ public class SCBSV4Fragment extends BaseV4Fragment {
                 bSssInfoList = top.smartsport.www.utils.JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("matches", data).toString(), BSssInfo.class);
                 if (refresh) {
                     bSssAdapter.clear();
-                    if (bSssInfoList.size() > 0) {
+                    if (bSssInfoList != null && !bSssInfoList.equals("null") && bSssInfoList.size() > 0) {
                         empty.setVisibility(View.GONE);
                     } else {
                         empty.setVisibility(View.VISIBLE);
@@ -188,5 +179,16 @@ public class SCBSV4Fragment extends BaseV4Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 101:
+                getData(true);
+                break;
+            default:
+                break;
+        }
+    }
 
 }

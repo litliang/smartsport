@@ -76,7 +76,7 @@ public class SCJLV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                startActivity(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("id").toString()));
+                startActivityForResult(new Intent(getActivity(), CoachDetailActivity.class).putExtra("id", ((Map)mList.get(i)).get("id").toString()), 101);
             }
         });
     }
@@ -133,6 +133,16 @@ public class SCJLV4Fragment extends BaseV4Fragment {
         });
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 101:
+                reload(true);
+                break;
+            default:
+                break;
+        }
+    }
 
 }

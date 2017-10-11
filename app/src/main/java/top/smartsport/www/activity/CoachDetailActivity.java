@@ -16,7 +16,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -72,7 +71,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     private CoachAdapter coachAdapter;
     private String tmpIntro = "";
     private String allIntro;
-
+    private boolean isCurrentScStatus = true;
 
     public void initView() {
         Coaches coach = (Coaches) getIntent().getSerializableExtra("data");
@@ -132,7 +131,6 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             json.put("access_token", access_token);
             json.put("action", "getCoachDetail");
             json.put("id", id);
-            LogUtil.d("---------------json.toString()-----------》" + json.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -147,7 +145,6 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             public void onSuccess(NetEntity entity) {
                 fl_loading.setVisibility(View.GONE);
                 String data = entity.getData().toString();
-                LogUtil.d("---------------data-----------》" + data);
                 String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", entity.getData().toString()).toString();
 
                 MapConf.build().with(CoachDetailActivity.this)
@@ -173,6 +170,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                     setSharetitle(details.getName());
                     setSharetxt(tmpIntro);
                     setShareurl(details.getHeader_url());
+                    isCurrentScStatus = getFaved();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -197,4 +195,13 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     public void favImpl(View view, boolean unfav) {
         fav.run(view, unfav + "", 5, id);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        boolean scStatus = getFaved();
+        if(isCurrentScStatus != scStatus)
+            setResult(RESULT_OK);
+    }
+
 }
