@@ -99,13 +99,13 @@ public class AllKechengActivity extends BaseActivity {
                     public void onClick(View view) {
 
 
-                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("coach_id").toString()));
+//                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("coach_id").toString()));
                     }
                 });
                 convertView.findViewById(R.id.coach_head).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("coach_id").toString()));
+//                        view.getContext().startActivity(new Intent(view.getContext(),CoachDetailActivity.class).putExtra("id",((Map)item).get("coach_id").toString()));
 
                     }
                 });

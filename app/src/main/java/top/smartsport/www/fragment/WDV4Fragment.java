@@ -123,7 +123,7 @@ public class WDV4Fragment extends BaseV4Fragment {
 
                     SPUtils.put(getContext(), "getUserInfo", data);
                     SPUtils.put(getContext(), "is_vip", JsonUtil.findJsonLink("is_vip", data));
-                    MapConf.with(getContext()).pair("header_url->wd_header").pair("is_vip->phone", "1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg", "1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
+                    MapConf.with(getContext()).pair("header_url->wd_header").pair("is_vip->phone", "1:会员;0:非会员").pair("username->status").pair("height:身高：%s cm->height").pair("weight:体重：%s kg->weight").pair("leg:惯用脚：%s ->leg", "0:未知;1:左脚;2:右脚;3:左右脚").source(app.base.JsonUtil.extractJsonRightValue(data), root).toView();
 
                 }
 

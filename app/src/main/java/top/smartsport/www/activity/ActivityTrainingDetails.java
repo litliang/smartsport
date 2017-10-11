@@ -175,7 +175,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                 getView(R.id.details_icon_iv).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getBaseContext(), CoachDetailActivity.class).putExtra("id", coachid));
+//                        startActivity(new Intent(getBaseContext(), CoachDetailActivity.class).putExtra("id", coachid));
                     }
                 });
             }
