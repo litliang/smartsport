@@ -182,7 +182,7 @@ public class ConsultDetailActivity extends BaseActivity {
                 setFaved(!collect_status.equals("0"));
                 ZXInfoDetail details = JsonUtil.jsonToEntity(app.base.JsonUtil.findJsonLink("detail", data).toString(), ZXInfoDetail.class);
                 setSharetitle(details.getTitle());
-                setSharetxt(details.getBody());
+                setSharetxt(details.getDescription());
                 setShareurl(details.getCover_url());
                 List<ZXInfoNews> news = JsonUtil.jsonToEntityList(intf.JsonUtil.findJsonLink("other_news", data).toString(), ZXInfoNews.class);
                 List<ZXInfoComment> coments = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments", data).toString(), ZXInfoComment.class);

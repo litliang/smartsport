@@ -73,12 +73,14 @@ public class Showlistbox extends Task {
                     String value = result.toString();
                     if (findId.equals("account_age")) {
                         type = "age";
-                    } else if (findId.equals("account_sex")) { // 传的是参数（0：女， 1：男）
+                    } else if (findId.equals("account_sex")) { // 传的是参数（0：保密， 1：男， 2女）
                         type = "sex";
-                        if(!StringUtil.isEmpty(value) && value.equals("女")) {
+                        if(!StringUtil.isEmpty(value) && value.equals("保密")) {
                             value = "0";
-                        } else {
+                        } else if(!StringUtil.isEmpty(value) && value.equals("男")) {
                             value = "1";
+                        } else {
+                            value = "2";
                         }
                     } else if (findId.equals("account_height")) {
                         type = "height";
@@ -86,10 +88,10 @@ public class Showlistbox extends Task {
                         type = "weight";
                     } else if (findId.equals("account_habit")) { // 传的是参数: 1左脚  2右脚  3左右均衡
                         type = "leg";
-                        if(!StringUtil.isEmpty(value) && value.equals("右脚")) {
-                            value = "2";
-                        } else if(!StringUtil.isEmpty(value) && value.equals("左脚")) {
+                        if(!StringUtil.isEmpty(value) && value.equals("左脚")) {
                             value = "1";
+                        } else if(!StringUtil.isEmpty(value) && value.equals("右脚")) {
+                            value = "2";
                         } else {
                             value = "3";
                         }
