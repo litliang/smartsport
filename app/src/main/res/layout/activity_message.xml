@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ListView
-            android:tag="fake:[[mipmap.default_head_image,123,12,1]];layout:message_item"
+            android:tag="fake:[[mipmap.default_head_image,title,message,body]];layout:message_item"
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

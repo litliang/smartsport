@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dip"
@@ -27,7 +26,7 @@
             android:orientation="vertical"
             android:paddingTop="70px">
 
-            <top.smartsport.www.widget.utils.RoundImageView
+            <ImageView
                 android:layout_width="90px"
                 android:layout_height="90px"
                 android:src="@mipmap/default_head_image" />

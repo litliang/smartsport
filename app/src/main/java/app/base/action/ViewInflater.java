@@ -46,6 +46,8 @@ public class ViewInflater extends LayoutInflater {
 
     @Override
     protected View onCreateView(View parent, String name, AttributeSet attrs) throws ClassNotFoundException {
+
+        View view = super.onCreateView(parent, name, attrs);
         if (parent != null && parent.getTag() != null) {
             if (!layoutlog.contains(parent.toString())) {
                 layoutlog.add(parent.toString());
@@ -54,7 +56,7 @@ public class ViewInflater extends LayoutInflater {
             }
 
         }
-        return super.onCreateView(parent, name, attrs);
+        return view;
     }
 
     static {
@@ -196,6 +198,7 @@ public class ViewInflater extends LayoutInflater {
                     int layout = tag.indexOf("layout:");
                     layout += 7;
                     int layoutend = -1;
+
                     if (tag.substring(layout).contains(";")) {
                         layoutend = tag.indexOf(";", layout);
 
