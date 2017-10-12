@@ -34,7 +34,7 @@ public class SetActivity extends BaseActivity {
         findViewById(R.id.rate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToMarket(view.getContext(),getPackageName(),"http://sj.qq.com/myapp/detail.htm?apkName=top.smartsport.www");
+                goToMarket(view.getContext(), getPackageName(), "http://sj.qq.com/myapp/detail.htm?apkName=top.smartsport.www");
 
             }
         });
@@ -75,7 +75,7 @@ public class SetActivity extends BaseActivity {
     private void getEvent(View v) {
         switch (v.getId()) {
             case R.id.rate:
-                 break;
+                break;
             case R.id.set_rl_about://关于我们
                 goActivity(ActivityAbout.class);
                 break;
@@ -95,16 +95,18 @@ public class SetActivity extends BaseActivity {
         }
     }
 
-    public static void goToMarket(Context context, String packageName,String url) {
-        Uri uri = Uri.parse("market://details?id=" + packageName);
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+    public static void goToMarket(Context context, String packageName, String url) {
         try {
-            context.startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            uri = Uri.parse(url);
+            Uri uri = Uri.parse(url);
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
             context.startActivity(it);
+        } catch (ActivityNotFoundException e) {
+            Uri uri = Uri.parse("market://details?id=" + packageName);
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+
+            context.startActivity(goToMarket);
         }
+
     }
 }
 
