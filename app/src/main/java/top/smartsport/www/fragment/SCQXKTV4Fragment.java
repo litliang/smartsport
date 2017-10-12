@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -114,7 +113,7 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Map map = (Map) adapterView.getItemAtPosition(i);
-                startActivityForResult(new Intent(getActivity(),ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()).putExtra("position",i),DETAIL);
+                startActivityForResult(new Intent(getActivity(),ActivityTrainingDetails.class).putExtra("id", map.get("id").toString()).putExtra("position",i), 101);
             }
         });
 
@@ -147,24 +146,30 @@ public class SCQXKTV4Fragment extends BaseV4Fragment {
                 }
                 String data = ((NetEntity)result).getData().toString();
                 List list = (List) JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("courses", data));
-                if (list.size()>0){
+                if (list != null && !list.equals("null") && list.size()>0){
                     empty.setVisibility(View.GONE);
+                } else {
+                    list = new ArrayList();
+                    empty.setVisibility(View.VISIBLE);
                 }
                 mList.addAll(list);
                 mapadapter.setItemDataSrc(new MapContent(mList));
                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
                 mapadapter.notifyDataSetChanged();
             }
-
-
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data!=null){
-            reload(mapadapter);
+        switch (requestCode) {
+            case 101:
+                page = 1;
+                reload(mapadapter);
+                break;
+            default:
+                break;
         }
     }
 

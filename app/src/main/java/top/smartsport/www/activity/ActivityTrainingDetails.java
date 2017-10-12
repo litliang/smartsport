@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 
 import java.io.Serializable;
@@ -56,6 +57,7 @@ public class ActivityTrainingDetails extends BaseActivity {
     String id;
     String data;
     private int position;
+    private boolean isCurrentScStatus = true;
 
     @Override
     protected void initView() {
@@ -172,10 +174,14 @@ public class ActivityTrainingDetails extends BaseActivity {
                 setShareurl(((app.base.widget.ImageView) getImageView(R.id.details_title_iv)).getUrl());
                 setSharetitle(getTextView(R.id.details_title_tv).getText().toString());
                 setSharetxt(((WebView) getView(R.id.details_introduction_tv)).getTitle());
+                String collect_status = app.base.JsonUtil.findJsonLink("detail-collect_status", data).toString();
+                setFaved(!collect_status.equals("0"));
+                LogUtil.d("--------getData---------->" + getFaved());
+                isCurrentScStatus = getFaved();
                 getView(R.id.details_icon_iv).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getBaseContext(), CoachDetailActivity.class).putExtra("id", coachid));
+//                        startActivity(new Intent(getBaseContext(), CoachDetailActivity.class).putExtra("id", coachid));
                     }
                 });
             }
@@ -214,4 +220,15 @@ public class ActivityTrainingDetails extends BaseActivity {
         fav.run(view, unfav + "", 1, id, "mipmap.fav_done", "mipmap.fav_undo");
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        boolean scStatus = getFaved();
+        LogUtil.d("------onDestroy--scStatus---------->" + scStatus);
+        LogUtil.d("------onDestroy--isCurrentScStatus---------->" + isCurrentScStatus);
+        if(isCurrentScStatus != scStatus)
+            setResult(RESULT_OK);
+    }
+
 }

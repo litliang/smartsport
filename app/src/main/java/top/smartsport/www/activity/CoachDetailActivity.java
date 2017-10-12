@@ -71,7 +71,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     private CoachAdapter coachAdapter;
     private String tmpIntro = "";
     private String allIntro;
-
+    private boolean isCurrentScStatus = true;
 
     public void initView() {
         Coaches coach = (Coaches) getIntent().getSerializableExtra("data");
@@ -79,6 +79,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
             id = getIntent().getStringExtra("id");
         } else
             id = coach.getId();
+//            id = coach.getCoach_id();
 
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();
@@ -169,6 +170,7 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
                     setSharetitle(details.getName());
                     setSharetxt(tmpIntro);
                     setShareurl(details.getHeader_url());
+                    isCurrentScStatus = getFaved();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -193,4 +195,13 @@ public class CoachDetailActivity extends BaseActivity implements OnRecyclerViewI
     public void favImpl(View view, boolean unfav) {
         fav.run(view, unfav + "", 5, id);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        boolean scStatus = getFaved();
+        if(isCurrentScStatus != scStatus)
+            setResult(RESULT_OK);
+    }
+
 }

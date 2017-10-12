@@ -73,7 +73,12 @@ class QYViewHolder  extends ViewHolder{
         if(!StringUtil.isEmpty(title)) {
             adapter_home_content.setText(title);
         } else {
-            adapter_home_content.setText("");
+            String teamName = info.getTeam_name();
+            if(!StringUtil.isEmpty(teamName)) {
+                adapter_home_content.setText(teamName + "球员");
+            } else {
+                adapter_home_content.setText("");
+            }
         }
 
 //        adapter_home_name.setText(info.getName());

@@ -1,48 +1,35 @@
 package top.smartsport.www.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import app.base.MapAdapter;
-import app.base.MapContent;
-
-import top.smartsport.www.activity.ActivityTrainingDetails;
-import top.smartsport.www.activity.CoachDetailActivity;
-import top.smartsport.www.base.BaseApplication;
-import top.smartsport.www.bean.Carousel;
-import top.smartsport.www.bean.HDZXInfo;
-import top.smartsport.www.bean.SSXWInfo;
-import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
-
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import app.base.MapAdapter;
+import app.base.MapContent;
 import intf.FunCallback;
 import intf.JsonUtil;
 import intf.MapBuilder;
-
-import org.xutils.common.util.LogUtil;
-import org.xutils.view.annotation.ContentView;
-
-import org.xutils.view.annotation.ViewInject;
-
 import top.smartsport.www.R;
+import top.smartsport.www.activity.ActivityTrainingDetails;
+import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.utils.SPUtils;
-
-import java.util.*;
-import java.util.concurrent.ExecutionException;
-
-import static android.R.id.list;
 
 /**
  * Created by Aaron on 2017/7/24.
@@ -138,13 +125,13 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                     public void onClick(View view) {
 
 
-                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("id").toString()));
+//                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("coach_id").toString()));
                     }
                 });
                 convertView.findViewById(R.id.coach_head).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("id").toString()));
+//                        view.getContext().startActivity(new Intent(view.getContext(), CoachDetailActivity.class).putExtra("id", ((Map) item).get("coach_id").toString()));
 
                     }
                 });

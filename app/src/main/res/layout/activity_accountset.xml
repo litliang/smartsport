@@ -193,7 +193,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="Showlistbox(account_sex,性别,男-女)"
+                <RelativeLayout android:tag="Showlistbox(account_sex,性别,保密-男-女)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 
@@ -315,7 +315,7 @@
                     android:layout_marginLeft="60px"
                     android:background="@color/line_color" />
 
-                <RelativeLayout android:tag="Showlistbox(account_habit,惯用脚,左脚-右脚-左右脚)"
+                <RelativeLayout android:tag="Showlistbox(account_habit,惯用脚,左脚-右脚-左右均衡)"
                     android:layout_width="match_parent"
                     android:layout_height="120px">
 

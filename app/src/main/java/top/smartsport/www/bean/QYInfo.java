@@ -14,6 +14,7 @@ public class QYInfo {
     private String position;
     private String header;
     private String header_url;
+    private String team_name;
 
     public String getId() {
         return id;
@@ -77,5 +78,13 @@ public class QYInfo {
 
     public void setHeader_url(String header_url) {
         this.header_url = header_url;
+    }
+
+    public String getTeam_name() {
+        return team_name;
+    }
+
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
     }
 }

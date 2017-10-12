@@ -72,7 +72,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selPos = i;
-                startActivity(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""));
+                startActivityForResult(new Intent(getActivity(), ConsultDetailActivity.class).putExtra("id", ((News) adapterView.getItemAtPosition(i)).getId() + ""), 101);
             }
         });
     }
@@ -109,7 +109,7 @@ public class SCZXV4Fragment extends BaseV4Fragment {
                 }else {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
-                empty.setVisibility(View.GONE);
+//                empty.setVisibility(View.GONE);
                 newsAdapter.addAll(newses);
             }
         });
@@ -123,6 +123,18 @@ public class SCZXV4Fragment extends BaseV4Fragment {
             newsAdapter.getItem(selPos).setHits("" + (Integer.valueOf(value).intValue() + 1));
             selPos = -1;
             newsAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 101:
+                reload(true);
+                break;
+            default:
+                break;
         }
     }
 }

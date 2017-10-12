@@ -260,6 +260,10 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         this.tofav = !faved;
     }
 
+    public boolean getFaved() {
+        return tofav;
+    }
+
     boolean tofav = true;
     public Fav fav = new Fav();
 

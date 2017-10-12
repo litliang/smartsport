@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="还没有收藏任何青训课程"
+                    android:text="还没有收藏任何资讯"
                     android:textColor="@color/text_gray"
                     android:textSize="17dip" />
 
