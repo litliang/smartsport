@@ -1,7 +1,7 @@
 package top.smartsport.www.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +13,8 @@ import org.xutils.view.annotation.ViewInject;
 import top.smartsport.www.R;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.utils.pay.PayUtil;
+
+import static top.smartsport.www.utils.StringUtil.secToTime;
 
 /**
  * Created by Aaron on 2017/7/28.
@@ -56,6 +58,7 @@ public class OrderCMActivity extends BaseActivity {
             }
         });
         findViewById(R.id.rl_zhifubao).performClick();
+        timer.start();
     }
 
     String id;
@@ -90,5 +93,33 @@ public class OrderCMActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        oncancel(tv_time);
+    }
+
+    /**
+     * 取消倒计时
+     * @param v
+     */
+    public void oncancel(View v) {
+        timer.cancel();
+    }
+
+    private CountDownTimer timer = new CountDownTimer(1800000, 1000) {
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            int len = (int) (millisUntilFinished / 1000);
+            tv_time.setText(secToTime(len));
+        }
+
+        @Override
+        public void onFinish() {
+            oncancel(tv_time);
+        }
+    };
 
 }
