@@ -89,6 +89,7 @@ public class SSBMActivity extends BaseActivity {
     private BMmyteam bMmyteam;
     private String total, teamId;
     private String team_name;
+    private boolean isToBuy = false;
 
     @Override
     protected void initView() {
@@ -112,7 +113,7 @@ public class SSBMActivity extends BaseActivity {
             }
         });
         getTextView(R.id.ssbm_text_sell_prices).setText("¥0.00");
-
+        isToBuy = false;
     }
 
 
@@ -186,7 +187,7 @@ public class SSBMActivity extends BaseActivity {
                 ssbm_text_people_name.setText(bMmyteam.getCoath_name());
                 ssbm_text_people_num.setText(bMmyteam.getMembers());
                 ssbm_text_people_phone.setText(bMmyteam.getCoath_mobile());
-//                ssbm_text_dingzhi_video.setText(bMvideo.getName());
+                ssbm_text_dingzhi_video.setText(bMvideo.getName());
                 teamId = bMmyteam.getId();
             }
         });
@@ -222,6 +223,9 @@ public class SSBMActivity extends BaseActivity {
             json.put("state", state);
             json.put("access_token", access_token);
             json.put("action", "matchApplyPay");
+            if(!StringUtil.isEmpty(total) && total.equals("0")) {
+                total = "0.00";
+            }
             json.put("total", total);
             json.put("match_id", id);
             json.put("team_id", teamId);
@@ -241,6 +245,7 @@ public class SSBMActivity extends BaseActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
+                isToBuy = true;
                 SSBMOrder bmOrder = entity.toObj(SSBMOrder.class);
                 Bundle bundle = new Bundle();
 //                {"total":"200.00","type":2,"product_id":"4"}
@@ -286,5 +291,12 @@ public class SSBMActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(isToBuy)
+            setResult(RESULT_OK);
     }
 }
