@@ -511,7 +511,7 @@ public class MapConf {
                 }
             }
         }
-        if (value.toString().contains(".") && resMaps.contains(value.toString().split("\\.")[0]) && value.toString().split("\\.")[0].length() != value.toString().length()) {
+        if (value instanceof String && value.toString().contains(".") && resMaps.contains(value.toString().split("\\.")[0]) && value.toString().split("\\.")[0].length() != value.toString().length()) {
             value = "R." + value.toString();
             value = new Integer(RRes.get(value.toString()).getAndroidValue());
         }
@@ -610,7 +610,8 @@ public class MapConf {
             }
 
         } else if (theView instanceof TextView) {
-            if (value instanceof Integer) {
+            if (value.getClass()==Integer.class&&RRes.getAttrValue_itsname().containsKey(value)) {
+
                 theView.setBackgroundResource((Integer) value);
             } else {
                 ((TextView) theView)

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.bumptech.glide.Glide;
 
@@ -634,19 +635,61 @@ public class MapAdapter extends BaseAdapter {
             treatMap(((Entity) item).fieldContents, convertView, position);
         } else if (item instanceof JSONObject) {
             treatJSONArray(item, convertView, position);
-        } else if (item instanceof List) {
-            if (((List) item).size() > 0) {
-                if (((List) item).get(0) instanceof String) {
-                    treatFakeList(item, convertView, position);
-                }
-            }
-        } else if (item instanceof String) {
+        }
+//        else if (item instanceof List) {
+//            if (((List) item).size() > 0) {
+//                if (((List) item).get(0) instanceof String) {
+//                    treatFakeList(item, convertView, position);
+//                }
+//            }
+//        }
+        else if (item instanceof String) {
             treatFakeString(item, convertView, position);
-        } else {
-            treatObject(item, convertView, position);
-
+        } else if(item instanceof List){
+//            treatObject(item, convertView, position);
+            treatList(item, convertView, position);
         }
 
+    }
+    List<View> baseviews = new ArrayList<View>();
+    private void treatList(Object item, View convertView, int position) {
+
+        baseviews.clear();
+        List<ViewGroup> baseGroup = new ArrayList<ViewGroup>();
+        baseGroup.add((ViewGroup) convertView);
+        getChildBaseViews(baseGroup);
+        List list = ((ArrayList)item);
+
+        for(int j = 0;j<list.size();j++){
+            if(baseviews.size()-1>=j){
+
+            }else{
+                break;
+            }
+            MapConf.with(context).setView(list.get(j).toString(),baseviews.get(j));
+        }
+    }
+
+    private void getChildBaseViews( List<ViewGroup> baseGroup) {
+        if(baseGroup.size()>0){
+            for(int g = 0;g<baseGroup.size();g++) {
+
+                View paramGroup = baseGroup.get(g);
+                    List<ViewGroup> paramChildGroup = new ArrayList<ViewGroup>();
+                for (int i = 0; i < ((ViewGroup) paramGroup).getChildCount(); i++) {
+                    View view = ((ViewGroup) paramGroup).getChildAt(i);
+                    if (view instanceof TextView || view instanceof ImageView) {
+                        baseviews.add(view);
+                    } else if (view instanceof ViewGroup) {
+                        paramChildGroup.add((ViewGroup) view);
+                    }
+                    if (i == ((ViewGroup) paramGroup).getChildCount() - 1) {
+                        getChildBaseViews(paramChildGroup);
+                    }
+                }
+
+        }
+    }
     }
 
     private void treatFakeString(Object item, View convertView, int position) {
