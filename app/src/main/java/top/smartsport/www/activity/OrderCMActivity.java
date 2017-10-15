@@ -44,12 +44,12 @@ public class OrderCMActivity extends BaseActivity {
         type = 1;
         Bundle bundel = getIntent().getExtras();
         tv_money.setText("¥" + bundel.getString("total"));
+        final String type = bundel.getString("type");
+        id = bundel.getString("product_id");
         ivPay = new ImageView[3];
         ivPay[0] = iv_sel_zhifubao;
         ivPay[1] = iv_sel_weixin;
         ivPay[2] = iv_sel_xianxia;
-        final String type = bundel.getString("type");
-        id = bundel.getString("product_id");
         findViewById(R.id.ssbm_pay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +106,7 @@ public class OrderCMActivity extends BaseActivity {
      */
     public void oncancel(View v) {
         timer.cancel();
+        finish();
     }
 
     private CountDownTimer timer = new CountDownTimer(1800000, 1000) {
