@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-
 import android.widget.TextView;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -82,6 +82,9 @@ public class ZXV4Fragment extends BaseV4Fragment {
         }
         String city = (String) SPUtils.get(BaseApplication.getApplication(),"city","");
         if(city!=null&&!city.trim().equals("")){
+            if(city.length() > 5) {
+                city = city.substring(0, 5) + "...";
+            }
             ((TextView)root.findViewById(R.id.zx_location)).setText(city);
         }
     }
