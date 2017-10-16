@@ -176,13 +176,19 @@
             android:textSize="@dimen/text_size"
             android:layout_marginLeft="@dimen/margin_left"
             />
-        <top.smartsport.www.widget.MyListView
+        <top.smartsport.www.swipe.SwipeMenuListView
+            android:id="@+id/lv_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/diver_color"
+            android:dividerHeight="0.5dp" />
+        <!--<top.smartsport.www.widget.MyListView
             android:id="@+id/lv_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@color/diver_color"
             android:dividerHeight="0.5dp"
-            />
+            />-->
 
         <View
             android:layout_width="match_parent"
