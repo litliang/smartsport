@@ -109,7 +109,13 @@ public class SCJLV4Fragment extends BaseV4Fragment {
                     pullrefreshlistview.onPullUpRefreshComplete();
                 }
                 String data = ((NetEntity)result).getData().toString();
-                List list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches",data).toString());
+                List list = new ArrayList();
+                try {
+                    list = (List<Coaches>) app.base.JsonUtil.extractJsonRightValue(JsonUtil.findJsonLink("coaches", data).toString());
+                }catch(Exception e){
+                    mList.clear();
+                    list.clear();
+                }
                 for(int i=0; i<list.size(); i++) {
                     if(list.get(i) != null && !list.get(i).equals("null")) {
                         mList.add(list.get(i));

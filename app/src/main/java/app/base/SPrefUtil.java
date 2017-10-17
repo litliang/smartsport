@@ -88,7 +88,7 @@ public class SPrefUtil {
 		} else if (clazz == Long.class) {
 			return sp.getLong(key, -1);
 		}
-		return "3";
+		return "";
 	}
 
 	public static void clear(String spname) {

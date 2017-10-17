@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="17sp"
-            android:text="树苗足球V1.0"/>
+            android:text="数苗足球V1.0"/>
     </com.zhy.autolayout.AutoLinearLayout>
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"

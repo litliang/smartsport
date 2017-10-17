@@ -86,7 +86,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
 
-        <!-- 欢迎页 ActionUIActivity -->
+        <!-- 欢迎页 DrawerLeftActivity -->
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -530,7 +530,6 @@
 
         <!-- 选择头像 -->
         <activity
-
             android:name=".activity.ActivityChooseIcon"
             android:theme="@style/my_dialog" />
 
@@ -538,7 +537,10 @@
         <activity
             android:name=".activity.ActivityBuyCustomVedio"
             android:label="购买定制视频" />
-        <!--<activity android:name="app.auto.ActionUIActivity" android:label="" ></activity>-->
+        <activity
+            android:name="app.auto.DrawerLeftActivity"
+            android:label="" />
+        <activity android:name="app.auto.ActionActivity" android:theme="@style/my_dialog"></activity>
     </application>
 
 </manifest>
