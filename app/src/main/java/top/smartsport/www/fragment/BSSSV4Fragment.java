@@ -114,10 +114,11 @@ public class BSSSV4Fragment extends BaseV4Fragment {
 
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
-        getData(true);
+        initView();
     }
 
     /**

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import app.auto.DrawerLeftActivity;
 import app.base.framework.CrashHandler;
 import top.smartsport.www.H;
 import top.smartsport.www.O;
@@ -136,7 +137,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //        Epr.parseParam("Print(Clickactivityid($ss:123%s456))",(RadioButton) findViewById(R.id.main_tabs_home)).innerrun();
 //        goActivity(ActivityTrainingDetails.class);
         CrashHandler.errorDialog();
-
+        ((RadioButton) findViewById(R.id.main_tabs_me)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), DrawerLeftActivity.class));
+                return false;
+            }
+        });
     }
 
     @Override

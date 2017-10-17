@@ -39,6 +39,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="136px"
         android:background="@color/white"
@@ -47,6 +48,7 @@
         <top.smartsport.www.widget.PagerSlidingTabStrip
             android:id="@+id/qx_tab"
             android:layout_width="match_parent"
+
             android:layout_height="136px"
             android:layout_marginLeft="130px"
             android:layout_marginRight="130px"

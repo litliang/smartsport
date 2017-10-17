@@ -53,12 +53,18 @@ public class WDV4Fragment extends BaseV4Fragment {
 
     @Override
     protected void initView() {
-        initUserInfo();
+
     }
 
     public void initUserInfo() {
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initUserInfo();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
