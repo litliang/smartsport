@@ -64,6 +64,12 @@ public class BSZBV4Fragment extends BaseV4Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        initView();
+    }
+
+    @Override
     protected void initView() {
         regInfo = RegInfo.newInstance();
         tokenInfo = TokenInfo.newInstance();

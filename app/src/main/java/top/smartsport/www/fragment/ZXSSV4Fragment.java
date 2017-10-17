@@ -47,6 +47,13 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     private int mCurrentPage;//当前页码
     private String cityId;
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initView();
+    }
+
     @Override
     protected void initView() {
         Context context = getContext();

@@ -66,6 +66,8 @@ public class BSV4Fragment extends BaseV4Fragment {
         ss_tab.setViewPager(ss_viewpager);
     }
 
+
+
     @Event(value = {R.id.bs_ll_choice})
     private void getEvent(View view){
         switch (view.getId()){

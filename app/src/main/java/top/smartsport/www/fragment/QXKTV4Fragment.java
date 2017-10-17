@@ -41,6 +41,12 @@ public class QXKTV4Fragment extends BaseV4Fragment {
     PullToRefreshListView pullrefreshlistview;
     private int mCurrentPage;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initView();
+    }
+
     public static QXKTV4Fragment newInstance() {
         QXKTV4Fragment fragment = new QXKTV4Fragment();
         Bundle bundle = new Bundle();

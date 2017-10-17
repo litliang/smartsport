@@ -53,6 +53,7 @@ public class StarDetailActivity extends BaseActivity {
                 fl_loading.setVisibility(View.GONE);
                 Gson gson = new Gson();
                 String data = ((NetEntity)result).getData().toString();
+                String coverUrl = null;
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     JSONArray players = jsonObject.optJSONArray("players");
@@ -66,7 +67,7 @@ public class StarDetailActivity extends BaseActivity {
                             introduce = introduce.replace("<img", "<img style='max-width:100%;height:auto;'");
                             tv_introduce_star.loadData(introduce, "text/html;charset=UTF-8", null);
                             tv_week.setText(starDetail.getStage());
-                            String coverUrl = starDetail.getCover_url();
+                            coverUrl = starDetail.getCover_url();
                             ImageLoader.getInstance().displayImage(coverUrl, iv_top_pic, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                         }
                     }
@@ -81,7 +82,7 @@ public class StarDetailActivity extends BaseActivity {
 //                MapConf.with(getBaseContext()).pair("players[0]-name->tv_name").pair("players[0]-team_name->tv_team").pair("players[0]-cover_url->iv_top_pic").pair("players[0]-introduce->tv_introduce_star").pair("players[0]-stage->tv_week").source(((NetEntity)result).getData().toString(),StarDetailActivity.this).toView();
                 String title = !TextUtils.isEmpty(getTextString(R.id.tv_name)) ? getTextString(R.id.tv_name) : "球星名称";
                 String shareText = !TextUtils.isEmpty(((WebView)getView(R.id.tv_introduce_star)).getTitle()) ? ((WebView)getView(R.id.tv_introduce_star)).getTitle() : "球星介绍。图文介绍。";
-                String shareUrl = !TextUtils.isEmpty(((ImageView)getView(R.id.iv_top_pic)).getUrl()) ? ((ImageView)getView(R.id.iv_top_pic)).getUrl() : "--";
+                String shareUrl = coverUrl;
                 setSharetitle(title);
                 setSharetxt(shareText);
                 setShareurl(shareUrl);
