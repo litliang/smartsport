@@ -29,4 +29,7 @@
     <color name="huise">#c9cbcd</color>
 <!--898b8d-->
     <color name="province_line_border">#D0D0D0</color>
+    <color name="gray">#575757</color>
+    <color name="transparent_ban3">#20000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

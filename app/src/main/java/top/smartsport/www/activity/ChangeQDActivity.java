@@ -57,7 +57,7 @@ public class ChangeQDActivity extends BaseActivity {
         wdqdAdapter = new WDQDAdapter(this);
         wd_qd_listView.setAdapter(wdqdAdapter);
 
-        getData();
+//        getData();
 
         wd_qd_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -66,6 +66,13 @@ public class ChangeQDActivity extends BaseActivity {
                 team_id = ((WDQDInfo) parent.getItemAtPosition(position)).getId();
                 setResult(0,new Intent().putExtra("team_name",name).putExtra("team_id",team_id));
                 finish();
+            }
+        });
+
+        findViewById(R.id.addteam).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplication(), AddMemberActivity.class));
             }
         });
     }
@@ -94,9 +101,18 @@ public class ChangeQDActivity extends BaseActivity {
 
             @Override
             public void onSuccess(NetEntity entity) {
+                wdqdInfoList.clear();
+                wdqdAdapter.clear();
                 wdqdInfoList = entity.toList(WDQDInfo.class);
                 wdqdAdapter.addAll(wdqdInfoList);
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
+
 }

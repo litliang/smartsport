@@ -3,17 +3,15 @@ package top.smartsport.www.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -23,13 +21,14 @@ import app.base.action.ViewInflater;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ConsultDetailActivity;
 import top.smartsport.www.adapter.HDZXAdapter;
+import top.smartsport.www.adapter.ZXBannerAdapter;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.HDZXInfo;
 import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.fragment.viewutils.InformationOperateUtils;
-import top.smartsport.www.adapter.ZXBannerAdapter;
-import top.smartsport.www.utils.ScreenUtils;
+import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.banner.Banner;
 
 /**
@@ -46,10 +45,12 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
     private HDZXAdapter mInformationAdapter;//资讯列表适配器
     private ZXBannerAdapter mBannerAdapter;//Banner 适配器
     private int mCurrentPage;//当前页码
+    private String cityId;
 
     @Override
     protected void initView() {
         Context context = getContext();
+        cityId = (String) SPUtils.get(BaseApplication.getApplication(),"cityId","");
         View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information,null);
         ((TextView)headerView.findViewById(R.id.title_name_tv)).setText("活动资讯");
         mBanner = (Banner) headerView.findViewById(R.id.banner);
@@ -89,7 +90,7 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
         } else {
             mCurrentPage++;
         }
-        InformationOperateUtils.requestActivityInformation(mCurrentPage,"2", new InformationOperateUtils.ActivityInformationAPICallBack() {
+        InformationOperateUtils.requestActivityInformation(mCurrentPage,"2", cityId, new InformationOperateUtils.ActivityInformationAPICallBack() {
             @Override
             public void onSuccessTypeTwo(List<Carousel> bannerResources, List<HDZXInfo> informationResources) {
                 //refresh information
@@ -122,6 +123,20 @@ public class ZXHDV4Fragment extends BaseV4Fragment {
                 mPullToRefreshView.onRefreshComplete();
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 101:
+                cityId = (String) SPUtils.get(BaseApplication.getApplication(),"cityId","");
+                LogUtil.d("----------cityId---------->" + cityId);
+                getData(true);
+                break;
+            default:
+                break;
+        }
     }
 
 }

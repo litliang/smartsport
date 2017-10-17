@@ -1,12 +1,13 @@
 package top.smartsport.www.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-
 import android.widget.TextView;
+
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -37,6 +38,7 @@ public class ZXV4Fragment extends BaseV4Fragment {
     private ZXALLAdapter zxallAdapter;//比赛,直播adapter
     private FragmentManager fragmentManager;
     private List<Fragment> listFM;
+    private String cityId;
 
     public static ZXV4Fragment newInstance() {
         ZXV4Fragment fragment = new ZXV4Fragment();
@@ -55,7 +57,8 @@ public class ZXV4Fragment extends BaseV4Fragment {
     private void getEvent(View v){
         switch (v.getId()){
             case R.id.zx_ll_location:
-                toActivity(ChoiceCityActivity.class);
+//                toActivity(ChoiceCityActivity.class);
+                startActivityForResult(new Intent(getActivity(), ChoiceCityActivity.class), 101);
                 break;
         }
     }
@@ -79,7 +82,23 @@ public class ZXV4Fragment extends BaseV4Fragment {
         }
         String city = (String) SPUtils.get(BaseApplication.getApplication(),"city","");
         if(city!=null&&!city.trim().equals("")){
+            if(city.length() > 5) {
+                city = city.substring(0, 5) + "...";
+            }
             ((TextView)root.findViewById(R.id.zx_location)).setText(city);
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (listFM != null) {
+            for (Fragment fragment : listFM) {
+                if(fragment==null)
+                    continue;
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
 }

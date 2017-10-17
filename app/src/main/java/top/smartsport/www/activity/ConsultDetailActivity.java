@@ -1,23 +1,30 @@
 package top.smartsport.www.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.base.MapConf;
@@ -34,8 +41,13 @@ import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.bean.ZXInfoComment;
 import top.smartsport.www.bean.ZXInfoDetail;
 import top.smartsport.www.bean.ZXInfoNews;
+import top.smartsport.www.swipe.SwipeMenu;
+import top.smartsport.www.swipe.SwipeMenuCreator;
+import top.smartsport.www.swipe.SwipeMenuItem;
+import top.smartsport.www.swipe.SwipeMenuListView;
 import top.smartsport.www.utils.ImageUtil;
 import top.smartsport.www.utils.JsonUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.MyListView;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
@@ -72,13 +84,14 @@ public class ConsultDetailActivity extends BaseActivity {
     @ViewInject(R.id.lv_consult)
     private MyListView lvConsult;
     @ViewInject(R.id.lv_comment)
-    private MyListView lvComment;
+    private SwipeMenuListView lvComment;
     @ViewInject(R.id.fl_loading)
     private FrameLayout fl_loading;
     private ConsultAdapter adapterNews;
     private CommentAdapter adapterComment;
     private String data;
     private boolean isCurrentScStatus = true;
+    private  List<ZXInfoComment> coments;
 
     @Override
     protected void initView() {
@@ -143,6 +156,56 @@ public class ConsultDetailActivity extends BaseActivity {
 
             }
         });
+
+        lvComment.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                getCommentStatus(position);
+                return true;
+            }
+        });
+
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(dp2px(90));
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_delete);
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        lvComment.setMenuCreator(creator);
+
+        lvComment.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public void onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        getCommentStatus(position);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void getCommentStatus(int pos) {
+        //删除状态: 0不可删除 1可删除
+        ZXInfoComment zxComment = coments.get(pos);
+        String delStatus = zxComment.getDel_status();
+        if(!StringUtil.isEmpty(delStatus) && delStatus.equals("1")) { // 可删除
+            showDefineDialog(pos, zxComment.getId());
+        } else {
+            Toast.makeText(ConsultDetailActivity.this, "只能删自己的评论哦", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -185,7 +248,8 @@ public class ConsultDetailActivity extends BaseActivity {
                 setSharetxt(details.getDescription());
                 setShareurl(details.getCover_url());
                 List<ZXInfoNews> news = JsonUtil.jsonToEntityList(intf.JsonUtil.findJsonLink("other_news", data).toString(), ZXInfoNews.class);
-                List<ZXInfoComment> coments = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments", data).toString(), ZXInfoComment.class);
+                coments = new ArrayList<ZXInfoComment>();
+                coments = JsonUtil.jsonToEntityList(app.base.JsonUtil.findJsonLink("comments", data).toString(), ZXInfoComment.class);
                 ImageLoader.getInstance().displayImage(details.getCover_url(), ivTop, ImageUtil.getOptions(), ImageUtil.getImageLoadingListener(true));
                 tvTitle.setText(details.getTitle());
                 tvTime.setText(details.getCtime());
@@ -195,7 +259,6 @@ public class ConsultDetailActivity extends BaseActivity {
                 if (news != null) {
                     adapterNews.setData(news);
                 }
-                LogUtil.d("--------getData---------->" + getFaved());
                 isCurrentScStatus = getFaved();
                 if (coments != null) {
                     adapterComment.setData(coments);
@@ -209,10 +272,87 @@ public class ConsultDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.d("------onDestroy--tofav---------->" + getFaved());
-        LogUtil.d("------onDestroy--isCurrentScStatus---------->" + isCurrentScStatus);
         boolean scStatus = getFaved();
         if(isCurrentScStatus != scStatus)
             setResult(RESULT_OK);
     }
+
+    // 显示自定义Dialog
+    private void showDefineDialog(final int pos, final String id) {
+        final AlertDialog dialog = new AlertDialog.Builder(ConsultDetailActivity.this).create();
+        dialog.show();
+        Window window = dialog.getWindow();
+        int resId = ConsultDetailActivity.this.getResources().getColor(R.color.transparent);
+        window.setBackgroundDrawable(new ColorDrawable(resId));
+        // *** 主要就是在这里实现这种效果的.
+        window.setContentView(R.layout.define_dialog);
+
+        RelativeLayout rlCancel = (RelativeLayout) window
+                .findViewById(R.id.rl_left);
+        RelativeLayout rlBoundPhone = (RelativeLayout) window
+                .findViewById(R.id.rl_right);
+        TextView tvTitle = (TextView) window.findViewById(R.id.tv_dialog_title);
+        TextView tvContent = (TextView) window
+                .findViewById(R.id.tv_dialog_content);
+        TextView tvLeft = (TextView) window.findViewById(R.id.tv_left);
+        TextView tvRight = (TextView) window.findViewById(R.id.tv_right);
+
+        tvTitle.setText("删除评论");
+        tvTitle.setVisibility(View.VISIBLE);
+        tvContent.setText("您是否要删除评论？");
+        tvContent.setTextSize(16.0f);
+        tvLeft.setText("删除");
+        tvRight.setText("取消");
+        rlCancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                delComment(pos, id);
+            }
+        });
+
+        rlBoundPhone.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    // 删除评论
+    private void delComment(final int pos, String id) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("client_id", client_id);
+            json.put("state", state);
+            json.put("access_token", access_token);
+            json.put("action", "delComment");
+            json.put("id", id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        X.Post(url, json, new MyCallBack<String>() {
+            @Override
+            protected void onFailure(String message) {
+                showToast(message);
+            }
+
+            @Override
+            public void onSuccess(NetEntity entity) {
+                coments.remove(pos);
+                if (coments != null) {
+                    adapterComment.setData(coments);
+                }
+            }
+        });
+
+    }
+
+    private int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
+    }
+
 }

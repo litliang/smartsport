@@ -10,6 +10,7 @@ public class ZXInfoComment {
      "uid": "60",
      "content": "葱花",
      "username": "只想做一枚安静的美男子",
+     "del_status": 删除状态0不可删除1可删除,
      "header_url": "http://admin.smartsport.top/data/upload/2017/0831/21/59a80a22c5cc6.jpeg",
      "comment_time": "09-05 15:35"
      */
@@ -17,6 +18,7 @@ public class ZXInfoComment {
     private String uid;
     private String content;
     private String username;
+    private String del_status;
     private String header_url;
     private String comment_time;
 
@@ -66,5 +68,13 @@ public class ZXInfoComment {
 
     public void setComment_time(String comment_time) {
         this.comment_time = comment_time;
+    }
+
+    public String getDel_status() {
+        return del_status;
+    }
+
+    public void setDel_status(String del_status) {
+        this.del_status = del_status;
     }
 }

@@ -14,6 +14,7 @@ import top.smartsport.www.bean.NetEntity;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.SSXWInfo;
 import top.smartsport.www.bean.TokenInfo;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.xutils3.MyCallBack;
 import top.smartsport.www.xutils3.X;
 
@@ -29,7 +30,7 @@ public class InformationOperateUtils {
      * @param page  页码
      * @param callBack  回调
      */
-    public static void requestActivityInformation(int page,final String type,final ActivityInformationAPICallBack callBack) {
+    public static void requestActivityInformation(int page,final String type, String cityId, final ActivityInformationAPICallBack callBack) {
         JSONObject json = new JSONObject();
         try {
             json.put("client_id", RegInfo.newInstance().getApp_key());
@@ -38,6 +39,9 @@ public class InformationOperateUtils {
             json.put("action", "getNews");
             json.put("type", type);
             json.put("page", page);
+            if(!StringUtil.isEmpty(cityId)) {
+                json.put("city", cityId);
+            }
         } catch (JSONException e) {
         }
         X.Post(RegInfo.newInstance().getSource_url(), json, new MyCallBack<String>() {

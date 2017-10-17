@@ -46,6 +46,7 @@ import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.Schedule;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.utils.ImageUtil;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.MyGridView;
 import top.smartsport.www.widget.MyListView;
 
@@ -118,6 +119,7 @@ public class BSDetailActivity extends BaseActivity {
 
     private List<Schedule> mListSchedule;
     private boolean isCurrentScStatus = true;
+    private String orderStatus; // 订单状态：null未报名0未支付1已支付
 
     @Override
     public View getTopBar() {
@@ -226,9 +228,7 @@ public class BSDetailActivity extends BaseActivity {
             bs_detail_baoming.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(SSBMActivity.TAG, id);
-                    goActivity(SSBMActivity.class, bundle);
+                    startActivityForResult(new Intent(BSDetailActivity.this, SSBMActivity.class).putExtra(SSBMActivity.TAG, id), 101);
                 }
             });
         }
@@ -306,7 +306,7 @@ public class BSDetailActivity extends BaseActivity {
             public void onSuccess(Object result, List object) {
                 NetEntity entity = ((NetEntity)result);
                 String data = ((NetEntity)result).getData().toString();
-                LogUtil.d("---------data------->" + data);
+                LogUtil.d("------onSuccess---data------->" + data);
                 fl_loading.setVisibility(View.GONE);
                 BSDetail bsDetail = entity.toObj(BSDetail.class);
                 String collect_status = app.base.JsonUtil.findJsonLink("collect_status", entity.getData().toString()).toString();
@@ -343,6 +343,11 @@ public class BSDetailActivity extends BaseActivity {
                     bs_detail_baoming.setVisibility(View.INVISIBLE);
                 }
                 bs_detail_content.loadData(bsDetail.getDescription(), "text/html;charset=UTF-8", null);
+                // 订单状态：null未报名 0未支付 1已支付
+                orderStatus = app.base.JsonUtil.findJsonLink("order_status", entity.getData().toString()).toString();
+                if(!StringUtil.isEmpty(orderStatus) && !orderStatus.equals("null")) {
+                    bs_detail_baoming.setVisibility(View.GONE);
+                }
                 bs_detail_baoming.setText("我要报名(￥" + bsDetail.getSell_price().replace(".00", "") + ")");
 
                 picInfoList = bsDetail.toList(PicInfo.class);
@@ -432,8 +437,6 @@ public class BSDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.d("------onDestroy--tofav---------->" + getFaved());
-        LogUtil.d("------onDestroy--isCurrentScStatus---------->" + isCurrentScStatus);
         boolean scStatus = getFaved();
         if(isCurrentScStatus != scStatus)
             setResult(RESULT_OK);

@@ -13,6 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
@@ -37,6 +38,7 @@ import top.smartsport.www.adapter.NewsAdapter;
 import top.smartsport.www.adapter.NewsHotAdapter;
 import top.smartsport.www.adapter.PlayersAdapter;
 import top.smartsport.www.base.BaseActivity;
+import top.smartsport.www.base.BaseApplication;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.Carousel;
 import top.smartsport.www.bean.Coaches;
@@ -49,6 +51,8 @@ import top.smartsport.www.bean.Players;
 import top.smartsport.www.bean.RegInfo;
 import top.smartsport.www.bean.TokenInfo;
 import top.smartsport.www.listener.OnClickThrottleListener;
+import top.smartsport.www.utils.SPUtils;
+import top.smartsport.www.utils.StringUtil;
 import top.smartsport.www.widget.Banner;
 import top.smartsport.www.widget.HorizontalListView;
 import top.smartsport.www.widget.MyListView;
@@ -107,6 +111,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
     private TextView fm_text_qbkc;
     @ViewInject(R.id.fm_text_)
     private TextView fm_text_;
+    private String cityId;
 
     public static ZXQXV4Fragment newInstance() {
         ZXQXV4Fragment fragment = new ZXQXV4Fragment();
@@ -257,6 +262,10 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
             json.put("state", state);
             json.put("access_token", access_token);
             json.put("action", "getQxNews");
+            if(!StringUtil.isEmpty(cityId)) {
+                json.put("city", cityId);
+            }
+            LogUtil.d("---------json.toString()-------》" + json.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -271,6 +280,7 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
             public void onSuccess(NetEntity entity) {
 
                 Data data = entity.toObj(Data.class);
+                LogUtil.d("----------data.toString()---------->" + data.toString());
                 carousels = data.toListcarousel(Carousel.class);
                 coaches = data.toListcoaches(Coaches.class);
                 courses = data.toListcourses(Courses.class);
@@ -299,4 +309,19 @@ public class ZXQXV4Fragment extends BaseV4Fragment {
         this.viewpager = viewpager;
         return this;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 101:
+                cityId = (String) SPUtils.get(BaseApplication.getApplication(),"cityId","");
+                LogUtil.d("----------cityId---------->" + cityId);
+                getData();
+                break;
+            default:
+                break;
+        }
+    }
+
 }

@@ -1,22 +1,18 @@
 package top.smartsport.www.activity;
 
 import android.content.Context;
-import android.content.Entity;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -38,13 +34,11 @@ import java.util.List;
 import top.smartsport.www.O;
 import top.smartsport.www.R;
 import top.smartsport.www.adapter.HotCityAdapter;
-import top.smartsport.www.adapter.NameAdapter;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.EntityListAdapter;
 import top.smartsport.www.bean.ComCity;
 import top.smartsport.www.bean.HotCity;
 import top.smartsport.www.bean.PlaceItemInfo;
-import top.smartsport.www.utils.GaoDeUtils;
 import top.smartsport.www.utils.SPUtils;
 import top.smartsport.www.widget.QuickIndex;
 
@@ -106,6 +100,7 @@ public class ChoiceCityActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra("placeItemInfo", placeItemInfo);
                 SPUtils.put(getApplicationContext(), "city", placeItemInfo.mName);
+                SPUtils.put(getApplicationContext(), "cityId", placeItemInfo.mPlaceId);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -119,6 +114,7 @@ public class ChoiceCityActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra("placeItemInfo", info);
                 SPUtils.put(getApplicationContext(), "city", info.mName);
+                SPUtils.put(getApplicationContext(), "cityId", info.mPlaceId);
                 setResult(RESULT_OK, intent);
                 finish();
 
