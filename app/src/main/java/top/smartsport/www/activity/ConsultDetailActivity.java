@@ -170,14 +170,13 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
 
-        lvComment.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                getCommentStatus(position);
-                return true;
-            }
-        });
-
+//        lvComment.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                getCommentStatus(position);
+//                return true;
+//            }
+//        });
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
