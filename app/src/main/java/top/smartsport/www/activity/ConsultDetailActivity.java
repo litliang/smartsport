@@ -214,7 +214,8 @@ public class ConsultDetailActivity extends BaseActivity {
         ZXInfoComment zxComment = coments.get(pos);
         String delStatus = zxComment.getDel_status();
         if(!StringUtil.isEmpty(delStatus) && delStatus.equals("1")) { // 可删除
-            showDefineDialog(pos, zxComment.getId());
+//            showDefineDialog(pos, zxComment.getId());
+            delComment(pos, zxComment.getId());
         } else {
             Toast.makeText(ConsultDetailActivity.this, "只能删自己的评论哦", Toast.LENGTH_SHORT).show();
         }
