@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.base.MapConf;
+import app.base.widget.ImageView;
 import intf.FunCallback;
 import intf.MapBuilder;
 import top.smartsport.www.R;
@@ -65,6 +67,8 @@ public class ConsultDetailActivity extends BaseActivity {
     private String access_token;
     private String id;
 
+    @ViewInject(R.id.sl_view)
+    private ScrollView sl_view;
     @ViewInject(R.id.iv_top_pic)
     private ImageView ivTop;
     @ViewInject(R.id.tv_title)
@@ -111,6 +115,15 @@ public class ConsultDetailActivity extends BaseActivity {
         lvConsult.setAdapter(adapterNews);
         adapterComment = new CommentAdapter();
         lvComment.setAdapter(adapterComment);
+
+        sl_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                lvComment.dispatchTouchEvent(event); //分发事件(让listview滚动)
+                return false; //scrollview自我滚动，true时不滚动
+            }
+        });
+
         findViewById(R.id.send_comment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -157,14 +170,13 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
 
-        lvComment.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                getCommentStatus(position);
-                return true;
-            }
-        });
-
+//        lvComment.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                getCommentStatus(position);
+//                return true;
+//            }
+//        });
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -202,7 +214,8 @@ public class ConsultDetailActivity extends BaseActivity {
         ZXInfoComment zxComment = coments.get(pos);
         String delStatus = zxComment.getDel_status();
         if(!StringUtil.isEmpty(delStatus) && delStatus.equals("1")) { // 可删除
-            showDefineDialog(pos, zxComment.getId());
+//            showDefineDialog(pos, zxComment.getId());
+            delComment(pos, zxComment.getId());
         } else {
             Toast.makeText(ConsultDetailActivity.this, "只能删自己的评论哦", Toast.LENGTH_SHORT).show();
         }
