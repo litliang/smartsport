@@ -47,15 +47,15 @@ public class BaseApplication extends Init {
         MultiDex.install(this);
         application = this;
         SPrefUtil.iniContext(this);
-        JPushInterface.init(getBaseContext());
         JPushInterface.setDebugMode(true);
-//        JPushInterface.initCrashHandler(this);
+        JPushInterface.init(getApplicationContext());
+        JPushInterface.initCrashHandler(this);
 
-        JAnalyticsInterface.init(getApplication());
-//        JAnalyticsInterface.initCrashHandler(this);
         JAnalyticsInterface.setDebugMode(true);
-        cn.jiguang.share.android.api.JShareInterface.init(this);
+        JAnalyticsInterface.init(getApplicationContext());
+        JAnalyticsInterface.initCrashHandler(this);
         cn.jiguang.share.android.api.JShareInterface.setDebugMode(true);
+        cn.jiguang.share.android.api.JShareInterface.init(getApplicationContext());
         SerialUtil.initCtx(application);
         //ImageLoader初始化
         ImageUtil.initImageLoader(this);

@@ -267,6 +267,7 @@ public class ConsultDetailActivity extends BaseActivity {
             }
         });
 
+
     }
 
     @Override

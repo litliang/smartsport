@@ -51,11 +51,7 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initView();
-    }
 
-    @Override
-    protected void initView() {
         Context context = getContext();
         cityId = (String) SPUtils.get(BaseApplication.getApplication(),"cityId","");
         View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information, null);
@@ -87,6 +83,10 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
 
             }
         });
+    }
+
+    @Override
+    protected void initView() {
     }
 
     private void getData(final boolean isRefresh) {
