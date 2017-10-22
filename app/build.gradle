@@ -55,8 +55,8 @@ android {
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : "top.smartsport.www",
-                JSHARE_PKGNAME: "top.smartsport.www",
-                JPUSH_APPKEY  : "5d9e5476b83fc95046e1c2ba", //极光控制台创建应用得到的AppKey.
+                JSHARE_PKGNAME: "top.smartsport.www",//5d9e5476b83fc95046e1c2ba
+                JPUSH_APPKEY  : "be56e736135844d06f4b1b1d", //极光控制台创建应用得到的AppKey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
                 TENCENT_APPID : "1106274178",//腾讯开放平台注册应用得到的appId
         ]
@@ -111,9 +111,6 @@ repositories {
 
 
 dependencies {
-
-
-
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.github.Rukey7:IjkPlayerView:1+'
@@ -153,7 +150,7 @@ dependencies {
     compile files('libs/pinyin4j-2.5.0.jar')
     //    compile files('libs/libammsdk.jar')
 
-//    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    //    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
     compile files('libs/alipaySdk-20160223.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.0.2.jar')
     compile files('libs/json-lib-2.4-jdk15.jar')
@@ -164,6 +161,8 @@ dependencies {
     //
     compile 'com.android.support:support-annotations:25.3.1'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile files('libs/jcore-android-1.1.7.jar')
+    compile files('libs/jpush-android-3.0.9.jar')
 }
 configurations {
 

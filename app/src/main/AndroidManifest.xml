@@ -365,7 +365,7 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="5d9e5476b83fc95046e1c2ba"
+            android:value="be56e736135844d06f4b1b1d"
             tools:replace="android:value" />
 
         <activity
