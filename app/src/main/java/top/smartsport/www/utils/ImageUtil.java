@@ -1,6 +1,5 @@
 package top.smartsport.www.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -150,7 +149,7 @@ public class ImageUtil {
 
             @Override
             public void onLoadingComplete(String s, final View view, final Bitmap bitmap) {
-                if(bitmap.isRecycled()){
+                if(bitmap == null || bitmap.isRecycled()){
                     return;
                 }
                 this.alignviewwidth = palignwidth;
