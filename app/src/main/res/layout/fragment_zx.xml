@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50px"
                 android:layout_marginRight="20px"
-                android:text="上海市"
+                android:text="选择城市"
                 android:textColor="@color/white"
                 android:textSize="45px" />
 

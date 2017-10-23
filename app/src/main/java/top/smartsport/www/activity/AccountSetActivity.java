@@ -99,7 +99,7 @@ public class AccountSetActivity extends BaseActivity {
                     SPUtils.put(getBaseContext(), "getUserInfo", data);
                     SPUtils.put(getBaseContext(), "is_vip", JsonUtil.findJsonLink("is_vip",data));
                     MapConf.with(getBaseContext()).pair("username->username").pair("truename->truename").pair("age->account_age").pair("sex->account_sex","0:保密;1:男;2:女").pair("height:%s cm->account_height").pair("weight:%s kg->account_weight")
-                            .pair("leg->account_habit","1:左脚;2:右脚;3:左右脚")
+                            .pair("leg->account_habit","1:左脚;2:右脚;3:左右均衡")
                             .pair("header_url->account_header")
                             .pair("soccer_age:%s 年->account_ql")
                             .pair("address->account_jz")

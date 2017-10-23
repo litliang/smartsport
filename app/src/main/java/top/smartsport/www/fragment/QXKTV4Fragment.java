@@ -97,19 +97,14 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                         case 1:
                             value = "报名中";
                             break;
-
                         case 2:
-                            value = "进行中";
+                            value = "已报满";
+                            convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.GONE);
                             break;
                         case 3:
                             value = "已结束";
                             break;
-                        case 4:
-                            value = "已报满";
-                            break;
-                        case 5:
-                            value = "已报名";
-                            break;
+
                     }
                 }
                 super.findAndBindView(convertView, pos, item, name, value);
@@ -175,12 +170,11 @@ public class QXKTV4Fragment extends BaseV4Fragment {
         } else {
             mCurrentPage++;
         }
-        String level =  SPUtils.get(getActivity(), "qx_currentLevelIndex", null)+"";
-        String status  =  SPUtils.get(getActivity(), "qx_currentStatusIndex", null)+"";
+        String level =  (String) SPUtils.get(getActivity(), "qx-level", "0");
+        String status  =  (String)  SPUtils.get(getActivity(), "qx-status", "0");
         // TODO 预留：刷新课程列表数据
 //        LogUtil.d("-------level------------>" + level);
-//        LogUtil.d("-------laiYuan------------>" + laiYuan);
-//        LogUtil.d("-------leiBie------------>" + leiBie);
+//        LogUtil.d("-------status------------>" + status);
         String city =  SPUtils.get(getContext(), "qx-getCounties-city", null)+"";
         String county = SPUtils.get(getContext(), "qx-getCounties-county", null)+"";
 
@@ -208,11 +202,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                         if (isRefresh) {
                             mapadapter.setItemDataSrc(new MapContent(list));
                             pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
-                            if(list != null && list.size() > 0) {
-                                rl_empty.setVisibility(View.GONE);
-                            } else {
-                                rl_empty.setVisibility(View.VISIBLE);
-                            }
+                            rl_empty.setVisibility(View.GONE);
                         } else {
                             List lt = ((List) mapadapter.getItemDataSrc().getContent());
                             lt.addAll(list);
@@ -227,6 +217,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                             pullrefreshlistview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                         } else {
                             if(mCurrentPage == 1) { // 返回数据为空
+                                rl_empty.setVisibility(View.VISIBLE);
                                 List lt = new ArrayList();
                                 mapadapter.setItemDataSrc(new MapContent(lt));
                                 pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);

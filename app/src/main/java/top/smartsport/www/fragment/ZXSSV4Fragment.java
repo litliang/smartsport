@@ -109,8 +109,12 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
                     }
                     mInformationAdapter.addAll(informationResources);
                 } else {
-                    showToast("已经到底了");
-                    mPullToRefreshView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    if(isRefresh) {
+                        mInformationAdapter.clear();
+                    } else {
+                        showToast("已经到底了");
+                        mPullToRefreshView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                    }
                 }
                 //refresh banner
                 if (bannerResources != null) {
