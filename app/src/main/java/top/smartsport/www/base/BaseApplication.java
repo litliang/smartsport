@@ -1,7 +1,6 @@
 package top.smartsport.www.base;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import com.lecloud.sdk.api.stats.ICdeSetting;
 import com.lecloud.sdk.config.LeCloudPlayerConfig;
 import com.lecloud.sdk.listener.OnInitCmfListener;
 import com.tencent.bugly.Bugly;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.config.AutoLayoutConifg;
@@ -26,7 +24,6 @@ import java.util.List;
 
 import app.base.RRes;
 import app.base.SPrefUtil;
-import app.base.framework.CrashHandler;
 import app.base.framework.Init;
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import cn.jpush.android.api.JPushInterface;
@@ -40,6 +37,7 @@ import top.smartsport.www.utils.SerialUtil;
 public class BaseApplication extends Init {
     private static BaseApplication application;
     public static IWXAPI mWxApi;
+    public static String jPushRegistrationID;
 
     @Override
     public void onCreate() {
@@ -140,6 +138,7 @@ public class BaseApplication extends Init {
             }
         }
 
+        jPushRegistrationID = JPushInterface.getRegistrationID(getApplicationContext());
     }
 
     /**

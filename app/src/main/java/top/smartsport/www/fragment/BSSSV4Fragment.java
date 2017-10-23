@@ -8,7 +8,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +41,8 @@ public class BSSSV4Fragment extends BaseV4Fragment {
     private int page;
     @ViewInject(R.id.ptrlv)
     private PullToRefreshListView ptrlv;
-    @ViewInject(R.id.tvHint)
-    private TextView tvHint;
+    @ViewInject(R.id.rl_empty)
+    private RelativeLayout rl_empty;
 
     private BSssAdapter bSssAdapter;
     private List<BSssInfo> bSssInfoList;
@@ -188,6 +188,11 @@ public class BSSSV4Fragment extends BaseV4Fragment {
                 bSssInfoList = entity.toList(BSssInfo.class);
                 if (refresh) {
                     bSssAdapter.clear();
+                    if(bSssInfoList != null && bSssInfoList.size() > 0) {
+                        rl_empty.setVisibility(View.GONE);
+                    } else {
+                        rl_empty.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     if (bSssInfoList.size() == 0) {
                         return;

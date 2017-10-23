@@ -6,7 +6,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,8 +40,8 @@ public class BSZBV4Fragment extends BaseV4Fragment {
     private int page;
     @ViewInject(R.id.ptrlv)
     private PullToRefreshListView ptrlv;
-    @ViewInject(R.id.tvHint)
-    private TextView tvHint;
+    @ViewInject(R.id.rl_empty)
+    RelativeLayout rl_empty;
 
     private BSzbAdapter bSzbAdapter;
     private List<BSzbInfo> bSzbInfoList;
@@ -172,6 +172,11 @@ public class BSZBV4Fragment extends BaseV4Fragment {
                 bSzbInfoList = data.toRows(BSzbInfo.class);
                 if(refresh){
                     bSzbAdapter.clear();
+                    if(bSzbInfoList != null && bSzbInfoList.size() > 0) {
+                        rl_empty.setVisibility(View.GONE);
+                    } else {
+                        rl_empty.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     if(bSzbInfoList.size()==0){
                         return;

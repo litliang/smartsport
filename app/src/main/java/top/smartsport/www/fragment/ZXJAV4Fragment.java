@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.util.LogUtil;
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +58,8 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
     private String url;
     private String access_token;
     private PullToRefreshScrollView pullToRefreshScrollView;
+    @ViewInject(R.id.rl_empty)
+    RelativeLayout rl_empty;
 
     public static ZXJAV4Fragment newInstance() {
         ZXJAV4Fragment fragment = new ZXJAV4Fragment();
@@ -138,6 +142,15 @@ public class ZXJAV4Fragment extends BaseV4Fragment {
                     JSONArray middle = data.optJSONArray("middle");
                     JSONArray senior = data.optJSONArray("senior");
                     JSONArray doctor = data.optJSONArray("doctor");
+
+                    if((begin != null && begin.length() > 0) || (primary != null && primary.length() > 0)
+                            || (middle != null && middle.length() > 0) || (senior != null && senior.length() > 0)
+                            || (doctor != null && doctor.length() > 0)) {
+                        rl_empty.setVisibility(View.GONE);
+                    } else {
+                        rl_empty.setVisibility(View.VISIBLE);
+                    }
+
                     if(begin != null && begin.length() > 0) {
                         setGrid(entity, "begin", R.id.rumenjigrid,R.id.titlerumenji);
                     } else {

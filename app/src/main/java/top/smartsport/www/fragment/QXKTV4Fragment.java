@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -25,7 +26,6 @@ import intf.JsonUtil;
 import intf.MapBuilder;
 import top.smartsport.www.R;
 import top.smartsport.www.activity.ActivityTrainingDetails;
-import top.smartsport.www.activity.CoachDetailActivity;
 import top.smartsport.www.base.BaseActivity;
 import top.smartsport.www.base.BaseV4Fragment;
 import top.smartsport.www.bean.NetEntity;
@@ -39,6 +39,8 @@ import top.smartsport.www.utils.SPUtils;
 public class QXKTV4Fragment extends BaseV4Fragment {
     @ViewInject(R.id.pullrefreshlistview)
     PullToRefreshListView pullrefreshlistview;
+    @ViewInject(R.id.rl_empty)
+    RelativeLayout rl_empty;
     private int mCurrentPage;
 
     @Override
@@ -206,6 +208,11 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                         if (isRefresh) {
                             mapadapter.setItemDataSrc(new MapContent(list));
                             pullrefreshlistview.getRefreshableView().setAdapter(mapadapter);
+                            if(list != null && list.size() > 0) {
+                                rl_empty.setVisibility(View.GONE);
+                            } else {
+                                rl_empty.setVisibility(View.VISIBLE);
+                            }
                         } else {
                             List lt = ((List) mapadapter.getItemDataSrc().getContent());
                             lt.addAll(list);
