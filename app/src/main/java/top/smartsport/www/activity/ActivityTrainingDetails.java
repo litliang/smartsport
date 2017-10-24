@@ -138,7 +138,7 @@ public class ActivityTrainingDetails extends BaseActivity {
                 if (!StringUtil.isEmpty(status)) {
                     mSignUpBtn.setVisibility(View.VISIBLE);
                     // 1报名中2进行中 3已结束 4已报满5已报名
-                    // 1报名中2已报满3已结束
+                    // 1报名中2进行中3已结束
                     if (status.equals("1")) { // 报名中
                         final String sellPrice = JsonUtil.findJsonLink("detail-sell_price", data).toString();
                         mSignUpBtn.setText("我要报名(￥" + sellPrice + "/年)");
@@ -151,9 +151,8 @@ public class ActivityTrainingDetails extends BaseActivity {
                                 startActivity(new Intent(getBaseContext(), ActivitySignUp.class).putExtra("data", (Serializable) map));
                             }
                         });
-                    } else if (status.equals("2")) { // 已报满
-                        mSignUpBtn.setText("已报满");
-                        mQuotaTv.setVisibility(View.INVISIBLE);
+                    } else if (status.equals("2")) { // 进行中
+                        mSignUpBtn.setText("进行中");
                     } else if (status.equals("3")) { // 已结束
                         mSignUpBtn.setText("已结束");
                         mQuotaTv.setVisibility(View.INVISIBLE);

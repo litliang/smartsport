@@ -3,6 +3,8 @@ package top.smartsport.www.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,11 +49,13 @@ public class ZXSSV4Fragment extends BaseV4Fragment {
     private int mCurrentPage;//当前页码
     private String cityId;
 
-
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
 
+    private void initData() {
         Context context = getContext();
         cityId = (String) SPUtils.get(BaseApplication.getApplication(),"cityId","");
         View headerView = new ViewInflater(getContext()).inflate(R.layout.head_information, null);

@@ -90,6 +90,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                     }
                     value = "还剩" + value + "个名额";
                     //1报名中2进行中 3已结束 4已报满5已报名
+                    // 报名中 进行中 已结束
                 } else if (name.equals("status")) {
 
                     int val = Integer.valueOf(value.toString());
@@ -98,8 +99,7 @@ public class QXKTV4Fragment extends BaseV4Fragment {
                             value = "报名中";
                             break;
                         case 2:
-                            value = "已报满";
-                            convertView.findViewById(R.id.haishengjigeminge).setVisibility(View.GONE);
+                            value = "进行中";
                             break;
                         case 3:
                             value = "已结束";
